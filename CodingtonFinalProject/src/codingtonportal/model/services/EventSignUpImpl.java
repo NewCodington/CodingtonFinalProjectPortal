@@ -27,7 +27,13 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	@Override
+	public boolean viewEvent(String typeEvent) throws IOException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 
 }
