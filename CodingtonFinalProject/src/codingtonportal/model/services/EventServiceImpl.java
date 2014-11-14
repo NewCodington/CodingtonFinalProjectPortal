@@ -1,8 +1,15 @@
 package codingtonportal.model.services;
 
+
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+
+
 
 import codingtonportal.model.dao.interfaces.EventDAO;
 import codingtonportal.model.domain.Event;
@@ -78,6 +85,36 @@ public class EventServiceImpl implements EventDAO {
 			}
 		 	
 		return true;  
+	}
+
+
+	public boolean selectEvent() throws IOException, ClassNotFoundException {
+		FERSDataConnection conex= new FERSDataConnection(); 
+		 PropertyAccess conexion= new PropertyAccess();
+		 ArrayList <Event> selection = new ArrayList <Event>();
+		 try {
+			 
+	            Statement sentencia = (conex.getConnection()).createStatement();
+	            ResultSet outdata= sentencia.executeQuery(conexion.getProperty("updateEvent"));                     
+	            while (outdata.next()){                   
+	            	Event data = new Event();
+	            	data.setEventId(outdata.getInt(1));
+	            	data.setName(outdata.getString(2));
+	            	data.setDescription(outdata.getString(3));
+	            	/*data.setPlace(outdata.getInt(4));
+	            	data.setStartTime(outdata.getString(5));
+	            	data.setDuration(outdata.getString(6));
+	            	data.setEventType(outdata.getString(7));
+	            	data.setSeatsAvailable(outdata.getInt(7));*/
+	            	selection.add(data);	                             
+	            }
+	            
+
+	        } catch (SQLException ex) {
+	            return false;
+	        }    
+		 for (Event element : selection) System.out.println(element.getEventId()+"/"+element.getName()+"/"+element.getDescription());
+		return true;
 	}
 
 /*

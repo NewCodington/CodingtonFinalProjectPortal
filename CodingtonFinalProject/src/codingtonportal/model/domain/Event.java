@@ -15,7 +15,7 @@ public class Event {
 	
 	
 	//Constructor
-	protected Event()
+	public Event()
 	{
 		this.eventId=0;
 		this.name=null;
