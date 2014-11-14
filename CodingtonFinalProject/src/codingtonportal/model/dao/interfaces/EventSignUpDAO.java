@@ -5,7 +5,7 @@ import java.io.IOException;
 import codingtonportal.model.domain.Event;
 
 public interface EventSignUpDAO {
-	public boolean insertEvent(Event event) throws IOException, ClassNotFoundException;
-	public boolean deleteEvent(Event event) throws IOException, ClassNotFoundException;
-	public boolean updateEvent(Event event) throws IOException, ClassNotFoundException;
+	public boolean registerForNewEvent(int idVisitor, int idEvent)throws ClassNotFoundException, IOException ;
+	public boolean unregisterForEvent(int idVisitor, int idEvent)throws IOException, ClassNotFoundException;
+	public boolean searchEvent(String Search) throws IOException,ClassNotFoundException;
 }

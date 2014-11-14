@@ -3,6 +3,7 @@ package codingtonportal.model.services;
 import java.io.IOException;
 
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
+import codingtonportal.model.domain.Event;
 
 public class EventSignUpImpl implements EventSignUpDAO {
 
@@ -27,10 +28,6 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		return false;
 	}
 
-	@Override
-	public boolean viewEvent() throws ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 }
