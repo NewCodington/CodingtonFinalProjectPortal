@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
-import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
@@ -258,36 +257,27 @@ public class VisitorServiceImpl implements VisitorDAO {
 	public boolean selectEvent() throws IOException, ClassNotFoundException {
 		FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
-		 ArrayList <User> selection = new ArrayList <Event>();
+		 ArrayList <Visitor> selection = new ArrayList <Visitor>();
 		 try {
 			 
 	            Statement sentencia = (conex.getConnection()).createStatement();
 	            ResultSet outdata= sentencia.executeQuery(conexion.getProperty("selectEvent"));                     
 	            while (outdata.next()){                   
-	            	Event data = new Event();	   
-	            	data.setEventId(outdata.getInt(1));
-	            	data.setName(outdata.getString(2));
-	            	data.setDescription(outdata.getString(3));
-	            	data.setPlace(outdata.getInt(4));
-	            	data.setStartTime(outdata.getString(5));
-	            	data.setDuration(outdata.getString(6));
-	            	data.setEventType(outdata.getString(7));
-	            	data.setSeatsAvailable(outdata.getInt(7));
-	          
+	            	Visitor data = new Visitor();
+	            	data.setIdVisitor(outdata.getInt(1));
+	            	data.setFirstName(outdata.getString(2));
+	            	data.setLastName(outdata.getString(3));
+	            	data.setDni(outdata.getString(4));
+	            	data.setEmail(outdata.getString(5));
+	            	data.setPhoneNumber(outdata.getString(6));
+	            	data.setAddress(outdata.getString(7));
+	            	data.setUserName(outdata.getString(8));
+	            	data.setPassword(outdata.getString(9));
+	            	data.setAdmin(outdata.getBoolean(10));
+	            	
 	            	selection.add(data);	                             
 	            }
-	          
-	            idUser	int(11)
-	            First_name	varchar(30)
-	            Last_name	varchar(30)
-	            DNI	varchar(12)
-	            Email	varchar(200)
-	            Phone_number	varchar(20)
-	            Address	varchar(30)
-	            Username	varchar(12)
-	            Password	varchar(30)
-	            isAdmin	tinyint(4)
-
+	            
 	        } catch (SQLException ex) {
 	            return false;
 	        } 		
