@@ -109,12 +109,15 @@ public class EventServiceImpl implements EventDAO {
 	          
 	            	selection.add(data);	                             
 	            }
-	            
+	   		 for (Event element : selection)
+				 System.out.println(
+						element.getEventId()+" - " + element.getName()+" - "+ element.getDescription() + " - "+ element.getPlace() + " - "+element.getStartTime()+" - "+element.getDuration()+" - "+element.getEventType()+" - "+element.getSeatsAvailable());	            
 
 	        } catch (SQLException ex) {
 	            return false;
 	        } 		
-		return true;
+
+			 return true;
 	}
 	
 	

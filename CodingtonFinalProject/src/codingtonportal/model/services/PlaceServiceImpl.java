@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import codingtonportal.model.dao.interfaces.PlaceDAO;
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
@@ -34,7 +35,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 		statementSQL.executeUpdate();
 		statementSQL.close();
 		conex.close();		     
-		JOptionPane.showMessageDialog(null, "Lugar insertado"); 
+		
 		 } catch (SQLException e) {         
 			 
 			 return false;
@@ -112,7 +113,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 		          
 		            	selection.add(data);	                             
 		            }   
-
+		         		 
 		        } catch (SQLException ex) {
 		            return false;
 		        }	

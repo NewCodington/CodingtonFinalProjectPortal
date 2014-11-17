@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
@@ -277,7 +278,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	            	
 	            	selection.add(data);	                             
 	            }
-	            
+	            							 
 	        } catch (SQLException ex) {
 	            return false;
 	        } 		
