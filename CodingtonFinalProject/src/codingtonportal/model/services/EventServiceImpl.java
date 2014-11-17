@@ -105,7 +105,7 @@ public class EventServiceImpl implements EventDAO {
 	            	data.setStartTime(outdata.getString(5));
 	            	data.setDuration(outdata.getString(6));
 	            	data.setEventType(outdata.getString(7));
-	            	data.setSeatsAvailable(outdata.getInt(7));
+	            	data.setSeatsAvailable(outdata.getInt(8));
 	          
 	            	selection.add(data);	                             
 	            }
