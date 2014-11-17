@@ -23,7 +23,7 @@ public class VisitorDAOJUnit extends TestCase {
 		super.tearDown();
 	}
 
-	@Test
+	/*@Test
 	public void testinsertVisitor() {
 		Visitor visit= new Visitor(1, "Charla2", "dafkj","Explicacion",
 				"jim", "45.2", "emai", "9874","12",true);
@@ -123,7 +123,7 @@ public class VisitorDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 /*
 	@Test
 	public void testsearchEvent() {
@@ -152,4 +152,17 @@ public class VisitorDAOJUnit extends TestCase {
 			e.printStackTrace();
 		}
 	}*/
+	
+	@Test
+	public void testSelectVisitor (){
+		try {
+			assertTrue(visitor.selectVisitor());			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
 }

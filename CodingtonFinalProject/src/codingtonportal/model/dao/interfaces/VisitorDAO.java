@@ -10,4 +10,5 @@ public interface VisitorDAO {
 	public boolean deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException;
 	public boolean updateInformation(Visitor visitor) throws ClassNotFoundException, IOException;
 	public boolean updatePassword(Visitor visitor) throws IOException, ClassNotFoundException;
+	public boolean selectVisitor() throws IOException, ClassNotFoundException;
 	}

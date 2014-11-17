@@ -254,14 +254,14 @@ public class VisitorServiceImpl implements VisitorDAO {
 	}
 
 
-	public boolean selectEvent() throws IOException, ClassNotFoundException {
+	public boolean selectVisitor() throws IOException, ClassNotFoundException {
 		FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
 		 ArrayList <Visitor> selection = new ArrayList <Visitor>();
 		 try {
 			 
 	            Statement sentencia = (conex.getConnection()).createStatement();
-	            ResultSet outdata= sentencia.executeQuery(conexion.getProperty("selectEvent"));                     
+	            ResultSet outdata= sentencia.executeQuery(conexion.getProperty("selectVisitor"));                     
 	            while (outdata.next()){                   
 	            	Visitor data = new Visitor();
 	            	data.setIdVisitor(outdata.getInt(1));
