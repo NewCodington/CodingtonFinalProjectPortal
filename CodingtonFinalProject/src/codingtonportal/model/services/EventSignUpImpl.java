@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
-import codingtonportal.model.domain.Event;
+//import codingtonportal.model.domain.Event;
 import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
 
@@ -64,7 +64,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	}
 
 	
-	public boolean searchEvent(String Search) throws IOException, ClassNotFoundException {
+	public boolean searchEvent(String Name) throws IOException, ClassNotFoundException {
 		
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
@@ -73,9 +73,9 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		//PreparedStatemnt for dynamic data	 
 		PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("searchevent"));
 	
-		statementSQL.setString(1, Search);
+		statementSQL.setString(1, Name);
 		
-		statementSQL.executeQuery();
+		statementSQL.execute();
 		statementSQL.close();
 		conex.close();		     
 
@@ -88,7 +88,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	}
 
 
-	public boolean viewEvent() throws ClassNotFoundException, IOException {
+	public boolean viewEvent(String Name) throws ClassNotFoundException, IOException {
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
@@ -110,12 +110,8 @@ public class EventSignUpImpl implements EventSignUpDAO {
 
 
 
-	@Override
-	public boolean viewEvent(String typeEvent) throws IOException,
-			ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		
+	
 
 
 }
