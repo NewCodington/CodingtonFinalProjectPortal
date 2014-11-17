@@ -14,7 +14,7 @@ public interface EventDAO {
 	 */
 	public boolean insertEvent(Event event) throws IOException, ClassNotFoundException;
 	/**
-	 * The admin inserts events.
+	 * The administrator inserts a new event.
 	 * @param event
 	 * @return
 	 * @throws IOException
@@ -23,7 +23,7 @@ public interface EventDAO {
 	
 	public boolean deleteEvent(Event event) throws IOException, ClassNotFoundException;
 	/**
-	 * The admin deletes events from the list of events.
+	 * The administrator deletes events from the list of events.
 	 * @param event
 	 * @return
 	 * @throws IOException
@@ -32,7 +32,7 @@ public interface EventDAO {
 	
 	public boolean updateEvent(Event event) throws IOException, ClassNotFoundException;
 	/**
-	 * The admin update the event.
+	 * The administrator update the event.
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -40,7 +40,7 @@ public interface EventDAO {
 	
 	public boolean selectEvent () throws IOException, ClassNotFoundException;
 	/**
-	 * Select a event.
+	 * The administrator selects a event.
 	 */
 
 }
