@@ -9,13 +9,23 @@ public class EventSign {
 	private int idEvent;
 	
 	//Constructor
-	EventSign()
+	public EventSign()
 	{
 		this.id=0;
 		this.idVisitor=0;
 		this.idEvent=0;
 		
 	}
+	
+	//Constructor
+			public EventSign(int idVisitor, int idEvent)
+			{
+				this.id=0;
+				this.idVisitor=0;
+				this.idEvent=0;
+				
+			}
+		
 	
 	
 
