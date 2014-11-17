@@ -24,7 +24,7 @@ public class EventDAOJUnit extends TestCase{
 		super.tearDown();
 	}
 
-	/*@Test
+	@Test
 	public void testInsertEvent() {
 	    Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12);
 		try {
@@ -50,10 +50,10 @@ public class EventDAOJUnit extends TestCase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
-	/*
-	@Test
+	
+	/*@Test
 	public void testUpdateSeatsAvailable() {
 		Event events= new Event(8, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",125);
 		try {
@@ -65,7 +65,7 @@ public class EventDAOJUnit extends TestCase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	
 	
@@ -81,18 +81,18 @@ public class EventDAOJUnit extends TestCase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
-	public void selectEvent (){
+	@Test
+	public void testSelectEvent (){
 		try {
-			assertTrue(event.selectEvent());
+			assertTrue(event.selectEvent());			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		}
 	}
-
 }

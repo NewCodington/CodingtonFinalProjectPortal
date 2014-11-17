@@ -2,7 +2,10 @@ package codingtonportal.model.services;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -88,4 +91,32 @@ public class PlaceServiceImpl implements PlaceDAO {
 		return true;  
 		
 	} 
+	
+	 public boolean selectPlace() throws IOException, ClassNotFoundException {
+			FERSDataConnection conex= new FERSDataConnection(); 
+			 PropertyAccess conexion= new PropertyAccess();
+			 ArrayList <Place> selection = new ArrayList <Place>();
+			 try {
+				 
+		            Statement sentencia = (conex.getConnection()).createStatement();
+		            ResultSet outdata= sentencia.executeQuery(conexion.getProperty("selectPlace"));                     
+		            while (outdata.next()){                   
+		            	Place data = new Place();	
+		            	data.setIdPlace(outdata.getInt(1));
+		            	data.setName(outdata.getString(2));
+		            	data.setRegion(outdata.getString(3));
+		            	data.setTypePlace(outdata.getInt(4));
+		            	data.setImage(outdata.getBlob(5));
+		            	data.setAddress(outdata.getString(6));
+		            	data.setDescription(outdata.getString(7));
+		          
+		            	selection.add(data);	                             
+		            }   
+
+		        } catch (SQLException ex) {
+		            return false;
+		        }	
+
+			return true;
+		}
 }

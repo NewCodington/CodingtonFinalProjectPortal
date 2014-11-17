@@ -95,27 +95,29 @@ public class EventServiceImpl implements EventDAO {
 		 try {
 			 
 	            Statement sentencia = (conex.getConnection()).createStatement();
-	            ResultSet outdata= sentencia.executeQuery(conexion.getProperty("updateEvent"));                     
+	            ResultSet outdata= sentencia.executeQuery(conexion.getProperty("selectEvent"));                     
 	            while (outdata.next()){                   
-	            	Event data = new Event();
+	            	Event data = new Event();	   
 	            	data.setEventId(outdata.getInt(1));
 	            	data.setName(outdata.getString(2));
 	            	data.setDescription(outdata.getString(3));
-	            	/*data.setPlace(outdata.getInt(4));
+	            	data.setPlace(outdata.getInt(4));
 	            	data.setStartTime(outdata.getString(5));
 	            	data.setDuration(outdata.getString(6));
 	            	data.setEventType(outdata.getString(7));
-	            	data.setSeatsAvailable(outdata.getInt(7));*/
+	            	data.setSeatsAvailable(outdata.getInt(7));
+	          
 	            	selection.add(data);	                             
 	            }
 	            
 
 	        } catch (SQLException ex) {
 	            return false;
-	        }    
-		 for (Event element : selection) System.out.println(element.getEventId()+"/"+element.getName()+"/"+element.getDescription());
+	        } 		
 		return true;
 	}
+	
+	
 
 /*
 	@Override

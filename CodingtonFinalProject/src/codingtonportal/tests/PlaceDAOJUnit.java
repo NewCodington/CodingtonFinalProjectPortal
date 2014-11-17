@@ -71,7 +71,18 @@ public class PlaceDAOJUnit extends TestCase {
 		}
 		 
 	}
-	
+	@Test
+	public void testSelectPlace (){
+		try {
+			assertTrue(place.selectPlace());			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
 	
 
 }

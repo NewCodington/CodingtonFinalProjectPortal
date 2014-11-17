@@ -15,7 +15,7 @@ public class Place {
 	
 	
 	//Constructor
-	protected Place(){
+	public Place(){
 		this.idPlace=0;
 		this.name=null;
 		this.description=null;
