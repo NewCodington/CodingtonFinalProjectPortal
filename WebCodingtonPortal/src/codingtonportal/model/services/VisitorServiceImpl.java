@@ -48,7 +48,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		 } 
 	
 
-	public boolean loginVisitor(String Username, String Password) throws ClassNotFoundException, IOException {
+	public boolean loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException {
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
@@ -57,8 +57,8 @@ public class VisitorServiceImpl implements VisitorDAO {
 		PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
 		
 		
-		statementSQL.setString(1, Username);
-		statementSQL.setString(2, Password);
+		statementSQL.setString(1, visitor.getUserName());
+		statementSQL.setString(2, visitor.getPassword());
 		
 
 		statementSQL.execute();

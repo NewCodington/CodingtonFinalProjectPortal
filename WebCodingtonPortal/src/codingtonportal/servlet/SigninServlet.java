@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import codingtonportal.model.domain.Visitor;
+import codingtonportal.model.services.VisitorServiceImpl;
 
 
 /**
@@ -45,6 +46,16 @@ public class SigninServlet extends HttpServlet {
 		Visitor visitor = new Visitor(request.getParameter("username"), request.getParameter("password"));
 		PrintWriter out = response.getWriter();
 		out.println(visitor.getUserName() + " " + visitor.getPassword());
+		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+		try {
+			if(visitorService.loginVisitor(visitor)){
+				RequestDispatcher dispatcher=request.getRequestDispatcher("/in.jsp");
+				dispatcher.forward(request, response);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
