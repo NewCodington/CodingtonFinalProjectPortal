@@ -11,15 +11,16 @@ import codingtonportal.utils.PropertyAccess;
 
 public class EventSignUpImpl implements EventSignUpDAO {
 
+	/**
+	 * The visitor is registered in a new event.
+	 * @param idVisitor
+	 * @param idEvent
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean registerForNewEvent(int idVisitor, int idEvent) throws ClassNotFoundException, IOException {
-		/**
-		 * The visitor is registered in a new event.
-		 * @param idVisitor
-		 * @param idEvent
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		try {    
@@ -40,14 +41,15 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		return true; 
 	}
 
+	/**
+	 * The visitor is unregistered for a registered event.
+	 * @param Name
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean unregisterForEvent(int idVisitor, int idEvent) throws IOException, ClassNotFoundException {
-		/**
-		 * The visitor is unregistered for a registered event.
-		 * @param Name
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		try {    
@@ -68,14 +70,15 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		return true;  	
 	}
 
+	/**
+	 * The visitor search a event by the name.
+	 * @param Name
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean searchEvent(String Name) throws IOException, ClassNotFoundException {
-		/**
-		 * The visitor search a event by the name.
-		 * @param Name
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		try {    
@@ -95,10 +98,11 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		return true;  	
 	}
 
+	/**
+	 * A list of all available events is shown.
+	 */
 	public boolean viewEvent(String Name) throws ClassNotFoundException, IOException {
-		/**
-		 * A list of all available events is shown.
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		try {    
