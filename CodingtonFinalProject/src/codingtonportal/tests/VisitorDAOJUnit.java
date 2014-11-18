@@ -23,9 +23,9 @@ public class VisitorDAOJUnit extends TestCase {
 		super.tearDown();
 	}
 
-	/*@Test
+	@Test
 	public void testinsertVisitor() {
-		Visitor visit= new Visitor(1, "Charla2", "dafkj","Explicacion",
+		Visitor visit= new Visitor( "Charla2", "dafkj","Explicacion",
 				"jim", "45.2", "emai", "9874","12",true);
 		try {
 			assertTrue(visitor.insertVisitor(visit));
@@ -54,7 +54,7 @@ public class VisitorDAOJUnit extends TestCase {
 
 	@Test
 	public void testdeleteVisitor() {
-		Visitor visit= new Visitor(12, "Charla", "dafkj","Explicacion", 
+		Visitor visit= new Visitor(6, "Charla2", "dafkj","Explicacion", 
 				"jim", "45.2", "emai", "9874","12",true);
 		try {
 			assertTrue(visitor.deleteVisitor(visit));
@@ -69,7 +69,7 @@ public class VisitorDAOJUnit extends TestCase {
 
 	@Test
 	public void testupdateInformation() {
-		Visitor visit= new Visitor(13, "Pepe", "dafkj","pepe", 
+		Visitor visit= new Visitor("Pepe", "dafkj","pepe", 
 				"jim", "45.2", "emai", "9874","12",true);
 		try {
 			assertTrue(visitor.updateInformation(visit));
@@ -84,7 +84,7 @@ public class VisitorDAOJUnit extends TestCase {
 
 	@Test
 	public void testupdatePassword() {
-		Visitor visit= new Visitor(13, "Charla", "aaaaaa","Explicacion", 
+		Visitor visit= new Visitor("Charla", "aaaaaa","Explicacion", 
 				"jim", "45.2", "emai", "9874","12",true);
 		try {
 			assertTrue(visitor.updatePassword(visit));
@@ -97,62 +97,6 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 
-	@Test
-	public void testregisterForNewEvent() {
-		Visitor visit= new Visitor(13,11);
-		try {
-			assertTrue(visitor.registerForNewEvent(visit.getIdVisitor(),visit.getIdEvent()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testunregisterForEvent() {
-		Visitor visit= new Visitor(13, 11);
-		try {
-			assertTrue(visitor.unregisterForEvent(visit.getIdVisitor(),visit.getIdEvent()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-/*
-	@Test
-	public void testsearchEvent() {
-		Visitor visit= new Visitor(2,1);
-		try {
-			assertTrue(visitor.searchEvent(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	@Test
-	public void testviewEvent() {
-		Visitor visit= new Visitor();
-		try {
-			assertTrue(visitor.viewEvent(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-	
 	@Test
 	public void testSelectVisitor (){
 		try {
