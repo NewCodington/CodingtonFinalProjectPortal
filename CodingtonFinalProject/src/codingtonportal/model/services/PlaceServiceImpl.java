@@ -14,14 +14,15 @@ import codingtonportal.utils.FERSDataConnection;
 
 public class PlaceServiceImpl implements PlaceDAO {
 
+	/**
+	 * The administrator inserts a new Place.
+	 * @param place
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */ 
 	public boolean insertPlace(Place place) throws IOException, ClassNotFoundException   {  
-		/**
-		 * The administrator inserts a new Place.
-		 * @param place
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */ 
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 
@@ -47,14 +48,15 @@ public class PlaceServiceImpl implements PlaceDAO {
 		return true;  
 	} 
 
+	/**
+	 * The administrator deletes a place from the list of places
+	 * @param place
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean deletePlace(Place place)   throws IOException, ClassNotFoundException   {  
-		/**
-		 * The administrator deletes a place from the list of places
-		 * @param place
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 
@@ -71,13 +73,14 @@ public class PlaceServiceImpl implements PlaceDAO {
 		return true;  
 	} 
 
+	/**
+	 * The administrator update the place.
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean updatePlace(Place place) throws IOException, ClassNotFoundException   {  
-		/**
-		 * The administrator update the place.
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 
@@ -100,10 +103,11 @@ public class PlaceServiceImpl implements PlaceDAO {
 		return true;  
 	} 
 
+	/**
+	 * The administrator selects a place.
+	 */	
 	public boolean selectPlace() throws IOException, ClassNotFoundException {
-		/**
-		 * The administrator selects a place.
-		 */	
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		ArrayList <Place> selection = new ArrayList <Place>();
