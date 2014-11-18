@@ -128,9 +128,9 @@ public class EventServiceImpl implements EventDAO {
 
 				selection.add(data);	                             
 			}
-			for (Event element : selection)
+			/*for (Event element : selection)
 				System.out.println(
-						element.getEventId()+" - " + element.getName()+" - "+ element.getDescription() + " - "+ element.getPlace() + " - "+element.getStartTime()+" - "+element.getDuration()+" - "+element.getEventType()+" - "+element.getSeatsAvailable());	            
+						element.getEventId()+" - " + element.getName()+" - "+ element.getDescription() + " - "+ element.getPlace() + " - "+element.getStartTime()+" - "+element.getDuration()+" - "+element.getEventType()+" - "+element.getSeatsAvailable());*/	            
 	        } catch (SQLException ex) {
 	            return selection;
 	        } 		
@@ -144,32 +144,29 @@ public class EventServiceImpl implements EventDAO {
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		ArrayList <Event> seat = this.selectEvent();
-		int savedata=0;
+		int temporal_id = 0;
+		int savedata=0;		
 		for(Event element: seat){
-			if(element.getName() == event.getName() && element.getStartTime() == event.getStartTime()){
+			if((event.getName()).compareTo(element.getName()) == 0 && (event.getStartTime()).compareTo(element.getStartTime()) == 0)  {
 				if(element.getSeatsAvailable() != 0) {
 					savedata = element.getSeatsAvailable() - 1;
-					System.out.println(element.getName()+ " - "+ element.getSeatsAvailable()+" - "+ savedata);
-					return true;
+					temporal_id = element.getEventId();
+					
 				}				
-			}		
+			}
 		}
-		/*try {    
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("updateSeats"));
-			statementSQL.setInt(1, event.getSeatsAvailable());
-			statementSQL.setInt(2, event.getEventId());
+		try {    
+			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("updateSeats"));			
+			statementSQL.setInt(1, savedata);
+			statementSQL.setInt(2, temporal_id);
 
 			statementSQL.executeUpdate();
 			statementSQL.close();
 			conex.close();		     
 			} catch (SQLException e) {         
 				return false;
-			}*/
-		 	
-	/*	return false;  
-			}*/
-
-		return false; 
+			}
+		return true; 
 	}
 
 }

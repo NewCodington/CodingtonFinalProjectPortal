@@ -2,6 +2,8 @@ package codingtonportal.tests;
 
 
 import java.io.IOException;
+import java.sql.Date;
+
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -55,8 +57,8 @@ public class EventDAOJUnit extends TestCase{
 	
 	@Test
 	public void testUpdateSeatsAvailable() {
-		//Event events= new Event(3, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",125,null);
-		Event events = new Event("Tour del zoo","Ver el zoo al completo",2,"12.00","2 horas","TP",25,null);
+		//Event events= new Event(3, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",12,null);
+		Event events = new Event("Tour del zoo","Ver el zoo al completo",2,"2 horas","12.00","TP",25,null);								                                   		
 		try {
 			assertTrue(event.updateSeatsAvailable(events));
 		} catch (IOException e) {
