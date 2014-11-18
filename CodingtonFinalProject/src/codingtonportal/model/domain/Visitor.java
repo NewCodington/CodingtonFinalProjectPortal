@@ -35,11 +35,10 @@ public class Visitor {
 	}
 	
 	//Constructor con parametros
-	public Visitor(int idVisitor, String userName, String password, String firstName,
+	public Visitor(String userName, String password, String firstName,
 			String lastName, String dni, String email,String phoneNumber, String address, boolean admin)
 	{
 		
-		this.idVisitor=idVisitor;
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.dni=dni;
@@ -51,6 +50,24 @@ public class Visitor {
 		this.admin=admin;
 				
 	}
+	
+	//Constructor con parametros
+		public Visitor(int idVisitor, String userName, String password, String firstName,
+				String lastName, String dni, String email,String phoneNumber, String address, boolean admin)
+		{
+			
+			this.idVisitor=idVisitor;
+			this.firstName=firstName;
+			this.lastName=lastName;
+			this.dni=dni;
+			this.email=email;
+			this.phoneNumber=phoneNumber;
+			this.address=address;
+			this.userName=userName;
+			this.password=password;
+			this.admin=admin;
+					
+		}
 	
 	//Constructor con parametros
 	public Visitor(String userName, String password)

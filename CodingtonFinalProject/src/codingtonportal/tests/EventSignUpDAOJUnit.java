@@ -14,8 +14,6 @@ import codingtonportal.model.services.EventSignUpImpl;
 
 public class EventSignUpDAOJUnit extends TestCase {
 	EventSignUpImpl EventSign;
-	private EventSign eventSigns;
-	private EventSign eventSigns2;
 	
 
 	@Before
@@ -32,9 +30,9 @@ public class EventSignUpDAOJUnit extends TestCase {
 
 	@Test
 	public void testregisterForNewEvent() {
-		EventSign eventSigns= new EventSign();
+		EventSign eventSigns= new EventSign(1,4);
 		try {
-			assertTrue(EventSign.registerForNewEvent(eventSigns.getIdVisitor(),eventSigns.getIdEvent()));
+			assertTrue(EventSign.registerForNewEvent(eventSigns.getIdVisitor(), eventSigns.getIdEvent()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,9 +58,11 @@ public class EventSignUpDAOJUnit extends TestCase {
 
 	@Test
 	public void testsearchEvent() {
-		setEventSigns2(new EventSign());
+		
+		EventSign eventSigns=new EventSign();
+		
 		try {
-			assertTrue(EventSign.searchEvent("jeeg"));
+			assertTrue(EventSign.searchEvent(eventSigns.getName()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,9 +74,9 @@ public class EventSignUpDAOJUnit extends TestCase {
 	
 	@Test
 	public void testviewEvent() {
-		setEventSigns(new EventSign());
+		EventSign eventSigns=new EventSign();
 		try {
-			assertTrue(EventSign.viewEvent("jeeg"));
+			assertTrue(EventSign.viewEvent(eventSigns.getName()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,21 +86,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 		}
 	}
 
-	public EventSign getEventSigns() {
-		return eventSigns;
-	}
-
-	public void setEventSigns(EventSign eventSigns) {
-		this.eventSigns = eventSigns;
-	}
-
-	public EventSign getEventSigns2() {
-		return eventSigns2;
-	}
-
-	public void setEventSigns2(EventSign eventSigns2) {
-		this.eventSigns2 = eventSigns2;
-	}
+	
 }
 
 
