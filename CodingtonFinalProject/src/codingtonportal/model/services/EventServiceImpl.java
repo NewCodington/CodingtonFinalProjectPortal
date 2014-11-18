@@ -18,15 +18,15 @@ import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
 
 public class EventServiceImpl implements EventDAO {
-
+	/**
+	 * The administrator inserts a new event with all his features.
+	 * @param event
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean insertEvent(Event event) throws IOException, ClassNotFoundException   {  
-		/**
-		 * The administrator inserts a new event with all his features.
-		 * @param event
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		try {    
@@ -47,15 +47,16 @@ public class EventServiceImpl implements EventDAO {
 		}
 		return true;  
 	} 
-
+	
+	/**
+	 * The administrator deletes events from the list of events.
+	 * @param event
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean deleteEvent(Event event) throws IOException, ClassNotFoundException   {  
-		/**
-		 * The administrator deletes events from the list of events.
-		 * @param event
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess(); 
 		try {    
@@ -72,14 +73,13 @@ public class EventServiceImpl implements EventDAO {
 		return true;  
 	}
 
-	
+	/**
+	 * The administrator update the event.
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean updateEvent(Event event) throws IOException, ClassNotFoundException {
-		/**
-		 * The administrator update the event.
-		 * @return
-		 * @throws IOException
-		 * @throws ClassNotFoundException
-		 */
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		try {    
@@ -102,11 +102,11 @@ public class EventServiceImpl implements EventDAO {
 		return true;  
 	}
 
-
+	/**
+	 * The administrator selects a event.
+	 */
 	public ArrayList<Event> selectEvent() throws IOException, ClassNotFoundException {
-		/**
-		 * The administrator selects a event.
-		 */
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		ArrayList <Event> selection = new ArrayList <Event>();
@@ -139,8 +139,16 @@ public class EventServiceImpl implements EventDAO {
 
 	}
 
+	/**
+	 * The update of available seats.
+	 * @param event
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Override
 	public boolean updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException {
+		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		ArrayList <Event> seat = this.selectEvent();
