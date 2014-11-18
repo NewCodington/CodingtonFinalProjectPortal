@@ -13,7 +13,7 @@ public class Event {
 	private String startTime;
 	private String eventType;
 	private int seatsAvailable;
-	private Date fecha;
+	private Date date_event;
 	
 	
 	
@@ -28,11 +28,12 @@ public class Event {
 		this.startTime=null;
 		this.eventType=null;
 		this.seatsAvailable=0;
+		this.setDate_event(null);
 	}
 
 	//Constructor con parametros
 	public Event(int eventId, String name, String description, int place,
-			String duration, String startTime, String eventType, int seatsAvailable)
+			String duration, String startTime, String eventType, int seatsAvailable, Date date_event)
 	{
 		this.eventId=eventId;
 		this.name=name;
@@ -42,6 +43,23 @@ public class Event {
 		this.startTime = startTime;
 		this.eventType=eventType;
 		this.seatsAvailable=seatsAvailable;
+		this.date_event = date_event;
+		
+	}
+	
+	
+	public Event(String name, String description, int place,
+			String duration, String startTime, String eventType, int seatsAvailable, Date date_event)
+	{		
+		this.name=name;
+		this.description=description;
+		this.place=place;
+		this.duration=duration;
+		this.startTime = startTime;
+		this.eventType=eventType;
+		this.seatsAvailable=seatsAvailable;
+		this.date_event = date_event;
+		
 	}
 	
 	public Event(Event event)
@@ -54,6 +72,7 @@ public class Event {
 		this.startTime=event.getStartTime();
 		this.eventType=event.getEventType();
 		this.seatsAvailable=event.getSeatsAvailable();
+		this.date_event= event.getDate_event();
 	}
 	
 	
@@ -126,18 +145,20 @@ public class Event {
 	}
 
 	/**
-	 * @return the fecha
+	 * @return the date_event
 	 */
-	public Date getFecha() {
-		return fecha;
+	public Date getDate_event() {
+		return date_event;
 	}
 
 	/**
-	 * @param fecha the fecha to set
+	 * @param date_event the date_event to set
 	 */
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setDate_event(Date date_event) {
+		this.date_event = date_event;
 	}
+
+
 
 
 }

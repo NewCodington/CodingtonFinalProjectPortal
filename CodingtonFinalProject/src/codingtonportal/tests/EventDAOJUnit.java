@@ -52,10 +52,11 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}*/
 	
-	/*
+	
 	@Test
 	public void testUpdateSeatsAvailable() {
-		Event events= new Event(3, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",125);
+		//Event events= new Event(3, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",125,null);
+		Event events = new Event("Tour del zoo","Ver el zoo al completo",2,"12.00","2 horas","TP",25,null);
 		try {
 			assertTrue(event.updateSeatsAvailable(events));
 		} catch (IOException e) {
@@ -83,7 +84,7 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}*/
 	
-	@Test
+	/*@Test
 	public void testSelectEvent (){
 		try {
 			assertNotNull(event.selectEvent());
@@ -95,5 +96,5 @@ public class EventDAOJUnit extends TestCase{
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

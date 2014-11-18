@@ -139,7 +139,6 @@ public class EventServiceImpl implements EventDAO {
 
 	}
 
-	/*
 	@Override
 	public boolean updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException {
 		FERSDataConnection conex= new FERSDataConnection(); 
@@ -165,12 +164,12 @@ public class EventServiceImpl implements EventDAO {
 			conex.close();		     
 			} catch (SQLException e) {         
 				return false;
-			}
+			}*/
 		 	
-		return false;  
-			}
+	/*	return false;  
+			}*/
 
-		return true;  
+		return false; 
 	}
-*/
+
 }
