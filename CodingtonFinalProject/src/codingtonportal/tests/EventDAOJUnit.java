@@ -2,7 +2,7 @@ package codingtonportal.tests;
 
 
 import java.io.IOException;
-import java.sql.Date;
+
 
 import junit.framework.TestCase;
 import org.junit.After;
