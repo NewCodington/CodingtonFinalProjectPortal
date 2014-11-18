@@ -45,10 +45,8 @@ public class EventServiceImpl implements EventDAO {
 		} catch (SQLException e) {         
 			return false;
 		}
-
 		return true;  
 	} 
-
 
 	public boolean deleteEvent(Event event) throws IOException, ClassNotFoundException   {  
 		/**
@@ -71,10 +69,8 @@ public class EventServiceImpl implements EventDAO {
 
 			return false; 
 		}
-
 		return true;  
 	}
-
 
 	@Override
 	public boolean updateEvent(Event event) throws IOException, ClassNotFoundException {
@@ -103,16 +99,13 @@ public class EventServiceImpl implements EventDAO {
 		} catch (SQLException e) {         
 			return false;
 		}
-
 		return true;  
 	}
-
 
 	public boolean selectEvent() throws IOException, ClassNotFoundException {
 		/**
 		 * The administrator selects a event.
 		 */
-
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		ArrayList <Event> selection = new ArrayList <Event>();
@@ -140,11 +133,8 @@ public class EventServiceImpl implements EventDAO {
 		} catch (SQLException ex) {
 			return false;
 		} 		
-
 		return true;
 	}
-
-
 
 	/*
 	@Override

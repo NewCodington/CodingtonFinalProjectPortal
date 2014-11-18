@@ -11,8 +11,6 @@ import codingtonportal.utils.PropertyAccess;
 
 public class EventSignUpImpl implements EventSignUpDAO {
 
-
-
 	public boolean registerForNewEvent(int idVisitor, int idEvent) throws ClassNotFoundException, IOException {
 		/**
 		 * The visitor is registered in a new event.
@@ -28,7 +26,6 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			//PreparedStatemnt for dynamic data	 
 			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("registerevent"));
 
-
 			statementSQL.setInt(1, idVisitor);
 			statementSQL.setInt(2, idEvent);
 
@@ -42,8 +39,6 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		}
 		return true; 
 	}
-
-
 
 	public boolean unregisterForEvent(int idVisitor, int idEvent) throws IOException, ClassNotFoundException {
 		/**
@@ -59,7 +54,6 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			//PreparedStatemnt for dynamic data	 
 			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("unregisterevent"));
 
-
 			statementSQL.setInt(1, idVisitor);
 			statementSQL.setInt(2, idEvent);
 
@@ -67,15 +61,12 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			statementSQL.close();
 			conex.close();		     
 
-
 		} catch (SQLException e) {         
 			System.out.println(e.getMessage());  
 			return false;
-
 		}
 		return true;  	
 	}
-
 
 	public boolean searchEvent(String Name) throws IOException, ClassNotFoundException {
 		/**
@@ -100,17 +91,14 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		} catch (SQLException e) {         
 			System.out.println(e.getMessage()); 
 			return false;
-
 		}
 		return true;  	
 	}
-
 
 	public boolean viewEvent(String Name) throws ClassNotFoundException, IOException {
 		/**
 		 * A list of all available events is shown.
 		 */
-
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		try {    
@@ -124,15 +112,8 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		} catch (SQLException e) {         
 			System.out.println(e.getMessage());  
 			return false;
-
 		}
 		return true; 	
 	}
-
-
-
-
-
-
 
 }

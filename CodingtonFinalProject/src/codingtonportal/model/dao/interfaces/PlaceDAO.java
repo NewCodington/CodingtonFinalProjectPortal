@@ -13,36 +13,8 @@ public interface PlaceDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	
 	public boolean insertPlace(Place place) throws IOException, ClassNotFoundException;
-	/**
-	 * The administrator inserts a new Place.
-	 * @param place
-	 * @return
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	
 	public boolean deletePlace(Place place) throws IOException, ClassNotFoundException;
-	/**
-	 * The administrator deletes a place from the list of places
-	 * @param place
-	 * @return
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	
 	public boolean updatePlace(Place place) throws IOException, ClassNotFoundException;
-	/**
-	 * The administrator update the place.
-	 * @return
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	
 	public boolean selectPlace() throws IOException, ClassNotFoundException;
-	/**
-	 * The administrator selects a place.
-	 */
-
 }
