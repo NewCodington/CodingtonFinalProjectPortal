@@ -1,5 +1,7 @@
 package codingtonportal.model.domain;
 
+import java.sql.Date;
+
 public class Event {
 
 	//Atributos
@@ -11,6 +13,7 @@ public class Event {
 	private String startTime;
 	private String eventType;
 	private int seatsAvailable;
+	private Date fecha;
 	
 	
 	
@@ -120,6 +123,20 @@ public class Event {
 
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
+	}
+
+	/**
+	 * @return the fecha
+	 */
+	public Date getFecha() {
+		return fecha;
+	}
+
+	/**
+	 * @param fecha the fecha to set
+	 */
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 

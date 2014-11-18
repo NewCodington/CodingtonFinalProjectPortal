@@ -72,7 +72,7 @@ public class EventServiceImpl implements EventDAO {
 		return true;  
 	}
 
-	@Override
+	
 	public boolean updateEvent(Event event) throws IOException, ClassNotFoundException {
 		/**
 		 * The administrator update the event.
@@ -102,13 +102,15 @@ public class EventServiceImpl implements EventDAO {
 		return true;  
 	}
 
-	public boolean selectEvent() throws IOException, ClassNotFoundException {
+
+	public ArrayList<Event> selectEvent() throws IOException, ClassNotFoundException {
 		/**
 		 * The administrator selects a event.
 		 */
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
 		ArrayList <Event> selection = new ArrayList <Event>();
+
 		try {
 
 			Statement sentencia = (conex.getConnection()).createStatement();
@@ -129,19 +131,31 @@ public class EventServiceImpl implements EventDAO {
 			for (Event element : selection)
 				System.out.println(
 						element.getEventId()+" - " + element.getName()+" - "+ element.getDescription() + " - "+ element.getPlace() + " - "+element.getStartTime()+" - "+element.getDuration()+" - "+element.getEventType()+" - "+element.getSeatsAvailable());	            
+	        } catch (SQLException ex) {
+	            return selection;
+	        } 		
 
-		} catch (SQLException ex) {
-			return false;
-		} 		
-		return true;
+			 return selection;
+
 	}
 
 	/*
 	@Override
 	public boolean updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException {
 		FERSDataConnection conex= new FERSDataConnection(); 
-		 PropertyAccess conexion= new PropertyAccess();
-		 try {    
+		PropertyAccess conexion= new PropertyAccess();
+		ArrayList <Event> seat = this.selectEvent();
+		int savedata=0;
+		for(Event element: seat){
+			if(element.getName() == event.getName() && element.getStartTime() == event.getStartTime()){
+				if(element.getSeatsAvailable() != 0) {
+					savedata = element.getSeatsAvailable() - 1;
+					System.out.println(element.getName()+ " - "+ element.getSeatsAvailable()+" - "+ savedata);
+					return true;
+				}				
+			}		
+		}
+		/*try {    
 			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("updateSeats"));
 			statementSQL.setInt(1, event.getSeatsAvailable());
 			statementSQL.setInt(2, event.getEventId());
@@ -152,8 +166,11 @@ public class EventServiceImpl implements EventDAO {
 			} catch (SQLException e) {         
 				return false;
 			}
+		 	
+		return false;  
+			}
 
 		return true;  
 	}
-	 */
+*/
 }

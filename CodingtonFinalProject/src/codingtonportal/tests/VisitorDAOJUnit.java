@@ -96,7 +96,63 @@ public class VisitorDAOJUnit extends TestCase {
 			e.printStackTrace();
 		}
 	}
+/*
+	@Test
+	public void testregisterForNewEvent() {
+		Visitor visit= new Visitor(13,11);
+		try {
+			assertTrue(visitor.registerForNewEvent(visit.getIdVisitor(),visit.getIdEvent()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	@Test
+	public void testunregisterForEvent() {
+		Visitor visit= new Visitor(13, 11);
+		try {
+			assertTrue(visitor.unregisterForEvent(visit.getIdVisitor(),visit.getIdEvent()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testsearchEvent() {
+		Visitor visit= new Visitor(2,1);
+		try {
+			assertTrue(visitor.searchEvent(visit));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testviewEvent() {
+		Visitor visit= new Visitor();
+		try {
+			assertTrue(visitor.viewEvent(visit));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
+	
 	@Test
 	public void testSelectVisitor (){
 		try {
