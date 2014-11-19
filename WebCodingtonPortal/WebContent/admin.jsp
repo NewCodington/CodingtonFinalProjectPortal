@@ -3,7 +3,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/codington.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin t&iacute;tulo</title>
+<title>Administrator</title>
 </head>
 
 <body>
@@ -32,8 +32,8 @@
 	
 	<p class = "menuVerticalTitulosAdmin"> Regist</p>
 	<hr>
-	<p class = "regionadmin"><a class="linkMenuVertical"  href="RegistPlace.html" >Regist Place </a></p>
-	<p class = "regionadmin"><a class="linkMenuVertical" href="RegistEvent.html">Regist Event </a></p>
+	<p class = "regionadmin"><a class="linkMenuVertical"  href="registPlace.jsp" >Regist Place </a></p>
+	<p class = "regionadmin"><a class="linkMenuVertical" href="registEvent.jsp">Regist Event </a></p>
 	</hr>
 	
 </div>
