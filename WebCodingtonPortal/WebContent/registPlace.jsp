@@ -24,8 +24,11 @@
 </div>
 
 <div class = "nav_log">
-	<form>
-		<p class = "title">
+	
+	
+	<br><b><a style="color:blue"><%= request.getParameter("msg")!=null?request.getParameter("msg"):""%></a></b>
+		
+	<form method="post" action="RegistPlaceServlet"><p class = "title">
         New Place	    </p>
 		
 		  Place name: 
@@ -61,9 +64,7 @@
 			<INPUT type="SUBMIT" value="Submit">
 			<INPUT type="SUBMIT" value="Cancel">
 		</p>  
-
 	</form>
-	
 </div>
 
 
