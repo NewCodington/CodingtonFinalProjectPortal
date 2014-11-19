@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
@@ -15,14 +16,16 @@ import codingtonportal.utils.FERSDataConnection;
 
 
 public class VisitorServiceImpl implements VisitorDAO {
-
-	public boolean insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException   {  
 	
-			 FERSDataConnection conex= new FERSDataConnection(); 
-			 PropertyAccess conexion= new PropertyAccess();
-			 try {    
+	public boolean insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException   {  
+	
+		FERSDataConnection conex= new FERSDataConnection(); 
+		PropertyAccess conexion= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		
+		try {    
 			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("insertVisitor"));
+			statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("insertVisitor"));
 			
 			//statementSQL.setInt(1, visitor.getIdVisitor());
 			statementSQL.setString(1, visitor.getFirstName());
@@ -39,105 +42,173 @@ public class VisitorServiceImpl implements VisitorDAO {
 			statementSQL.close();
 			conex.close();		     
 		
-		 } catch (SQLException e) {         
+		 } catch (SQLException e) {  
 			 System.out.println(e.getMessage());  
+			 return false;	
 			 
-		 return false;	
-		 }
-			return true;  
-		 } 
+		 }finally{
+			if (statementSQL != null){
+				statementSQL.close();
+			}
+			if (conex != null){
+				conex.close();
+			}
+		}
+		return true;  
+	} 
 	
 
-	public boolean loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException {
+	
+	public boolean loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		
 		try {    
-		//PreparedStatemnt for dynamic data	 
-		PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
-		
-		
-		statementSQL.setString(1, visitor.getUserName());
-		statementSQL.setString(2, visitor.getPassword());
-		
-
-		ResultSet rs = statementSQL.executeQuery();
-		
-		if(rs != null && rs.next()){
-			statementSQL.close();
-			conex.close();	
-			return true;
-		}
-		else{
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
+			statementSQL.setString(1, visitor.getUserName());
+			statementSQL.setString(2, visitor.getPassword());
 			
-			statementSQL.close();
-			conex.close();	
-			return false;
-		}
-	
+			ResultSet rs = statementSQL.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		
-		//if(rs.getRow() == 0)return false;
-
 		 } catch (SQLException e) {         
 			 System.out.println(e.getMessage());  
 			 return false;
+			 
+		 } finally {
+			if (statementSQL != null) {
+				statementSQL.close();
+			}
+			
+			if (conex != null){
+				conex.close();
+			}
 		}
 	
 	}
 
-
-	public boolean deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException {
 	
-		
+	
+	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+
 		try {    
-		//PreparedStatemnt for dynamic data	 
-		PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("deleteVisitor"));
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
+			
+			statementSQL.setString(1, visitor.getUserName());
+			statementSQL.setString(2, visitor.getPassword());
+			
+			ResultSet rs = statementSQL.executeQuery();
+			if(rs != null) {
+				while (rs.next()) {                   
+					if(rs.getInt(10) == 1) {              
+						statementSQL.close();
+						conex.close();	
+						return true;
+					}
+				} 
+			}
 		
-		statementSQL.setInt(1, visitor.getIdVisitor());
+			statementSQL.close();
+			conex.close();
+			
+		}catch (SQLException e) {         
+			 System.out.println(e.getMessage()); 
+			 
+		}finally{
+			if (statementSQL != null) {
+				statementSQL.close();
+			}
+			if (conex != null) {
+				conex.close();
+			}
+		}
+		return false;
+	
+	}
+
+
+	
+	public boolean deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException {
+		FERSDataConnection conex= new FERSDataConnection(); 
+		PropertyAccess conexion= new PropertyAccess();
+		PreparedStatement statementSQL = null;
 		
-		statementSQL.execute();
-		statementSQL.close();
-		conex.close();		     
+		try {    
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("deleteVisitor"));
+			
+			statementSQL.setInt(1, visitor.getIdVisitor());
+			
+			statementSQL.execute();
+			statementSQL.close();
+			conex.close();		     
 	  
 		 } catch (SQLException e) {         
 			 System.out.println(e.getMessage());  
 			 return false;
-			
-			 }
+			 
+		}finally{
+			if (statementSQL != null){
+				statementSQL.close();
+			}
+			if (conex != null){
+				conex.close();
+			}
+		}
 		return true;  	
 	}
 
 
 
-	public boolean updateInformation(Visitor visitor) throws ClassNotFoundException, IOException {
+	public boolean updateInformation(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
 	
 		 FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
+		 PreparedStatement statementSQL = null;
+		 
 		 try {    
-		//PreparedStatemnt for dynamic data	 
-		PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("updateVisitor"));
-	
-		statementSQL.setString(1, visitor.getFirstName());
-		statementSQL.setString(2, visitor.getLastName());
-		statementSQL.setString(3, visitor.getDni());
-		statementSQL.setString(4, visitor.getEmail());
-		statementSQL.setString(5, visitor.getPhoneNumber());
-		statementSQL.setString(6, visitor.getAddress());
-		statementSQL.setString(7, visitor.getPassword());
-		//Where
-		statementSQL.setInt(8, visitor.getIdVisitor());
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("updateVisitor"));
 		
-		statementSQL.executeUpdate();
-		statementSQL.close();
-		conex.close();		     
+			statementSQL.setString(1, visitor.getFirstName());
+			statementSQL.setString(2, visitor.getLastName());
+			statementSQL.setString(3, visitor.getDni());
+			statementSQL.setString(4, visitor.getEmail());
+			statementSQL.setString(5, visitor.getPhoneNumber());
+			statementSQL.setString(6, visitor.getAddress());
+			statementSQL.setString(7, visitor.getPassword());
+			//Where
+			statementSQL.setInt(8, visitor.getIdVisitor());
+			
+			statementSQL.executeUpdate();
+			statementSQL.close();
+			conex.close();		     
 		
-		 } catch (SQLException e) {         
+		} catch (SQLException e) {         
 			 System.out.println(e.getMessage()); 
 			 return false;
 			
-			 }
+		}finally{
+			if (statementSQL != null){
+				statementSQL.close();
+			}
+			if (conex != null){
+				conex.close();
+			}
+		}
 		return true;  		
 	}
 

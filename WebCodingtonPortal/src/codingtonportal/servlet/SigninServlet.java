@@ -1,7 +1,7 @@
 package codingtonportal.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,15 +44,30 @@ public class SigninServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		Visitor visitor = new Visitor(request.getParameter("username"), request.getParameter("password"));
-		PrintWriter out = response.getWriter();
-		out.println(visitor.getUserName() + " " + visitor.getPassword());
+
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
 		try {
 			if(visitorService.loginVisitor(visitor)){
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
+				if(visitorService.isAdmin(visitor)){
+
+					RequestDispatcher dispatcher=request.getRequestDispatcher("/admin.jsp");
+					dispatcher.forward(request, response);
+					
+				}else{
+					
+					RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+
+			}else{
+				RequestDispatcher dispatcher=request.getRequestDispatcher("/Signin.jsp?msg=User or password incorrect");
 				dispatcher.forward(request, response);
 			}
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
