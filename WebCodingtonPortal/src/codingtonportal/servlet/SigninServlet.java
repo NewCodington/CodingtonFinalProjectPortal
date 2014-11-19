@@ -1,7 +1,6 @@
 package codingtonportal.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -35,7 +34,7 @@ public class SigninServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/signin.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/Signin.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -62,7 +61,7 @@ public class SigninServlet extends HttpServlet {
 				
 
 			}else{
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/signin.jsp?msg=User or password incorrect");
+				RequestDispatcher dispatcher=request.getRequestDispatcher("/Signin.jsp?msg=User or password incorrect");
 				dispatcher.forward(request, response);
 			}
 		} catch (ClassNotFoundException e) {
