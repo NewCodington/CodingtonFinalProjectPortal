@@ -61,15 +61,28 @@ public class VisitorServiceImpl implements VisitorDAO {
 		statementSQL.setString(2, visitor.getPassword());
 		
 
-		statementSQL.execute();
-		statementSQL.close();
-		conex.close();		     
+		ResultSet rs = statementSQL.executeQuery();
+		
+		if(rs != null && rs.next()){
+			statementSQL.close();
+			conex.close();	
+			return true;
+		}
+		else{
+			
+			statementSQL.close();
+			conex.close();	
+			return false;
+		}
+	
+		
+		//if(rs.getRow() == 0)return false;
 
 		 } catch (SQLException e) {         
 			 System.out.println(e.getMessage());  
 			 return false;
 		}
-		return true;  	
+	
 	}
 
 
