@@ -18,6 +18,9 @@
 
 
 <div class="nav_log">
+
+	<br><b><a style="color:red"><%= request.getParameter("msg")!=null?request.getParameter("msg"):""%></a></b>
+	
 	<form  method = "post" action = "SigninServlet">
 		<p class = "title">
 		Sign In </p>
@@ -34,7 +37,7 @@
 	</form>
 		
 	<a href="Regist.html" > Register New Visitor </a>
-	
+		
 </div>
 
 

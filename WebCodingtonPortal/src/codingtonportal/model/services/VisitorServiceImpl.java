@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
@@ -64,10 +65,12 @@ public class VisitorServiceImpl implements VisitorDAO {
 		ResultSet rs = statementSQL.executeQuery();
 		
 		if(rs != null && rs.next()){
+					
 			statementSQL.close();
 			conex.close();	
 			return true;
 		}
+		
 		else{
 			
 			statementSQL.close();
@@ -76,12 +79,58 @@ public class VisitorServiceImpl implements VisitorDAO {
 		}
 	
 		
-		//if(rs.getRow() == 0)return false;
-
 		 } catch (SQLException e) {         
 			 System.out.println(e.getMessage());  
 			 return false;
 		}
+	
+	}
+
+public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
+		
+		FERSDataConnection conex= new FERSDataConnection(); 
+		PropertyAccess conexion= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+
+		try {    
+		//PreparedStatemnt for dynamic data	 
+		 statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
+		
+		
+		statementSQL.setString(1, visitor.getUserName());
+		statementSQL.setString(2, visitor.getPassword());
+		
+
+		ResultSet rs = statementSQL.executeQuery();
+		
+		if(rs != null){
+
+			while (rs.next()){                   
+   
+				if(rs.getInt(10) == 1){              
+					statementSQL.close();
+					conex.close();	
+					return true;
+				}
+			} 
+		}
+		
+			statementSQL.close();
+			conex.close();
+			
+		}catch (SQLException e) {         
+			 System.out.println(e.getMessage()); 
+			 
+		}finally{
+			if (statementSQL != null){
+				statementSQL.close();
+			}
+			
+			if (conex != null){
+				conex.close();
+			}
+		}
+		return false;
 	
 	}
 
