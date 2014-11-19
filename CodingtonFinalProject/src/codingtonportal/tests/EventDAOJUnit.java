@@ -86,7 +86,7 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}*/
 	
-	/*@Test
+	@Test
 	public void testSelectEvent (){
 		try {
 			assertNotNull(event.selectEvent());
@@ -98,5 +98,5 @@ public class EventDAOJUnit extends TestCase{
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
