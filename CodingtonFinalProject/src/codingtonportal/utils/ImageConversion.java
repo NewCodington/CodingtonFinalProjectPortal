@@ -59,17 +59,17 @@ public class ImageConversion {
 				}catch(IOException ex){;
 					System.out.println("problemas en el fichero");
 				}
-				places.setImage(image);
-				
-				selection.add(places);							
+				places.setImage(image);				
+				selection.add(places);
 			}
-					
+			for (Place element : selection)
+				System.out.println("Soy Image fea: \n"+	element.getImage());
 		
 		}catch(SQLException e){		
 			System.out.println("Ai mai ay problemas\n" + e);
 			return false;
 		}	
-		//setVisible (true);
+
 		return true;
 	}
 }
