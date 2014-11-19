@@ -49,7 +49,7 @@ public class SigninServlet extends HttpServlet {
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
 		try {
 			if(visitorService.loginVisitor(visitor)){
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/in.jsp");
+				RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
 				dispatcher.forward(request, response);
 			}
 		} catch (ClassNotFoundException e) {
