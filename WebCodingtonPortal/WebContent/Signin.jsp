@@ -1,27 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 	  
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	
 	<link rel="stylesheet" type="text/css" href="css/codington.css">
+	<script language="javascript" src="Register.js"></script>
 	<title>New Codington Portal</title>
 </head>
 
 
-
 <div class="header">
-	<p class="cabecera">New Codington Portal</p>
-	<p class="cabecera2">One of the World's Best Cities 2014</p>
+	<p class="cabecera">
+	<table width="100%" border="0">
+      <tr>
+        <td width="284" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
+        <td width="499"><div align="center">New Codington Portal</div></td>	
+        <td width="151">&nbsp;</td>
+        <td width="6"></p>
+      </tr>
+      <tr>
+        <td><p class="cabecera2">One of the World's Best Cities 2014</p></td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
 </div>
 
 
 <div class="nav_log">
-
 	<br><b><a style="color:red"><%= request.getParameter("msg")!=null?request.getParameter("msg"):""%></a></b>
-	
-	<form  method = "post" action = "SigninServlet">
+	<form method="post" action="SigninServlet">
 		<p class = "title">
 		Sign In </p>
 		<p class = "title"><br>
@@ -34,10 +41,9 @@
 			<INPUT type="SUBMIT" value="Submit">
 			<INPUT type="SUBMIT" value="Cancel">
 	  </p>
+		
+		<a href="Regist.html" > Register New Visitor </a>
 	</form>
-		
-	<a href="Regist.html" > Register New Visitor </a>
-		
 </div>
 
 
@@ -45,8 +51,10 @@
 
 
 <div class ="footer">
-Copyright © W3Schools.com
+New Codignton Portal - December, 2014
 </div>
 
 </body>
+</html>
+
 </html>

@@ -17,13 +17,14 @@ import codingtonportal.utils.FERSDataConnection;
 
 public class VisitorServiceImpl implements VisitorDAO {
 
-	public boolean insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException   {  
+	public boolean insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException   {  
 	
 			 FERSDataConnection conex= new FERSDataConnection(); 
 			 PropertyAccess conexion= new PropertyAccess();
+			 PreparedStatement statementSQL = null;
 			 try {    
 			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("insertVisitor"));
+			statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("insertVisitor"));
 			
 			//statementSQL.setInt(1, visitor.getIdVisitor());
 			statementSQL.setString(1, visitor.getFirstName());
@@ -40,22 +41,33 @@ public class VisitorServiceImpl implements VisitorDAO {
 			statementSQL.close();
 			conex.close();		     
 		
-		 } catch (SQLException e) {         
-			 System.out.println(e.getMessage());  
+		 } catch (SQLException e) {  
 			 
-		 return false;	
-		 }
+			 System.out.println(e.getMessage());  
+			 return false;	
+			 
+		 }finally{
+				
+				if (statementSQL != null){
+					statementSQL.close();
+				}
+				
+				if (conex != null){
+					conex.close();
+				}
+			}
 			return true;  
 		 } 
 	
 
-	public boolean loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException {
+	public boolean loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
+		PreparedStatement statementSQL = null;
 		try {    
 		//PreparedStatemnt for dynamic data	 
-		PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
+		statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
 		
 		
 		statementSQL.setString(1, visitor.getUserName());
@@ -66,15 +78,11 @@ public class VisitorServiceImpl implements VisitorDAO {
 		
 		if(rs != null && rs.next()){
 					
-			statementSQL.close();
-			conex.close();	
 			return true;
 		}
 		
 		else{
-			
-			statementSQL.close();
-			conex.close();	
+	
 			return false;
 		}
 	
@@ -82,6 +90,15 @@ public class VisitorServiceImpl implements VisitorDAO {
 		 } catch (SQLException e) {         
 			 System.out.println(e.getMessage());  
 			 return false;
+		}finally{
+			
+			if (statementSQL != null){
+				statementSQL.close();
+			}
+			
+			if (conex != null){
+				conex.close();
+			}
 		}
 	
 	}
