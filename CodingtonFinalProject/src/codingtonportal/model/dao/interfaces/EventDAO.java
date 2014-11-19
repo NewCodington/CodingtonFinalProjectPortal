@@ -1,6 +1,7 @@
 package codingtonportal.model.dao.interfaces;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import codingtonportal.model.domain.Event;
@@ -14,9 +15,9 @@ import codingtonportal.model.domain.Event;
  */
 
 public interface EventDAO {
-	public boolean insertEvent(Event event) throws IOException, ClassNotFoundException;
-	public boolean deleteEvent(Event event) throws IOException, ClassNotFoundException;
-	public boolean updateEvent(Event event) throws IOException, ClassNotFoundException;
-	public ArrayList<Event> selectEvent () throws IOException, ClassNotFoundException;
-	public boolean updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException;
+	public Event selectEvent (Event event) throws IOException, ClassNotFoundException, SQLException;
+	public ArrayList<Event> viewEvent () throws IOException, ClassNotFoundException, SQLException;
+	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException;
+	public Integer deleteEvent(Event event) throws IOException, ClassNotFoundException, SQLException;
+	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException;
 }

@@ -2,15 +2,17 @@ package codingtonportal.model.services;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
-//import codingtonportal.model.domain.Event;
+import codingtonportal.model.domain.Event;
 import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
 
 public class EventSignUpImpl implements EventSignUpDAO {
 
+	
+	
 	/**
 	 * The visitor is registered in a new event.
 	 * @param idVisitor
@@ -18,106 +20,162 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public boolean registerForNewEvent(int idVisitor, int idEvent) throws ClassNotFoundException, IOException {
+	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("registerevent"));
-
-			statementSQL.setInt(1, idVisitor);
-			statementSQL.setInt(2, idEvent);
-
-			statementSQL.execute();
-			statementSQL.close();
-			conex.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage());  	  
-			return false; 
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer idVisitorRegistered = selectEventForVisitor(idEvent);
+		
+		if (idVisitorRegistered == null) {
+			
+			try {    
+				//PreparedStatemnt for dynamic data	 
+				statementSQL = con.getConnection().prepareStatement(connection.getProperty("registerForNewEvent"));
+				statementSQL.setInt(1, idVisitor);
+				statementSQL.setInt(2, idEvent);
+	
+				statementSQL.executeUpdate();     
+			
+			}finally {
+				if (statementSQL != null) { 
+					statementSQL.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			}
 		}
-		return true; 
+		
+		else {
+			return null;
+		}
+		
+		return 0; 
 	}
 
+	
+	
 	/**
 	 * The visitor is unregistered for a registered event.
 	 * @param Name
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public boolean unregisterForEvent(int idVisitor, int idEvent) throws IOException, ClassNotFoundException {
+	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent) throws IOException, ClassNotFoundException, SQLException {
 		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		
 		try {    
 			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("unregisterevent"));
-
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("unregisterForEvent"));
 			statementSQL.setInt(1, idVisitor);
 			statementSQL.setInt(2, idEvent);
 
-			statementSQL.execute();
-			statementSQL.close();
-			conex.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage());  
-			return false;
+			statementSQL.executeUpdate();	     
+		
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
 		}
-		return true;  	
+		
+		return 0;  	
 	}
 
+	
+	
+	
 	/**
-	 * The visitor search a event by the name.
-	 * @param Name
+	 * The update of available seats.
+	 * @param event
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public boolean searchEvent(String Name) throws IOException, ClassNotFoundException {
+	@Override
+	public Integer updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException, SQLException {
 		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer seats = null;
+		
 		try {    
 			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("searchevent"));
-
-			statementSQL.setString(1, Name);
-
-			statementSQL.execute();
-			statementSQL.close();
-			conex.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage()); 
-			return false;
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectSeats"));
+			statementSQL.setInt(1, event.getEventId());
+			
+			ResultSet rs = statementSQL.executeQuery();
+			
+			if (rs.next()) {
+				seats = rs.getInt("Seats_available");
+				if (seats > 0) {
+					seats--;
+					statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateSeats"));
+					statementSQL.setInt(1, seats);
+					statementSQL.setInt(2, event.getEventId());
+					statementSQL.executeUpdate();
+				}
+				else {
+					seats = 0;
+				}
+			}
+			
+			rs.close();
+		
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
 		}
-		return true;  	
+		return seats;  	
 	}
 
-	/**
-	 * A list of all available events is shown.
-	 */
-	public boolean viewEvent(String Name) throws ClassNotFoundException, IOException {
+
+	
+	
+	@Override
+	public Integer selectEventForVisitor(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
 		try {    
 			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("viewevent"));
-
-			statementSQL.executeQuery();
-			statementSQL.close();
-			conex.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage());  
-			return false;
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectEventForVisitor"));
+			statementSQL.setInt(1, idEvent);
+			
+			ResultSet rs = statementSQL.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("idVisitorR");
+			}
+			rs.close();
+			
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
 		}
-		return true; 	
+			
+		return result;
 	}
 
 }

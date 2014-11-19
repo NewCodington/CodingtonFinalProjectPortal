@@ -1,6 +1,8 @@
 package codingtonportal.model.dao.interfaces;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import codingtonportal.model.domain.Visitor;
 
@@ -12,10 +14,13 @@ import codingtonportal.model.domain.Visitor;
  * @throws ClassNotFoundException
  */
 public interface VisitorDAO {
-	public boolean insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException;
-	public boolean loginVisitor(String Username, String Password) throws ClassNotFoundException, IOException;
-	public boolean deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException;
-	public boolean updateInformation(Visitor visitor) throws ClassNotFoundException, IOException;
-	public boolean updatePassword(Visitor visitor) throws IOException, ClassNotFoundException;
-	public boolean selectVisitor() throws IOException, ClassNotFoundException;
+	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException;
+	public ArrayList<Visitor> viewVisitor() throws IOException, ClassNotFoundException, SQLException;
+	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException;
+	public Integer insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException;
+	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException;
+	public Integer updatePassword(Visitor visitor) throws IOException, ClassNotFoundException, SQLException;
+	public Integer deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException;	
+	public Integer searchEvent(String Name) throws IOException,ClassNotFoundException;
+	public Integer viewEvent(String Name) throws IOException,ClassNotFoundException;
 }

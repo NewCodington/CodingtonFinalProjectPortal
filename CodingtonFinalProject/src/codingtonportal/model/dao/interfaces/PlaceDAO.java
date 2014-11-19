@@ -2,6 +2,8 @@ package codingtonportal.model.dao.interfaces;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import codingtonportal.model.domain.Place;
 
@@ -13,8 +15,9 @@ import codingtonportal.model.domain.Place;
  * @throws ClassNotFoundException
  */
 public interface PlaceDAO {
-	public boolean insertPlace(Place place) throws IOException, ClassNotFoundException;
-	public boolean deletePlace(Place place) throws IOException, ClassNotFoundException;
-	public boolean updatePlace(Place place) throws IOException, ClassNotFoundException;
-	public boolean selectPlace() throws IOException, ClassNotFoundException;
+	public Place selectPlace(Place place);
+	public ArrayList<Place> viewPlace() throws IOException, ClassNotFoundException;
+	public Integer insertPlace(Place place) throws IOException, ClassNotFoundException, SQLException;
+	public Integer updatePlace(Place place) throws IOException, ClassNotFoundException, SQLException;
+	public Integer deletePlace(Place place) throws IOException, ClassNotFoundException, SQLException;	
 }

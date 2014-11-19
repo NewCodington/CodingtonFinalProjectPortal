@@ -8,28 +8,119 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.PlaceDAO;
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
 
+
 public class PlaceServiceImpl implements PlaceDAO {
 
+	
+	
+	@Override
+	public Place selectPlace(Place place) {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Place data = null;
+
+		try {
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectPlace"));
+			statementSQL.setInt(1, place.getIdPlace());
+			
+			ResultSet outdata= statementSQL.executeQuery();
+			
+			if (outdata.next()){
+				data = new Place();
+				
+				data.setIdPlace(outdata.getInt(1));
+				data.setName(outdata.getString(2));
+				data.setRegion(outdata.getString(3));
+				data.setTypePlace(outdata.getInt(4));
+				data.setImage(outdata.getBlob(5));
+				data.setAddress(outdata.getString(6));
+				data.setDescription(outdata.getString(7));	                             
+			}	
+			
+			outdata.close();
+			
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		return data;
+	}
+
+	
+	
+	/**
+	 * The administrator selects a place.
+	 */
+	@Override
+	public ArrayList<Place> viewPlace() throws IOException, ClassNotFoundException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		ArrayList <Place> selection = null;
+		Statement statementSQL = null;
+		
+		try {
+			statementSQL = (con.getConnection()).createStatement();
+			
+			ResultSet outdata= statementSQL.executeQuery(connection.getProperty("viewPlace"));                     
+			
+			if (outdata.next()) {
+				selection = new ArrayList <Place>();                   
+				
+				do {
+					Place data = new Place();
+					
+					data.setIdPlace(outdata.getInt(1));
+					data.setName(outdata.getString(2));
+					data.setRegion(outdata.getString(3));
+					data.setTypePlace(outdata.getInt(4));
+					data.setImage(outdata.getBlob(5));
+					data.setAddress(outdata.getString(6));
+					data.setDescription(outdata.getString(7));
+	
+					selection.add(data);
+				}while(outdata.next());
+			}  
+			outdata.close();
+
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}	
+		return selection;
+	}
+	
+	
+	
+	
 	/**
 	 * The administrator inserts a new Place.
 	 * @param place
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */ 
-	public boolean insertPlace(Place place) throws IOException, ClassNotFoundException   {  
-		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
+	public Integer insertPlace(Place place) throws IOException, ClassNotFoundException, SQLException {  
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
 
 		try {    
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("insertplace"));
-
-
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertPlace"));
 			statementSQL.setString(1, place.getName());
 			statementSQL.setString(2, place.getRegion());
 			statementSQL.setInt(3, place.getTypePlace());
@@ -37,55 +128,70 @@ public class PlaceServiceImpl implements PlaceDAO {
 			statementSQL.setString(5, place.getAddress());
 			statementSQL.setString(6, place.getDescription());	
 
-			statementSQL.executeUpdate();
-			statementSQL.close();
-			conex.close();		     
+			statementSQL.executeUpdate();		     
 
-		} catch (SQLException e) {         
-
-			return false;
-		}
-		return true;  
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}	
+		return 0;  
 	} 
 
+	
+	
+	
 	/**
 	 * The administrator deletes a place from the list of places
 	 * @param place
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public boolean deletePlace(Place place)   throws IOException, ClassNotFoundException   {  
-		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
+	public Integer deletePlace(Place place) throws IOException, ClassNotFoundException, SQLException   {  
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
 
 		try {    
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("deleteplace"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deletePlace"));
 			statementSQL.setInt(1, place.getIdPlace());
 
 			statementSQL.executeUpdate();
-			statementSQL.close();  
-			conex.close();
-		} catch (SQLException e) {       
-			return false;
-		}
-		return true;  
+
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}	
+		return 0;  
 	} 
 
+	
+	
+	
 	/**
 	 * The administrator update the place.
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public boolean updatePlace(Place place) throws IOException, ClassNotFoundException   {  
+	public Integer updatePlace(Place place) throws IOException, ClassNotFoundException, SQLException   {  
 		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
 
 		try {    
-			PreparedStatement statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("updateplace"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePlace"));
 			statementSQL.setString(1, place.getName());
 			statementSQL.setString(2, place.getRegion());
 			statementSQL.setInt(3,place.getTypePlace());
@@ -95,42 +201,16 @@ public class PlaceServiceImpl implements PlaceDAO {
 			statementSQL.setInt(7, place.getIdPlace());
 
 			statementSQL.executeUpdate();
-			statementSQL.close();
-			conex.close();		     
-		} catch (SQLException e) {         
-			return false;
-		}
-		return true;  
-	} 
-
-	/**
-	 * The administrator selects a place.
-	 */	
-	public boolean selectPlace() throws IOException, ClassNotFoundException {
-		
-		FERSDataConnection conex= new FERSDataConnection(); 
-		PropertyAccess conexion= new PropertyAccess();
-		ArrayList <Place> selection = new ArrayList <Place>();
-		try {
-
-			Statement sentencia = (conex.getConnection()).createStatement();
-			ResultSet outdata= sentencia.executeQuery(conexion.getProperty("selectPlace"));                     
-			while (outdata.next()){                   
-				Place data = new Place();	
-				data.setIdPlace(outdata.getInt(1));
-				data.setName(outdata.getString(2));
-				data.setRegion(outdata.getString(3));
-				data.setTypePlace(outdata.getInt(4));
-				data.setImage(outdata.getBlob(5));
-				data.setAddress(outdata.getString(6));
-				data.setDescription(outdata.getString(7));
-
-				selection.add(data);	                             
-			}   
-
-		} catch (SQLException ex) {
-			return false;
+		     
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
 		}	
-		return true;
+		return 0;  
 	}
+
 }
