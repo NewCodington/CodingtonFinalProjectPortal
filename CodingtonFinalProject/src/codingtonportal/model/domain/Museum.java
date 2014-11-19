@@ -9,8 +9,8 @@ public class Museum extends Place{
 	//Constructor
 	
 	Museum(){
-		this.idMuseum=0;
-		this.typeMuseum=null;
+		this.idMuseum = 0;
+		this.typeMuseum = null;
 	}
 
 	public int getIdMuseum() {

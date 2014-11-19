@@ -5,9 +5,9 @@ public class LargeBusiness extends Place{
 	//Atribute
 	private int idLargeBusiness;
 
-	//Constructor
+	// Void constructor
 	LargeBusiness(){
-		this.idLargeBusiness=0;
+		this.idLargeBusiness = 0;
 	}
 
 

@@ -33,7 +33,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 			statementSQL.setString(1, place.getName());
 			statementSQL.setString(2, place.getRegion());
 			statementSQL.setInt(3, place.getTypePlace());
-			statementSQL.setBytes(4, place.getImage());
+			statementSQL.setBlob(4, place.getImage());
 			statementSQL.setString(5, place.getAddress());
 			statementSQL.setString(6, place.getDescription());	
 
@@ -89,7 +89,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 			statementSQL.setString(1, place.getName());
 			statementSQL.setString(2, place.getRegion());
 			statementSQL.setInt(3,place.getTypePlace());
-			statementSQL.setBytes(4, place.getImage());
+			statementSQL.setBlob(4, place.getImage());
 			statementSQL.setString(5, place.getAddress());
 			statementSQL.setString(6, place.getDescription());		
 			statementSQL.setInt(7, place.getIdPlace());

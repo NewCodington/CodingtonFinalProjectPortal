@@ -2,17 +2,17 @@ package codingtonportal.model.domain;
 
 public class Zoo extends Place{
 	
-	//Atributes
+	//Parameters
 	private int idZoo;
 	private int noOfAnimals;
 	private String nameAnimals;
 	
-	//Constructor
+	//Void constructor
 	
 	Zoo(){
-		this.idZoo=0;
-		this.noOfAnimals=0;
-		this.nameAnimals=null;
+		this.idZoo = 0;
+		this.noOfAnimals = 0;
+		this.nameAnimals = null;
 	}
 
 	public int getIdZoo() {

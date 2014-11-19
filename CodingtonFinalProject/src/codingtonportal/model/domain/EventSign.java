@@ -3,40 +3,44 @@ package codingtonportal.model.domain;
 public class EventSign {
 
 
-	//Atribute
+	//Parameters
 	private int id;
 	private int idVisitor;
 	private int idEvent;
 	private String Name;
 
-	//Constructor
+	//Void constructor
 	public EventSign()
 	{
-		this.id=0;
-		this.idVisitor=0;
-		this.idEvent=0;
-
-	}
-
-	//Constructor
-	public EventSign(int idVisitor, int idEvent)
-	{
-		this.idVisitor= idVisitor;
-		this.idEvent=idEvent;
+		this.id = 0;
+		this.idVisitor = 0;
+		this.idEvent = 0;
 
 	}
 	
-	//Constructor
-	public EventSign(String Name)
+	//Constructor with parameters
+	public EventSign(int idVisitor, int idEvent, String Name)
 	{
-		this.Name=null;
+		this.idVisitor = idVisitor;
+		this.idEvent = idEvent;
+		this.Name = Name;
+	}
 		
 
+	//Constructor with idVisitor and idEvent
+	public EventSign(int idVisitor, int idEvent)
+	{
+		this.idVisitor = idVisitor;
+		this.idEvent = idEvent;
+
 	}
 	
-
-
-
+	//Constructor with Name
+	public EventSign(String Name)
+	{
+		this.Name = Name;
+	}
+	
 
 	public int getId() {
 		return id;
