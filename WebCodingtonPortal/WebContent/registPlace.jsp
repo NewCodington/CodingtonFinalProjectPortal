@@ -30,30 +30,30 @@
 		
 		  Place name: 
 		  <br>
-		  <input type="text" name="placeName" pattern="\S{1,45}" title="1 to 45 characters" required >
+		  <input type="text" id="placeName" name="placeName" pattern="\S{1,45}" title="1 to 45 characters" required >
 	      </p>
 		 
 		    <p>Description: 
 		  <br>
-		  <textarea name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required"></textarea>
+		  <textarea id="description" name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required"></textarea>
 		    </p>
 		 
 		    <p>Region:
 		  <br>
-		  <input type="text" name="region" pattern="\S{1,45}" title="1 to 45 characters" required/>
+		  <input type="text" id="region" name="region" pattern="\S{1,45}" title="1 to 45 characters" required/>
 		    </p>
 		    <p>Image: 
 		      <br>
-		      <input type="file" name="image" id="image" required />
+		      <input type="file" id="image" name="image" id="image" required />
 		      <br>
 		  
 		   
 	  
 		  Address: <br>
-		    <input type="text" name="address"  pattern="\S{1,45}" title="1 to 45 characters" required/>
+		    <input type="text" id="address" name="address"  pattern="\S{1,45}" title="1 to 45 characters" required/>
 	  </p>
 		    <p>Type Place  : <br>
-	          <input type="text" name="typePlace" required title="Field required"/>
+	          <input type="text" id="typePlace" name="typePlace" required title="Field required"/>
    
 		      </p>
 		        </p>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
 import codingtonportal.model.services.EventServiceImpl;
+import codingtonportal.model.services.PlaceServiceImpl;
 
 
 
@@ -47,30 +48,35 @@ public class RegistPlaceServlet extends HttpServlet {
 		response.setContentType("text/html");
 		
 		Place place=new Place();
+		PlaceServiceImpl  placeService = new PlaceServiceImpl();
 		
-		PlaceServiceImpl  eventService = new EventServiceImpl();
 		
-		place.setName(request.getParameter("eventName"));
+		
+		
+		
+		place.setName(request.getParameter("placeName"));
 		place.setDescription(request.getParameter("description"));
-		place.setPlace(Integer.parseInt(request.getParameter("place")));
+		place.setRegion(request.getParameter("region"));
 		
-		place.setDuration(request.getParameter("duration"));
-		place.setEventType(request.getParameter("typeOfEvent"));
-		place.setSeatsAvailable(Integer.parseInt(request.getParameter("seats")));
+		//place.setImage(request.getParameter("image"));
 		
-		place.setStartTime("2 horas");//Lo cojo manual porque falta el campo en el form
+		
+		place.setAddress(request.getParameter("address"));
+		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
+		
+
 		
 		//Falta incluir la fecha y el tiempo que dura
 
 		
 		try {
-			if(eventService.insertEvent(event)){
+			if(placeService.insertPlace(place)){
 				
-					RequestDispatcher dispatcher=request.getRequestDispatcher("/registEvent.jsp?msg=Evento creado con éxito");
+					RequestDispatcher dispatcher=request.getRequestDispatcher("/registPlace.jsp?msg=Evento creado con éxito");
 					dispatcher.forward(request, response);
 
 			}else{
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/registEvent.jsp?msg=Incorrect");
+				RequestDispatcher dispatcher=request.getRequestDispatcher("/registPlace.jsp?msg=Incorrect");
 				dispatcher.forward(request, response);
 			}
 		} catch (ClassNotFoundException e) {
