@@ -30,7 +30,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
-		Integer idVisitorRegistered = selectEventForVisitor(idEvent);
+		ArrayList<Integer> idVisitorRegistered = selectVisitorForEvent(idVisitor);
 		
 		if (idVisitorRegistered == null) {
 			
@@ -160,21 +160,13 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		
 		try {    
 			statementSQL = (con.getConnection()).createStatement();
-			ResultSet outdata= statementSQL.executeQuery(connection.getProperty("viewEvent"));                     
+			ResultSet outdata= statementSQL.executeQuery(connection.getProperty("selectEventForVisitor"));                     
 			
 			if (outdata.next()) {
 				selection = new ArrayList <Integer>();
 				
 				do {
-					Event data = new Event();	   
-					data.setEventId(outdata.getInt(1));
-					data.setName(outdata.getString(2));
-					data.setDescription(outdata.getString(3));
-					data.setPlace(outdata.getInt(4));
-					data.setStartTime(outdata.getString(5));
-					data.setDuration(outdata.getString(6));
-					data.setEventType(outdata.getString(7));
-					data.setSeatsAvailable(outdata.getInt(8));
+					Integer data = outdata.getInt("idEventR");   
 	
 					selection.add(data);
 				}while(outdata.next());
@@ -190,7 +182,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			}
 		}
 			
-		return result;
+		return selection;
 	}
 
 }
