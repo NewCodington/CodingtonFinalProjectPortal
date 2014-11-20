@@ -23,4 +23,5 @@ public interface VisitorDAO {
 	public Integer deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException;	
 	public Integer searchEvent(String Name) throws IOException,ClassNotFoundException;
 	public Integer viewEvent(String Name) throws IOException,ClassNotFoundException;
+	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, IOException, SQLException;
 }

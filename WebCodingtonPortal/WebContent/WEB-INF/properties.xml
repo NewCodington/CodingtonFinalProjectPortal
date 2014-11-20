@@ -33,7 +33,7 @@
 			<registerForNewEvent>INSERT INTO  codington.eventregistration (idVisitorR,idEventR) VALUES (?,?);</registerForNewEvent>
 			<unregisterForEvent>DELETE FROM  codington.eventregistration  WHERE (idVisitorR= ? AND idEventR=?);</unregisterForEvent>
 			<selectSeats>SELECT Seats_available FROM codington.event WHERE (idEvent = ?);</selectSeats><updateSeats>UPDATE codington.event SET Seats_available = ? WHERE (idEvent = ?);</updateSeats>
-			<selectEventForVisitor>SELECT idEventR FROM codington.eventregistration WHERE (idUserR = ?);</selectEventForVisitor></signUp>
+			<selectEventForVisitor>SELECT idEventR FROM codington.eventregistration WHERE (idVisitorR = ?);</selectEventForVisitor></signUp>
 	</connection>
 	
 	

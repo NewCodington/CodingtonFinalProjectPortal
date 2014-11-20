@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
 import codingtonportal.model.domain.Event;
 import codingtonportal.utils.FERSDataConnection;
@@ -149,22 +152,34 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	
 	
 	@Override
-	public Integer selectEventForVisitor(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
+	public ArrayList<Integer> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
-		PreparedStatement statementSQL = null;
-		Integer result = null;
+		ArrayList <Integer> selection = null;
+		Statement statementSQL = null;
 		
 		try {    
-			//PreparedStatemnt for dynamic data	 
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectEventForVisitor"));
-			statementSQL.setInt(1, idEvent);
+			statementSQL = (con.getConnection()).createStatement();
+			ResultSet outdata= statementSQL.executeQuery(connection.getProperty("viewEvent"));                     
 			
-			ResultSet rs = statementSQL.executeQuery();
-			if (rs.next()) {
-				result = rs.getInt("idVisitorR");
+			if (outdata.next()) {
+				selection = new ArrayList <Integer>();
+				
+				do {
+					Event data = new Event();	   
+					data.setEventId(outdata.getInt(1));
+					data.setName(outdata.getString(2));
+					data.setDescription(outdata.getString(3));
+					data.setPlace(outdata.getInt(4));
+					data.setStartTime(outdata.getString(5));
+					data.setDuration(outdata.getString(6));
+					data.setEventType(outdata.getString(7));
+					data.setSeatsAvailable(outdata.getInt(8));
+	
+					selection.add(data);
+				}while(outdata.next());
 			}
-			rs.close();
+			outdata.close();
 			
 		}finally {
 			if (statementSQL != null) { 

@@ -114,7 +114,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 
 	
 	
-	
+
 	/**
 	 * The visitor is logs into the portal.
 	 * @param visitor
@@ -127,6 +127,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
@@ -134,20 +135,69 @@ public class VisitorServiceImpl implements VisitorDAO {
 			statementSQL.setString(1, visitor.getUserName());
 			statementSQL.setString(2, visitor.getPassword());
 
-			statementSQL.executeUpdate();     
-
-		}finally {
-			if (statementSQL != null) { 
+			ResultSet rs = statementSQL.executeQuery();
+			
+			if(rs == null) {
+				result = -1;
+			}
+			else {
+				result = rs.getInt("idVisitor");
+				rs.close();
+			}
+			 
+		 } finally {
+			if (statementSQL != null) {
 				statementSQL.close();
 			}
 			if (con != null) {
 				con.close();
 			}
-		}
-		return 0;  	
+		 }
+		return result;
 	}
-
 	
+
+	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
+		  FERSDataConnection conex= new FERSDataConnection(); 
+		  PropertyAccess conexion= new PropertyAccess();
+		  PreparedStatement statementSQL = null;
+		 try {    
+		   //PreparedStatemnt for dynamic data  
+		   statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
+		   
+		   statementSQL.setString(1, visitor.getUserName());
+		   statementSQL.setString(2, visitor.getPassword());
+		   
+		   ResultSet rs = statementSQL.executeQuery();
+		   if(rs != null) {
+		    while (rs.next()) {                   
+		     if(rs.getInt(10) == 1) {              
+		      statementSQL.close();
+		      conex.close(); 
+		      return true;
+		     }
+
+		} 
+		   }
+		  
+		   statementSQL.close();
+		   conex.close();
+		   
+		  }catch (SQLException e) {         
+		    System.out.println(e.getMessage()); 
+		    
+		  }finally{
+		   if (statementSQL != null) {
+		    statementSQL.close();
+		   }
+		   if (conex != null) {
+		    conex.close();
+		   }
+		  }
+		  return false;
+		 
+		 }
+
 	
 
 	/**

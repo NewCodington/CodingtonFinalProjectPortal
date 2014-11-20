@@ -109,7 +109,7 @@ public class RegistPlaceServlet extends HttpServlet {
 		try {
 			
 			
-			if(placeService.insertPlace(place)){
+			if(placeService.insertPlace(place) >= 0){
 				
 					RequestDispatcher dispatcher=request.getRequestDispatcher("/registPlace.jsp?msg=Evento creado con éxito");
 					dispatcher.forward(request, response);

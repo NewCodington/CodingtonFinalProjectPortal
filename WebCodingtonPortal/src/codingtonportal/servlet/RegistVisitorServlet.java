@@ -61,7 +61,7 @@ public class RegistVisitorServlet extends HttpServlet {
 	//dcvn
 		
 		try {
-			if(visitorService.insertVisitor(visitor)){
+			if(visitorService.insertVisitor(visitor) >= 0){
 				
 					RequestDispatcher dispatcher=request.getRequestDispatcher("/Signin.jsp");
 					dispatcher.forward(request, response);
@@ -74,6 +74,9 @@ public class RegistVisitorServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

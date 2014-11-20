@@ -51,8 +51,9 @@ public class SigninServlet extends HttpServlet {
 		Visitor visitor = new Visitor(request.getParameter("username"), request.getParameter("password"));
 
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+		Integer idVisitor = 0;
 		try {
-			if(visitorService.loginVisitor(visitor)){
+			if((idVisitor = visitorService.loginVisitor(visitor))>=0){
 				if(visitorService.isAdmin(visitor)){
 
 					RequestDispatcher dispatcher=request.getRequestDispatcher("/admin.jsp");
@@ -62,13 +63,15 @@ public class SigninServlet extends HttpServlet {
 					EventServiceImpl eventService=new EventServiceImpl();
 					HttpSession session=request.getSession();
 					ArrayList<Event> eventsList;
-					eventsList = eventService.selectEvent();
+					eventsList = eventService.viewEvent();
 					session.setAttribute("EVENTLIST", eventsList);
 					
 					EventSignUpImpl eventSignUp=new EventSignUpImpl();
-
+					
+					eventsRegisterList = eventSignUp.selectEventForVisitor(idVisitor);
+					
 					ArrayList<Event> eventsRegisterList;
-					eventsRegisterList = eventSignUp.viewEvent();
+					eventsRegisterList = eventSignUp.selectEventForVisitor(idVisitor);
 					session.setAttribute("EVENTLIST", eventsRegisterList);
 					
 					RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
