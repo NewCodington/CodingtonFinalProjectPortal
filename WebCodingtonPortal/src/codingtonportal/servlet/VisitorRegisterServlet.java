@@ -17,14 +17,14 @@ import codingtonportal.model.services.VisitorServiceImpl;
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for Regist Visitor", urlPatterns = { "/RegistVisitorServlet" })
-public class RegistVisitorServlet extends HttpServlet {
+@WebServlet(description = "Servlet for Regist Visitor", urlPatterns = { "/register" })
+public class VisitorRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistVisitorServlet() {
+    public VisitorRegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +34,8 @@ public class RegistVisitorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/regist.jsp");
-		dispatcher.forward(request, response);
+		
+		response.sendRedirect("registerVisitor.jsp");
 	}
 
 	/**

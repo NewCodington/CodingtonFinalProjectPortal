@@ -22,14 +22,14 @@ import codingtonportal.model.services.VisitorServiceImpl;
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for Log in to website", urlPatterns = { "/SigninServlet" })
-public class SigninServlet extends HttpServlet {
+@WebServlet(description = "Servlet for Log in to website", urlPatterns = { "/login" })
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SigninServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,8 +39,19 @@ public class SigninServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/Signin.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
+			session.invalidate();
+			response.sendRedirect("login.jsp");
+		}
+		else{
+			if(session.getAttribute("Visitor")!= null)
+				response.sendRedirect("visitor");
+			else {
+				response.sendRedirect("admin");
+			}
+		}
 	}
 
 	/**
@@ -48,34 +59,32 @@ public class SigninServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		HttpSession session = request.getSession();
+		
 		Visitor visitor = new Visitor(request.getParameter("username"), request.getParameter("password"));
 
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
-		Integer idVisitor = 0;
+		
 		try {
-			if((idVisitor = visitorService.loginVisitor(visitor))>=0){
+			if((visitorService.loginVisitor(visitor))>=0){
 				if(visitorService.isAdmin(visitor)){
 
-					RequestDispatcher dispatcher=request.getRequestDispatcher("/admin.jsp");
-					dispatcher.forward(request, response);
+					session.setAttribute("idAdmin",visitor.getUserName());
+					session.setAttribute("Admin", visitor.getUserName());
+					
+					response.sendRedirect("admin");
 					
 				}else{
-					
+					session.setAttribute("idVisitor",visitor.getIdVisitor());
+					session.setAttribute("Visitor",visitor.getUserName());
 
-					
-				//	response.sendRedirect("/home.jsp?idVisitor="+idVisitor);
-					
-				//	RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp?idVisitor="+idVisitor);
-				//	dispatcher.forward(request, response);
-					
-					
-					getServletConfig().getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+					response.sendRedirect("visitor");
 				}
 				
 
 			}else{
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/Signin.jsp?msg=User or password incorrect");
-				dispatcher.forward(request, response);
+				session.setAttribute("Error", "User or password incorrect");
+				response.sendRedirect("login");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

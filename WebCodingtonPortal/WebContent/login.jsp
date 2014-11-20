@@ -27,8 +27,8 @@
 
 
 <div class="nav_log">
-	<br><b><a style="color:red"><%= request.getParameter("msg")!=null?request.getParameter("msg"):""%></a></b>
-	<form method="post" action="SigninServlet">
+	<br><b><a style="color:red"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></a></b>
+	<form method="post" action="login">
 		<p class = "title">
 		Sign In </p>
 		<p class = "title"><br>

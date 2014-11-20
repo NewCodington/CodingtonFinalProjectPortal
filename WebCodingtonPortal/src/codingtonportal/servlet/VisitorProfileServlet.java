@@ -22,13 +22,13 @@ import codingtonportal.model.services.EventSignUpImpl;
  * Servlet implementation class SigninServlet
  */
 @WebServlet(description = "Servlet for select Event", urlPatterns = { "/HomeServlet" })
-public class HomeServlet extends HttpServlet {
+public class VisitorProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public VisitorProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -173,7 +173,7 @@ public class HomeServlet extends HttpServlet {
 		
 		
 
-		//RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp?msg=Evento creado con éxito");
+		//RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp?msg=Evento creado con ï¿½xito");
 		//dispatcher.forward(request, response);
 
 
