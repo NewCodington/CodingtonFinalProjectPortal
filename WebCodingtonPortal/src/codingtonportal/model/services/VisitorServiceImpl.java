@@ -17,7 +17,7 @@ import codingtonportal.utils.FERSDataConnection;
 
 public class VisitorServiceImpl implements VisitorDAO {
 	
-	public boolean insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException   {  
+	public boolean insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException{  
 	
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
