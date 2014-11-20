@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
@@ -26,7 +27,6 @@ public class VisitorServiceImpl implements VisitorDAO {
 		PreparedStatement statementSQL = null;
 		
 		try {
-
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectVisitor"));
 			statementSQL.setInt(1, visitor.getIdVisitor());
 			
@@ -35,16 +35,16 @@ public class VisitorServiceImpl implements VisitorDAO {
 			if (outdata.next()){                  
 				data = new Visitor();
 				
-				data.setIdVisitor(outdata.getInt(1));
-				data.setFirstName(outdata.getString(2));
-				data.setLastName(outdata.getString(3));
-				data.setDni(outdata.getString(4));
-				data.setEmail(outdata.getString(5));
-				data.setPhoneNumber(outdata.getString(6));
-				data.setAddress(outdata.getString(7));
-				data.setUserName(outdata.getString(8));
-				data.setPassword(outdata.getString(9));
-				data.setAdmin(outdata.getBoolean(10));
+				data.setIdVisitor(outdata.getInt("idVisitor"));
+				data.setFirstName(outdata.getString("First_name"));
+				data.setLastName(outdata.getString("Last_name"));
+				data.setDni(outdata.getString("DNI"));
+				data.setEmail(outdata.getString("Email"));
+				data.setPhoneNumber(outdata.getString("Phone_number"));
+				data.setAddress(outdata.getString("Address"));
+				data.setUserName(outdata.getString("Username"));
+				data.setPassword(outdata.getString("Password"));
+				data.setAdmin(outdata.getBoolean("isAdmin"));
 					                             
 			}
 			outdata.close();
@@ -72,12 +72,12 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		ArrayList <Visitor> selection = null;
-		Statement statementSQL = null;
+		PreparedStatement statementSQL = null;
 		
 		try {
-			statementSQL = (con.getConnection()).createStatement();
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewVisitor"));
 			
-			ResultSet outdata= statementSQL.executeQuery(connection.getProperty("viewVisitor"));                     
+			ResultSet outdata= statementSQL.executeQuery();                     
 			
 			if (outdata.next()) {
 				selection = new ArrayList <Visitor>();                   
@@ -85,16 +85,16 @@ public class VisitorServiceImpl implements VisitorDAO {
 				do {           
 					Visitor data = new Visitor();
 					
-					data.setIdVisitor(outdata.getInt(1));
-					data.setFirstName(outdata.getString(2));
-					data.setLastName(outdata.getString(3));
-					data.setDni(outdata.getString(4));
-					data.setEmail(outdata.getString(5));
-					data.setPhoneNumber(outdata.getString(6));
-					data.setAddress(outdata.getString(7));
-					data.setUserName(outdata.getString(8));
-					data.setPassword(outdata.getString(9));
-					data.setAdmin(outdata.getBoolean(10));
+					data.setIdVisitor(outdata.getInt("idVisitor"));
+					data.setFirstName(outdata.getString("First_name"));
+					data.setLastName(outdata.getString("Last_name"));
+					data.setDni(outdata.getString("DNI"));
+					data.setEmail(outdata.getString("Email"));
+					data.setPhoneNumber(outdata.getString("Phone_number"));
+					data.setAddress(outdata.getString("Address"));
+					data.setUserName(outdata.getString("Username"));
+					data.setPassword(outdata.getString("Password"));
+					data.setAdmin(outdata.getBoolean("isAdmin"));
 	
 					selection.add(data);	
 				}while(outdata.next());
@@ -134,17 +134,24 @@ public class VisitorServiceImpl implements VisitorDAO {
 			statementSQL.setString(1, visitor.getUserName());
 			statementSQL.setString(2, visitor.getPassword());
 
-			statementSQL.executeUpdate();     
-
-		}finally {
-			if (statementSQL != null) { 
+			ResultSet rs = statementSQL.executeQuery();
+			
+			if(rs == null) {
+				return -1;
+			}
+			else {
+				rs.close();
+			}
+			 
+		 } finally {
+			if (statementSQL != null) {
 				statementSQL.close();
 			}
 			if (con != null) {
 				con.close();
 			}
-		}
-		return 0;  	
+		 }
+		return 0;
 	}
 
 	
@@ -163,6 +170,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
@@ -177,7 +185,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 			statementSQL.setString(8, visitor.getPassword());
 			statementSQL.setBoolean(9, visitor.isAdmin());
 
-			statementSQL.executeUpdate();	     
+			result = statementSQL.executeUpdate();	     
 
 		}finally {
 			if (statementSQL != null) { 
@@ -187,7 +195,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 				con.close();
 			}
 		}
-		return 0;  
+		return result;  
 	} 
 	
 	
@@ -207,6 +215,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
@@ -221,7 +230,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 			//Where
 			statementSQL.setInt(8, visitor.getIdVisitor());
 
-			statementSQL.executeUpdate();
+			result = statementSQL.executeUpdate();
 	     
 		}finally {
 			if (statementSQL != null) { 
@@ -231,7 +240,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 				con.close();
 			}
 		}
-		return 0;  		
+		return result;  		
 	}
 	
 	/**
@@ -245,6 +254,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
@@ -253,7 +263,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 			//Where
 			statementSQL.setInt(2, visitor.getIdVisitor());
 
-			statementSQL.execute();		     
+			result = statementSQL.executeUpdate();		     
 
 		}finally {
 			if (statementSQL != null) { 
@@ -263,7 +273,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 				con.close();
 			}
 		}
-		return 0;  	
+		return result;  	
 	}
 	
 	
@@ -281,13 +291,14 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteVisitor"));
 			statementSQL.setInt(1, visitor.getIdVisitor());
 
-			statementSQL.execute();		     
+			result = statementSQL.executeUpdate();		     
 
 		}finally {
 			if (statementSQL != null) { 
@@ -297,7 +308,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 				con.close();
 			}
 		}
-		return 0;  	
+		return result;  	
 	}
 	
 	
@@ -305,50 +316,108 @@ public class VisitorServiceImpl implements VisitorDAO {
 	
 	/**
 	 * A list of all available events is shown.
+	 * @throws SQLException 
 	 */
-	public Integer viewEvent(String Name) throws ClassNotFoundException, IOException {
-		
+	public ArrayList<Event> viewEvent() throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewevent"));
+		ArrayList <Event> selection = null;
+		PreparedStatement statementSQL = null;
+		
+		try {
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewEvent"));
+			
+			ResultSet outdata= statementSQL.executeQuery();                     
+			
+			if (outdata.next()) {
+				selection = new ArrayList <Event>();                   
+				
+				do {           
+					Event data = new Event();
+					
+					data.setEventId(outdata.getInt("idEvent"));
+					data.setName(outdata.getString("Name"));
+					data.setDescription(outdata.getString("Description"));
+					data.setPlace(outdata.getInt("Place"));
+					data.setDate_event(outdata.getDate("Date_event"));
+					data.setStartTime(outdata.getString("StartTime"));
+					data.setDuration(outdata.getString("Duration"));
+					data.setEventType(outdata.getString("Event_type"));
+					data.setSeatsAvailable(outdata.getInt("Seats_available"));
+	
+					selection.add(data);
+					
+				}while(outdata.next());
+			}
+			
+			outdata.close();
 
-			statementSQL.executeQuery();
-			statementSQL.close();
-			con.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage());  
-			return -1;
-		}
-		return 0; 	
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}	
+		return selection;
 	}
+	
+	
+	
+	
 	/**
 	 * The visitor search a event by the name.
 	 * @param Name
 	 * @return
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public Integer searchEvent(String Name) throws IOException, ClassNotFoundException {
-		
+	public ArrayList<Event> searchEvent(String Name) throws IOException, ClassNotFoundException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchevent"));
+		ArrayList <Event> selection = null;
+		PreparedStatement statementSQL = null;
+		
+		try {
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchEvent"));
+			statementSQL.setString(1,Name);
+			
+			ResultSet outdata= statementSQL.executeQuery();                     
+			
+			if (outdata.next()) {
+				selection = new ArrayList <Event>();                   
+				
+				do {           
+					Event data = new Event();
+					
+					data.setEventId(outdata.getInt("idEvent"));
+					data.setName(outdata.getString("Name"));
+					data.setDescription(outdata.getString("Description"));
+					data.setPlace(outdata.getInt("Place"));
+					data.setDate_event(outdata.getDate("Date_event"));
+					data.setStartTime(outdata.getString("StartTime"));
+					data.setDuration(outdata.getString("Duration"));
+					data.setEventType(outdata.getString("Event_type"));
+					data.setSeatsAvailable(outdata.getInt("Seats_available"));
+	
+					selection.add(data);
+					
+				}while(outdata.next());
+			}
+			
+			outdata.close();
 
-			statementSQL.setString(1, Name);
-
-			statementSQL.execute();
-			statementSQL.close();
-			con.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage()); 
-			return -1;
-		}
-		return 0;  	
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}	
+		return selection; 	
 	}
+	
 }

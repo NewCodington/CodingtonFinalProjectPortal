@@ -4,45 +4,69 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+
 import codingtonportal.model.dao.interfaces.EventDAO;
 import codingtonportal.model.domain.Event;
 import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
 
 
+/**
+ * Services of the Event class used to select, insert, update and delete events available in the application.
+ * 
+ */
+
 public class EventServiceImpl implements EventDAO {
 	
-	
-	
+	/**
+	 * Method to get an Event from the database. Use an EventDAO class to input the data required.
+	 * 
+	 * @param event : EventDAO class with the data necessary to get the event requested.
+	 * 
+	 * @return EventDAO class with the Event requested or NULL if the event does not exists.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
 	@Override
 	public Event selectEvent(Event event) throws IOException,ClassNotFoundException, SQLException {
+		// Initialize variables
 		FERSDataConnection con = new FERSDataConnection(); 
 		PropertyAccess connection = new PropertyAccess();
 		Event selection = null;
 		PreparedStatement statementSQL = null;
+		
 		try {
-
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectEvent"));
+			// Where clauses
 			statementSQL.setInt(1, event.getEventId());
+			
+			// Execute query
 			ResultSet outdata= statementSQL.executeQuery();
 			
+			// If the Resultset brigns the Event
 			if (outdata.next()) {
+				// Create a new Event
 				selection = new Event();
 				
-				selection.setEventId(outdata.getInt(1));
-				selection.setName(outdata.getString(2));
-				selection.setDescription(outdata.getString(3));
-				selection.setPlace(outdata.getInt(4));
-				selection.setStartTime(outdata.getString(5));
-				selection.setDuration(outdata.getString(6));
-				selection.setEventType(outdata.getString(7));
-				selection.setSeatsAvailable(outdata.getInt(8));
+				// Complete the fields
+				selection.setEventId(outdata.getInt("idEvent"));
+				selection.setName(outdata.getString("Name"));
+				selection.setDescription(outdata.getString("Description"));
+				selection.setPlace(outdata.getInt("Place"));
+				selection.setDate_event(outdata.getDate("Date_event"));
+				selection.setStartTime(outdata.getString("StartTime"));
+				selection.setDuration(outdata.getString("Duration"));
+				selection.setEventType(outdata.getString("Event_type"));
+				selection.setSeatsAvailable(outdata.getInt("Seats_available"));
 			}
-			
+			// Close the Resultset
 			outdata.close();
 		
+		// Close the Statement and Connection
 		}finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -51,38 +75,55 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
+		// Return the Event or null
 		return selection;
 	}
 
 	
 	
 	
+	/**
+	 * Method to get all Events from the database.
+	 * 
+	 * @return ArrayList<Event> with all Events that exists or NULL if there is no Event.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
 	@Override
 	public ArrayList<Event> viewEvent() throws IOException,ClassNotFoundException, SQLException {
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		ArrayList <Event> selection = null;
-		Statement statementSQL = null;
+		PreparedStatement statementSQL = null;
 
 		try {
-			statementSQL = (con.getConnection()).createStatement();
-			ResultSet outdata= statementSQL.executeQuery(connection.getProperty("viewEvent"));                     
+			// Create the Statement
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewEvent"));
+			
+			// Execute query
+			ResultSet outdata= statementSQL.executeQuery();                     
 			
 			if (outdata.next()) {
 				selection = new ArrayList <Event>();
 				
 				do {
 					Event data = new Event();	   
-					data.setEventId(outdata.getInt(1));
-					data.setName(outdata.getString(2));
-					data.setDescription(outdata.getString(3));
-					data.setPlace(outdata.getInt(4));
-					data.setStartTime(outdata.getString(5));
-					data.setDuration(outdata.getString(6));
-					data.setEventType(outdata.getString(7));
-					data.setSeatsAvailable(outdata.getInt(8));
+
+					data.setEventId(outdata.getInt("idEvent"));
+					data.setName(outdata.getString("Name"));
+					data.setDescription(outdata.getString("Description"));
+					data.setPlace(outdata.getInt("Place"));
+					data.setDate_event(outdata.getDate("Date_event"));
+					data.setStartTime(outdata.getString("StartTime"));
+					data.setDuration(outdata.getString("Duration"));
+					data.setEventType(outdata.getString("Event_type"));
+					data.setSeatsAvailable(outdata.getInt("Seats_available"));
 	
 					selection.add(data);
+					
 				}while(outdata.next());
 			}
 			outdata.close();
@@ -100,30 +141,37 @@ public class EventServiceImpl implements EventDAO {
 	
 	
 	
+	
 	/**
-	 * The administrator inserts a new event with all his features.
-	 * @param event
-	 * @return
+	 * Method to insert an Event from the database. Use an EventDAO class to input the data required.
+	 * 
+	 * @param event : EventDAO class with the data necessary to insert.
+	 * 
+	 * @return Number of rows affected in the database. If the insert is correct, return 1.
+	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 */
+	@Override
 	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertEvent"));
 			statementSQL.setString(1, event.getName());
 			statementSQL.setString(2, event.getDescription());
 			statementSQL.setInt(3, event.getPlace());
-			statementSQL.setString(4, event.getDuration());
+			statementSQL.setDate(4, event.getDate_event());
 			statementSQL.setString(5, event.getStartTime());
-			statementSQL.setString(6, event.getEventType());
-			statementSQL.setInt(7, event.getSeatsAvailable());
+			statementSQL.setString(6, event.getDuration());
+			statementSQL.setString(7, event.getEventType());
+			statementSQL.setInt(8, event.getSeatsAvailable());
 
-			statementSQL.executeUpdate();	     
+			result = statementSQL.executeUpdate();	     
 		
 		} finally {
 			if (statementSQL != null) { 
@@ -133,28 +181,35 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
-		return 0;  
+		return result;  
 	} 
 	
 	
 	
 	/**
-	 * The administrator deletes events from the list of events.
-	 * @param event
-	 * @return
+	 * Method to delete an Event from the database. Use an EventDAO class to input the data required.
+	 * 
+	 * @param event : EventDAO class with the data necessary to delete.
+	 * 
+	 * @return Number of rows affected in the database. If the delete is correct, return 1.
+	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 */
+	@Override
 	public Integer deleteEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteEvent"));
+			//Where
 			statementSQL.setInt(1, event.getEventId());
-			statementSQL.executeUpdate();
+			
+			result = statementSQL.executeUpdate();
     
 		} finally {
 			if (statementSQL != null) { 
@@ -164,36 +219,45 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
-		return 0;  
+		return result;  
 	}
 	
 	
 
 	
 	/**
-	 * The administrator update the event.
-	 * @return
+	 * Method to update an Event from the database. Use an EventDAO class to input the data required.
+	 * 
+	 * @param event : EventDAO class with the data necessary to update.
+	 * 
+	 * @return Number of rows affected in the database. If the insert is correct, return 1.
+	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 */
+	@Override
 	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateEvent"));
+			//Conditions
 			statementSQL.setString(1, event.getName());
 			statementSQL.setString(2, event.getDescription());
 			statementSQL.setInt(3, event.getPlace());
-			statementSQL.setString(4, event.getDuration());
+			statementSQL.setDate(4, event.getDate_event());
 			statementSQL.setString(5, event.getStartTime());
-			statementSQL.setString(6, event.getEventType());
-			statementSQL.setInt(7, event.getSeatsAvailable());
-			statementSQL.setInt(8, event.getEventId());
+			statementSQL.setString(6, event.getDuration());
+			statementSQL.setString(7, event.getEventType());
+			statementSQL.setInt(8, event.getSeatsAvailable());
+			// Where
+			statementSQL.setInt(9, event.getEventId());
 
-			statementSQL.executeUpdate();		     
+			result = statementSQL.executeUpdate();		     
 		
 		} finally {
 			if (statementSQL != null) { 
@@ -203,6 +267,6 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
-		return 0;  
+		return result;  
 	}
 }
