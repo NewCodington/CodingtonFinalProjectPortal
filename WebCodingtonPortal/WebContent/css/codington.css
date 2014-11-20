@@ -156,6 +156,14 @@ div.footer
 	    font-size: 20px;
 	    margin-top:0; margin-bottom:0;	
    	}
+   	
+   	p.mensaje
+    {
+	    text-align: center;
+	    font-size: 18px;
+	    color:blue;
+	    margin-top:0; margin-bottom:0;	
+   	}
 
 
 

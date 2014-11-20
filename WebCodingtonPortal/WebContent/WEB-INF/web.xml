@@ -25,5 +25,25 @@
     <servlet-name>SigninServlet</servlet-name>
     <url-pattern>/Signin</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>HomeServlet</display-name>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>codingtonportal.servlet.HomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  
+ 
+  
+    
+ 
+  
+  
+  
+  
 </web-app>
 

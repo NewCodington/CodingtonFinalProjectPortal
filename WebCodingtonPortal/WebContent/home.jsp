@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="codingtonportal.model.domain.Event"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,6 +11,20 @@
 </head>
 
 <body>
+
+<%
+//Recojo el id del Visitor
+									String idVisitor=request.getParameter("idVisitor");
+									String idVi=request.getParameter("idVi");
+									String idEv=request.getParameter("idEv");
+									
+									
+									
+									
+%>
+				
+						
+
 
 <div class="header">
 	<p class="cabecera">
@@ -78,6 +93,11 @@
 										<th>Action</th>
 									</tr>
 									<%
+									
+									
+									
+									
+									
 										for (Event event : eventList) {
 									%>
 									<tr>
@@ -87,45 +107,66 @@
 										<td align="center"><%=event.getEventType()%></td>
 										<td align="center"><%=event.getSeatsAvailable()%></td>
 										<td align="center"><%=event.getStartTime()%></td>
-										<td align="center"><a href = "">Regist</a><a href = "">Unregist</a></td>
+										<td align="center"><a href = <%="home.jsp?idEv=" + event.getEventId() + "&idVi=" + idVisitor %>>Regist</a></td>
 									</tr>
 									<%
 										}
 									%>
 								</table>
 								
-																<td>
+	
+							<tr>
+								<td style="font-weight: bold">Events Resgistration<b></b></td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
+							<tr>
+								<td>
 								<%
 									ArrayList<Event> eventRegisterList = new ArrayList<Event>();
 									eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGISTERLIST");
-								%>
-								<table border="2">
-									<tr>
-										<th>Event Name</th>
-										<th>Description</th>
-										<th>Duration</th>
-										<th>Event Type</th>
-										<th>Seats Available</th>
-										<th>Start Time</th>
-										<th>Action</th>
-									</tr>
-									<%
-										for (Event event : eventRegisterList) {
+									if (eventRegisterList == null){
+									
 									%>
-									<tr>
-										<td align="center"><%=event.getName()%></td>
-										<td align="center"><%=event.getDescription()%></td>
-										<td align="center"><%=event.getDuration()%></td>
-										<td align="center"><%=event.getEventType()%></td>
-										<td align="center"><%=event.getSeatsAvailable()%></td>
-										<td align="center"><%=event.getStartTime()%></td>
-										<td align="center"><a href = "">Regist</a><a href = "">Unregist</a></td>
-									</tr>
-									<%
+										<hr>
+										<p class="mensaje">There are no Events Registered for you</p>	
+									<%	
+									}
+									else
+									{	
+											%>
+											<table border="2">
+												<tr>
+													<th>Event Name</th>
+													<th>Description</th>
+													<th>Duration</th>
+													<th>Event Type</th>
+													<th>Seats Available</th>
+													<th>Start Time</th>
+													<th>Action</th>
+												</tr>
+												<%
+													for (Event event : eventRegisterList) {
+												%>
+												<tr>
+													<td align="center"><%=event.getName()%></td>
+													<td align="center"><%=event.getDescription()%></td>
+													<td align="center"><%=event.getDuration()%></td>
+													<td align="center"><%=event.getEventType()%></td>
+													<td align="center"><%=event.getSeatsAvailable()%></td>
+													<td align="center"><%=event.getStartTime()%></td>
+													<td align="center"><a href = "">Unregist</a></td>
+												</tr>
+												<%
+													}
+												%>
+											</table>
+											
+											
+											<%
 										}
-									%>
-								</table>
-
+										%>
 								</td>
 							</tr>
 
