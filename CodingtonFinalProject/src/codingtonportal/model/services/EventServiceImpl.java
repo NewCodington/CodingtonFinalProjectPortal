@@ -106,12 +106,16 @@ public class EventServiceImpl implements EventDAO {
 			// Execute query
 			ResultSet outdata= statementSQL.executeQuery();                     
 			
+			// If the Resultset brigns the Event
 			if (outdata.next()) {
+				// Create an ArrayList of Events
 				selection = new ArrayList <Event>();
 				
 				do {
+					// Create a new Event
 					Event data = new Event();	   
 
+					// Complete the fields
 					data.setEventId(outdata.getInt("idEvent"));
 					data.setName(outdata.getString("Name"));
 					data.setDescription(outdata.getString("Description"));
@@ -122,12 +126,16 @@ public class EventServiceImpl implements EventDAO {
 					data.setEventType(outdata.getString("Event_type"));
 					data.setSeatsAvailable(outdata.getInt("Seats_available"));
 	
+					// Add to ArrayList
 					selection.add(data);
 					
+				// Continue add Events while the Resultset have
 				}while(outdata.next());
 			}
+			// Close the Resultset
 			outdata.close();
 			
+		// Close the Statement and Connection
 		}finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -136,6 +144,7 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
+		// Return the ArrayList of Events or null
 		return selection;
 	}
 	
@@ -155,13 +164,16 @@ public class EventServiceImpl implements EventDAO {
 	 */
 	@Override
 	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
-		try {    
+		try { 
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertEvent"));
+			// Add conditions
 			statementSQL.setString(1, event.getName());
 			statementSQL.setString(2, event.getDescription());
 			statementSQL.setInt(3, event.getPlace());
@@ -171,8 +183,10 @@ public class EventServiceImpl implements EventDAO {
 			statementSQL.setString(7, event.getEventType());
 			statementSQL.setInt(8, event.getSeatsAvailable());
 
-			result = statementSQL.executeUpdate();	     
+			// Execute query
+			result = statementSQL.executeUpdate();
 		
+		// Close the Statement and Connection
 		} finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -181,6 +195,7 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
+		// Return if Event was inserted or not 
 		return result;  
 	} 
 	
@@ -199,18 +214,22 @@ public class EventServiceImpl implements EventDAO {
 	 */
 	@Override
 	public Integer deleteEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
-		try {    
+		try { 
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteEvent"));
-			//Where
+			//Where clauses
 			statementSQL.setInt(1, event.getEventId());
 			
+			// Execute query
 			result = statementSQL.executeUpdate();
     
+		// Close the Statement and Connection
 		} finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -219,6 +238,7 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
+		// Return if Event was deleted or not 
 		return result;  
 	}
 	
@@ -238,14 +258,16 @@ public class EventServiceImpl implements EventDAO {
 	 */
 	@Override
 	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException {
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
 		try {    
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateEvent"));
-			//Conditions
+			// Add conditions
 			statementSQL.setString(1, event.getName());
 			statementSQL.setString(2, event.getDescription());
 			statementSQL.setInt(3, event.getPlace());
@@ -254,11 +276,13 @@ public class EventServiceImpl implements EventDAO {
 			statementSQL.setString(6, event.getDuration());
 			statementSQL.setString(7, event.getEventType());
 			statementSQL.setInt(8, event.getSeatsAvailable());
-			// Where
+			// Where clauses
 			statementSQL.setInt(9, event.getEventId());
 
+			// Execute query
 			result = statementSQL.executeUpdate();		     
 		
+		// Close the Statement and Connection
 		} finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -267,6 +291,7 @@ public class EventServiceImpl implements EventDAO {
 				con.close();
 			}
 		}
+		// Return if Event was updated or not 
 		return result;  
 	}
 }

@@ -6,12 +6,10 @@ import java.sql.SQLException;
 import codingtonportal.model.domain.Event;
 
 /**
- * This interface manages the methods related with the registration in the events.
- * @param idVisitor
- * @param idEvent
- * @return
- * @throws ClassNotFoundException
- * @throws IOException
+ * The interface EventSignUpDAO shows the services that can be used or are related to the Events Registrations.
+ * 
+ * @author JAVA101_01
+ *
  */
 public interface EventSignUpDAO {
 	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, IOException, SQLException ;

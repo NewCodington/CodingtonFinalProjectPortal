@@ -127,6 +127,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
@@ -137,9 +138,10 @@ public class VisitorServiceImpl implements VisitorDAO {
 			ResultSet rs = statementSQL.executeQuery();
 			
 			if(rs == null) {
-				return -1;
+				result = -1;
 			}
 			else {
+				result = rs.getInt("idVisitor");
 				rs.close();
 			}
 			 
@@ -151,7 +153,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 				con.close();
 			}
 		 }
-		return 0;
+		return result;
 	}
 
 	
