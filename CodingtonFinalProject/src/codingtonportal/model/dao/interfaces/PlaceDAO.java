@@ -14,8 +14,8 @@ import codingtonportal.model.domain.Place;
  *
  */
 public interface PlaceDAO {
-	public Place selectPlace(Place place);
-	public ArrayList<Place> viewPlace() throws IOException, ClassNotFoundException;
+	public Place selectPlace(Place place) throws IOException, SQLException, ClassNotFoundException;
+	public ArrayList<Place> viewPlace() throws IOException, ClassNotFoundException, SQLException;
 	public Integer insertPlace(Place place) throws IOException, ClassNotFoundException, SQLException;
 	public Integer updatePlace(Place place) throws IOException, ClassNotFoundException, SQLException;
 	public Integer deletePlace(Place place) throws IOException, ClassNotFoundException, SQLException;	

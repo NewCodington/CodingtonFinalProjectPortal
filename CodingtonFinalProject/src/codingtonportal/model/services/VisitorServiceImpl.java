@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
 import codingtonportal.model.domain.Event;
-import codingtonportal.model.domain.Place;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
@@ -23,11 +21,12 @@ public class VisitorServiceImpl implements VisitorDAO {
 	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection = new PropertyAccess();
-		Visitor data = null;
 		PreparedStatement statementSQL = null;
+		Visitor data = null;
 		
 		try {
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectVisitor"));
+			
 			statementSQL.setInt(1, visitor.getIdVisitor());
 			
 			ResultSet outdata= statementSQL.executeQuery();
@@ -298,6 +297,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		try {    
 			//PreparedStatemnt for dynamic data	 
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteVisitor"));
+			
 			statementSQL.setInt(1, visitor.getIdVisitor());
 
 			result = statementSQL.executeUpdate();		     
