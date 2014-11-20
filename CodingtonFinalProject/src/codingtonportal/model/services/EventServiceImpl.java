@@ -19,11 +19,11 @@ import codingtonportal.utils.PropertyAccess;
 public class EventServiceImpl implements EventDAO {
 	
 	/**
-	 * Method to get an Event from the database. Use an EventDAO class to input the data required.
+	 * Method to get an Event from the database. Use an Event class to input the data required.
 	 * 
-	 * @param event : EventDAO class with the data necessary to get the event requested.
+	 * @param event : Event class with the data necessary to get the event requested.
 	 * 
-	 * @return EventDAO class with the Event requested or NULL if the event does not exists.
+	 * @return Event class with the Event requested or NULL if the event does not exists.
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -151,9 +151,9 @@ public class EventServiceImpl implements EventDAO {
 	
 	
 	/**
-	 * Method to insert an Event from the database. Use an EventDAO class to input the data required.
+	 * Method to insert an Event from the database. Use an Event class to input the data required.
 	 * 
-	 * @param event : EventDAO class with the data necessary to insert.
+	 * @param event : Event class with the data necessary to insert.
 	 * 
 	 * @return Number of rows affected in the database. If the insert is correct, return 1, else return 0.
 	 * 
@@ -201,55 +201,11 @@ public class EventServiceImpl implements EventDAO {
 	
 	
 	/**
-	 * Method to delete an Event from the database. Use an EventDAO class to input the data required.
+	 * Method to update an Event from the database. Use an Event class to input the data required.
 	 * 
-	 * @param event : EventDAO class with the data necessary to delete.
+	 * @param event : Event class with the data necessary to update.
 	 * 
-	 * @return Number of rows affected in the database. If the delete is correct, return 1, else return 0.
-	 * 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 * @throws SQLException 
-	 */
-	@Override
-	public Integer deleteEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
-		// Initialize variables
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		PreparedStatement statementSQL = null;
-		Integer result = null;
-		
-		try { 
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteEvent"));
-			//Where clauses
-			statementSQL.setInt(1, event.getEventId());
-			
-			// Execute query
-			result = statementSQL.executeUpdate();
-    
-		// Close the Statement and Connection
-		} finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
-		// Return if Event was deleted or not 
-		return result;  
-	}
-	
-	
-
-	
-	/**
-	 * Method to update an Event from the database. Use an EventDAO class to input the data required.
-	 * 
-	 * @param event : EventDAO class with the data necessary to update.
-	 * 
-	 * @return Number of rows affected in the database. If the insert is correct, return 1, else return 0.
+	 * @return Number of rows affected in the database. If the update is correct, return 1, else return 0.
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -293,4 +249,50 @@ public class EventServiceImpl implements EventDAO {
 		// Return if Event was updated or not 
 		return result;  
 	}
+	
+	
+	
+	
+	
+	/**
+	 * Method to delete an Event from the database. Use an Event class to input the data required.
+	 * 
+	 * @param event : Event class with the data necessary to delete.
+	 * 
+	 * @return Number of rows affected in the database. If the delete is correct, return 1, else return 0.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
+	@Override
+	public Integer deleteEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
+		// Initialize variables
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer result = null;
+		
+		try { 
+			// Create the Statement
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteEvent"));
+			//Where clauses
+			statementSQL.setInt(1, event.getEventId());
+			
+			// Execute query
+			result = statementSQL.executeUpdate();
+    
+		// Close the Statement and Connection
+		} finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		// Return if Event was deleted or not 
+		return result;  
+	}
+	
 }
