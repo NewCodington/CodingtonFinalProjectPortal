@@ -63,7 +63,7 @@ public class RegistEventServlet extends HttpServlet {
 
 		
 		try {
-			if(eventService.insertEvent(event)){
+			if(eventService.insertEvent(event) > 0){
 				
 					RequestDispatcher dispatcher=request.getRequestDispatcher("/registEvent.jsp?msg=Evento creado con éxito");
 					dispatcher.forward(request, response);
@@ -73,6 +73,9 @@ public class RegistEventServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

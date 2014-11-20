@@ -75,6 +75,7 @@
 										<th>Event Type</th>
 										<th>Seats Available</th>
 										<th>Start Time</th>
+										<th>Action</th>
 									</tr>
 									<%
 										for (Event event : eventList) {
@@ -86,6 +87,39 @@
 										<td align="center"><%=event.getEventType()%></td>
 										<td align="center"><%=event.getSeatsAvailable()%></td>
 										<td align="center"><%=event.getStartTime()%></td>
+										<td align="center"><a href = "">Regist</a><a href = "">Unregist</a></td>
+									</tr>
+									<%
+										}
+									%>
+								</table>
+								
+																<td>
+								<%
+									ArrayList<Event> eventRegisterList = new ArrayList<Event>();
+									eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGLIST");
+								%>
+								<table border="2">
+									<tr>
+										<th>Event Name</th>
+										<th>Description</th>
+										<th>Duration</th>
+										<th>Event Type</th>
+										<th>Seats Available</th>
+										<th>Start Time</th>
+										<th>Action</th>
+									</tr>
+									<%
+										for (Event event : eventRegisterList) {
+									%>
+									<tr>
+										<td align="center"><%=event.getName()%></td>
+										<td align="center"><%=event.getDescription()%></td>
+										<td align="center"><%=event.getDuration()%></td>
+										<td align="center"><%=event.getEventType()%></td>
+										<td align="center"><%=event.getSeatsAvailable()%></td>
+										<td align="center"><%=event.getStartTime()%></td>
+										<td align="center"><a href = "">Regist</a><a href = "">Unregist</a></td>
 									</tr>
 									<%
 										}

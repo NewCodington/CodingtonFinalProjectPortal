@@ -43,7 +43,7 @@ public class HomeServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		ArrayList<Event> eventsList;
 		try {
-			eventsList = eventService.selectEvent();
+			eventsList = eventService.viewEvent();
 			session.setAttribute("EVENTLIST", eventsList);
 			
 			RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
@@ -51,6 +51,9 @@ public class HomeServlet extends HttpServlet {
 			
 			
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

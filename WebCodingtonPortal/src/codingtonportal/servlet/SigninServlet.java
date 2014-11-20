@@ -2,6 +2,7 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
+import codingtonportal.model.services.EventServiceImpl;
+import codingtonportal.model.services.EventSignUpImpl;
 import codingtonportal.model.services.VisitorServiceImpl;
 
 
@@ -54,6 +59,17 @@ public class SigninServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 					
 				}else{
+					EventServiceImpl eventService=new EventServiceImpl();
+					HttpSession session=request.getSession();
+					ArrayList<Event> eventsList;
+					eventsList = eventService.selectEvent();
+					session.setAttribute("EVENTLIST", eventsList);
+					
+					EventSignUpImpl eventSignUp=new EventSignUpImpl();
+
+					ArrayList<Event> eventsRegisterList;
+					eventsRegisterList = eventSignUp.viewEvent();
+					session.setAttribute("EVENTLIST", eventsRegisterList);
 					
 					RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
 					dispatcher.forward(request, response);

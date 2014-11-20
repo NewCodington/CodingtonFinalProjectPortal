@@ -16,7 +16,7 @@ import codingtonportal.utils.FERSDataConnection;
 
 public class PlaceServiceImpl implements PlaceDAO {
 	
-	public boolean insertPlace(Place place) throws IOException, ClassNotFoundException   {  
+	public Integer insertPlace(Place place) throws IOException, ClassNotFoundException   {  
 		 FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
 		 
@@ -37,13 +37,13 @@ public class PlaceServiceImpl implements PlaceDAO {
 		JOptionPane.showMessageDialog(null, "Lugar insertado"); 
 		 } catch (SQLException e) {         
 			 
-			 return false;
+			 return -1;
 			 }
-		return true;  
+		return 0;  
 		 } 
 	
 	
-	 public boolean deletePlace(Place place)   throws IOException, ClassNotFoundException   {  
+	 public Integer deletePlace(Place place)   throws IOException, ClassNotFoundException   {  
 		 FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
 		 
@@ -59,14 +59,14 @@ public class PlaceServiceImpl implements PlaceDAO {
 	 } catch (SQLException e) {       
 
 		
-		 return false;
+		 return -1;
 	 }
-		return true;  
+		return 0;  
  } 
 
 		 
 	 
-	 public boolean updatePlace(Place place) throws IOException, ClassNotFoundException   {  
+	 public Integer updatePlace(Place place) throws IOException, ClassNotFoundException   {  
 		 FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
 		 
@@ -86,9 +86,9 @@ public class PlaceServiceImpl implements PlaceDAO {
 				
 		} catch (SQLException e) {         
 			
-					 return false;
+					 return -1;
 		}
-		return true;  
+		return 0;  
 		
 	} 
 	
@@ -119,4 +119,19 @@ public class PlaceServiceImpl implements PlaceDAO {
 
 			return true;
 		}
+
+
+	@Override
+	public Place selectPlace(Place place) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ArrayList<Place> viewPlace() throws IOException,
+			ClassNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
