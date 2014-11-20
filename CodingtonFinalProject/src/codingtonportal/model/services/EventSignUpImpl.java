@@ -4,15 +4,21 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
 import codingtonportal.model.domain.Event;
 import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
 
+
+/**
+ * Services of the Event Registration used to register or unregister for Events and update the seats of the Events. 
+ * 
+ */
 public class EventSignUpImpl implements EventSignUpDAO {
 
-	
-	
 	/**
 	 * The visitor is registered in a new event.
 	 * @param idVisitor
@@ -23,11 +29,12 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws SQLException 
 	 */
 	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
-		
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
-		Integer idVisitorRegistered = selectEventForVisitor(idEvent);
+		Integer idVisitorRegistered = selectVisitorForEvent(idEvent);
+		Integer result = null;
 		
 		if (idVisitorRegistered == null) {
 			
@@ -37,7 +44,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 				statementSQL.setInt(1, idVisitor);
 				statementSQL.setInt(2, idEvent);
 	
-				statementSQL.executeUpdate();     
+				result = statementSQL.executeUpdate();     
 			
 			}finally {
 				if (statementSQL != null) { 
@@ -49,11 +56,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			}
 		}
 		
-		else {
-			return null;
-		}
-		
-		return 0; 
+		return result; 
 	}
 
 	
@@ -71,6 +74,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
+		Integer result = null;
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
@@ -78,7 +82,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			statementSQL.setInt(1, idVisitor);
 			statementSQL.setInt(2, idEvent);
 
-			statementSQL.executeUpdate();	     
+			result = statementSQL.executeUpdate();	     
 		
 		}finally {
 			if (statementSQL != null) { 
@@ -89,7 +93,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			}
 		}
 		
-		return 0;  	
+		return result;  	
 	}
 
 	
@@ -149,7 +153,45 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	
 	
 	@Override
-	public Integer selectEventForVisitor(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
+	public ArrayList<Integer> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, IOException, SQLException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		ArrayList <Integer> selection = null;
+		PreparedStatement statementSQL = null;
+		
+		try {    
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectEventForVisitor"));
+			
+			ResultSet outdata= statementSQL.executeQuery();                     
+			
+			if (outdata.next()) {
+				selection = new ArrayList <Integer>();
+				
+				do {
+					Integer data = outdata.getInt("idEventR");   
+	
+					selection.add(data);
+					
+				}while(outdata.next());
+			}
+			outdata.close();
+			
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+			
+		return selection;
+	}
+
+
+
+	@Override
+	public Integer selectVisitorForEvent(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
@@ -157,7 +199,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		
 		try {    
 			//PreparedStatemnt for dynamic data	 
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectEventForVisitor"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectVisitorForEvent"));
 			statementSQL.setInt(1, idEvent);
 			
 			ResultSet rs = statementSQL.executeQuery();

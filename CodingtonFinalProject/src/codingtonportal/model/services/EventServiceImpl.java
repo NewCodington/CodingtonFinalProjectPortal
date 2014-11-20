@@ -13,10 +13,9 @@ import codingtonportal.utils.PropertyAccess;
 
 
 /**
- * Services of the Event class used to select, insert, update and delete events available in the application.
+ * Services of Events used to select, insert, update and delete events available in the application.
  * 
  */
-
 public class EventServiceImpl implements EventDAO {
 	
 	/**

@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 
+
 /**
- * This interface manages the methods related with visitors.
- * @param visitor
- * @return
- * @throws IOException
- * @throws ClassNotFoundException
+ * The interface VisitorDAO shows the services that can be used or are related to the Visitors.
+ * 
+ * @author JAVA101_01
+ *
  */
 public interface VisitorDAO {
 	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException;
