@@ -25,7 +25,8 @@
 			<insertVisitor>INSERT INTO codington.visitor(First_name, Last_name, DNI, Email, Phone_number, Address, Username, Password, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,? );</insertVisitor>
 			<updateVisitor>UPDATE codington.visitor SET First_name=?, Last_name=?, DNI=?, Email=?, Phone_number=?, Address=?,Password=? WHERE (idVisitor=?);</updateVisitor>
 			<updatePassword>UPDATE codington.visitor SET Password=? WHERE (idVisitor=?);</updatePassword>
-			<deleteVisitor>DELETE FROM codington.visitor WHERE (idVisitor=?);</deleteVisitor><viewEvent>SELECT * FROM codington.event ORDER BY Date_event;</viewEvent>
+			<deleteVisitor>DELETE FROM codington.visitor WHERE (idVisitor=?);</deleteVisitor>
+			<viewEvent>SELECT * FROM codington.event ORDER BY Date_event;</viewEvent>
 			<searchEvent>SELECT * FROM codington.event  WHERE (Name LIKE '%?%');</searchEvent>
 			</visitor>
 		
