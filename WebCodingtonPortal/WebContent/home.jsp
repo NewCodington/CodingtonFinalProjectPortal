@@ -1,4 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="codingtonportal.model.domain.Event"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="stylesheet" type="text/css" href="css/codington.css">
@@ -50,9 +53,51 @@
 <div class = "section">
 	
 	<div id="event">
-		<p>
-		Aqui van los eventos.
-		</p>
+		
+	<table>
+							<tr>
+								<td style="font-weight: bold">Events<b></b></td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
+							<tr>
+								<td>
+								<%
+									ArrayList<Event> eventList = new ArrayList<Event>();
+									eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
+								%>
+								<table border="2">
+									<tr>
+										<th>Event Name</th>
+										<th>Description</th>
+										<th>Duration</th>
+										<th>Event Type</th>
+										<th>Seats Available</th>
+										<th>Start Time</th>
+									</tr>
+									<%
+										for (Event event : eventList) {
+									%>
+									<tr>
+										<td align="center"><%=event.getName()%></td>
+										<td align="center"><%=event.getDescription()%></td>
+										<td align="center"><%=event.getDuration()%></td>
+										<td align="center"><%=event.getEventType()%></td>
+										<td align="center"><%=event.getSeatsAvailable()%></td>
+										<td align="center"><%=event.getStartTime()%></td>
+									</tr>
+									<%
+										}
+									%>
+								</table>
+
+								</td>
+							</tr>
+
+						</table>
+						
+						
 	</div>
 
 </div>

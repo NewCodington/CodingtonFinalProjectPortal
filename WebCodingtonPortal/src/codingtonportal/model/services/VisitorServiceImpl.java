@@ -45,13 +45,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 			 System.out.println(e.getMessage());  
 			 return false;	
 			 
-		 }finally{
-			if (statementSQL != null){
-				statementSQL.close();
-			}
-			if (conex != null){
-				conex.close();
-			}
+
 		}
 		return true;  
 	} 

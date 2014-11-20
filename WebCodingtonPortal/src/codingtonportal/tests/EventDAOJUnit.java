@@ -83,16 +83,16 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
-	@Test
-	public void testSelectEvent (){
-		try {
-			assertTrue(event.selectEvent());			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
-		}
-	}
+//	@Test
+//	public void testSelectEvent (){
+//		try {
+//			assertTrue(event.selectEvent());			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block			
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block			
+//			e.printStackTrace();
+//		}
+//	}
 }

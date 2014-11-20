@@ -88,7 +88,7 @@ public class EventServiceImpl implements EventDAO {
 	}
 
 
-	public boolean selectEvent() throws IOException, ClassNotFoundException {
+	public ArrayList<Event> selectEvent() throws IOException, ClassNotFoundException {
 		FERSDataConnection conex= new FERSDataConnection(); 
 		 PropertyAccess conexion= new PropertyAccess();
 		 ArrayList <Event> selection = new ArrayList <Event>();
@@ -112,9 +112,9 @@ public class EventServiceImpl implements EventDAO {
 	            
 
 	        } catch (SQLException ex) {
-	            return false;
+	            return null;
 	        } 		
-		return true;
+		return selection;
 	}
 	
 	
