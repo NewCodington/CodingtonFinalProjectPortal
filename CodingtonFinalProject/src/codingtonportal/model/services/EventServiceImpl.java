@@ -155,7 +155,7 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @param event : EventDAO class with the data necessary to insert.
 	 * 
-	 * @return Number of rows affected in the database. If the insert is correct, return 1.
+	 * @return Number of rows affected in the database. If the insert is correct, return 1, else return 0.
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -205,7 +205,7 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @param event : EventDAO class with the data necessary to delete.
 	 * 
-	 * @return Number of rows affected in the database. If the delete is correct, return 1.
+	 * @return Number of rows affected in the database. If the delete is correct, return 1, else return 0.
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -249,7 +249,7 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @param event : EventDAO class with the data necessary to update.
 	 * 
-	 * @return Number of rows affected in the database. If the insert is correct, return 1.
+	 * @return Number of rows affected in the database. If the insert is correct, return 1, else return 0.
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException

@@ -18,5 +18,5 @@ public interface EventSignUpDAO {
 	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent)throws IOException, ClassNotFoundException, SQLException;
 	public Integer updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException, SQLException;
 	public ArrayList<Integer> selectEventForVisitor(Integer idEvent)throws ClassNotFoundException, IOException, SQLException ;
-	public Integer selectVisitorForEvent(Integer idEvent)throws ClassNotFoundException, IOException, SQLException ;
+	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, IOException, SQLException ;
 }

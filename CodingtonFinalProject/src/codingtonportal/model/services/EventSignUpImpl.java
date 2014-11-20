@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
@@ -20,10 +19,13 @@ import codingtonportal.utils.PropertyAccess;
 public class EventSignUpImpl implements EventSignUpDAO {
 
 	/**
-	 * The visitor is registered in a new event.
-	 * @param idVisitor
-	 * @param idEvent
-	 * @return
+	 * Method to register a Visitor into an Event if the Visitor not is registered in that Event.
+	 * 
+	 * @param idVisitor	: the Id of the Visitor to register in the Event. 
+	 * @param idEvent	: the Id of the event in which register the user wants.
+	 * 
+	 * @return Number of rows affected in the database. If the register is correct, return 1, else return 0.
+	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
@@ -33,7 +35,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
-		Integer idVisitorRegistered = selectVisitorForEvent(idEvent);
+		Integer idVisitorRegistered = selectVisitorForEvent(idVisitor, idEvent);
 		Integer result = null;
 		
 		if (idVisitorRegistered == null) {
@@ -62,9 +64,13 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	
 	
 	/**
-	 * The visitor is unregistered for a registered event.
-	 * @param Name
-	 * @return
+	 * Method to unregister a Visitor to an Event if the Visitor is registered in that Event.
+	 * 
+	 * @param idVisitor	: the Id of the Visitor to unregister in the Event. 
+	 * @param idEvent	: the Id of the event in which unregister the user wants.
+	 * 
+	 * @return Number of rows affected in the database. If the unregister is correct, return 1, else return 0.
+	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
@@ -100,9 +106,12 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	
 	
 	/**
-	 * The update of available seats.
-	 * @param event
-	 * @return
+	 * Method to update the seats available in the event especified.
+	 * 
+	 * @param event	: the Event to update the seats available. 
+	 * 
+	 * @return Number of seats available after update it, if the Event hasn't got seats, return 0.
+	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
@@ -151,7 +160,17 @@ public class EventSignUpImpl implements EventSignUpDAO {
 
 
 	
-	
+	/**
+	 * Method to obtain all Ids of Events in which Visitor is registered.
+	 * 
+	 * @param idVisitor	: the Id of the Visitor to obtain the Events registered. 
+	 * 
+	 * @return ArrayList of Ids of Events or NULL if the Visitor isn't registered.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
 	@Override
 	public ArrayList<Integer> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
@@ -190,8 +209,19 @@ public class EventSignUpImpl implements EventSignUpDAO {
 
 
 
+	/**
+	 * Method to obtain if the Event has registered this Visitor.
+	 * 
+	 * @param idVisitor	: the Id of the Visitor to obtain the Events registered. 
+	 * 
+	 * @return ArrayList of Ids of Events or NULL if the Visitor isn't registered.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
 	@Override
-	public Integer selectVisitorForEvent(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
+	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
@@ -200,7 +230,9 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		try {    
 			//PreparedStatemnt for dynamic data	 
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectVisitorForEvent"));
+			
 			statementSQL.setInt(1, idEvent);
+			statementSQL.setInt(2, idVisitor);
 			
 			ResultSet rs = statementSQL.executeQuery();
 			if (rs.next()) {
