@@ -161,6 +161,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		
 		try {    
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectEventForVisitor"));
+			statementSQL.setInt(1, idVisitor);
 			
 			ResultSet outdata= statementSQL.executeQuery();                     
 			

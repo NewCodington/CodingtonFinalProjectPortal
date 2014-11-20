@@ -136,7 +136,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 
 			ResultSet rs = statementSQL.executeQuery();
 			
-			if(rs == null) {
+			if(!rs.next()) {
 				result = -1;
 			}
 			else {
