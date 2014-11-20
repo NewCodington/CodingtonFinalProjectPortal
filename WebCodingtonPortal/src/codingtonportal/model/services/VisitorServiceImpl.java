@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
-import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;

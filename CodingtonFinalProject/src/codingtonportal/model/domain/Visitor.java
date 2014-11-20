@@ -2,7 +2,7 @@ package codingtonportal.model.domain;
 
 public class Visitor {
 	
-	//Atributos
+	//Parameters
 
 	private int idVisitor;
 	private String firstName;
@@ -17,59 +17,59 @@ public class Visitor {
 	private int idEvent;
 	
 	
-	//Constructor
+	// Void constructor
 	public Visitor()
 	{
-		this.idVisitor=0;
-		this.firstName=null;
-		this.lastName=null;
-		this.dni=null;
-		this.email=null;
-		this.phoneNumber=null;
-		this.address=null;
-		this.userName=null;
-		this.password=null;
-		this.admin=true;
-		this.idEvent=0;
+		this.idVisitor = 0;
+		this.firstName = null;
+		this.lastName = null;
+		this.dni = null;
+		this.email = null;
+		this.phoneNumber = null;
+		this.address = null;
+		this.userName = null;
+		this.password = null;
+		this.admin = true;
+		this.idEvent = 0;
 		
 	}
 	
-	//Constructor con parametros
+	//Constructor with parameters except idVisitor
 	public Visitor(String userName, String password, String firstName,
 			String lastName, String dni, String email,String phoneNumber, String address, boolean admin)
 	{
 		
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.dni=dni;
-		this.email=email;
-		this.phoneNumber=phoneNumber;
-		this.address=address;
-		this.userName=userName;
-		this.password=password;
-		this.admin=admin;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dni = dni;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.userName = userName;
+		this.password = password;
+		this.admin = admin;
 				
 	}
 	
-	//Constructor con parametros
+	//Constructor with parameters 
 		public Visitor(int idVisitor, String userName, String password, String firstName,
 				String lastName, String dni, String email,String phoneNumber, String address, boolean admin)
 		{
 			
-			this.idVisitor=idVisitor;
-			this.firstName=firstName;
-			this.lastName=lastName;
-			this.dni=dni;
-			this.email=email;
-			this.phoneNumber=phoneNumber;
-			this.address=address;
-			this.userName=userName;
-			this.password=password;
-			this.admin=admin;
+			this.idVisitor = idVisitor;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.dni = dni;
+			this.email = email;
+			this.phoneNumber = phoneNumber;
+			this.address = address;
+			this.userName = userName;
+			this.password = password;
+			this.admin = admin;
 					
 		}
 	
-	//Constructor con parametros
+	//Constructor with userName and password
 	public Visitor(String userName, String password)
 	{
 		this.userName=userName;
@@ -80,15 +80,14 @@ public class Visitor {
 	
 	
 
-	//Constructor con parametros
+	//Constructor with idVisitor and idEvent
 	public Visitor(int idVisitor, int idEvent)
 	{
 		this.idVisitor=idVisitor;
 		this.idEvent=idEvent;
 				
 	}
-	
-	
+		
 	
 	
 	//GETTERS AND SETTERS
@@ -187,7 +186,6 @@ public class Visitor {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-
 
 
 }

@@ -8,8 +8,8 @@ public class Market extends Place {
 	
 	//Constructor
 	Market(){
-		this.idMarket=0;
-		this.typeMarket=null;
+		this.idMarket = 0;
+		this.typeMarket = null;
 	}
 
 	public int getIdMarket() {

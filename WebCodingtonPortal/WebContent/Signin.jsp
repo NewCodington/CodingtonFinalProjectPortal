@@ -42,7 +42,7 @@
 			<INPUT type="SUBMIT" value="Cancel">
 	  </p>
 		
-		<a href="Regist.html" > Register New Visitor </a>
+		<a href="regist.jsp" > Register New Visitor </a>
 	</form>
 </div>
 

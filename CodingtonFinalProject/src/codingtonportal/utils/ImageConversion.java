@@ -40,7 +40,7 @@ public class ImageConversion {
 		return true;		
 	}	
 	
-	public boolean showImage () throws ClassNotFoundException, IOException{
+	/*public boolean showImage () throws ClassNotFoundException, IOException{
 		FERSDataConnection conex= new FERSDataConnection(); 
 		ArrayList <Place> selection = new ArrayList <Place>();
 		
@@ -71,5 +71,5 @@ public class ImageConversion {
 		}	
 
 		return true;
-	}
+	}*/
 }

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Event {
 
-	//Atributos
+	//Parameter
 	private int eventId;
 	private String name;
 	private String description;
@@ -17,62 +17,63 @@ public class Event {
 	
 	
 	
-	//Constructor
+	// void Constructor
 	public Event()
 	{
-		this.eventId=0;
-		this.name=null;
-		this.description=null;
-		this.place=0;
-		this.duration=null;
-		this.startTime=null;
-		this.eventType=null;
-		this.seatsAvailable=0;
-		this.setDate_event(null);
+		this.eventId = 0;
+		this.name = null;
+		this.description = null;
+		this.place = 0;
+		this.duration = null;
+		this.startTime = null;
+		this.eventType = null;
+		this.seatsAvailable = 0;
+		this.date_event = null;
 	}
 
-	//Constructor con parametros
+	//Constructor with parameters
 	public Event(int eventId, String name, String description, int place,
 			String duration, String startTime, String eventType, int seatsAvailable, Date date_event)
 	{
-		this.eventId=eventId;
-		this.name=name;
-		this.description=description;
-		this.place=place;
-		this.duration=duration;
+		this.eventId = eventId;
+		this.name = name;
+		this.description = description;
+		this.place = place;
+		this.duration = duration;
 		this.startTime = startTime;
-		this.eventType=eventType;
-		this.seatsAvailable=seatsAvailable;
+		this.eventType = eventType;
+		this.seatsAvailable = seatsAvailable;
 		this.date_event = date_event;
 		
 	}
 	
-	
+	//Constructor with parameters except id
 	public Event(String name, String description, int place,
 			String duration, String startTime, String eventType, int seatsAvailable, Date date_event)
 	{		
-		this.name=name;
-		this.description=description;
-		this.place=place;
-		this.duration=duration;
+		this.name = name;
+		this.description = description;
+		this.place = place;
+		this.duration = duration;
 		this.startTime = startTime;
-		this.eventType=eventType;
-		this.seatsAvailable=seatsAvailable;
+		this.eventType = eventType;
+		this.seatsAvailable = seatsAvailable;
 		this.date_event = date_event;
 		
 	}
 	
+	//Constructor with parameters
 	public Event(Event event)
 	{
-		this.eventId=event.getEventId();
-		this.name=event.getName();
-		this.description=event.getDescription();
-		this.place=event.getPlace();
-		this.duration=event.getDuration();
-		this.startTime=event.getStartTime();
-		this.eventType=event.getEventType();
-		this.seatsAvailable=event.getSeatsAvailable();
-		this.date_event= event.getDate_event();
+		this.eventId = event.getEventId();
+		this.name = event.getName();
+		this.description = event.getDescription();
+		this.place = event.getPlace();
+		this.duration = event.getDuration();
+		this.startTime = event.getStartTime();
+		this.eventType = event.getEventType();
+		this.seatsAvailable = event.getSeatsAvailable();
+		this.date_event = event.getDate_event();
 	}
 	
 	
@@ -144,16 +145,12 @@ public class Event {
 		this.startTime = startTime;
 	}
 
-	/**
-	 * @return the date_event
-	 */
+
 	public Date getDate_event() {
 		return date_event;
 	}
 
-	/**
-	 * @param date_event the date_event to set
-	 */
+
 	public void setDate_event(Date date_event) {
 		this.date_event = date_event;
 	}
