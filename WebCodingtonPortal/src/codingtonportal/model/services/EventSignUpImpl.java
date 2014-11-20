@@ -38,16 +38,20 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		Integer idVisitorRegistered = selectVisitorForEvent(idVisitor, idEvent);
 		Integer result = null;
 		
+		// If the visitor isn't registered
 		if (idVisitorRegistered == null) {
 			
 			try {    
-				//PreparedStatemnt for dynamic data	 
+				// Create the Statement
 				statementSQL = con.getConnection().prepareStatement(connection.getProperty("registerForNewEvent"));
+				// Add conditions
 				statementSQL.setInt(1, idVisitor);
 				statementSQL.setInt(2, idEvent);
 	
-				result = statementSQL.executeUpdate();     
+				// Execute Query
+				result = statementSQL.executeUpdate();
 			
+			// Close the Statement and Connection
 			}finally {
 				if (statementSQL != null) { 
 					statementSQL.close();
@@ -57,10 +61,11 @@ public class EventSignUpImpl implements EventSignUpDAO {
 				}
 			}
 		}
-		
+		// Return if Visitor was registered or not 
 		return result; 
 	}
 
+	
 	
 	
 	/**
@@ -76,20 +81,23 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws SQLException 
 	 */
 	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent) throws IOException, ClassNotFoundException, SQLException {
-		
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
 		try {    
-			//PreparedStatemnt for dynamic data	 
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("unregisterForEvent"));
+			// Add conditions
 			statementSQL.setInt(1, idVisitor);
 			statementSQL.setInt(2, idEvent);
 
+			// Execute Query
 			result = statementSQL.executeUpdate();	     
 		
+		// Close the Statement and Connection
 		}finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -98,7 +106,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 				con.close();
 			}
 		}
-		
+		// Return if Visitor was unregistered or not 
 		return result;  	
 	}
 
@@ -118,21 +126,25 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 */
 	@Override
 	public Integer updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException, SQLException {
-		
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer seats = null;
 		
 		try {    
-			//PreparedStatemnt for dynamic data	 
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectSeats"));
+			// Add conditions
 			statementSQL.setInt(1, event.getEventId());
 			
+			// Execute Query
 			ResultSet rs = statementSQL.executeQuery();
 			
+			// If there are seats available
 			if (rs.next()) {
 				seats = rs.getInt("Seats_available");
+				// If the seats are more than 0
 				if (seats > 0) {
 					seats--;
 					statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateSeats"));
@@ -140,13 +152,15 @@ public class EventSignUpImpl implements EventSignUpDAO {
 					statementSQL.setInt(2, event.getEventId());
 					statementSQL.executeUpdate();
 				}
+				// If the seats are 0, not if it decreases
 				else {
 					seats = 0;
 				}
 			}
-			
+			// Close the Resultset
 			rs.close();
 		
+		// Close the Statement and Connection
 		}finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -155,6 +169,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 				con.close();
 			}
 		}
+		// Return if Visitor was unregistered or not 
 		return seats;  	
 	}
 
@@ -173,29 +188,41 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 */
 	@Override
 	public ArrayList<Integer> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, IOException, SQLException {
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		ArrayList <Integer> selection = null;
 		PreparedStatement statementSQL = null;
 		
-		try {    
+		try {   
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectEventForVisitor"));
+			// Where clauses
 			statementSQL.setInt(1, idVisitor);
 			
+			// Execute Query
 			ResultSet outdata= statementSQL.executeQuery();                     
 			
+			// If there are events available
 			if (outdata.next()) {
+				// Create a new ArrayList
 				selection = new ArrayList <Integer>();
 				
 				do {
+					// Create a new Id
 					Integer data = outdata.getInt("idEventR");   
 	
+					// Add to ArrayList
 					selection.add(data);
 					
+				// Continue add Ids while the Resultset have
 				}while(outdata.next());
 			}
+			
+			// Close the Resultset
 			outdata.close();
 			
+		// Close the Statement and Connection
 		}finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -204,7 +231,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 				con.close();
 			}
 		}
-			
+		// Return the Event's Ids registered for Visitor or not
 		return selection;
 	}
 
@@ -213,9 +240,10 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	/**
 	 * Method to obtain if the Event has registered this Visitor.
 	 * 
-	 * @param idVisitor	: the Id of the Visitor to obtain the Events registered. 
+	 * @param idVisitor	: the Id of the Visitor to to check if is registered.
+	 * @param idEvent	: the Id of the Event to check if the visitor is registered. 
 	 * 
-	 * @return ArrayList of Ids of Events or NULL if the Visitor isn't registered.
+	 * @return Visitor's Id if is registered in the Event or null if isn't registered.
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -223,24 +251,32 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 */
 	@Override
 	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
+		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
 		try {    
-			//PreparedStatemnt for dynamic data	 
+			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectVisitorForEvent"));
-			
+			// Where clauses
 			statementSQL.setInt(1, idEvent);
 			statementSQL.setInt(2, idVisitor);
 			
+			// Execute Query
 			ResultSet rs = statementSQL.executeQuery();
+			
+			// If the Visitor has registered for that Event
 			if (rs.next()) {
+				// Get the Id of the visitor to return
 				result = rs.getInt("idVisitorR");
 			}
-			rs.close();
 			
+			// Close the Resultset
+			rs.close();
+		
+		// Close the Statement and Connection
 		}finally {
 			if (statementSQL != null) { 
 				statementSQL.close();
@@ -249,7 +285,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 				con.close();
 			}
 		}
-			
+		// Return the Visitor's Ids registered for that Event or null
 		return result;
 	}
 
