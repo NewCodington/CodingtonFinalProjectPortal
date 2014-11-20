@@ -2,15 +2,15 @@ package codingtonportal.model.domain;
 
 public class Theatre extends Place {
 
-	// Atribute
+	// Parameters
 	
 	private int idTheatre;
 	
-	// Constructor
+	// Void constructor
 	
 	Theatre()
 	{
-		this.idTheatre=0;
+		this.idTheatre = 0;
 		
 	}
 
@@ -22,8 +22,6 @@ public class Theatre extends Place {
 		this.idTheatre = idTheatre;
 	}
 	
-	
-	
-	
+		
 	
 }

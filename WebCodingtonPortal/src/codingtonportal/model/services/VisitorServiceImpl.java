@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
-import codingtonportal.model.domain.Place;
+import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
@@ -22,12 +21,12 @@ public class VisitorServiceImpl implements VisitorDAO {
 	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection = new PropertyAccess();
-		Visitor data = null;
 		PreparedStatement statementSQL = null;
+		Visitor data = null;
 		
 		try {
-
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectVisitor"));
+			
 			statementSQL.setInt(1, visitor.getIdVisitor());
 			
 			ResultSet outdata= statementSQL.executeQuery();
@@ -35,16 +34,16 @@ public class VisitorServiceImpl implements VisitorDAO {
 			if (outdata.next()){                  
 				data = new Visitor();
 				
-				data.setIdVisitor(outdata.getInt(1));
-				data.setFirstName(outdata.getString(2));
-				data.setLastName(outdata.getString(3));
-				data.setDni(outdata.getString(4));
-				data.setEmail(outdata.getString(5));
-				data.setPhoneNumber(outdata.getString(6));
-				data.setAddress(outdata.getString(7));
-				data.setUserName(outdata.getString(8));
-				data.setPassword(outdata.getString(9));
-				data.setAdmin(outdata.getBoolean(10));
+				data.setIdVisitor(outdata.getInt("idVisitor"));
+				data.setFirstName(outdata.getString("First_name"));
+				data.setLastName(outdata.getString("Last_name"));
+				data.setDni(outdata.getString("DNI"));
+				data.setEmail(outdata.getString("Email"));
+				data.setPhoneNumber(outdata.getString("Phone_number"));
+				data.setAddress(outdata.getString("Address"));
+				data.setUserName(outdata.getString("Username"));
+				data.setPassword(outdata.getString("Password"));
+				data.setAdmin(outdata.getBoolean("isAdmin"));
 					                             
 			}
 			outdata.close();
@@ -72,12 +71,12 @@ public class VisitorServiceImpl implements VisitorDAO {
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
 		ArrayList <Visitor> selection = null;
-		Statement statementSQL = null;
+		PreparedStatement statementSQL = null;
 		
 		try {
-			statementSQL = (con.getConnection()).createStatement();
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewVisitor"));
 			
-			ResultSet outdata= statementSQL.executeQuery(connection.getProperty("viewVisitor"));                     
+			ResultSet outdata= statementSQL.executeQuery();                     
 			
 			if (outdata.next()) {
 				selection = new ArrayList <Visitor>();                   
@@ -85,16 +84,16 @@ public class VisitorServiceImpl implements VisitorDAO {
 				do {           
 					Visitor data = new Visitor();
 					
-					data.setIdVisitor(outdata.getInt(1));
-					data.setFirstName(outdata.getString(2));
-					data.setLastName(outdata.getString(3));
-					data.setDni(outdata.getString(4));
-					data.setEmail(outdata.getString(5));
-					data.setPhoneNumber(outdata.getString(6));
-					data.setAddress(outdata.getString(7));
-					data.setUserName(outdata.getString(8));
-					data.setPassword(outdata.getString(9));
-					data.setAdmin(outdata.getBoolean(10));
+					data.setIdVisitor(outdata.getInt("idVisitor"));
+					data.setFirstName(outdata.getString("First_name"));
+					data.setLastName(outdata.getString("Last_name"));
+					data.setDni(outdata.getString("DNI"));
+					data.setEmail(outdata.getString("Email"));
+					data.setPhoneNumber(outdata.getString("Phone_number"));
+					data.setAddress(outdata.getString("Address"));
+					data.setUserName(outdata.getString("Username"));
+					data.setPassword(outdata.getString("Password"));
+					data.setAdmin(outdata.getBoolean("isAdmin"));
 	
 					selection.add(data);	
 				}while(outdata.next());
@@ -114,7 +113,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 
 	
 	
-
+	
 	/**
 	 * The visitor is logs into the portal.
 	 * @param visitor
@@ -155,8 +154,274 @@ public class VisitorServiceImpl implements VisitorDAO {
 		 }
 		return result;
 	}
+
+	
 	
 
+	/**
+	 * The visitor is registered in a the portal.
+	 * @param Username
+	 * @param Password
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException 
+	 */
+	public Integer insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException   {  
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer result = null;
+		
+		try {    
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertVisitor"));
+			statementSQL.setString(1, visitor.getFirstName());
+			statementSQL.setString(2, visitor.getLastName());
+			statementSQL.setString(3, visitor.getDni());
+			statementSQL.setString(4, visitor.getEmail());
+			statementSQL.setString(5, visitor.getPhoneNumber());
+			statementSQL.setString(6, visitor.getAddress());
+			statementSQL.setString(7, visitor.getUserName());
+			statementSQL.setString(8, visitor.getPassword());
+			statementSQL.setBoolean(9, visitor.isAdmin());
+
+			result = statementSQL.executeUpdate();	     
+
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		return result;  
+	} 
+	
+	
+	
+	
+	/**
+	 * The visitor updates his personal information.
+	 * @param visitor
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
+
+	@Override
+	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer result = null;
+		
+		try {    
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateVisitor"));
+			statementSQL.setString(1, visitor.getFirstName());
+			statementSQL.setString(2, visitor.getLastName());
+			statementSQL.setString(3, visitor.getDni());
+			statementSQL.setString(4, visitor.getEmail());
+			statementSQL.setString(5, visitor.getPhoneNumber());
+			statementSQL.setString(6, visitor.getAddress());
+			statementSQL.setString(7, visitor.getPassword());
+			//Where
+			statementSQL.setInt(8, visitor.getIdVisitor());
+
+			result = statementSQL.executeUpdate();
+	     
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		return result;  		
+	}
+	
+	/**
+	 * The visitor updates his password.
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
+	public Integer updatePassword(Visitor visitor) throws IOException, ClassNotFoundException, SQLException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer result = null;
+		
+		try {    
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePassword"));
+			statementSQL.setString(1, visitor.getPassword());
+			//Where
+			statementSQL.setInt(2, visitor.getIdVisitor());
+
+			result = statementSQL.executeUpdate();		     
+
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		return result;  	
+	}
+	
+	
+	
+	
+	/**
+	 * The visitor is deleted of the portal.
+	 * @param visitor
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException 
+	 */
+	public Integer deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer result = null;
+		
+		try {    
+			//PreparedStatemnt for dynamic data	 
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteVisitor"));
+			
+			statementSQL.setInt(1, visitor.getIdVisitor());
+
+			result = statementSQL.executeUpdate();		     
+
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		return result;  	
+	}
+	
+	
+	
+	
+	/**
+	 * A list of all available events is shown.
+	 * @throws SQLException 
+	 */
+	public ArrayList<Event> viewEvent() throws ClassNotFoundException, IOException, SQLException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		ArrayList <Event> selection = null;
+		PreparedStatement statementSQL = null;
+		
+		try {
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewEvent"));
+			
+			ResultSet outdata= statementSQL.executeQuery();                     
+			
+			if (outdata.next()) {
+				selection = new ArrayList <Event>();                   
+				
+				do {           
+					Event data = new Event();
+					
+					data.setEventId(outdata.getInt("idEvent"));
+					data.setName(outdata.getString("Name"));
+					data.setDescription(outdata.getString("Description"));
+					data.setPlace(outdata.getInt("Place"));
+					data.setDate_event(outdata.getDate("Date_event"));
+					data.setStartTime(outdata.getString("StartTime"));
+					data.setDuration(outdata.getString("Duration"));
+					data.setEventType(outdata.getString("Event_type"));
+					data.setSeatsAvailable(outdata.getInt("Seats_available"));
+	
+					selection.add(data);
+					
+				}while(outdata.next());
+			}
+			
+			outdata.close();
+
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}	
+		return selection;
+	}
+	
+	
+	
+	
+	/**
+	 * The visitor search a event by the name.
+	 * @param Name
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
+	public ArrayList<Event> searchEvent(String Name) throws IOException, ClassNotFoundException, SQLException {
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		ArrayList <Event> selection = null;
+		PreparedStatement statementSQL = null;
+		
+		try {
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchEvent"));
+			statementSQL.setString(1,Name);
+			
+			ResultSet outdata= statementSQL.executeQuery();                     
+			
+			if (outdata.next()) {
+				selection = new ArrayList <Event>();                   
+				
+				do {           
+					Event data = new Event();
+					
+					data.setEventId(outdata.getInt("idEvent"));
+					data.setName(outdata.getString("Name"));
+					data.setDescription(outdata.getString("Description"));
+					data.setPlace(outdata.getInt("Place"));
+					data.setDate_event(outdata.getDate("Date_event"));
+					data.setStartTime(outdata.getString("StartTime"));
+					data.setDuration(outdata.getString("Duration"));
+					data.setEventType(outdata.getString("Event_type"));
+					data.setSeatsAvailable(outdata.getInt("Seats_available"));
+	
+					selection.add(data);
+					
+				}while(outdata.next());
+			}
+			
+			outdata.close();
+
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}	
+		return selection; 	
+	}
+	
 	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
 		  FERSDataConnection conex= new FERSDataConnection(); 
 		  PropertyAccess conexion= new PropertyAccess();
@@ -197,208 +462,5 @@ public class VisitorServiceImpl implements VisitorDAO {
 		  return false;
 		 
 		 }
-
 	
-
-	/**
-	 * The visitor is registered in a the portal.
-	 * @param Username
-	 * @param Password
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws IOException
-	 * @throws SQLException 
-	 */
-	public Integer insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException   {  
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		PreparedStatement statementSQL = null;
-		
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertVisitor"));
-			statementSQL.setString(1, visitor.getFirstName());
-			statementSQL.setString(2, visitor.getLastName());
-			statementSQL.setString(3, visitor.getDni());
-			statementSQL.setString(4, visitor.getEmail());
-			statementSQL.setString(5, visitor.getPhoneNumber());
-			statementSQL.setString(6, visitor.getAddress());
-			statementSQL.setString(7, visitor.getUserName());
-			statementSQL.setString(8, visitor.getPassword());
-			statementSQL.setBoolean(9, visitor.isAdmin());
-
-			statementSQL.executeUpdate();	     
-
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
-		return 0;  
-	} 
-	
-	
-	
-	
-	/**
-	 * The visitor updates his personal information.
-	 * @param visitor
-	 * @return
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 * @throws SQLException 
-	 */
-
-	@Override
-	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException {
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		PreparedStatement statementSQL = null;
-		
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateVisitor"));
-			statementSQL.setString(1, visitor.getFirstName());
-			statementSQL.setString(2, visitor.getLastName());
-			statementSQL.setString(3, visitor.getDni());
-			statementSQL.setString(4, visitor.getEmail());
-			statementSQL.setString(5, visitor.getPhoneNumber());
-			statementSQL.setString(6, visitor.getAddress());
-			statementSQL.setString(7, visitor.getPassword());
-			//Where
-			statementSQL.setInt(8, visitor.getIdVisitor());
-
-			statementSQL.executeUpdate();
-	     
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
-		return 0;  		
-	}
-	
-	/**
-	 * The visitor updates his password.
-	 * @return
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 * @throws SQLException 
-	 */
-	public Integer updatePassword(Visitor visitor) throws IOException, ClassNotFoundException, SQLException {
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		PreparedStatement statementSQL = null;
-		
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePassword"));
-			statementSQL.setString(1, visitor.getPassword());
-			//Where
-			statementSQL.setInt(2, visitor.getIdVisitor());
-
-			statementSQL.execute();		     
-
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
-		return 0;  	
-	}
-	
-	
-	
-	
-	/**
-	 * The visitor is deleted of the portal.
-	 * @param visitor
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws IOException
-	 * @throws SQLException 
-	 */
-	public Integer deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException {
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		PreparedStatement statementSQL = null;
-		
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteVisitor"));
-			statementSQL.setInt(1, visitor.getIdVisitor());
-
-			statementSQL.execute();		     
-
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
-		return 0;  	
-	}
-	
-	
-	
-	
-	/**
-	 * A list of all available events is shown.
-	 */
-	public Integer viewEvent(String Name) throws ClassNotFoundException, IOException {
-		
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewevent"));
-
-			statementSQL.executeQuery();
-			statementSQL.close();
-			con.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage());  
-			return -1;
-		}
-		return 0; 	
-	}
-	/**
-	 * The visitor search a event by the name.
-	 * @param Name
-	 * @return
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	public Integer searchEvent(String Name) throws IOException, ClassNotFoundException {
-		
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		try {    
-			//PreparedStatemnt for dynamic data	 
-			PreparedStatement statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchevent"));
-
-			statementSQL.setString(1, Name);
-
-			statementSQL.execute();
-			statementSQL.close();
-			con.close();		     
-
-		} catch (SQLException e) {         
-			System.out.println(e.getMessage()); 
-			return -1;
-		}
-		return 0;  	
-	}
 }

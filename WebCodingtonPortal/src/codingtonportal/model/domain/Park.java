@@ -6,10 +6,10 @@ public class Park extends Place {
 	private int idPark;
 	private String parkCategory;
 
-	//Constructor
+	// Void Constructor
 	Park(){
-	this.idPark=0;
-	this.parkCategory=null;
+	this.idPark = 0;
+	this.parkCategory = null;
 	}
 
 	public int getIdPark() {

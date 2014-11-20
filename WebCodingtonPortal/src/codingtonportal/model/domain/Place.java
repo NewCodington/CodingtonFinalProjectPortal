@@ -2,9 +2,11 @@ package codingtonportal.model.domain;
 
 import java.sql.Blob;
 
+
+
 public class Place {
 	
-	//Atribute	
+	//Parameters	
 	private int idPlace;
 	private String name;
 	private String description;
@@ -14,30 +16,30 @@ public class Place {
 	private int typePlace; 
 	
 	
-	//Constructor
+	//void constructor
 	public Place(){
-		this.idPlace=0;
-		this.name=null;
-		this.description=null;
-	    this.region=null;
-		this.image=null;
-		this.address=null;
-		this.typePlace=0;
+		this.idPlace = 0;
+		this.name = null;
+		this.description = null;
+	    this.region = null;
+		this.image = null;
+		this.address = null;
+		this.typePlace = 0;
 	}
 	
+	// Constructor with parameters
 	public Place(int idPlace, String name, String region, int typePlace, Blob image, String address, String description){
-		this.idPlace=idPlace;
-		this.name=name;
-		this.description=description;
-	    this.region=region;
-		this.image=image;
-		this.address=address;
-		this.typePlace=typePlace;
+		this.idPlace = idPlace;
+		this.name = name;
+		this.description = description;
+	    this.region = region;
+		this.image = image;
+		this.address = address;
+		this.typePlace = typePlace;
 	}
 	
 	
-	
-
+	// Setters and getters
 	public String getAddress() {
 		return address;
 	}
@@ -90,16 +92,12 @@ public class Place {
 		this.image = image;
 	}
 
-	/**
-	 * @return the typePlace
-	 */
+
 	public int getTypePlace() {
 		return typePlace;
 	}
 
-	/**
-	 * @param typePlace the typePlace to set
-	 */
+	
 	public void setTypePlace(int typePlace) {
 		this.typePlace = typePlace;
 	}

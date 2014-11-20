@@ -6,14 +6,13 @@ import java.util.ArrayList;
 
 import codingtonportal.model.domain.Event;
 
-/**
- * This interface manages the methods relate with the events.
- * @param event
- * @return
- * @throws IOException
- * @throws ClassNotFoundException
- */
 
+/**
+ * The interface EventDAO shows the services that can be used or are related to the Events.
+ * 
+ * @author JAVA101_01
+ *
+ */
 public interface EventDAO {
 	public Event selectEvent (Event event) throws IOException, ClassNotFoundException, SQLException;
 	public ArrayList<Event> viewEvent () throws IOException, ClassNotFoundException, SQLException;

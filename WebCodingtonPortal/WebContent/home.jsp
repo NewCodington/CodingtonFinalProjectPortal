@@ -97,7 +97,7 @@
 																<td>
 								<%
 									ArrayList<Event> eventRegisterList = new ArrayList<Event>();
-									eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGLIST");
+									eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGISTERLIST");
 								%>
 								<table border="2">
 									<tr>

@@ -67,12 +67,18 @@ public class SigninServlet extends HttpServlet {
 					session.setAttribute("EVENTLIST", eventsList);
 					
 					EventSignUpImpl eventSignUp=new EventSignUpImpl();
+					ArrayList<Integer> listIdEvent = null;
+					ArrayList<Event> eventsRegisterList = new ArrayList <Event>();
 					
-					eventsRegisterList = eventSignUp.selectEventForVisitor(idVisitor);
+					listIdEvent = eventSignUp.selectEventForVisitor(idVisitor);
 					
-					ArrayList<Event> eventsRegisterList;
-					eventsRegisterList = eventSignUp.selectEventForVisitor(idVisitor);
-					session.setAttribute("EVENTLIST", eventsRegisterList);
+					for (Integer element : listIdEvent){
+						Event data = new Event();
+						data.setEventId(element);
+						eventsRegisterList.add(eventService.selectEvent(data));
+					}
+					
+					session.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
 					
 					RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
 					dispatcher.forward(request, response);
