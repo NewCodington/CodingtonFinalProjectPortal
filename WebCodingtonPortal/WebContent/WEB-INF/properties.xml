@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties>
+	<connection>
+		<event >
+			<selectEvent>SELECT * FROM codington.event WHERE (idEvent = ?);</selectEvent>
+			<viewEvent>SELECT * FROM codington.event;</viewEvent>
+			<insertEvent>INSERT INTO codington.event(Name, Description, Place, StartTime, Duration, Event_type, Seats_available) VALUES (?, ?, ?, ?, ?, ?, ?);</insertEvent>
+			<deleteEvent>DELETE FROM codington.event WHERE (idEvent = ?);</deleteEvent>
+			<updateEvent>UPDATE codington.event SET Name = ?, Description = ?, Place = ?, StartTime = ?, Duration = ?, Event_type = ?, Seats_available = ? WHERE (idEvent = ?);</updateEvent>
+		</event>
+		
+
+		<place>
+			<selectPlace>SELECT * FROM codington.place WHERE (idPlace = ?);</selectPlace>
+			<viewPlace>SELECT * FROM codington.place;</viewPlace>
+			<insertPlace>INSERT INTO codington.place(Name, Region, TypePlace, Image, Address, Description) VALUES (?, ?, ?, ?, ?, ?);</insertPlace>
+			<updatePlace>UPDATE codington.place SET Name=?, Region=?, typePlace=?, Image=?, Address=? , Description =? WHERE (idPlace=?);</updatePlace>
+			<deletePlace>DELETE FROM codington.place WHERE (idPlace= ?);</deletePlace></place>
+		
+		<visitor>
+			<selectVisitor>SELECT * FROM codington.visitor WHERE (idVisitor = ?);</selectVisitor>
+			<viewVisitor>SELECT * FROM codington.visitor;</viewVisitor>
+			<loginVisitor>SELECT * FROM codington.visitor WHERE (Username=? AND Password=?);</loginVisitor>
+			<insertVisitor>INSERT INTO codington.visitor(First_name, Last_name, DNI, Email, Phone_number, Address, Username, Password, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,? );</insertVisitor>
+			<updateVisitor>UPDATE codington.visitor SET First_name=?, Last_name=?, DNI=?, Email=?, Phone_number=?, Address=?,Password=? WHERE (idVisitor=?);</updateVisitor>
+			<updatePassword>UPDATE codington.visitor SET Password=? WHERE (idVisitor=?);</updatePassword>
+			<deleteVisitor>DELETE FROM codington.visitor WHERE (idVisitor=?);</deleteVisitor><viewEvent>SELECT * FROM codington.event ORDER BY Date_event;</viewEvent>
+			<searchEvent>SELECT * FROM codington.event  WHERE (Name LIKE '%?%');</searchEvent>
+			</visitor>
+		
+		<signUp>
+			<registerForNewEvent>INSERT INTO  codington.eventregistration (idVisitorR,idEventR) VALUES (?,?);</registerForNewEvent>
+			<unregisterForEvent>DELETE FROM  codington.eventregistration  WHERE (idVisitorR= ? AND idEventR=?);</unregisterForEvent>
+			<selectSeats>SELECT Seats_available FROM codington.event WHERE (idEvent = ?);</selectSeats><updateSeats>UPDATE codington.event SET Seats_available = ? WHERE (idEvent = ?);</updateSeats>
+			<selectEventForVisitor>SELECT idVisitorR FROM codington.eventregistration WHERE (idEventR = ?);</selectEventForVisitor></signUp>
+	</connection>
+	
+	
+	<constants>
+		<Zoo>1</Zoo>
+	</constants>
+</properties>
