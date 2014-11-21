@@ -45,11 +45,16 @@
 		  <br>
 		  <input type="text" id="place" name="place" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Place" required/>
 		    </p>
-			 <p>Date:
+		  <p>Date:
 		  <br>
 		  <input type="text" id="date" name="date" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Date" required/>
 		    </p>
 		  
+		 <p>Start Time:
+		  <br>
+		  <input type="text" id="startTime" name="startTime" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Date" required/>
+		 </p>
+		    
 		 Duration: 
 		  <br>
 		  <input type="text" id="duration" name="duration"  pattern="\S{1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required/><br>
@@ -69,7 +74,7 @@
 		<p class = "input">
 		 
 			<INPUT type="SUBMIT" value="Submit">
-			<INPUT type="SUBMIT" value="Cancel"  onclick = "javascript:window.location='admin';">
+			<INPUT type="SUBMIT" value="Cancel"  onclick = "javascript:window.location='profileAdmin.jsp';">
 		</p>
 	  
 

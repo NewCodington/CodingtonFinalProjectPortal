@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
+		if(session.getAttribute("ErrorLogin")!= null && !session.getAttribute("ErrorLogin").toString().equals("")){
 			response.sendRedirect("login.jsp");
 		}
 		else{
@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 				
 
 			}else{
-				session.setAttribute("Error", "User or password incorrect");
+				session.setAttribute("ErrorLogin", "User or password incorrect");
 				response.sendRedirect("login");
 			}
 		} catch (ClassNotFoundException e) {

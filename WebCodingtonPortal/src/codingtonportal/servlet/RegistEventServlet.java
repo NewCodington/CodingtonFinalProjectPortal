@@ -2,8 +2,9 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,15 +70,20 @@ public class RegistEventServlet extends HttpServlet {
 		event.setName(request.getParameter("eventName"));
 		event.setDescription(request.getParameter("description"));
 		event.setPlace(Integer.parseInt(request.getParameter("place")));
-		
+	
+		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
+		Date date = null;
+		try {
+			date = formatter.parse(request.getParameter("date"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		event.setDate_event(date);
+		event.setStartTime(request.getParameter("startTime"));
 		event.setDuration(request.getParameter("duration"));
 		event.setEventType(request.getParameter("typeOfEvent"));
 		event.setSeatsAvailable(Integer.parseInt(request.getParameter("seats")));
-		
-		event.setStartTime("2 horas");//Lo cojo manual porque falta el campo en el form
-		
-		//Falta incluir la fecha y el tiempo que dura
-
 		
 		try {
 			if(eventService.insertEvent(event) > 0){

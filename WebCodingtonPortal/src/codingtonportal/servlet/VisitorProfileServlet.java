@@ -38,6 +38,8 @@ public class VisitorProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		HttpSession session=request.getSession();
+		session.setAttribute("ErrorLogin", null);
 		
 		ArrayList<Integer> listIdEvent = null;
 		ArrayList<Event> eventsRegisterList = null;
@@ -45,8 +47,6 @@ public class VisitorProfileServlet extends HttpServlet {
 		
 		EventServiceImpl eventService=new EventServiceImpl();
 		EventSignUpImpl eventSignUp=new EventSignUpImpl();
-		
-		HttpSession session=request.getSession();
 		
 		//Params of jsp for get
 		String register=null;

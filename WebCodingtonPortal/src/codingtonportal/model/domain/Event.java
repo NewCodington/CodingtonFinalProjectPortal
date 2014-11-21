@@ -1,6 +1,6 @@
 package codingtonportal.model.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Event {
 
@@ -151,8 +151,8 @@ public class Event {
 	}
 
 
-	public void setDate_event(Date date_event) {
-		this.date_event = date_event;
+	public void setDate_event(Date date) {
+		this.date_event = date;
 	}
 
 

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
 	  
@@ -27,7 +29,7 @@
 
 
 <div class="nav_log">
-	<br><b><a style="color:red"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></a></b>
+	<br><b><a style="color:red"><%= session.getAttribute("ErrorLogin")!=null?session.getAttribute("ErrorLogin").toString():""%></a></b>
 	<form method="post" action="login">
 		<p class = "title">
 		Sign In </p>

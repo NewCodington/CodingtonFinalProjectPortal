@@ -167,8 +167,9 @@ div.footer
 
 
 
-	p.menuHorizontal
+	div.menuHorizontal
        {
+       widht: 50%;
 		font-size:28px;
 		color:#333333;
 		background-color:#CCCCCC;
