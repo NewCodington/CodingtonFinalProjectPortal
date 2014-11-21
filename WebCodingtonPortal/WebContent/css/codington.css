@@ -1,4 +1,29 @@
-	
+#Styles for Events pages
+
+div#Estilo1 span.title{
+	width: 50%;
+	float: left;
+	font-weight: bold;
+	font-size: 22px;
+}
+
+div.Estilo2 a {
+	width: 13%;
+	float: right;
+	font-size: 18px;
+}
+
+table.events{
+	width:100%;
+	border:2;
+}
+table.events tr {
+	 padding-bottom: 10px;
+}
+table.events tr th {
+	align: left;
+}
+
 	
 	
 	div.header
@@ -38,8 +63,9 @@
 	}
 	div.section
     {   
-        float:left;
-	    padding:5px;		
+		float: right;
+		widht: 85%;		
+		padding: 15px;
 	}
 	
 	div.sectionprofileright
@@ -87,6 +113,7 @@ p.region
 	    text-align: center;
 	    font-size: 18px;
 	    margin-top: 5px;
+	    margin-bottom: 10px;
 		}
 
    p.regionadmin
@@ -311,16 +338,4 @@ input2[type="submit"] {
   font-size:1px;
   box-shadow: inset 0 0 0 3px #w;
  
-}
-
-
-table.events{
-	width:100%;
-	border:2;
-}
-table.events tr {
-	 padding-bottom: 10px;
-}
-table.events tr th {
-	align: left;
 }
