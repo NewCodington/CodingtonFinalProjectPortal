@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.model.services.VisitorServiceImpl;
@@ -17,7 +18,7 @@ import codingtonportal.model.services.VisitorServiceImpl;
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for Regist Visitor", urlPatterns = { "/register" })
+@WebServlet(description = "Servlet for Regist Visitor", urlPatterns = { "/registerVisitor" })
 public class VisitorRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +36,28 @@ public class VisitorRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		
-		response.sendRedirect("registerVisitor.jsp");
+		
+HttpSession session = request.getSession();
+		
+		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
+			response.sendRedirect("registerEvent.jsp");
+		}
+		else{
+			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
+				session.setAttribute("Error", null);
+				response.sendRedirect("login");
+			}
+			else {
+				session.setAttribute("Error", null);
+				session.setAttribute("Success", null);
+				response.sendRedirect("registerVisitor.jsp");
+			}				
+		}
+		
+		
+		
+		
+		//response.sendRedirect("registerVisitor.jsp");
 	}
 
 	/**
@@ -43,6 +65,9 @@ public class VisitorRegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		
+		HttpSession session = request.getSession();
+		
 		
 		Visitor visitor=new Visitor();
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
@@ -57,27 +82,31 @@ public class VisitorRegisterServlet extends HttpServlet {
 		visitor.setAddress(request.getParameter("adress"));
 		visitor.setAdmin(false);
 
-		//= new Visitor(request.getParameter("fname"),request.getParameter("lname"),request.getParameter("fname"),);
-	//dcvn
+		
+		
 		
 		try {
-			if(visitorService.insertVisitor(visitor) >= 0){
-				
-					RequestDispatcher dispatcher=request.getRequestDispatcher("/Signin.jsp");
-					dispatcher.forward(request, response);
-
+			if(visitorService.insertVisitor(visitor) > 0){
+				session.setAttribute("Success", "Successfully created visitor");
 			}else{
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/regist.jsp?msg=Incorrect");
-				dispatcher.forward(request, response);
+				session.setAttribute("Error", "Incorrect Visitor values");
 			}
-		} catch (ClassNotFoundException e) {
+			
+			
+			
+		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		
-		} catch (SQLException e) {
+			e1.printStackTrace();
+		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		
+		response.sendRedirect("registerVisitor");
+		
+		
+		
+		
 	}
 
 }

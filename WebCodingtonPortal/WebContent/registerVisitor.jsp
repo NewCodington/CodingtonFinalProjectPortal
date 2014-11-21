@@ -28,7 +28,7 @@
 <div class = "nav_log">
 
 <br><b><a style="color:red"><%= request.getParameter("msg")!=null?request.getParameter("msg"):""%></a></b>
-	<form method="post" action="RegistVisitorServlet">
+	<form method="post" action="registerVisitor">
 		<p class = "title">
         New User</p>
 		
@@ -72,7 +72,7 @@
 	  </p>
 	    <p class = "input">
 		  <INPUT type="SUBMIT" value="Submit" onclick = "return validateForm()">
-		  <INPUT type="SUBMIT" value="Cancel" onclick = "javascript:window.location='Signin.jsp';">
+		  <INPUT type="BUTTON" value="Cancel" onclick = "javascript:window.location='login';">
 	  </p>
 	  
 
