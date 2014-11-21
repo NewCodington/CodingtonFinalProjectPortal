@@ -23,7 +23,7 @@ public class VisitorDAOJUnit extends TestCase {
 		super.tearDown();
 	}
 
-	/*@Test
+	@Test
 	public void testinsertVisitor() {
 		Visitor visit= new Visitor(1, "Charla2", "dafkj","Explicacion",
 				"jim", "45.2", "emai", "9874","12",true);
@@ -42,7 +42,7 @@ public class VisitorDAOJUnit extends TestCase {
 	public void testloginVisitor() {
 		Visitor visit= new Visitor("Charla","dafkj");
 		try {
-			assertTrue(visitor.loginVisitor(visit.getUserName(),visit.getPassword()));
+			assertTrue(visitor.loginVisitor(visit));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class VisitorDAOJUnit extends TestCase {
 			e.printStackTrace();
 		}
 	}
-
+/*
 	@Test
 	public void testdeleteVisitor() {
 		Visitor visit= new Visitor(12, "Charla", "dafkj","Explicacion", 
