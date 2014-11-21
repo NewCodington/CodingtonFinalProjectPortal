@@ -69,12 +69,11 @@
 		  <br>
 		  <input type="text" id="seats" name="seats" required title="Field required" placeholder="Seats Avalaible"/>
 	    </p>
-	  
-		</p>
+
 		<p class = "input">
 		 
 			<INPUT type="SUBMIT" value="Submit">
-			<INPUT type="SUBMIT" value="Cancel"  onclick = "javascript:window.location='profileAdmin.jsp';">
+			<INPUT type="BUTTON" value="Cancel"  onclick = "javascript:window.location='admin';">
 		</p>
 	  
 
