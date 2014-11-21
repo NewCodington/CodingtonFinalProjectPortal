@@ -21,7 +21,7 @@ import codingtonportal.model.services.EventSignUpImpl;
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for select Event", urlPatterns = { "/HomeServlet" })
+@WebServlet(description = "Servlet for select Event", urlPatterns = { "/visitor" })
 public class VisitorProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,49 +39,60 @@ public class VisitorProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		
+		ArrayList<Integer> listIdEvent = null;
+		ArrayList<Event> eventsRegisterList = null;
+		ArrayList<Event> eventsList=null;
 		
 		EventServiceImpl eventService=new EventServiceImpl();
 		EventSignUpImpl eventSignUp=new EventSignUpImpl();
 		
 		HttpSession session=request.getSession();
-		ArrayList<Event> eventsList=null;
-		
 		
 		//Params of jsp for get
-		String idEv=null;
-		idEv=request.getParameter("idEv");
+		String register=null;
+		register=request.getParameter("register");
 		
-		String idVi=null;
-		idVi=request.getParameter("idVi");
+		String unregister=null;
+		unregister=request.getParameter("unregister");
 		
 		String idVisitor=null;
-		idVisitor=request.getParameter("idVisitor");
-		
-		
-		
-		try {
-			eventsList = eventService.viewEvent();
-		
-		
-		} catch (ClassNotFoundException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		session.setAttribute("EVENTLIST", eventsList);
-		
-		
-		ArrayList<Integer> listIdEvent = null;
-		
-		ArrayList<Event> eventsRegisterList = null;
+		idVisitor=session.getAttribute("idVisitor").toString();
 		
 		try {
 			
+			//si vienen los parametros meto el nuevo evento a ese visitor
+			if(register!=null){ 
+				if(eventSignUp.registerForNewEvent(Integer.parseInt(idVisitor), Integer.parseInt(register)) == null)
+					session.setAttribute("Error", "You're already registered on this event");
+				else
+					session.setAttribute("Error", null);
+			}
+			if(unregister!=null){ 
+				eventSignUp.unregisterForEvent(Integer.parseInt(idVisitor), Integer.parseInt(unregister));
+				session.setAttribute("Error", null);
+			}
+			
 			listIdEvent = eventSignUp.selectEventForVisitor(Integer.parseInt(idVisitor));
 		
+			if(listIdEvent != null){
+				eventsRegisterList = new ArrayList <Event>();
+				
+				for (Integer element : listIdEvent){
+					Event data = new Event();
+					data.setEventId(element);
+					eventsRegisterList.add(eventService.selectEvent(data));
+				}
+				
+			}
 		
+			eventsList = eventService.viewEvent();
+			
+			session.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
+			session.setAttribute("EVENTLIST", eventsList);
+			
+			
+			response.sendRedirect("profileVisitor.jsp");
+			
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -92,76 +103,6 @@ public class VisitorProfileServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		if(listIdEvent != null){
-			
-			 eventsRegisterList=new ArrayList <Event>();
-			for (Integer element : listIdEvent){
-				Event data = new Event();
-				data.setEventId(element);
-				try {
-					
-					eventsRegisterList.add(eventService.selectEvent(data));
-				
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		session.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
-		
-		
-		
-		
-		//si vienen los parametros meto el nuevo evento a ese visitor
-		if(idVi!=null && idEv!=null)
-		{
-		
-			try {
-			
-				eventSignUp.registerForNewEvent(Integer.parseInt(idVi), Integer.parseInt(idEv));
-				
-			
-			
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
-			
-		}
-
-		
-		try {
-			eventsList = eventService.viewEvent();
-			session.setAttribute("EVENTLIST", eventsList);
-			
-			//RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp");
-			//dispatcher.forward(request, response);
-			
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
 		
 	}
 

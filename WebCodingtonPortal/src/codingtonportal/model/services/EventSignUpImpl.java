@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
-import codingtonportal.model.domain.Event;
 import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
 
@@ -41,16 +40,22 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		// If the visitor isn't registered
 		if (idVisitorRegistered == null) {
 			
-			try {    
-				// Create the Statement
-				statementSQL = con.getConnection().prepareStatement(connection.getProperty("registerForNewEvent"));
-				// Add conditions
-				statementSQL.setInt(1, idVisitor);
-				statementSQL.setInt(2, idEvent);
-	
-				// Execute Query
-				result = statementSQL.executeUpdate();
+			try {
+			// Update seats if available
+				Integer seatsAvailable = decrementSeats(idEvent);
 			
+			// If seats availabe, register a Visitor into Event
+				if (seatsAvailable != 0) {
+					// Create the Statement
+					statementSQL = con.getConnection().prepareStatement(connection.getProperty("registerForNewEvent"));
+					// Add conditions
+					statementSQL.setInt(1, idVisitor);
+					statementSQL.setInt(2, idEvent);
+		
+					// Execute Query
+					result = statementSQL.executeUpdate();
+				}
+				
 			// Close the Statement and Connection
 			}finally {
 				if (statementSQL != null) { 
@@ -88,15 +93,21 @@ public class EventSignUpImpl implements EventSignUpDAO {
 		Integer result = null;
 		
 		try {    
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("unregisterForEvent"));
-			// Add conditions
-			statementSQL.setInt(1, idVisitor);
-			statementSQL.setInt(2, idEvent);
-
-			// Execute Query
-			result = statementSQL.executeUpdate();	     
-		
+			// Update seats if available
+			Integer seatsAvailable = incrementSeats(idEvent);
+			
+			// Unregister for Event
+			if (seatsAvailable != null) {
+				// Create the Statement
+				statementSQL = con.getConnection().prepareStatement(connection.getProperty("unregisterForEvent"));
+				// Add conditions
+				statementSQL.setInt(1, idVisitor);
+				statementSQL.setInt(2, idEvent);
+	
+				// Execute Query
+				result = statementSQL.executeUpdate();	     
+			}
+			
 		// Close the Statement and Connection
 		}finally {
 			if (statementSQL != null) { 
@@ -125,7 +136,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws SQLException 
 	 */
 	@Override
-	public Integer updateSeatsAvailable(Event event) throws ClassNotFoundException, IOException, SQLException {
+	public Integer incrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -136,7 +147,65 @@ public class EventSignUpImpl implements EventSignUpDAO {
 			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectSeats"));
 			// Add conditions
-			statementSQL.setInt(1, event.getEventId());
+			statementSQL.setInt(1, idEvent);
+			
+			// Execute Query
+			ResultSet rs = statementSQL.executeQuery();
+			
+			// If there are seats available
+			if (rs.next()) {
+				seats = rs.getInt("Seats_available");
+
+				seats++;
+				statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateSeats"));
+				statementSQL.setInt(1, seats);
+				statementSQL.setInt(2, idEvent);
+				statementSQL.executeUpdate();
+			}
+			// Close the Resultset
+			rs.close();
+		
+		// Close the Statement and Connection
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		// Return if Visitor was unregistered or not 
+		return seats;  	
+	}
+
+	
+	
+	
+	
+	/**
+	 * Method to update the seats available in the event especified.
+	 * 
+	 * @param event	: the Event to update the seats available. 
+	 * 
+	 * @return Number of seats available after update it, if the Event hasn't got seats, return 0.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 */
+	@Override
+	public Integer decrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
+		// Initialize variables
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer seats = null;
+		
+		try {    
+			// Create the Statement
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("selectSeats"));
+			// Add conditions
+			statementSQL.setInt(1, idEvent);
 			
 			// Execute Query
 			ResultSet rs = statementSQL.executeQuery();
@@ -149,7 +218,7 @@ public class EventSignUpImpl implements EventSignUpDAO {
 					seats--;
 					statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateSeats"));
 					statementSQL.setInt(1, seats);
-					statementSQL.setInt(2, event.getEventId());
+					statementSQL.setInt(2, idEvent);
 					statementSQL.executeUpdate();
 				}
 				// If the seats are 0, not if it decreases

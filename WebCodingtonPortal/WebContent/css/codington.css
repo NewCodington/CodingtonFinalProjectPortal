@@ -15,7 +15,7 @@
 		line-height:20px;
 		background-color:#eeeeee;
 		height:100%;
-		width:160px;
+		width:13%;
 		float:left;
 		padding:0px;
 		margin-top:0px;	 
@@ -310,4 +310,16 @@ input2[type="submit"] {
   font-size:1px;
   box-shadow: inset 0 0 0 3px #w;
  
+}
+
+
+table.events{
+	width:100%;
+	border:2;
+}
+table.events tr {
+	 padding-bottom: 10px;
+}
+table.events tr th {
+	align: left;
 }

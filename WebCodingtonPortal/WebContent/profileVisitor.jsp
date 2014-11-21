@@ -7,23 +7,15 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/codington.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin t&iacute;tulo</title>
+<title>Bienvenido <%=session.getAttribute("Visitor") %></title>
 </head>
 
 <body>
 
 <%
-//Recojo el id del Visitor
-									String idVisitor=request.getParameter("idVisitor");
-									String idVi=request.getParameter("idVi");
-									String idEv=request.getParameter("idEv");
-									
-									
-									
-									
-%>
-				
-						
+	//Recojo el id del Evento
+	String idEv=request.getParameter("idEv");								
+%>	
 
 
 <div class="header">
@@ -41,7 +33,7 @@
       </tr>
     </table>
 	
-<p class="menuHorizontal"><a href="myprofile.html" class="link">My Profile </a> | <a href="home.html" class="link">Home </a> | <a href="History.html" class="link" > History </a> | <a class="link" href="Events.html"> Events </a> | <a href="Signin.html" class="link">Logout </a> </p>
+<p class="menuHorizontal"><a href="myprofile.html" class="link">My Profile </a> | <a href="home.html" class="link">Home </a> | <a href="History.html" class="link" > History </a> | <a class="link" href="Events.html"> Events </a> | <a href="logout" class="link">Logout </a> </p>
 </div>
 
 
@@ -69,6 +61,8 @@
 	
 	<div id="event">
 		
+	<br><b><a style="color:red"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></a></b>
+	
 	<table>
 							<tr>
 								<td style="font-weight: bold">Events<b></b></td>
@@ -82,7 +76,7 @@
 									ArrayList<Event> eventList = new ArrayList<Event>();
 									eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
 								%>
-								<table border="2">
+								<table class="events">
 									<tr>
 										<th>Event Name</th>
 										<th>Description</th>
@@ -93,28 +87,22 @@
 										<th>Action</th>
 									</tr>
 									<%
-									
-									
-									
-									
-									
 										for (Event event : eventList) {
 									%>
+									
 									<tr>
-										<td align="center"><%=event.getName()%></td>
-										<td align="center"><%=event.getDescription()%></td>
-										<td align="center"><%=event.getDuration()%></td>
-										<td align="center"><%=event.getEventType()%></td>
-										<td align="center"><%=event.getSeatsAvailable()%></td>
-										<td align="center"><%=event.getStartTime()%></td>
-										<td align="center"><a href = <%="home.jsp?idEv=" + event.getEventId() + "&idVi=" + idVisitor %>>Regist</a></td>
+										<td><%=event.getName()%></td>
+										<td><%=event.getDescription()%></td>
+										<td><%=event.getDuration()%></td>
+										<td><%=event.getEventType()%></td>
+										<td><%=event.getSeatsAvailable()%></td>
+										<td><%=event.getStartTime()%></td>
+										<td><a href = <%="visitor?register=" + event.getEventId() %>>Register</a></td>
 									</tr>
 									<%
 										}
 									%>
 								</table>
-								
-	
 							<tr>
 								<td style="font-weight: bold">Events Resgistration<b></b></td>
 							</tr>
@@ -136,7 +124,7 @@
 									else
 									{	
 											%>
-											<table border="2">
+											<table class="events" >
 												<tr>
 													<th>Event Name</th>
 													<th>Description</th>
@@ -150,13 +138,13 @@
 													for (Event event : eventRegisterList) {
 												%>
 												<tr>
-													<td align="center"><%=event.getName()%></td>
-													<td align="center"><%=event.getDescription()%></td>
-													<td align="center"><%=event.getDuration()%></td>
-													<td align="center"><%=event.getEventType()%></td>
-													<td align="center"><%=event.getSeatsAvailable()%></td>
-													<td align="center"><%=event.getStartTime()%></td>
-													<td align="center"><a href = "">Unregist</a></td>
+													<td><%=event.getName()%></td>
+													<td><%=event.getDescription()%></td>
+													<td><%=event.getDuration()%></td>
+													<td><%=event.getEventType()%></td>
+													<td><%=event.getSeatsAvailable()%></td>
+													<td><%=event.getStartTime()%></td>
+													<td><a href = "<%="visitor?unregister=" + event.getEventId() %>">Unregister</a></td>
 												</tr>
 												<%
 													}

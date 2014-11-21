@@ -31,7 +31,7 @@ public class PropertyAccess implements IPropertyAccess {
 		
 		
 		
-		input=new FileInputStream("C:/Users/JAVA101_01/git/CodingtonFinalProjectPortal/WebCodingtonPortal/build/classes/codingtonportal/utils/files/connection.properties");
+		input=new FileInputStream("C:/Users/JAVA101_01/git/CodingtonFinalProjectPortal/WebCodingtonPortal/src/codingtonportal/utils/files/connection.properties");
 		
 		// Se carga el archivo de propiedades        
 		p.load(input);         

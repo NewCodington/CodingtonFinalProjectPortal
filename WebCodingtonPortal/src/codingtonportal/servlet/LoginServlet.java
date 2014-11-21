@@ -42,7 +42,6 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
-			session.invalidate();
 			response.sendRedirect("login.jsp");
 		}
 		else{
@@ -66,10 +65,19 @@ public class LoginServlet extends HttpServlet {
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
 		
 		try {
-			if((visitorService.loginVisitor(visitor))>=0){
+			visitor.setIdVisitor(visitorService.loginVisitor(visitor));
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			if ((visitor.getIdVisitor()) >= 0) {
 				if(visitorService.isAdmin(visitor)){
 
-					session.setAttribute("idAdmin",visitor.getUserName());
+					session.setAttribute("idAdmin",visitor.getIdVisitor());
 					session.setAttribute("Admin", visitor.getUserName());
 					
 					response.sendRedirect("admin");
