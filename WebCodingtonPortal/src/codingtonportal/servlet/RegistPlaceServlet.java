@@ -29,7 +29,7 @@ import codingtonportal.model.services.PlaceServiceImpl;
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for Regist Place", urlPatterns = { "/RegistPlaceServlet" })
+@WebServlet(description = "Servlet for Regist Place", urlPatterns = { "/registerPlace" })
 public class RegistPlaceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,7 +46,7 @@ public class RegistPlaceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/registPlace.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/registerPlace.jsp");
 		dispatcher.forward(request, response);
 	}
 

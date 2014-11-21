@@ -25,9 +25,9 @@
 
 <div class = "nav_log">
 
-<br><b><a style="color:blue"><%= request.getParameter("msg")!=null?request.getParameter("msg"):""%></a></b>
+<br><b><a style="color:red"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></a></b>
 	
-	<form method="post" action="RegistEventServlet">
+	<form method="post" action="registerEvent">
 		<p class = "title">
         New Event </p>
 		    <p>
@@ -69,7 +69,7 @@
 		<p class = "input">
 		 
 			<INPUT type="SUBMIT" value="Submit">
-			<INPUT type="SUBMIT" value="Cancel"  onclick = "javascript:window.location='admin.jsp';">
+			<INPUT type="SUBMIT" value="Cancel"  onclick = "javascript:window.location='admin';">
 		</p>
 	  
 

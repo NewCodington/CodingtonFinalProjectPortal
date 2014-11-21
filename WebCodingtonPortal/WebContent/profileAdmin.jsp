@@ -28,16 +28,15 @@
 
 
 
-<div class = "admin">
-	
-	<p class = "menuVerticalTitulosAdmin"> Regist</p>
+<div class = "left_nav">
+	<p class = "menuVerticalTitulosAdmin"> Register</p>
 	<hr>
-	<p class = "regionadmin"><a class="linkMenuVertical"  href="registPlace.jsp" >Regist Place </a></p>
-	<p class = "regionadmin"><a class="linkMenuVertical" href="registEvent.jsp">Regist Event </a></p>
+	<p class = "regionadmin"><a class="linkMenuVertical"  href=<%="registerPlace"%>>Register Place </a></p>
+	<p class = "regionadmin"><a class="linkMenuVertical" href=<%="registerEvent"%>>Register Event </a></p>
 	</hr>
 	
 </div>
-
+<br><b><a style="color:blue"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></a></b>
 
 
 

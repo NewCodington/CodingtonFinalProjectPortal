@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.services.EventServiceImpl;
@@ -18,7 +19,7 @@ import codingtonportal.model.services.EventServiceImpl;
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for Regist Event", urlPatterns = { "/RegistEventServlet" })
+@WebServlet(description = "Servlet for Regist Event", urlPatterns = { "/registerEvent" })
 public class RegistEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,8 +36,23 @@ public class RegistEventServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/registEvent.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
+			response.sendRedirect("registerEvent.jsp");
+		}
+		else{
+			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
+				session.setAttribute("Error", null);
+				response.sendRedirect("admin");
+			}
+			else {
+				session.setAttribute("Error", null);
+				session.setAttribute("Success", null);
+				response.sendRedirect("registerEvent.jsp");
+			}				
+		}
+		
 	}
 
 	/**
@@ -44,6 +60,7 @@ public class RegistEventServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		HttpSession session = request.getSession();
 		
 		Event event=new Event();
 		
@@ -64,14 +81,13 @@ public class RegistEventServlet extends HttpServlet {
 		
 		try {
 			if(eventService.insertEvent(event) > 0){
-				
-					RequestDispatcher dispatcher=request.getRequestDispatcher("/registEvent.jsp?msg=Evento creado con éxito");
-					dispatcher.forward(request, response);
-
+				session.setAttribute("Success", "Successfully created Event");
 			}else{
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/registEvent.jsp?msg=Incorrect");
-				dispatcher.forward(request, response);
+				session.setAttribute("Error", "Incorrect Event values");
 			}
+			
+			response.sendRedirect("registerEvent");
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
