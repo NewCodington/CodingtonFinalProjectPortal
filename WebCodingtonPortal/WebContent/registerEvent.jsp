@@ -21,6 +21,9 @@
         <td>&nbsp;</td>
       </tr>
     </table>
+    
+    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
+    
 </div>
 
 <div class = "nav_log">
@@ -72,8 +75,8 @@
 
 		<p class = "input">
 		 
-			<INPUT type="SUBMIT" value="Submit">
-			<INPUT type="BUTTON" value="Cancel"  onclick = "javascript:window.location='admin';">
+			<INPUT type="submit" value="Submit">
+			<INPUT type="button" value="Cancel"  onclick = "javascript:window.location='admin';">
 		
 		</p>
 	  

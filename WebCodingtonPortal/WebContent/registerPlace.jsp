@@ -5,96 +5,89 @@
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css">
+	<link rel="stylesheet" type="text/css" href="css/codington.css">
 	</head>
 
-	<body id="body">
+<body>
+
+<div class="header">
+	<table width="100%" border="0">
+      <tr>
+        <td width="20%" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
+        <td width="60%"><p class="cabecera">New Codington Portal</p></td>	
+        <td width="20%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td><p class="cabecera2"><strong><em>One of the World's Best Cities 2014</em></strong></p>
+      </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    
+    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
+</div>
+
+<div class = "nav_log">
+	<div class="message"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
 	
-		<div id="header">
-			<table>
-		    	<tr>
-		      		<td class="colum1" rowspan="2">
-		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
-		        	</td>
-		        	<td class="colum2">
-		        		<div class="title">New Codington Portal</div>
-		        	</td>	
-		        	<td class="colum3">&nbsp;</td>
-		      		</tr>
-		      	<tr>
-		        	<td>
-		        		<div class="subtitle">One of the World's Best Cities 2014</div>
-		        	</td>
-		        	<td>&nbsp;</td>
-		      	</tr>
-		    </table>
-		</div>
+	<form method="post" action="RegistPlaceServlet">
+		<p class = "title">
+        New Place	    </p>
 		
-		
-		<div id="content">
-		
-			<div class = "left_nav">
-				<div class="title"> Register</div>
-				<hr />
-				<div class = "content">
-					<p><a  href=<%="registerPlace"%>>Register Place </a></p>
-					<p><a href=<%="registerEvent"%>>Register Event </a></p>
-				</div>
-			</div>
+		  Place name: 
+		  <br>
+		  <input type="text" name="placeName" pattern="\S{1,45}" title="1 to 45 characters" required >
+	      </p>
+		 
+		    <p>Description: 
+		  <br>
+		  <textarea name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required"></textarea>
+		    </p>
+		 
+		    <p>Region:
+		  <br>
+		  <input type="text" name="region" pattern="\S{1,45}" title="1 to 45 characters" required/>
+		    </p>
+		    <p>Image: 
+		      <br>
+		      <input type="file" name="image" id="image" required />
+		      <br>
+		  
+		   
+	  
+		  Address: <br>
+		    <input type="text" name="address"  pattern="\S{1,45}" title="1 to 45 characters" required/>
+	  </p>
+		    <p>Type Place  : <br>
+	          <input type="text" name="typePlace" required title="Field required"/>
+   
+		      </p>
+		        </p>
+		    <p class = "input">
+				<input type="submit" value="Submit">
+				<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';">
+		</p>
+	  
+
+	</form>
 	
 	
-			<div class="center_nav">		
-				<br />
-				<div class="message"><%= request.getParameter("Error")!=null?request.getParameter("Error"):""%></div>
-					
-				<form method="post" action="RegistPlaceServlet">
-					<div class="title">New Place</div>
-					<br />
-					<div class="field"><p>Place name:</p> 
-					  	<input type="text" id="placeName" name="placeName" pattern="\S{1,45}" title="1 to 45 characters" required >
-					  	<br /><br />
-					</div>
-					 
-					<div class="field"><p>Description:</p> 
-					  	<textarea id="description" name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required"></textarea>
-					  	<br /><br />
-					</div>
-					 
-					<div class="field"><p>Region:</p>
-					  	<select id="region" name="region" required>
-							<option value="1">Norte</option>
-							<option value="2">Sur</option>
-						</select>
-						<br /><br />
-					</div>
-					    
-					<div class="field"><p>Image:</p> 
-						<input type="file" id="image" name="image" id="image" required />
-						<br /><br />
-				  	</div>
-				  		
-				  	<div class="field"><p>Address:</p> 
-					    <input type="text" id="address" name="address"  pattern="\S{1,45}" title="1 to 45 characters" required/>
-					    <br /><br />
-				  	</div>
-				  		
-					<div class="field"><p>Type Place:</p>
-						<input type="text" id="typePlace" name="typePlace" required title="Field required"/>
-						<br />
-					</div>
-					
-					<div class="input">
-						<input type="submit" value="Submit">
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';">
-						<br />
-					</div>  
-				</form>
-			</div>
-		</div>
-		
-		<div id ="footer">
-		New Codignton Portal - December, 2014
-		</div>
 	
-	</body>
+	
+	
+     
+
+
+</div>
+
+
+
+
+<div class ="footer">
+New Codignton Portal - December, 2014
+</div>
+
+</body>
+</html>
+
 </html>

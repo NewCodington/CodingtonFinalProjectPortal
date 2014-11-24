@@ -51,7 +51,7 @@ public class AdminProfileServlet extends HttpServlet {
 		
 		try {
 			if(delete!=null){ 
-				eventService.deleteEvent(Integer.parseInt((delete)))
+				eventService.deleteEvent(Integer.parseInt((delete)));
 			}
 			eventsList = eventService.viewEvent();
 			session.setAttribute("EVENTLIST", eventsList);
