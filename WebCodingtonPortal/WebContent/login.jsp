@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-    
-<!DOCTYPE html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	  
 	<head>
@@ -12,20 +12,19 @@
 
 
 	<div class="header">
-		<p class="cabecera">
-		<table width="100%" border="0">
-	      <tr>
-	        <td width="284" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
-	        <td width="499"><div align="center">New Codington Portal</div></td>	
-	        <td width="151">&nbsp;</td>
-	        <td width="6"></p>
-	      </tr>
-	      <tr>
-	        <td><p class="cabecera2">One of the World's Best Cities 2014</p></td>
-	        <td>&nbsp;</td>
-	      </tr>
-	    </table>
-	</div>
+	<table width="100%" border="0">
+      <tr>
+        <td width="20%" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
+        <td width="60%"><div align="center" class="cabecera">New Codington Portal</div></td>
+        <td width="20%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td><p class="cabecera2">One of the World's Best Cities 2014</p></td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+	
+</div>
 
 
 <div class="nav_log">
@@ -40,8 +39,8 @@
 	      <br>
 	  </p>
 	  <p class = "input">
-			<INPUT type="SUBMIT" value="Submit">
-			<INPUT type="BUTTON" value="Cancel">
+			<INPUT type="submit" value="Submit">
+			<INPUT type="button" value="Cancel">
 	  </p>
 		
 		<a href="registerVisitor" > Register New Visitor </a>

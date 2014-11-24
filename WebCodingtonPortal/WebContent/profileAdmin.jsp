@@ -20,7 +20,7 @@
 	<table width="100%" border="0">
       <tr>
         <td width="20%" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
-        <td width="60%"><div align="center">New Codington Portal</div></td>	
+        <td width="60%"><div align="center" class="cabecera">New Codington Portal</div></td>
         <td width="20%">&nbsp;</td>
       </tr>
       <tr>
@@ -33,6 +33,8 @@
 </div>
 		
 	<div class = "left_nav">
+		<p class = "menuVerticalTitulos"><%=session.getAttribute("Admin") %>'s Menu</p>
+		<hr size=10 />
 		<p><a href="admin" class="link">My Page </a></p>
 		<hr />
 		<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>

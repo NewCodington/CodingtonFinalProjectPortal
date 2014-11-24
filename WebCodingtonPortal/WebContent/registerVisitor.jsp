@@ -1,33 +1,34 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html>
 	  
 	<head>
 	<link rel="stylesheet" type="text/css" href="css/codington.css">
-	<script language="javascript" src="js/Register.js"></script>
-	<title>New Codington Portal</title>
+	<title>Visitor Register Page</title>
 	</head>
 
 <body>
 
 <div class="header">
-	<p class="cabecera">
 	<table width="100%" border="0">
       <tr>
-        <td width="284" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
-        <td width="499"><div align="center">New Codington Portal</div></td>	
-        <td width="151">&nbsp;</td>
-        <td width="6"></p>
+        <td width="20%" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
+        <td width="60%"><div align="center" class="cabecera">New Codington Portal</div></td>
+        <td width="20%">&nbsp;</td>
       </tr>
       <tr>
         <td><p class="cabecera2">One of the World's Best Cities 2014</p></td>
         <td>&nbsp;</td>
       </tr>
     </table>
+	
 </div>
 
 <div class = "nav_log">
 
-<br><b><a style="color:red"><%= request.getParameter("msg")!=null?request.getParameter("msg"):""%></a></b>
+	<div class="message"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
 	<form method="post" action="registerVisitor">
 		<p class = "title">
         New User</p>
@@ -71,8 +72,8 @@
 		    <input type="text" name="adress" id = "adress" placeholder="Address">
 	  </p>
 	    <p class = "input">
-		  <INPUT type="SUBMIT" value="Submit" onclick = "return validateForm()">
-		  <INPUT type="BUTTON" value="Cancel" onclick = "javascript:window.location='login';">
+		  <INPUT type="submit" value="Submit" onclick = "return validateForm()">
+		  <INPUT type="button" value="Cancel" onclick = "javascript:window.location='login';">
 	  </p>
 	  
 

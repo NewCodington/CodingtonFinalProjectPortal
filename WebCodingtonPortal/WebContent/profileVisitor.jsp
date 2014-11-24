@@ -1,9 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="codingtonportal.model.domain.Event"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <link rel="stylesheet" type="text/css" href="css/codington.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,7 +26,7 @@
 	<table width="100%" border="0">
       <tr>
         <td width="20%" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
-        <td width="60%"><div align="center">New Codington Portal</div></td>	
+        <td width="60%"><div align="center" class="cabecera">New Codington Portal</div></td>
         <td width="20%">&nbsp;</td>
       </tr>
       <tr>
@@ -37,7 +41,8 @@
 
 
 <div class = "left_nav">
-	
+	<p class = "menuVerticalTitulos"><%=session.getAttribute("Visitor") %>'s Menu</p>
+	<hr size=10 />
 	<p><a href="visitor" class="link">My Page </a></p>
 	<hr />
 	<p><a href="logout" class="link">Logout </a></p>
