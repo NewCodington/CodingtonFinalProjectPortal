@@ -80,8 +80,6 @@ public class AdminProfileServlet extends HttpServlet {
 				placeService.deletePlace(Integer.parseInt((deletePlace)));
 			}
 			
-			if(session.getAttribute("ViewSuccess")!=null)
-					System.out.println(session.getAttribute("ViewSuccess").toString());
 			
 			if(session.getAttribute("ViewSuccess")!=null && !session.getAttribute("ViewSuccess").toString().equals("YES")) {
 				session.setAttribute("ViewSuccess", null);
