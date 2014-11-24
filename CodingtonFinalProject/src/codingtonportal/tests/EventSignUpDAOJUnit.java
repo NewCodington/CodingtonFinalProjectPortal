@@ -1,6 +1,8 @@
 package codingtonportal.tests;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -30,9 +32,15 @@ public class EventSignUpDAOJUnit extends TestCase {
 
 	@Test
 	public void testregisterForNewEvent() {
-		EventSign eventSigns= new EventSign(1,4);
+		EventSign eventSigns= new EventSign(2,4);
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
-			assertTrue(EventSign.registerForNewEvent(eventSigns.getIdVisitor(), eventSigns.getIdEvent()));
+			try {
+				assertNotNull(serviceEventSignUp.registerForNewEvent(eventSigns.getIdEvent(),eventSigns.getIdVisitor()));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,13 +48,21 @@ public class EventSignUpDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
 
+	}
+	
+	
 	@Test
 	public void testunregisterForEvent() {
-		EventSign eventSigns= new EventSign();
+		EventSign eventSigns= new EventSign(4,2);
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
-			assertTrue(EventSign.unregisterForEvent( eventSigns.getIdVisitor(), eventSigns.getIdEvent()));
+			try {
+				assertNotNull(serviceEventSignUp.unregisterForEvent(eventSigns.getIdVisitor(), eventSigns.getIdEvent()));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,29 +70,66 @@ public class EventSignUpDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
+		
 
 	@Test
-	public void testsearchEvent() {
-		
-		EventSign eventSigns=new EventSign();
-		
+	public void testUpdateSeatsAvailable() {
+		Event events=new Event();
+		//2	The Science of Natural Disasters	Earthquakes. Volcanoes. Tornadoes...	2	2014-12-11	17.00 PM	120 min	Science	60
+		//EventSign eventSigns = new EventSign();								                                   		
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
-			assertTrue(EventSign.searchEvent(eventSigns.getName()));
+			try {
+				assertNotNull(serviceEventSignUp.updateSeatsAvailable(events));
+						} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	@Test
+	public void testselectEventForVisitor (){
+		EventSign eventSigns= new EventSign();
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		try {
+			try{
+				assertNotNull(serviceEventSignUp.selectEventForVisitor(eventSigns.getIdVisitor()));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		}
 	}
 	
+	
 	@Test
-	public void testviewEvent() {
-		EventSign eventSigns=new EventSign();
+	public void testselectVisitorForEvent() {
+		EventSign eventSigns = new EventSign();								                                   		
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
-			assertTrue(EventSign.viewEvent(eventSigns.getName()));
+			try {
+				assertNotNull(serviceEventSignUp.selectVisitorForEvent(eventSigns.getIdVisitor(),eventSigns.getIdEvent()));
+						} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,6 +137,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	
