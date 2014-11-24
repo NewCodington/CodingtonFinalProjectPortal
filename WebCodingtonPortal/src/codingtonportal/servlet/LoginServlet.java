@@ -47,10 +47,12 @@ public class LoginServlet extends HttpServlet {
 		else{
 			if(session.getAttribute("Visitor")!= null)
 				response.sendRedirect("visitor");
-			else {
+			else if (session.getAttribute("Admin")!= null) 
 				response.sendRedirect("admin");
+			else
+				response.sendRedirect("login.jsp");
 			}
-		}
+		
 	}
 
 	/**

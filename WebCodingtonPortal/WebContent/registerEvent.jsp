@@ -74,6 +74,7 @@
 		 
 			<INPUT type="SUBMIT" value="Submit">
 			<INPUT type="BUTTON" value="Cancel"  onclick = "javascript:window.location='admin';">
+		
 		</p>
 	  
 

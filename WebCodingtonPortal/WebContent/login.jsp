@@ -41,10 +41,10 @@
 	  </p>
 	  <p class = "input">
 			<INPUT type="SUBMIT" value="Submit">
-			<INPUT type="SUBMIT" value="Cancel">
+			<INPUT type="BUTTON" value="Cancel">
 	  </p>
 		
-		<a href="regist.jsp" > Register New Visitor </a>
+		<a href="registerVisitor" > Register New Visitor </a>
 	</form>
 </div>
 
