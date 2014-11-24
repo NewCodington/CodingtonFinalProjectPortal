@@ -257,7 +257,7 @@ public class EventServiceImpl implements EventDAO {
 	/**
 	 * Method to delete an Event from the database. Use an Event class to input the data required.
 	 * 
-	 * @param event : Event class with the data necessary to delete.
+	 * @param idEvent : Event class with the data necessary to delete.
 	 * 
 	 * @return Number of rows affected in the database. If the delete is correct, return 1, else return 0.
 	 * 
@@ -266,7 +266,7 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws SQLException 
 	 */
 	@Override
-	public Integer deleteEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
+	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -277,7 +277,7 @@ public class EventServiceImpl implements EventDAO {
 			// Create the Statement
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteEvent"));
 			//Where clauses
-			statementSQL.setInt(1, event.getEventId());
+			statementSQL.setInt(1, idEvent);
 			
 			// Execute query
 			result = statementSQL.executeUpdate();

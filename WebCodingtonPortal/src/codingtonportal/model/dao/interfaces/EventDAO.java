@@ -17,6 +17,6 @@ public interface EventDAO {
 	public Event selectEvent (Event event) throws IOException, ClassNotFoundException, SQLException;
 	public ArrayList<Event> viewEvent () throws IOException, ClassNotFoundException, SQLException;
 	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException;
-	public Integer deleteEvent(Event event) throws IOException, ClassNotFoundException, SQLException;
+	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException;
 	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException;
 }
