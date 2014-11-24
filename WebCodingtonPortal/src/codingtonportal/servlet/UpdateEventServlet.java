@@ -2,6 +2,8 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import javax.servlet.ServletException;
@@ -88,24 +90,21 @@ public class UpdateEventServlet extends HttpServlet {
 		event.setDescription(request.getParameter("description"));
 		event.setPlace(Integer.parseInt(request.getParameter("place")));
 	
-		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
-		Date date = null;
+		SimpleDateFormat originalFormat = new SimpleDateFormat("dd-mm-yyyy");
+		SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-mm-dd" );
+		java.util.Date dateInput, dateOutput;
+		Date dateSQL = null;
+		   try {
+		     dateInput = originalFormat.parse(request.getParameter("date").toString());
+		     String date = targetFormat.format(dateInput);
+		     
+		     dateOutput = targetFormat.parse(date);
+		     dateSQL = new java.sql.Date(dateOutput.getTime()); 
+		   }catch (ParseException ex) {
+
+	       }
 		
-		
-		Date d=new Date(2014, 9, 24);
-		
-		date= d;
-		
-//		try {
-//			//date =  (Date) formatter.parse(request.getParameter("date"));
-//		
-//		
-//		
-//		} catch (ParseException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-		//}
-		event.setDate_event(date);
+		event.setDate_event(dateSQL);
 		event.setStartTime(request.getParameter("startTime"));
 		event.setDuration(request.getParameter("duration"));
 		event.setEventType(request.getParameter("typeOfEvent"));
