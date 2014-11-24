@@ -1,11 +1,12 @@
 package codingtonportal.utils;
 
-import java.io.FileInputStream;
+
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.jasper.tagplugins.jstl.core.Url;
+import codingtonportal.utils.IPropertyAccess;
 
 
 public class PropertyAccess implements IPropertyAccess {
@@ -13,28 +14,12 @@ public class PropertyAccess implements IPropertyAccess {
 	@Override
 	public String getProperty(String property) throws IOException {
 		Properties p = new Properties();    
-		InputStream input = null;
-		//input = new FileInputStream("/connection.properties");
 		
 		
-		
-		
-		
-		
-		
-		//input = this.getClass().getClassLoader().getResourceAsStream("/connection.properties");
-		//input = new FileInputStream("./connection.properties");    
-		
-		
-		//input = Thread.currentThread().getContextClassLoader().getResourceAsStream("/WEB-INF/properties/connection.properties");   
-		
-		
-		
-		
-		input=new FileInputStream("C:/Users/JAVA101_01/git/CodingtonFinalProjectPortal/WebCodingtonPortal/src/codingtonportal/utils/files/connection.properties");
+		InputStream fileInput = this.getClass().getResourceAsStream("files/connection.properties");
 		
 		// Se carga el archivo de propiedades        
-		p.load(input);         
+		p.load(fileInput);         
 		
 		// Se obtiene la propiedad y se devuelve              
 		return p.getProperty(property);
@@ -44,16 +29,14 @@ public class PropertyAccess implements IPropertyAccess {
 	public String getConstant(String constant) throws IOException {
 		
 		Properties p = new Properties();    
-		InputStream input = null;
 			
-		input = new FileInputStream("/src/codingtonportal/utils/files/constant.properties");         
-			
+InputStream fileInput = this.getClass().getResourceAsStream("files/constant.properties");
+		
 		// Se carga el archivo de propiedades        
-		p.load(input);         
-			
+		p.load(fileInput);         
+		
 		// Se obtiene la propiedad y se devuelve              
 		return p.getProperty(constant);
-
 	}
 
 }
