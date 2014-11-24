@@ -2,6 +2,8 @@ package codingtonportal.tests;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -24,11 +26,47 @@ public class EventDAOJUnit extends TestCase{
 		super.tearDown();
 	}
 
+	
 	@Test
-	public void testInsertEvent() {
-	    Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12);
+	public void testSelectEvent () throws SQLException{
+		Event events= new Event(2,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12,null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
-			assertTrue(event.insertEvent(events));
+			assertNotNull(serviceEvent.selectEvent(events));						
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testviewEvent (){
+		EventServiceImpl serviceEvent = new EventServiceImpl();
+		try {
+			try{
+				assertNotNull(serviceEvent.viewEvent());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testInsertEvent() throws SQLException {
+		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
+		try {
+			assertNotNull(serviceEvent.insertEvent(events));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,10 +77,11 @@ public class EventDAOJUnit extends TestCase{
 	}
 	
 	@Test
-	public void testUpdateEvent() {
-		Event events= new Event(9, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",15);
+	public void testDeleteEvent() throws SQLException {
+		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
-			assertTrue(event.updateEvent(events));
+			assertNotNull(serviceEvent.deleteEvent(events.getEventId()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,29 +90,13 @@ public class EventDAOJUnit extends TestCase{
 			e.printStackTrace();
 		}
 	}
-	
-	
-	/*@Test
-	public void testUpdateSeatsAvailable() {
-		Event events= new Event(8, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",125);
-		try {
-			assertTrue(event.updateSeatsAvailable(events));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-	
-	
 	
 	@Test
-	public void testDeleteEvent() {
-		Event events= new Event(8, "Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12);
+	public void testUpdateEvent() throws SQLException {
+		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
-			assertTrue(event.deleteEvent(events));
+			assertNotNull(serviceEvent.updateEvent(events));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,16 +106,5 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
-//	@Test
-//	public void testSelectEvent (){
-//		try {
-//			assertTrue(event.selectEvent());			
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block			
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block			
-//			e.printStackTrace();
-//		}
-//	}
+
 }

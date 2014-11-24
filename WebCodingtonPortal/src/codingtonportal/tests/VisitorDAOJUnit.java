@@ -2,6 +2,8 @@ package codingtonportal.tests;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -24,112 +26,40 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 
 	@Test
-	public void testinsertVisitor() {
-		Visitor visit= new Visitor(1, "Charla2", "dafkj","Explicacion",
-				"jim", "45.2", "emai", "9874","12",true);
+	public void testSelectVisitor () throws SQLException{
+		Visitor visit= new Visitor(23, "Charlay", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
-			assertTrue(visitor.insertVisitor(visit));
+			assertNotNull(serviceVisitor.selectVisitor(visit));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Test
-	public void testloginVisitor() {
-		Visitor visit= new Visitor("Charla","dafkj");
+	public void testviewVisitor () throws SQLException{				
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
-			assertTrue(visitor.loginVisitor(visit));
+			assertNotNull(serviceVisitor.viewVisitor());			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		}
 	}
-/*
+	
 	@Test
-	public void testdeleteVisitor() {
-		Visitor visit= new Visitor(12, "Charla", "dafkj","Explicacion", 
-				"jim", "45.2", "emai", "9874","12",true);
+	public void testloginVisitor() throws SQLException {
+		Visitor visit= new Visitor(16, "Charlay", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
-			assertTrue(visitor.deleteVisitor(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testupdateInformation() {
-		Visitor visit= new Visitor(13, "Pepe", "dafkj","pepe", 
-				"jim", "45.2", "emai", "9874","12",true);
-		try {
-			assertTrue(visitor.updateInformation(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testupdatePassword() {
-		Visitor visit= new Visitor(13, "Charla", "aaaaaa","Explicacion", 
-				"jim", "45.2", "emai", "9874","12",true);
-		try {
-			assertTrue(visitor.updatePassword(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testregisterForNewEvent() {
-		Visitor visit= new Visitor(13,11);
-		try {
-			assertTrue(visitor.registerForNewEvent(visit.getIdVisitor(),visit.getIdEvent()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testunregisterForEvent() {
-		Visitor visit= new Visitor(13, 11);
-		try {
-			assertTrue(visitor.unregisterForEvent(visit.getIdVisitor(),visit.getIdEvent()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-/*
-	@Test
-	public void testsearchEvent() {
-		Visitor visit= new Visitor(2,1);
-		try {
-			assertTrue(visitor.searchEvent(visit));
+			assertNotNull(serviceVisitor.loginVisitor(visit));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,10 +70,11 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 	
 	@Test
-	public void testviewEvent() {
-		Visitor visit= new Visitor();
+	public void testinsertVisitor() throws SQLException {
+		Visitor visit= new Visitor(16, "Carlos", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
-			assertTrue(visitor.viewEvent(visit));
+			assertNotNull(serviceVisitor.insertVisitor(visit));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,12 +82,72 @@ public class VisitorDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
+
+	@Test
+	public void testupdateVisitor() throws SQLException {
+		Visitor visit= new Visitor(16, "Charly", "dafkj","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		try {
+			assertNotNull(serviceVisitor.updateVisitor(visit));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testupdatePassword() throws SQLException {
+		Visitor visit= new Visitor(16, "Charly", "facilisimo","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		try {			
+			assertNotNull(serviceVisitor.updatePassword(visit));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	@Test
-	public void testSelectVisitor (){
+	public void testdeleteVisitor() throws SQLException {
+		Visitor visit= new Visitor(16, "Charly", "facilisimo","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
-			assertTrue(visitor.selectVisitor());			
+			assertNotNull(serviceVisitor.deleteVisitor(visit));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testsearchEvent() throws SQLException {				
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		try {
+			assertNotNull(serviceVisitor.searchEvent("FRI"));	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testviewEvent () throws SQLException{				
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		try {			
+			assertNotNull(serviceVisitor.viewEvent());			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -165,4 +156,25 @@ public class VisitorDAOJUnit extends TestCase {
 			e.printStackTrace();
 		}
 	}
-}
+
+	@Test
+	public void testisAdmin (){
+		
+		Visitor visit=new Visitor("Charly","dafkj","Peter","Pan","08.512.254-T","Peter.Pan12@gmail.com","6945269854","Puy Chemin,12,New Codington", false);
+		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		try {
+			try{
+				assertTrue(serviceVisitor.isAdmin(visit));	
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}	
+}	

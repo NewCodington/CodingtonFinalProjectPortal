@@ -338,7 +338,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		
 		try {    
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePassword"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatepassword"));
 			// Add conditions
 			statementSQL.setString(1, visitor.getPassword());
 			// Where clauses
@@ -497,7 +497,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		
 		try {
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchEvent"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchevent"));
 			// Add conditions
 			statementSQL.setString(1,Name);
 			
