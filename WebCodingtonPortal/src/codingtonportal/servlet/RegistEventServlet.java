@@ -71,15 +71,18 @@ public class RegistEventServlet extends HttpServlet {
 		event.setDescription(request.getParameter("description"));
 		event.setPlace(Integer.parseInt(request.getParameter("place")));
 	
-		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
-		Date date = null;
-		try {
-			date = (Date) formatter.parse(request.getParameter("date"));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		event.setDate_event(date);
+		SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date dateInput = null;
+		   try {
+		     dateInput = originalFormat.parse(request.getParameter("date").toString());
+		     
+		     event.setDate_event(dateInput);
+
+		   }catch (ParseException ex) {
+
+	       }
+		
+		
 		event.setStartTime(request.getParameter("startTime"));
 		event.setDuration(request.getParameter("duration"));
 		event.setEventType(request.getParameter("typeOfEvent"));
@@ -98,6 +101,9 @@ public class RegistEventServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

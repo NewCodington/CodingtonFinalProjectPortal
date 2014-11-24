@@ -1,6 +1,8 @@
 package codingtonportal.model.domain;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 public class Event {
@@ -64,7 +66,7 @@ public class Event {
 	}
 	
 	//Constructor with parameters
-	public Event(Event event)
+	public Event(Event event) throws ParseException
 	{
 		this.eventId = event.getEventId();
 		this.name = event.getName();
@@ -147,16 +149,27 @@ public class Event {
 	}
 
 
-	public Date getDate_event() {
-		return date_event;
+	public Date getDate_event() throws ParseException {
+		return this.date_event;
 	}
 
 
-	public void setDate_event(Date date) {
-		this.date_event = date;
+	public void setDate_event(java.util.Date dateInput) throws ParseException {
+		SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd" );
+		java.util.Date dateOutput = targetFormat.parse(targetFormat.format(dateInput));
+		
+		this.date_event = new Date(dateOutput.getTime());
 	}
 
-
+	public String getDate_eventString() throws ParseException {
+		SimpleDateFormat targetFormat = new SimpleDateFormat("dd-MM-yyyy" );
+		
+		java.util.Date dateOutput = targetFormat.parse(targetFormat.format(this.date_event));
+		String dateString = targetFormat.format(dateOutput);
+		
+		return dateString;
+		
+	}
 
 
 }

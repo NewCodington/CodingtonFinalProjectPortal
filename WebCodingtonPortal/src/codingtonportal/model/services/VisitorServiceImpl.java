@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
-import codingtonportal.utils.PropertyAccess;
 import codingtonportal.utils.FERSDataConnection;
+import codingtonportal.utils.PropertyAccess;
 
 
 /**
@@ -415,9 +416,10 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws ParseException 
 	 */
 	@Override
-	public ArrayList<Event> viewEvent() throws ClassNotFoundException, IOException, SQLException {
+	public ArrayList<Event> viewEvent() throws ClassNotFoundException, IOException, SQLException, ParseException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -486,9 +488,10 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws ParseException 
 	 */
 	@Override
-	public ArrayList<Event> searchEvent(String Name) throws IOException, ClassNotFoundException, SQLException {
+	public ArrayList<Event> searchEvent(String Name) throws IOException, ClassNotFoundException, SQLException, ParseException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();

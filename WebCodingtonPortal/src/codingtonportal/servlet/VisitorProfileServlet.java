@@ -2,6 +2,7 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -102,6 +103,9 @@ public class VisitorProfileServlet extends HttpServlet {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

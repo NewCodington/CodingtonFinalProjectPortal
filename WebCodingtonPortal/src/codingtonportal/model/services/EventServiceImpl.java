@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import codingtonportal.model.dao.interfaces.EventDAO;
@@ -28,9 +29,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws ParseException 
 	 */
 	@Override
-	public Event selectEvent(Event event) throws IOException,ClassNotFoundException, SQLException {
+	public Event selectEvent(Event event) throws IOException,ClassNotFoundException, SQLException, ParseException {
 		// Initialize variables
 		FERSDataConnection con = new FERSDataConnection(); 
 		PropertyAccess connection = new PropertyAccess();
@@ -89,9 +91,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws ParseException 
 	 */
 	@Override
-	public ArrayList<Event> viewEvent() throws IOException,ClassNotFoundException, SQLException {
+	public ArrayList<Event> viewEvent() throws IOException,ClassNotFoundException, SQLException, ParseException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -160,9 +163,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws ParseException 
 	 */
 	@Override
-	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException   {  
+	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -210,9 +214,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws ParseException 
 	 */
 	@Override
-	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException {
+	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();

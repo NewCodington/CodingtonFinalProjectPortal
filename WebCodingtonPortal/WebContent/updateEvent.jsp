@@ -56,7 +56,7 @@
 		    </p>
 		  <p>Date:
 		  <br>
-		  <input type="text" id="date" name="date" pattern="\S{1,45}" value="<%= event.getDate_event() %>"title="Enter a valid place (length between 1-45)" placeholder="Date" required/>
+		  <input type="text" id="date" name="date" pattern="\S{1,45}" value="<%= event.getDate_eventString() %>"title="Enter a valid date (length between 1-45)" placeholder="Date" required/>
 		    </p>
 		  
 		 <p>Start Time:
