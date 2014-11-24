@@ -18,5 +18,5 @@ public interface PlaceDAO {
 	public ArrayList<Place> viewPlace() throws IOException, ClassNotFoundException, SQLException;
 	public Integer insertPlace(Place place) throws IOException, ClassNotFoundException, SQLException;
 	public Integer updatePlace(Place place) throws IOException, ClassNotFoundException, SQLException;
-	public Integer deletePlace(Place place) throws IOException, ClassNotFoundException, SQLException;	
+	public Integer deletePlace(int idPlace) throws IOException, ClassNotFoundException, SQLException;	
 }

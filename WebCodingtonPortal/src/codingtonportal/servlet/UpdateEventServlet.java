@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,21 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
+import codingtonportal.model.domain.Place;
 import codingtonportal.model.services.EventServiceImpl;
+import codingtonportal.model.services.VisitorServiceImpl;
 
 
 
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for Regist Event", urlPatterns = { "/registerEvent" })
-public class RegistEventServlet extends HttpServlet {
+@WebServlet(description = "Servlet for Regist Event", urlPatterns = { "/updateEvent" })
+public class UpdateEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistEventServlet() {
+    public UpdateEventServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,20 +42,35 @@ public class RegistEventServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
-			response.sendRedirect("registerEvent.jsp");
-		}
-		else{
-			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
-				session.setAttribute("Error", null);
-				response.sendRedirect("admin");
+		String idEvent=null;
+		EventServiceImpl  eventService = new EventServiceImpl();
+		Event event=new Event();
+		
+		idEvent=request.getParameter("updateEvent");
+		
+
+		if(idEvent!=null)
+		{
+			event.setEventId(Integer.parseInt(idEvent));
+			try {
+				Event eventUpdate=new Event(eventService.selectEvent(event));
+				
+				session.setAttribute("EVENT", eventUpdate);
+			
+			
+			
+			
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			else {
-				session.setAttribute("Error", null);
-				session.setAttribute("Success", null);
-				response.sendRedirect("registerEvent.jsp");
-			}				
+				
 		}
+		
+		response.sendRedirect("updateEvent.jsp");
 		
 	}
 
@@ -72,13 +90,22 @@ public class RegistEventServlet extends HttpServlet {
 		event.setPlace(Integer.parseInt(request.getParameter("place")));
 	
 		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
-		Date date = null;
-		try {
-			date = (Date) formatter.parse(request.getParameter("date"));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		java.sql.Date date = null;
+		
+		
+		Date d=new Date(2014, 9, 24);
+		
+		date= d;
+		
+//		try {
+//			//date =  (Date) formatter.parse(request.getParameter("date"));
+//		
+//		
+//		
+//		} catch (ParseException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+		//}
 		event.setDate_event(date);
 		event.setStartTime(request.getParameter("startTime"));
 		event.setDuration(request.getParameter("duration"));
@@ -86,13 +113,13 @@ public class RegistEventServlet extends HttpServlet {
 		event.setSeatsAvailable(Integer.parseInt(request.getParameter("seats")));
 		
 		try {
-			if(eventService.insertEvent(event) > 0){
+			if(eventService.updateEvent(event) > 0){
 				session.setAttribute("Success", "Successfully created Event");
 			}else{
 				session.setAttribute("Error", "Incorrect Event values");
 			}
 			
-			response.sendRedirect("registerEvent");
+			response.sendRedirect("updateEvent");
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

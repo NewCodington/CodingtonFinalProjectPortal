@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
+import codingtonportal.model.domain.Place;
 import codingtonportal.model.services.EventServiceImpl;
 import codingtonportal.model.services.EventSignUpImpl;
+import codingtonportal.model.services.PlaceServiceImpl;
 
 /**
  * Servlet implementation class AdminProfileServlet
@@ -39,22 +41,62 @@ public class AdminProfileServlet extends HttpServlet {
 		session.setAttribute("ErrorLogin", null);
 		
 		ArrayList<Event> eventsList=null;
+		ArrayList<Place> placesList=null;
 		
 		EventServiceImpl eventService=new EventServiceImpl();
+		PlaceServiceImpl placeService=new PlaceServiceImpl();
+		
+		
 		
 		//Params of jsp for get
-		String update = null;
-		update = request.getParameter("update");
+		String updateEvent = null;
+		updateEvent = request.getParameter("updateEvent");
 		
-		String delete = null;
-		delete = request.getParameter("delete");
+		String deleteEvent = null;
+		deleteEvent = request.getParameter("deleteEvent");
+		
+		String updatePlace = null;
+		updatePlace = request.getParameter("updatePlace");
+		
+		String deletePlace = null;
+		deletePlace = request.getParameter("deletePlace");
 		
 		try {
-			if(delete!=null){ 
-				eventService.deleteEvent(Integer.parseInt((delete)));
+
+			if(deleteEvent!=null){ 
+				eventService.deleteEvent(Integer.parseInt((deleteEvent)));
+
 			}
 			eventsList = eventService.viewEvent();
 			session.setAttribute("EVENTLIST", eventsList);
+			
+			if(deletePlace!=null){ 
+				placeService.deletePlace(Integer.parseInt((deletePlace)));
+			}
+			placesList = placeService.viewPlace();
+			session.setAttribute("PLACELIST", placesList);
+				
+			
+			if(updateEvent!=null){ 
+				//LLamo a la pagina para poder modificar los parametros
+				
+				response.sendRedirect("updateEvent?idEvent="+updateEvent);
+				
+				
+				
+			}
+			
+			
+			
+		
+			if(updatePlace!=null){ 
+				response.sendRedirect("updatePlace");
+				
+			}
+			
+				
+			
+			
 			
 			response.sendRedirect("profileAdmin.jsp");
 			

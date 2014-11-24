@@ -5,6 +5,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="codingtonportal.model.domain.Event"%>
+<%@page import="codingtonportal.model.domain.Place"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	
@@ -75,8 +76,8 @@
 				<td><%=event.getEventType()%></td>
 				<td><%=event.getSeatsAvailable()%></td>
 				<td><%=event.getStartTime()%></td>
-				<td><a href = <%="admin?update=" + event.getEventId() %>>Update</a></td>
-				<td><a href = <%="admin?delete=" + event.getEventId() %>>Delete</a></td>
+				<td><a href = <%="updateEvent?updateEvent=" + event.getEventId() %>>Update</a></td>
+				<td><a href = <%="admin?deleteEvent=" + event.getEventId() %>>Delete</a></td>
 			</tr>
 			<%
 				}
@@ -88,32 +89,32 @@
 		<div id="Estilo1">PLACES<hr></div>
 		
 		<%
-		ArrayList<Event> placeList = new ArrayList<Event>();
-		placeList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
+		ArrayList<Place> placeList = new ArrayList<Place>();
+		placeList = (ArrayList<Place>) session.getAttribute("PLACELIST");
 		%>
 								
 		  <table class="events">
 			<tr>
-				<th>Event Name</th>
+				<th>Place Name</th>
+				<th>Region</th>
+				<th>Type Place</th>
+				<th>Image</th>
+				<th>Address</th>
 				<th>Description</th>
-				<th>Duration</th>
-				<th>Event Type</th>
-				<th>Seats Available</th>
-				<th>Start Time</th>
 				<th>Actions</th>
 			</tr>
 			<%
-				for (Event event : placeList) {
+				for (Place place : placeList) {
 			%>				
 			<tr>
-				<td><%=event.getName()%></td>
-				<td><%=event.getDescription()%></td>
-				<td><%=event.getDuration()%></td>
-				<td><%=event.getEventType()%></td>
-				<td><%=event.getSeatsAvailable()%></td>
-				<td><%=event.getStartTime()%></td>
-				<td><a href = <%="admin?update=" + event.getEventId() %>>Update</a></td>
-				<td><a href = <%="admin?delete=" + event.getEventId() %>>Delete</a></td>
+				<td><%=place.getName()%></td>
+				<td><%=place.getRegion()%>    </td>
+				<td><%=place.getTypePlace()%></td>
+				<td><%=place.getImage()%></td>
+				<td><%=place.getAddress()%></td>
+				<td><%=place.getDescription()%></td>
+				<td><a href = <%="admin?updatePlace=" + place.getIdPlace() %>>Update</a></td>
+				<td><a href = <%="admin?deletePlace=" + place.getIdPlace() %>>Delete</a></td>
 			</tr>
 			<%
 				}
