@@ -3,6 +3,8 @@ package codingtonportal.tests;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -28,10 +30,11 @@ public class PlaceDAOJUnit extends TestCase {
 	}
 
 	@Test
-	public void testinsertplace() {
-		Place places = new Place (1, "Museum", "North", 1, null, "C/olvido", "Quiero aparecer");
+	public void testinsertplace() throws SQLException {
+		Place places = new Place (34, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
+		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
-			assertTrue(place.insertPlace(places));		
+			assertNotNull(servicePlace.insertPlace(places));		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,10 +46,11 @@ public class PlaceDAOJUnit extends TestCase {
 	}
 	
 	@Test
-	public void testupdateplace() {
-		Place places = new Place (1, "Museum", "North", 1, null, "C/olvido", "Actualizado");
+	public void testupdateplace() throws SQLException {
+		Place places = new Place (36, "Museum", "1", 1, null,"C/olvido", "Actualizar");
+		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
-			assertTrue(place.updatePlace(places));		
+			assertNotNull(servicePlace.updatePlace(places));		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,10 +62,11 @@ public class PlaceDAOJUnit extends TestCase {
 	}
 	
 	@Test
-	public void testdeleteplace() {
-		Place places = new Place (1, "Museum", "North", 1, null, "C/olvido", "Quiero aparecer");
+	public void testdeleteplace() throws SQLException {
+		Place places = new Place (39, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
+		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
-			assertTrue(place.deletePlace(places));		
+			assertNotNull(servicePlace.deletePlace(places.getIdPlace()));		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,10 +76,12 @@ public class PlaceDAOJUnit extends TestCase {
 		}
 		 
 	}
+	
 	@Test
-	public void testSelectPlace (){
+	public void testviewPlace () throws SQLException{
+		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
-			assertTrue(place.selectPlace());			
+			assertNotNull(servicePlace.viewPlace());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -84,6 +91,20 @@ public class PlaceDAOJUnit extends TestCase {
 		}
 	}
 	
+	@Test
+	public void testselectPlace () throws SQLException{
+		Place places = new Place (38, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
+		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
+		try {
+			assertNotNull(servicePlace.selectPlace(places));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
 
 }
 

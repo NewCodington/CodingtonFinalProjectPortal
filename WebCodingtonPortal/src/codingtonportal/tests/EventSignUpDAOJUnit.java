@@ -1,6 +1,8 @@
 package codingtonportal.tests;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -14,8 +16,6 @@ import codingtonportal.model.services.EventSignUpImpl;
 
 public class EventSignUpDAOJUnit extends TestCase {
 	EventSignUpImpl EventSign;
-	private EventSign eventSigns;
-	private EventSign eventSigns2;
 	
 
 	@Before
@@ -31,10 +31,11 @@ public class EventSignUpDAOJUnit extends TestCase {
 	}
 
 	@Test
-	public void testregisterForNewEvent() {
-		EventSign eventSigns= new EventSign();
+	public void testregisterForNewEvent() throws SQLException {
+		EventSign eventSigns= new EventSign(3,4);
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
-			assertTrue(EventSign.registerForNewEvent(eventSigns.getIdVisitor(),eventSigns.getIdEvent()));
+			assertNotNull(serviceEventSignUp.registerForNewEvent(eventSigns.getIdVisitor(),eventSigns.getIdEvent()));		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,10 +46,11 @@ public class EventSignUpDAOJUnit extends TestCase {
 	}
 
 	@Test
-	public void testunregisterForEvent() {
-		EventSign eventSigns= new EventSign();
+	public void testunregisterForEvent() throws SQLException {
+		EventSign eventSigns= new EventSign(2,4);
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
-			assertTrue(EventSign.unregisterForEvent( eventSigns.getIdVisitor(), eventSigns.getIdEvent()));
+			assertNotNull(serviceEventSignUp.unregisterForEvent(eventSigns.getIdVisitor(), eventSigns.getIdEvent()));			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,10 +61,11 @@ public class EventSignUpDAOJUnit extends TestCase {
 	}
 
 	@Test
-	public void testsearchEvent() {
-		setEventSigns2(new EventSign());
+	public void testincrementSeats() throws SQLException {
+		EventSign eventSigns= new EventSign(2,4);
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
-			assertTrue(EventSign.searchEvent("jeeg"));
+			assertNotNull(serviceEventSignUp.incrementSeats(eventSigns.getIdEvent()));			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,10 +76,11 @@ public class EventSignUpDAOJUnit extends TestCase {
 	}
 	
 	@Test
-	public void testviewEvent() {
-		setEventSigns(new EventSign());
-		try {
-			assertTrue(EventSign.viewEvent("jeeg"));
+	public void testdecrementSeats() throws SQLException {
+		EventSign eventSigns= new EventSign(2,4);
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		try {			
+			assertNotNull(serviceEventSignUp.decrementSeats(eventSigns.getIdEvent()));			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,22 +89,49 @@ public class EventSignUpDAOJUnit extends TestCase {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test	
+	public void testselectEventForVisitor (){
+		EventSign eventSigns= new EventSign(3,4);
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		try {
+			try{
+				assertNotNull(serviceEventSignUp.selectEventForVisitor(eventSigns.getIdVisitor()));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test
+	public void testselectVisitorForEvent() {
+		EventSign eventSigns = new EventSign(3,4);								                                   		
+		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		try {
+			try {
+				assertNotNull(serviceEventSignUp.selectVisitorForEvent(eventSigns.getIdVisitor(),eventSigns.getIdEvent()));
+				} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	public EventSign getEventSigns() {
-		return eventSigns;
 	}
 
-	public void setEventSigns(EventSign eventSigns) {
-		this.eventSigns = eventSigns;
-	}
-
-	public EventSign getEventSigns2() {
-		return eventSigns2;
-	}
-
-	public void setEventSigns2(EventSign eventSigns2) {
-		this.eventSigns2 = eventSigns2;
-	}
 }
 
 

@@ -2,6 +2,8 @@ package codingtonportal.tests;
 
 
 import java.io.IOException;
+//import java.sql.Date;
+import java.sql.SQLException;
 
 
 import junit.framework.TestCase;
@@ -11,6 +13,7 @@ import org.junit.Test;
 
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.services.EventServiceImpl;
+
 
 public class EventDAOJUnit extends TestCase{
 	EventServiceImpl event;
@@ -26,71 +29,19 @@ public class EventDAOJUnit extends TestCase{
 		super.tearDown();
 	}
 
-	/*@Test
-	public void testInsertEvent() {
-	    Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12);
-		try {
-			assertTrue(event.insertEvent(events));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
-	@Test
-	public void testUpdateEvent() {
-		Event events= new Event(9, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",15);
-		try {
-			assertTrue(event.updateEvent(events));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-	
-	
-	@Test
-	public void testUpdateSeatsAvailable() {
-		//Event events= new Event(3, "Charla", "Explicacion de pelicanos", 3, "2 horas", "17 horas", "divulgativo",12,null);
-		Event events = new Event("Tour del zoo","Ver el zoo al completo",2,"2 horas","12.00","TP",25,null);								                                   		
-		try {
-			assertTrue(event.updateSeatsAvailable(events));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	
-	
-	/*@Test
-	public void testDeleteEvent() {
-		Event events= new Event(8, "Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12);
-		try {
-			assertTrue(event.deleteEvent(events));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
 	
 	@Test
 	public void testSelectEvent (){
+		Event events= new Event(2,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12,null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
-			assertNotNull(event.selectEvent());
-			
+			try{
+				assertNotNull(serviceEvent.selectEvent(events));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -99,4 +50,92 @@ public class EventDAOJUnit extends TestCase{
 			e.printStackTrace();
 		}
 	}
+	
+	
+	@Test
+	public void testviewEvent (){
+		EventServiceImpl serviceEvent = new EventServiceImpl();
+		try {
+			try{
+				assertNotNull(serviceEvent.viewEvent());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test
+	public void testInsertEvent() {
+	    Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
+		try {
+			try {
+				assertNotNull(serviceEvent.insertEvent(events));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	    
+	    
+
+	@Test
+	public void testDeleteEvent() {
+		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
+		try {
+			try {
+				assertNotNull(serviceEvent.deleteEvent(events));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+		
+	
+	@Test
+	public void testUpdateEvent() {
+		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
+		EventServiceImpl serviceEvent = new EventServiceImpl();
+		try {
+			try {
+				assertNotNull(serviceEvent.updateEvent(events));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}	
+	
 }
