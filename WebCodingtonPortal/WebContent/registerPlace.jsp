@@ -42,7 +42,7 @@
 
 
 <div class = "nav_log">
-	<div class="message"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
+	<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 	
 	<form method="post" action="RegistPlaceServlet">
 		<p class = "title">
@@ -55,7 +55,7 @@
 		 
 		    <p>Description: 
 		  <br>
-		  <textarea name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required"></textarea>
+		  <input type="text" name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required"></input>
 		    </p>
 		 
 		    <p>Region:

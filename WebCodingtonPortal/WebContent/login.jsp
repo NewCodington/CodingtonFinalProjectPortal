@@ -28,7 +28,7 @@
 
 
 <div class="nav_log">
-	<br><b><a style="color:red"><%= session.getAttribute("ErrorLogin")!=null?session.getAttribute("ErrorLogin").toString():""%></a></b>
+	<div class="error"><%= session.getAttribute("ErrorLogin")!=null?session.getAttribute("ErrorLogin").toString():""%></div>
 	<form method="post" action="login">
 		<p class = "title">
 		Sign In </p>

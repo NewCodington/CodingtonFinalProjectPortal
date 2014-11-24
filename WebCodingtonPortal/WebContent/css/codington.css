@@ -184,14 +184,18 @@ div.footer
 	    font-size: 20px;
    	}
    	
-   	p.mensaje
+   	div .mensaje
     {
 	    text-align: center;
 	    font-size: 18px;
-	    color:blue;
-	    margin-top:0; margin-bottom:0;	
+	    color:blue;	
    	}
-
+	div .error
+    {
+	    text-align: center;
+	    font-size: 18px;
+	    color:red;	
+   	}
 
 
 	div.menuHorizontal

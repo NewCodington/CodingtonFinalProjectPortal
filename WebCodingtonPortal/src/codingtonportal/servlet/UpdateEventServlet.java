@@ -2,9 +2,7 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
-import codingtonportal.model.domain.Place;
 import codingtonportal.model.services.EventServiceImpl;
-import codingtonportal.model.services.VisitorServiceImpl;
 
 
 
@@ -47,7 +43,7 @@ public class UpdateEventServlet extends HttpServlet {
 		Event event=new Event();
 		
 		idEvent=request.getParameter("updateEvent");
-		
+		session.setAttribute("idEvent", idEvent);
 
 		if(idEvent!=null)
 		{
@@ -81,16 +77,19 @@ public class UpdateEventServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
+		String idEvent=session.getAttribute("idEvent").toString();
+		
 		Event event=new Event();
 		
 		EventServiceImpl  eventService = new EventServiceImpl();
 		
+		event.setEventId(Integer.parseInt(idEvent));
 		event.setName(request.getParameter("eventName"));
 		event.setDescription(request.getParameter("description"));
 		event.setPlace(Integer.parseInt(request.getParameter("place")));
 	
 		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
-		java.sql.Date date = null;
+		Date date = null;
 		
 		
 		Date d=new Date(2014, 9, 24);
@@ -114,12 +113,14 @@ public class UpdateEventServlet extends HttpServlet {
 		
 		try {
 			if(eventService.updateEvent(event) > 0){
-				session.setAttribute("Success", "Successfully created Event");
+				session.setAttribute("Success", "Successfully Event updated");
+				session.setAttribute("ViewSuccess", "Yes");
 			}else{
 				session.setAttribute("Error", "Incorrect Event values");
+				response.sendRedirect("updateEvent");
 			}
 			
-			response.sendRedirect("updateEvent");
+			response.sendRedirect("admin");
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

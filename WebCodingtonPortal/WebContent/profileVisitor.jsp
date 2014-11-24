@@ -54,7 +54,7 @@
 	
 	<div id="event">
 		
-	<br><b><a style="color:red"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></a></b>
+	<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 	
 	<table>
 		<tr>

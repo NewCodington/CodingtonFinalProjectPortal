@@ -2,8 +2,6 @@ package codingtonportal.model.domain;
 
 import java.sql.Date;
 
-import java.util.*;
-
 
 public class Event {
 
@@ -149,7 +147,7 @@ public class Event {
 	}
 
 
-	public java.sql.Date getDate_event() {
+	public Date getDate_event() {
 		return date_event;
 	}
 

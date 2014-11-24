@@ -34,7 +34,7 @@
 
 <div class = "nav_log">
 
-<br><b><a style="color:red"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></a></b>
+<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 	
 	<form method="post" action="updateEvent">
 		<p class = "title">
@@ -47,7 +47,7 @@
 		  
 		    <p>Description: 
 		  <br>
-		  <textarea id="description" name="description" value="<%= event.getDescription() %>" title="1 to 45 characters" pattern="\S{1,45}" placeholder="Description" required></textarea>
+		  <input type="text" id="description" name="description" value="<%= event.getDescription() %>" title="1 to 45 characters" pattern="\S{1,45}" placeholder="Description" required></input>
 		    </p>
 		  
 		    <p>Place:

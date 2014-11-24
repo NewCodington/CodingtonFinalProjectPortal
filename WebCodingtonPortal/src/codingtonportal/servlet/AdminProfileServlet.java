@@ -63,41 +63,39 @@ public class AdminProfileServlet extends HttpServlet {
 		
 		try {
 
+			if(updateEvent!=null){ 
+				//LLamo a la pagina para poder modificar los parametros
+				response.sendRedirect("updateEvent?idEvent="+updateEvent);
+			}
+			
+			if(updatePlace!=null){ 
+				response.sendRedirect("updatePlace");
+			}
+			
 			if(deleteEvent!=null){ 
 				eventService.deleteEvent(Integer.parseInt((deleteEvent)));
-
 			}
-			eventsList = eventService.viewEvent();
-			session.setAttribute("EVENTLIST", eventsList);
 			
 			if(deletePlace!=null){ 
 				placeService.deletePlace(Integer.parseInt((deletePlace)));
 			}
+			
+			if(session.getAttribute("ViewSuccess")!=null)
+					System.out.println(session.getAttribute("ViewSuccess").toString());
+			
+			if(session.getAttribute("ViewSuccess")!=null && !session.getAttribute("ViewSuccess").toString().equals("YES")) {
+				session.setAttribute("ViewSuccess", null);
+			}
+			else
+				session.setAttribute("Success", null);
+			
+			
+			eventsList = eventService.viewEvent();
+			session.setAttribute("EVENTLIST", eventsList);
+			
 			placesList = placeService.viewPlace();
 			session.setAttribute("PLACELIST", placesList);
-				
-			
-			if(updateEvent!=null){ 
-				//LLamo a la pagina para poder modificar los parametros
-				
-				response.sendRedirect("updateEvent?idEvent="+updateEvent);
-				
-				
-				
-			}
-			
-			
-			
-		
-			if(updatePlace!=null){ 
-				response.sendRedirect("updatePlace");
-				
-			}
-			
-				
-			
-			
-			
+
 			response.sendRedirect("profileAdmin.jsp");
 			
 		} catch (ClassNotFoundException e) {

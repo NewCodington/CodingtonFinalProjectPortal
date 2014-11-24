@@ -47,7 +47,7 @@
 		
 	<div class = "section">
 			
-		<br><b><a style="color:blue"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></a></b>
+		<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
 			
 		<div id="Estilo1">EVENTS <hr></hr></div>
 	

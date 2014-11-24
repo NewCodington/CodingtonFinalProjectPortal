@@ -28,7 +28,7 @@
 
 <div class = "nav_log">
 
-	<div class="message"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
+	<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 	<form method="post" action="registerVisitor">
 		<p class = "title">
         New User</p>
