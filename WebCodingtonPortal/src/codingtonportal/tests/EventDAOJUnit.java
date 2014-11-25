@@ -27,7 +27,11 @@ public class EventDAOJUnit extends TestCase{
 		super.tearDown();
 	}
 
-	
+	/**
+	 * Method to get an Event from the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
 	public void testSelectEvent () throws SQLException, ParseException{
 		Event events= new Event(2,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12,null);
@@ -43,6 +47,10 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to view all available events from the database.
+	 * @throws ParseException
+	 */
 	@Test
 	public void testviewEvent () throws ParseException{
 		EventServiceImpl serviceEvent = new EventServiceImpl();
@@ -62,6 +70,11 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to insert an Event in the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
 	public void testInsertEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
@@ -77,6 +90,10 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to remove an Event from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testDeleteEvent() throws SQLException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
@@ -92,6 +109,11 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to update an Event from the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
 	public void testUpdateEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);

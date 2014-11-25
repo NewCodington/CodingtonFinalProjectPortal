@@ -26,6 +26,10 @@ public class VisitorDAOJUnit extends TestCase {
 		super.tearDown();
 	}
 
+	/**
+	 * Method to get an specific Visitor from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testSelectVisitor () throws SQLException{
 		Visitor visit= new Visitor(23, "Charlay", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
@@ -41,6 +45,10 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 	
+	/**
+	 * Method to view all Visitors from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testviewVisitor () throws SQLException{				
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
@@ -55,6 +63,10 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 	
+	/**
+	 * Method for a visitor logs into the application.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testloginVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Charlay", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
@@ -70,6 +82,10 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 	
+	/**
+	 * Method to insert a Visitor into the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testinsertVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Carlos", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
@@ -85,6 +101,10 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 
+	/**
+	 * Method to update a Visitor from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testupdateVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Charly", "dafkj","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
@@ -100,6 +120,10 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 
+	/**
+	 * Method by which a visitor updated password
+	 * @throws SQLException
+	 */
 	@Test
 	public void testupdatePassword() throws SQLException {
 		Visitor visit= new Visitor(16, "Charly", "facilisimo","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
@@ -115,6 +139,10 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 	
+	/**
+	 * Method to remove a Visitor from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testdeleteVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Charly", "facilisimo","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
@@ -130,6 +158,11 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 
+	/**
+	 * Method to search Events by partial names from the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
 	public void testsearchEvent() throws SQLException, ParseException {				
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
@@ -144,6 +177,11 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 
+	/**
+	 * Method to view all available events for a Visitor from the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
 	public void testviewEvent () throws SQLException, ParseException{				
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
@@ -158,6 +196,9 @@ public class VisitorDAOJUnit extends TestCase {
 		}
 	}
 
+	/**
+	 * Method to check if the Visitor is the admin application.
+	 */
 	@Test
 	public void testisAdmin (){
 		
