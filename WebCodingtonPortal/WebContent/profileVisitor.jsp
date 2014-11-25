@@ -48,7 +48,7 @@
 					<p><a href="visitor" class="link">My Page </a></p>
 					<hr />
 					<p><a href="updateVisitor" class="link">Update Information </a></p>
-					<hr />
+					
 					<p><a href="updatePasswordVisitor" class="link">Update Password </a></p>
 					<hr />
 					<p><a href="logout" class="link">Logout </a></p>
@@ -60,6 +60,18 @@
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				
 				<div class = "section">
+				
+				
+				<div class="search">		
+					<form method="post" action="visitor">	
+						<input type="text" name="search" id = "search"   placeholder="Search"   />
+						<input  type="submit" class="buscar" value="Search" />
+					</form>
+				</div>
+				
+				
+					
+				
 					<div class="title">EVENTS <hr></hr></div>
 					
 					<%

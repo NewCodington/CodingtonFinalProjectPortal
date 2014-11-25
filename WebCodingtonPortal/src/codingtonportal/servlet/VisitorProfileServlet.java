@@ -43,6 +43,7 @@ public class VisitorProfileServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		session.setAttribute("ErrorLogin", null);
 		
+		
 		ArrayList<Integer> listIdEvent = null;
 		ArrayList<Event> eventsRegisterList = null;
 		ArrayList<Event> eventsList=null;
@@ -118,14 +119,34 @@ public class VisitorProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.setContentType("text/html");
+		response.setContentType("text/html");
 		
+		HttpSession session=request.getSession();
 		
-
-		//RequestDispatcher dispatcher=request.getRequestDispatcher("/home.jsp?msg=Evento creado con �xito");
-		//dispatcher.forward(request, response);
-
-
+		String search=null;
+		search=request.getParameter("search");
+		
+		ArrayList<Event> eventsList=null;
+		EventServiceImpl eventService=new EventServiceImpl();
+		
+		try {
+			
+			eventsList = eventService.searchEvent(search);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		session.setAttribute("EVENTLIST", eventsList);
+		response.sendRedirect("profileVisitor.jsp");
 	}
 
 }
