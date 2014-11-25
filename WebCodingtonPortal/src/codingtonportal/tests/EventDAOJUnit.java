@@ -2,7 +2,6 @@ package codingtonportal.tests;
 
 
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -15,6 +14,7 @@ import org.junit.Test;
 
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.services.EventServiceImpl;
+
 
 public class EventDAOJUnit extends TestCase{
 	EventServiceImpl event;
@@ -41,9 +41,6 @@ public class EventDAOJUnit extends TestCase{
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
 			assertNotNull(serviceEvent.selectEvent(events));						
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -70,11 +67,27 @@ public class EventDAOJUnit extends TestCase{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Method to search Events by partial names from the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	@Test
+	public void testsearchEvent() throws SQLException, ParseException {				
+		EventServiceImpl serviceEvent = new EventServiceImpl();
+		try {
+			assertNotNull(serviceEvent.searchEvent("FRI"));	
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -90,9 +103,6 @@ public class EventDAOJUnit extends TestCase{
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
 			assertNotNull(serviceEvent.insertEvent(events));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,9 +122,6 @@ public class EventDAOJUnit extends TestCase{
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
 			assertNotNull(serviceEvent.deleteEvent(events.getEventId()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -135,9 +142,6 @@ public class EventDAOJUnit extends TestCase{
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
 			assertNotNull(serviceEvent.updateEvent(events));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

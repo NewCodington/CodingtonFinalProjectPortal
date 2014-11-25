@@ -9,7 +9,7 @@ import codingtonportal.model.domain.TypePlace;
 
 /**
  * 
- * The interface PlaceDAO shows the services that can be used or are related to the Places.
+ * The interface TypePlaceDAO shows the services that can be used or are related to the Type of the Places.
  * 
  * @author JAVA101_01
  *
