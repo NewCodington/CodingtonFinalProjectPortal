@@ -87,9 +87,6 @@ public class EventSignUpDAOJUnit extends TestCase {
 		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {
 			assertNotNull(serviceEventSignUp.incrementSeats(eventSigns.getIdEvent()));			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,9 +106,6 @@ public class EventSignUpDAOJUnit extends TestCase {
 		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
 		try {			
 			assertNotNull(serviceEventSignUp.decrementSeats(eventSigns.getIdEvent()));			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,9 +133,6 @@ public class EventSignUpDAOJUnit extends TestCase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -165,9 +156,6 @@ public class EventSignUpDAOJUnit extends TestCase {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

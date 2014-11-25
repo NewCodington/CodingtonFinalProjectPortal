@@ -3,7 +3,6 @@ package codingtonportal.tests;
 
 
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -42,9 +41,6 @@ public class PlaceDAOJUnit extends TestCase {
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.insertPlace(places));		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,9 +61,6 @@ public class PlaceDAOJUnit extends TestCase {
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.updatePlace(places));		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,9 +81,6 @@ public class PlaceDAOJUnit extends TestCase {
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.deletePlace(places.getIdPlace()));		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,9 +100,6 @@ public class PlaceDAOJUnit extends TestCase {
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.viewPlace());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -132,9 +119,6 @@ public class PlaceDAOJUnit extends TestCase {
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.selectPlace(places));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();

@@ -2,9 +2,7 @@ package codingtonportal.tests;
 
 
 
-import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 import javax.naming.NamingException;
 
@@ -39,9 +37,6 @@ public class VisitorDAOJUnit extends TestCase {
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
 			assertNotNull(serviceVisitor.selectVisitor(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -60,9 +55,6 @@ public class VisitorDAOJUnit extends TestCase {
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
 			assertNotNull(serviceVisitor.viewVisitor());			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
@@ -82,9 +74,6 @@ public class VisitorDAOJUnit extends TestCase {
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
 			assertNotNull(serviceVisitor.loginVisitor(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,9 +93,6 @@ public class VisitorDAOJUnit extends TestCase {
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
 			assertNotNull(serviceVisitor.insertVisitor(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,9 +112,6 @@ public class VisitorDAOJUnit extends TestCase {
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
 			assertNotNull(serviceVisitor.updateVisitor(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,9 +131,6 @@ public class VisitorDAOJUnit extends TestCase {
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {			
 			assertNotNull(serviceVisitor.updatePassword(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,55 +150,8 @@ public class VisitorDAOJUnit extends TestCase {
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
 			assertNotNull(serviceVisitor.deleteVisitor(visit));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Method to search Events by partial names from the database.
-	 * @throws SQLException
-	 * @throws ParseException
-	 */
-	@Test
-	public void testsearchEvent() throws SQLException, ParseException {				
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
-		try {
-			assertNotNull(serviceVisitor.searchEvent("FRI"));	
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Method to view all available events for a Visitor from the database.
-	 * @throws SQLException
-	 * @throws ParseException
-	 */
-	@Test
-	public void testviewEvent () throws SQLException, ParseException{				
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
-		try {			
-			assertNotNull(serviceVisitor.viewEvent());			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block			
 			e.printStackTrace();
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
@@ -244,9 +177,6 @@ public class VisitorDAOJUnit extends TestCase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
