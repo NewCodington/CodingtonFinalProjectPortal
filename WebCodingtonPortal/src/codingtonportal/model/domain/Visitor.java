@@ -77,9 +77,23 @@ public class Visitor {
 				
 	}
 	
-	
-	
-	
+	//Constructor 
+	public Visitor(Visitor visitor)
+	{
+		
+		this.idVisitor = visitor.getVisitorId();
+		this.firstName = visitor.getFirstName();
+		this.lastName = visitor.getLastName();
+		this.dni = visitor.getDni();
+		this.email = visitor.getEmail();
+		this.phoneNumber = visitor.getPhoneNumber();
+		this.address = visitor.getAddress();
+		this.userName = visitor.getUserName();
+		this.password = visitor.getPassword();
+		this.admin = visitor.isAdmin();
+				
+	}
+
 	//GETTERS AND SETTERS
 	public int getVisitorId() {
 		return idVisitor;
@@ -96,7 +110,6 @@ public class Visitor {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 
 	public String getPassword() {
 		return password;
