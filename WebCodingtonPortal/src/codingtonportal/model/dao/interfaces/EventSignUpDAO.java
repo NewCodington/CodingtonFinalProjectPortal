@@ -15,10 +15,10 @@ import javax.naming.NamingException;
  *
  */
 public interface EventSignUpDAO {
-	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, IOException, SQLException, NamingException ;
-	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent)throws IOException, ClassNotFoundException, SQLException, NamingException;
-	public Integer incrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException, NamingException;
-	public Integer decrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException, NamingException;
-	public ArrayList<Integer> selectEventForVisitor(Integer idEvent)throws ClassNotFoundException, IOException, SQLException, NamingException ;
-	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, IOException, SQLException, NamingException ;
+	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, SQLException, NamingException, IOException ;
+	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, SQLException, NamingException, IOException;
+	public Integer incrementSeats(Integer idEvent) throws ClassNotFoundException, SQLException, NamingException;
+	public Integer decrementSeats(Integer idEvent) throws ClassNotFoundException, SQLException, NamingException;
+	public ArrayList<Integer> selectEventForVisitor(Integer idEvent)throws ClassNotFoundException, SQLException, NamingException ;
+	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, SQLException, NamingException ;
 }

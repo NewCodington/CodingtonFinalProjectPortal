@@ -1,6 +1,9 @@
 package codingtonportal.model.dao.interfaces;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.naming.NamingException;
 
 import codingtonportal.model.domain.TypePlace;
 
@@ -12,6 +15,6 @@ import codingtonportal.model.domain.TypePlace;
  *
  */
 public interface TypePlaceDAO {
-	public ArrayList<TypePlace> viewTypePlace();
-	public TypePlace selectTypePlace(TypePlace type);
+	public ArrayList<TypePlace> viewTypePlace() throws NamingException, SQLException, ClassNotFoundException;
+	public TypePlace selectTypePlace(TypePlace type) throws SQLException, ClassNotFoundException, NamingException;
 }
