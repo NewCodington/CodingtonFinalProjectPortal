@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.naming.NamingException;
+
 import codingtonportal.model.domain.Event;
 
 
@@ -15,9 +17,9 @@ import codingtonportal.model.domain.Event;
  *
  */
 public interface EventDAO {
-	public Event selectEvent (Event event) throws IOException, ClassNotFoundException, SQLException, ParseException;
-	public ArrayList<Event> viewEvent () throws IOException, ClassNotFoundException, SQLException, ParseException;
-	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException;
-	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException;
-	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException;
+	public Event selectEvent (Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
+	public ArrayList<Event> viewEvent () throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
+	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
+	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException, NamingException;
+	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
 }

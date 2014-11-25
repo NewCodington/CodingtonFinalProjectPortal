@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.naming.NamingException;
+
 import codingtonportal.model.dao.interfaces.EventDAO;
 import codingtonportal.model.domain.Event;
 import codingtonportal.utils.FERSDataConnection;
@@ -30,9 +32,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Event selectEvent(Event event) throws IOException,ClassNotFoundException, SQLException, ParseException {
+	public Event selectEvent(Event event) throws IOException,ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
 		FERSDataConnection con = new FERSDataConnection(); 
 		PropertyAccess connection = new PropertyAccess();
@@ -92,9 +95,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Event> viewEvent() throws IOException,ClassNotFoundException, SQLException, ParseException {
+	public ArrayList<Event> viewEvent() throws IOException,ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -164,9 +168,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException   {  
+	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -215,9 +220,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException {
+	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -269,9 +275,10 @@ public class EventServiceImpl implements EventDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException   {  
+	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();

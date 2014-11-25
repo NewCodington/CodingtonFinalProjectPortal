@@ -1,42 +1,49 @@
 package codingtonportal.utils;
 
 
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
-import codingtonportal.utils.IPropertyAccess;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 
-public class PropertyAccess implements IPropertyAccess {
-
+public class PropertyAccess implements IPropertyAccess{
+	
 	@Override
-	public String getProperty(String property) throws IOException {
-		Properties p = new Properties();    
-		
-		
-		InputStream fileInput = this.getClass().getResourceAsStream("files/connection.properties");
-		
-		// Se carga el archivo de propiedades        
-		p.load(fileInput);         
-		
-		// Se obtiene la propiedad y se devuelve              
-		return p.getProperty(property);
-	}
-
-	@Override
-	public String getConstant(String constant) throws IOException {
-		
-		Properties p = new Properties();    
+	public String getProperty(String property) {
+		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder;
+		String statement = null;
+		try {
+			InputStream in = this.getClass().getResourceAsStream("files/properties.xml");
 			
-InputStream fileInput = this.getClass().getResourceAsStream("files/constant.properties");
-		
-		// Se carga el archivo de propiedades        
-		p.load(fileInput);         
-		
-		// Se obtiene la propiedad y se devuelve              
-		return p.getProperty(constant);
+			docBuilder = docBuilderFactory.newDocumentBuilder();
+			Document doc = docBuilder.parse (in);
+			
+			// normalize text representation
+			doc.getDocumentElement ().normalize ();
+			Element root = doc.getDocumentElement();
+			NodeList nodeList = root.getElementsByTagName(property);
+			statement= nodeList.item(0).getTextContent().toString();
+			
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return statement;
 	}
 
+ 
 }
