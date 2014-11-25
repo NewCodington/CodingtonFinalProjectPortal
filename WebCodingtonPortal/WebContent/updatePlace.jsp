@@ -97,7 +97,7 @@
 							ArrayList<TypePlace> typePlaceList = new ArrayList<TypePlace>();
 							typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
 						%>
-						<select>
+						<select id="typePlace" name="typePlace" required>
 							<%
 								for (TypePlace typePlace : typePlaceList) {
 							%>

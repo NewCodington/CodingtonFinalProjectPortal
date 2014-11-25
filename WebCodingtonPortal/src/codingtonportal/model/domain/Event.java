@@ -1,8 +1,15 @@
 package codingtonportal.model.domain;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import javax.naming.NamingException;
+
+import codingtonportal.model.dao.interfaces.PlaceDAO;
+import codingtonportal.model.services.PlaceServiceImpl;
+import codingtonportal.model.services.RegionPlaceServiceImpl;
 
 
 public class Event {
@@ -150,6 +157,17 @@ public class Event {
 
 	public void setPlace(int place) {
 		this.place = place;
+	}
+	
+	public String getPlaceString() throws ClassNotFoundException, SQLException, NamingException {
+		PlaceServiceImpl placeService = new PlaceServiceImpl();
+		Place p = new Place();
+		Place pOut;
+		
+		p.setIdPlace(this.place);
+		pOut = placeService.selectPlace(p);
+		p=null;
+		return pOut.getName();
 	}
 
 	public String getDuration() {

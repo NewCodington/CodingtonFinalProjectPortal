@@ -88,7 +88,7 @@
 							ArrayList<Place> placeList = new ArrayList<Place>();
 							placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
 						%>
-						<select>
+						<select id="place" name="place" required>
 							<%
 								for (Place place : placeList) {
 							%>

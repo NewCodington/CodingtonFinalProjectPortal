@@ -94,21 +94,19 @@ public class UpdateEventServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		String idEvent=session.getAttribute("idEvent").toString();
-		
-		Event event=new Event();
-		
-		EventServiceImpl  eventService = new EventServiceImpl();
-		
-		event.setEventId(Integer.parseInt(idEvent));
-		event.setName(request.getParameter("eventName"));
-		event.setDescription(request.getParameter("description"));
-		event.setPlace(Integer.parseInt(request.getParameter("place")));
-	
-		SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy");
-		java.util.Date dateInput = null;
-		
 		try {
+			String idEvent=session.getAttribute("idEvent").toString();
+			
+			Event event=new Event();
+			EventServiceImpl  eventService = new EventServiceImpl();
+			
+			event.setEventId(Integer.parseInt(idEvent));
+			event.setName(request.getParameter("eventName"));
+			event.setDescription(request.getParameter("description"));
+			event.setPlace(Integer.parseInt(request.getParameter("place")));
+		
+			SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy");
+			java.util.Date dateInput = null;
 			dateInput = originalFormat.parse(request.getParameter("date").toString());
 		    event.setDate_event(dateInput);
 			event.setStartTime(request.getParameter("startTime"));

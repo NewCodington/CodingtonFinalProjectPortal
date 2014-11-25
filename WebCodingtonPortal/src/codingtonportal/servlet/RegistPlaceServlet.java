@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import codingtonportal.model.domain.Place;
 import codingtonportal.model.domain.TypePlace;
 import codingtonportal.model.services.PlaceServiceImpl;
@@ -120,20 +121,15 @@ public class RegistPlaceServlet extends HttpServlet {
 		
 		  ps.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
 		
-		*/
-		
-		place.setName(request.getParameter("placeName"));
-		place.setDescription(request.getParameter("description"));
-		//place.setImage(request.getParameter("image"));
-		place.setAddress(request.getParameter("address"));
-		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
-		place.setRegion("1");
-		
-
-		//Falta incluir la fecha y el tiempo que dura
-	
+		*/	
 		
 		try {
+			place.setName(request.getParameter("placeName"));
+			place.setDescription(request.getParameter("description"));
+			//place.setImage(request.getParameter("image"));
+			place.setAddress(request.getParameter("address"));
+			place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
+			
 			if(placeService.insertPlace(place) > 0){
 				session.setAttribute("Success", "Successfully Place created ");
 				session.setAttribute("ViewSuccess", "YES");

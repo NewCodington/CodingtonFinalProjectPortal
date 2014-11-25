@@ -77,6 +77,7 @@
 						<tr>
 							<th>Event Name</th>
 							<th>Description</th>
+							<th>Place</th>
 							<th>Date</th>
 							<th>Duration</th>
 							<th>Event Type</th>
@@ -91,6 +92,7 @@
 						<tr>
 							<td><%=event.getName()%></td>
 							<td><%=event.getDescription()%></td>
+							<td><%=event.getPlaceString()%></td>
 							<td><%=event.getDate_eventString()%></td>
 							<td><%=event.getDuration()%></td>
 							<td><%=event.getEventType()%></td>
@@ -124,6 +126,7 @@
 					<tr>
 						<th>Event Name</th>
 						<th>Description</th>
+						<th>Place</th>
 						<th>Date</th>
 						<th>Duration</th>
 						<th>Event Type</th>
@@ -137,6 +140,7 @@
 					<tr>
 						<td><%=event.getName()%></td>
 						<td><%=event.getDescription()%></td>
+						<td><%=event.getPlaceString()%></td>
 						<td><%=event.getDate_eventString()%></td>
 						<td><%=event.getDuration()%></td>
 						<td><%=event.getEventType()%></td>

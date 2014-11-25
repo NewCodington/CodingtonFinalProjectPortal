@@ -57,7 +57,6 @@ public class PlaceServiceImpl implements PlaceDAO {
 				// Complete the fields
 				data.setIdPlace(outdata.getInt("idPlace"));
 				data.setName(outdata.getString("Name"));
-				data.setRegion(outdata.getString("Region"));
 				data.setTypePlace(outdata.getInt("TypePlace"));
 				data.setImage(outdata.getBlob("Image"));
 				data.setAddress(outdata.getString("Address"));
@@ -117,7 +116,6 @@ public class PlaceServiceImpl implements PlaceDAO {
 					// Complete the fields
 					data.setIdPlace(outdata.getInt("idPlace"));
 					data.setName(outdata.getString("Name"));
-					data.setRegion(outdata.getString("Region"));
 					data.setTypePlace(outdata.getInt("TypePlace"));
 					data.setImage(outdata.getBlob("Image"));
 					data.setAddress(outdata.getString("Address"));
@@ -173,11 +171,10 @@ public class PlaceServiceImpl implements PlaceDAO {
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertPlace"));
 			// Add conditions
 			statementSQL.setString(1, place.getName());
-			statementSQL.setString(2, place.getRegion());
-			statementSQL.setInt(3, place.getTypePlace());
-			statementSQL.setBlob(4, place.getImage());
-			statementSQL.setString(5, place.getAddress());
-			statementSQL.setString(6, place.getDescription());	
+			statementSQL.setInt(2, place.getTypePlace());
+			statementSQL.setBlob(3, place.getImage());
+			statementSQL.setString(4, place.getAddress());
+			statementSQL.setString(5, place.getDescription());	
 
 			// Execute query
 			result = statementSQL.executeUpdate();		     
@@ -223,13 +220,12 @@ public class PlaceServiceImpl implements PlaceDAO {
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePlace"));
 			// Add conditions
 			statementSQL.setString(1, place.getName());
-			statementSQL.setString(2, place.getRegion());
-			statementSQL.setInt(3,place.getTypePlace());
-			statementSQL.setBlob(4, place.getImage());
-			statementSQL.setString(5, place.getAddress());
-			statementSQL.setString(6, place.getDescription());
+			statementSQL.setInt(2,place.getTypePlace());
+			statementSQL.setBlob(3, place.getImage());
+			statementSQL.setString(4, place.getAddress());
+			statementSQL.setString(5, place.getDescription());
 			// Where clauses
-			statementSQL.setInt(7, place.getIdPlace());
+			statementSQL.setInt(6, place.getIdPlace());
 
 			// Execute query
 			result = statementSQL.executeUpdate();

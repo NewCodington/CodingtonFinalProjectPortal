@@ -88,32 +88,20 @@ public class UpdatePlaceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		String idPlace=null;
-		
-		
-		Place place=new Place();
-		
-		
-		
-		idPlace=(String) session.getAttribute("idPlace");
-		place.setIdPlace(Integer.parseInt(idPlace));
-		
-		
-		PlaceServiceImpl  placeService = new PlaceServiceImpl();
-		
-		place.setIdPlace(Integer.parseInt(idPlace));
-		place.setName(request.getParameter("placeName"));
-		place.setDescription(request.getParameter("description"));
-		place.setRegion(request.getParameter("region"));
-		
-		//place.setImage(request.getParameter("image"));
-		
-		place.setAddress(request.getParameter("address"));
-		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
-		
-
+		String idPlace=null;		
 		
 		try {
+			Place place=new Place();
+			PlaceServiceImpl  placeService = new PlaceServiceImpl();
+			
+			idPlace=(String) session.getAttribute("idPlace");
+			place.setIdPlace(Integer.parseInt(idPlace));
+			place.setName(request.getParameter("placeName"));
+			place.setDescription(request.getParameter("description"));		
+			//place.setImage(request.getParameter("image"));
+			place.setAddress(request.getParameter("address"));
+			place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
+			
 			if(placeService.updatePlace(place) > 0){
 				session.setAttribute("Success", "Successfully Event updated");
 				session.setAttribute("ViewSuccess", "YES");

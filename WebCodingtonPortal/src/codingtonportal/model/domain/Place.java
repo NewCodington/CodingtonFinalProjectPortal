@@ -1,6 +1,14 @@
 package codingtonportal.model.domain;
 
 import java.sql.Blob;
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
+
+import codingtonportal.model.dao.interfaces.RegionPlaceDAO;
+import codingtonportal.model.dao.interfaces.TypePlaceDAO;
+import codingtonportal.model.services.RegionPlaceServiceImpl;
+import codingtonportal.model.services.TypePlaceServiceImpl;
 
 
 
@@ -12,7 +20,6 @@ public class Place {
 	private int idPlace;
 	private String name;
 	private String description;
-	private String region;
 	private Blob image;
 	private String address; 
 	private int typePlace; 
@@ -25,7 +32,6 @@ public class Place {
 		this.idPlace = 0;
 		this.name = null;
 		this.description = null;
-		this.region = null;
 		this.image = null;
 		this.address = null;
 		this.typePlace = 0;
@@ -44,11 +50,10 @@ public class Place {
 	 * @param address
 	 * @param description
 	 */
-	public Place(int idPlace, String name, String region, int typePlace, Blob image, String address, String description){
+	public Place(int idPlace, String name, int typePlace, Blob image, String address, String description){
 		this.idPlace = idPlace;
 		this.name = name;
 		this.description = description;
-		this.region = region;
 		this.image = image;
 		this.address = address;
 		this.typePlace = typePlace;
@@ -64,7 +69,6 @@ public class Place {
 
 		this.name = place.getName();
 		this.description = place.getDescription();
-		this.region = place.getRegion();
 		this.image = place.getImage();
 		this.address = place.getAddress();
 		this.typePlace = place.getTypePlace();
@@ -80,13 +84,9 @@ public class Place {
 		return address;
 	}
 
-
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-
 
 	public int getIdPlace() {
 		return idPlace;
@@ -112,13 +112,6 @@ public class Place {
 		this.description = description;
 	}
 
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
 
 	public Blob getImage() {
 		return image;
@@ -136,5 +129,27 @@ public class Place {
 
 	public void setTypePlace(int typePlace) {
 		this.typePlace = typePlace;
+	}
+	
+	public String getTypePlaceString() throws ClassNotFoundException, SQLException, NamingException{
+		TypePlaceServiceImpl regionPlaceService = new TypePlaceServiceImpl();
+		TypePlace p = new TypePlace();
+		TypePlace pOut;
+		
+		p.setIdTypePlace(this.typePlace);
+		pOut = regionPlaceService.selectTypePlace(p);
+		p=null;
+		return pOut.getName();			
+	}
+	
+	public String getRegionString(int typePlace) throws ClassNotFoundException, SQLException, NamingException{
+		RegionPlaceServiceImpl regionPlaceService = new RegionPlaceServiceImpl();
+		TypePlace p = new TypePlace();
+		RegionPlace pOut;
+		
+		p.setIdTypePlace(typePlace);
+		pOut = regionPlaceService.getRegionPlace(p);
+		p=null;
+		return pOut.getName();		
 	}
 }

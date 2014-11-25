@@ -15,8 +15,8 @@
 		<place>
 			<selectPlace>SELECT * FROM codington.place WHERE (idPlace = ?);</selectPlace>
 			<viewPlace>SELECT * FROM codington.place;</viewPlace>
-			<insertPlace>INSERT INTO codington.place(Name, Region, TypePlace, Image, Address, Description) VALUES (?, ?, ?, ?, ?, ?);</insertPlace>
-			<updatePlace>UPDATE codington.place SET Name=?, Region=?, typePlace=?, Image=?, Address=? , Description =? WHERE (idPlace=?);</updatePlace>
+			<insertPlace>INSERT INTO codington.place(Name, TypePlace, Image, Address, Description) VALUES (?, ?, ?, ?, ?);</insertPlace>
+			<updatePlace>UPDATE codington.place SET Name=?, TypePlace=?, Image=?, Address=? , Description =? WHERE (idPlace=?);</updatePlace>
 			<deletePlace>DELETE FROM codington.place WHERE (idPlace= ?);</deletePlace></place>
 		
 		<visitor>
@@ -38,7 +38,7 @@
 		<RegionPlace>
 			<viewRegionPlace>SELECT * FROM codington.regionplace;</viewRegionPlace>
 			<selectRegionPlace>SELECT * FROM codington.regionplace WHERE (idRegionPlace = ?);</selectRegionPlace>
-			<getRegionPlace>SELECT * FROM codington.regionplace INNER JOIN condington.typeplace ON codington.regionplace .idRegionPlace = condington.typeplace.RegionPlace WHERE (condington.typeplace.idTypePlace = ?);</getRegionPlace>
+			<getRegionPlace>SELECT * FROM codington.regionplace INNER JOIN codington.typeplace ON codington.regionplace.idRegionPlace = codington.typeplace.RegionPlace WHERE (codington.typeplace.idTypePlace = ?);</getRegionPlace>
 		</RegionPlace>
 		<TypePlace>
 			<viewTypePlace>SELECT * FROM codington.typeplace;</viewTypePlace>
