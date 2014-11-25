@@ -20,6 +20,7 @@ import codingtonportal.model.domain.Event;
 public interface EventDAO {
 	public Event selectEvent (Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
 	public ArrayList<Event> viewEvent () throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
+	public ArrayList<Event> searchEvent(String Name) throws IOException,ClassNotFoundException, SQLException, ParseException, NamingException;
 	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
 	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException, NamingException;
 	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;

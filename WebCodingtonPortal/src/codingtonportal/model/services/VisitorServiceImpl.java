@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
-
 import javax.naming.NamingException;
 
 import codingtonportal.model.dao.interfaces.VisitorDAO;
-import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Visitor;
 import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
@@ -413,153 +410,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		// Return if Visitor was deleted or not 
 		return result;  	
 	}
-	
-	
-	
-	
-	/**
-	 * Method to view all Events for a Visitor from the database.
-	 * 
-	 * @return ArrayList<Event> with all Events that exists or NULL if there isn't events.
-	 * 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 * @throws SQLException 
-	 * @throws ParseException 
-	 * @throws NamingException 
-	 */
-	@Override
-	public ArrayList<Event> viewEvent() throws ClassNotFoundException, IOException, SQLException, ParseException, NamingException {
-		// Initialize variables
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		ArrayList <Event> selection = null;
-		PreparedStatement statementSQL = null;
 		
-		try {
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewEvent"));
-			
-			// Execute query
-			ResultSet outdata= statementSQL.executeQuery();                     
-			
-			// If exits events
-			if (outdata.next()) {
-				// Create an ArrayList of Events
-				selection = new ArrayList <Event>();                   
-				
-				do {   
-					// Create a new Event
-					Event data = new Event();
-					
-					// Complete the fields
-					data.setEventId(outdata.getInt("idEvent"));
-					data.setName(outdata.getString("Name"));
-					data.setDescription(outdata.getString("Description"));
-					data.setPlace(outdata.getInt("Place"));
-					data.setDate_event(outdata.getDate("Date_event"));
-					data.setStartTime(outdata.getString("StartTime"));
-					data.setDuration(outdata.getString("Duration"));
-					data.setEventType(outdata.getString("Event_type"));
-					data.setSeatsAvailable(outdata.getInt("Seats_available"));
-	
-					// Add to ArrayList
-					selection.add(data);
-					
-				// Continue add Events while the Resultset have
-				}while(outdata.next());
-			}
-			// Close the Resultset
-			outdata.close();
-
-		// Close the Statement and Connection
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}	
-		// Return the ArrayList of Events or null
-		return selection;
-	}
-	
-	
-	
-	
-	/**
-	 * Method to search Events for a Name from the database.
-	 * 
-	 * @param Name : name to search in events. 
-	 * 
-	 * @return ArrayList<Event> with all matching events that exists or NULL if there isn't events.
-	 * 
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 * @throws SQLException 
-	 * @throws ParseException 
-	 * @throws NamingException 
-	 */
-	@Override
-	public ArrayList<Event> searchEvent(String Name) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException {
-		// Initialize variables
-		FERSDataConnection con= new FERSDataConnection(); 
-		PropertyAccess connection= new PropertyAccess();
-		ArrayList <Event> selection = null;
-		PreparedStatement statementSQL = null;
-		
-		try {
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchevent"));
-			// Add conditions
-			statementSQL.setString(1,Name);
-			
-			// Execute query
-			ResultSet outdata= statementSQL.executeQuery();                     
-			
-			// If exits events
-			if (outdata.next()) {
-				// Create an ArrayList of Events
-				selection = new ArrayList <Event>();                   
-				
-				do {
-					// Create a new Event
-					Event data = new Event();
-					
-					// Complete the fields
-					data.setEventId(outdata.getInt("idEvent"));
-					data.setName(outdata.getString("Name"));
-					data.setDescription(outdata.getString("Description"));
-					data.setPlace(outdata.getInt("Place"));
-					data.setDate_event(outdata.getDate("Date_event"));
-					data.setStartTime(outdata.getString("StartTime"));
-					data.setDuration(outdata.getString("Duration"));
-					data.setEventType(outdata.getString("Event_type"));
-					data.setSeatsAvailable(outdata.getInt("Seats_available"));
-	
-					// Add to ArrayList
-					selection.add(data);
-
-				// Continue add Events while the Resultset have
-				}while(outdata.next());
-			}
-			// Close the Resultset
-			outdata.close();
-
-		// Close the Statement and Connection
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}	
-		// Return the ArrayList of Events or null
-		return selection; 	
-	}
-	
 	
 	
 	
