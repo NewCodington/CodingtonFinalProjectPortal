@@ -82,13 +82,12 @@
 					    <input type="text" id="address" name="address"  pattern="\S{1,45}" title="1 to 45 characters" required/>
 					    <br /><br />
 				  	</div>
-				  		
-				  	<%
-						ArrayList<TypePlace> typePlaceList = new ArrayList<TypePlace>();
-						typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
-					%>
 					
 					<div class="field"><p>Type Place:</p>
+						<%
+							ArrayList<TypePlace> typePlaceList = new ArrayList<TypePlace>();
+							typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+						%>
 						<select id="typePlace" name="typePlace" required>
 							<%
 								for (TypePlace typePlace : typePlaceList) {

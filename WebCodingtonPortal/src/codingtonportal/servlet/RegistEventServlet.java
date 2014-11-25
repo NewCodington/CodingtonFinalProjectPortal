@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.sql.Date;
 
 import javax.naming.NamingException;
@@ -15,7 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
+import codingtonportal.model.domain.Place;
+import codingtonportal.model.domain.TypePlace;
 import codingtonportal.model.services.EventServiceImpl;
+import codingtonportal.model.services.PlaceServiceImpl;
+import codingtonportal.model.services.TypePlaceServiceImpl;
 
 
 
@@ -40,6 +45,9 @@ public class RegistEventServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
+		ArrayList<Place> listPlace = null;
+		PlaceServiceImpl PlaceService=new PlaceServiceImpl();
+		
 		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
 			response.sendRedirect("registerEvent.jsp");
@@ -51,10 +59,25 @@ public class RegistEventServlet extends HttpServlet {
 				response.sendRedirect("admin");
 			}
 			else {
-				session.setAttribute("Error", null);
-				session.setAttribute("Success", null);
-				
-				response.sendRedirect("registerEvent.jsp");
+				try {
+					session.setAttribute("Error", null);
+					session.setAttribute("Success", null);
+					
+					listPlace = PlaceService.viewPlace();
+					session.setAttribute("LISTPLACE", listPlace);
+					
+					response.sendRedirect("registerEvent.jsp");
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}				
 		}
 		

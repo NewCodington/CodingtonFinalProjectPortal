@@ -2,6 +2,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="codingtonportal.model.domain.Place"%>
+
 <html>
 	  
 	<head>
@@ -11,7 +14,8 @@
 		<title>Event Register Page</title>
 	</head>
 
-<body id="body">
+	
+	<body id="body">
 
 		<div id="header">
 			<table>
@@ -76,8 +80,19 @@
 					</div>
 					
 					<div class="field"><p>Place:</p>
-					  	<input type="text" id="place" name="place" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Place" required />
-					  	<br />
+					  	<%
+							ArrayList<Place> placeList = new ArrayList<Place>();
+							placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
+						%>
+						<select id="place" name="place" required>
+							<%
+								for (Place place : placeList) {
+							%>
+							<option value="<%= place.getIdPlace()%>"><%=place.getName() %></option>
+							<%
+								}
+							%>
+						</select>
 					</div>
 					  
 					 <div class="field"><p>Start Time:</p>

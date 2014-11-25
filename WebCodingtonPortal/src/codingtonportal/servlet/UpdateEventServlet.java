@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.sql.Date;
 
 import javax.naming.NamingException;
@@ -15,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
+import codingtonportal.model.domain.Place;
 import codingtonportal.model.services.EventServiceImpl;
+import codingtonportal.model.services.PlaceServiceImpl;
 
 
 
@@ -40,6 +43,8 @@ public class UpdateEventServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
+		ArrayList<Place> listPlace = null;
+		PlaceServiceImpl PlaceService=new PlaceServiceImpl();
 		
 		String idEvent=null;
 		EventServiceImpl  eventService = new EventServiceImpl();
@@ -53,6 +58,9 @@ public class UpdateEventServlet extends HttpServlet {
 			event.setEventId(Integer.parseInt(idEvent));
 			try {
 				Event eventUpdate=new Event(eventService.selectEvent(event));
+				
+				listPlace = PlaceService.viewPlace();
+				session.setAttribute("LISTPLACE", listPlace);
 				
 				session.setAttribute("EVENT", eventUpdate);
 			

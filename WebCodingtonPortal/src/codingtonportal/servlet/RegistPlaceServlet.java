@@ -40,7 +40,6 @@ public class RegistPlaceServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		ArrayList<TypePlace> listTypePlace = null;
-		
 		TypePlaceServiceImpl typePlaceService=new TypePlaceServiceImpl();
 		
 		

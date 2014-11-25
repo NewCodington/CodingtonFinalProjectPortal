@@ -2,6 +2,7 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+
 import codingtonportal.model.domain.Place;
+import codingtonportal.model.domain.TypePlace;
 import codingtonportal.model.services.PlaceServiceImpl;
+import codingtonportal.model.services.TypePlaceServiceImpl;
 
 
 
@@ -39,6 +43,8 @@ public class UpdatePlaceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
+		ArrayList<TypePlace> listTypePlace = null;
+		TypePlaceServiceImpl typePlaceService=new TypePlaceServiceImpl();
 		
 		String idPlace=null;
 		Place place=new Place();
@@ -54,6 +60,9 @@ public class UpdatePlaceServlet extends HttpServlet {
 			place.setIdPlace(Integer.parseInt(idPlace));
 			try {
 				Place placeUpdate=new Place(placeService.selectPlace(place));
+				listTypePlace = typePlaceService.viewTypePlace();
+				
+				session.setAttribute("LISTTYPEPLACE", listTypePlace);
 				session.setAttribute("PLACE", placeUpdate);
 			
 			} catch (ClassNotFoundException e) {

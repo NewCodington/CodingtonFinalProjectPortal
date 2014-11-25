@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%@page import="codingtonportal.model.domain.Place"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="codingtonportal.model.domain.TypePlace"%>
 	 
 <html>
 	  
@@ -79,14 +81,6 @@
 					  	<input type="text" name="description" value="<%= place.getDescription() %>" title="1 to 45 characters" pattern="\S{1,45}" required="required" />
 					  	<br />
 					</div>
-					 
-					<div class="field"><p>Region:</p>
-					  	<select id="region" name="region" value="<%= place.getRegion() %>" required>
-							<option value="1">Norte</option>
-							<option value="2">Sur</option>
-						</select>
-						<br /><br />
-					</div>
 					    
 					<div class="field"><p>Image:</p> 
 						<input type="file" id="image" name="image" value="<%= place.getImage() %>" id="image" required />
@@ -99,7 +93,19 @@
 				  	</div>
 				  		
 					<div class="field"><p>Type Place:</p>
-						<input type="text" id="typePlace" name="typePlace" value="<%= place.getTypePlace() %>" required title="Field required" />
+						<%
+							ArrayList<TypePlace> typePlaceList = new ArrayList<TypePlace>();
+							typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+						%>
+						<select>
+							<%
+								for (TypePlace typePlace : typePlaceList) {
+							%>
+							<option value="<%= typePlace.getIdTypePlace()%>" <%= place.getTypePlace() == typePlace.getIdTypePlace()?"selected":"" %>> <%=typePlace.getName() %></option>
+							<%
+								}
+							%>
+						</select>
 						<br />
 					</div>
 					

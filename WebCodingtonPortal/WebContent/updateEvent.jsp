@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%@page import="codingtonportal.model.domain.Event"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="codingtonportal.model.domain.Place"%>
 
 <html>
 	  
@@ -82,7 +84,19 @@
 					</div>
 					
 					<div class="field"><p>Place:</p>
-					  	<input type="text" id="place" name="place" value="<%= event.getPlace() %>" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Place" required />
+					  	<%
+							ArrayList<Place> placeList = new ArrayList<Place>();
+							placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
+						%>
+						<select>
+							<%
+								for (Place place : placeList) {
+							%>
+							<option value="<%= place.getIdPlace()%>" <%= event.getPlace() == place.getIdPlace()?"selected":"" %>> <%=place.getName() %></option>
+							<%
+								}
+							%>
+						</select>
 					  	<br />
 					</div>
 					  
