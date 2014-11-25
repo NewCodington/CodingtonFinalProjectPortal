@@ -48,7 +48,6 @@
 					<p><a href="visitor" class="link">My Page </a></p>
 					<hr />
 					<p><a href="updateVisitor" class="link">Update Information </a></p>
-					
 					<p><a href="updatePasswordVisitor" class="link">Update Password </a></p>
 					<hr />
 					<p><a href="logout" class="link">Logout </a></p>
@@ -57,7 +56,7 @@
 
 			<div class="right_nav">
 				
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+				<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
 				
 				<div class = "section">
 				

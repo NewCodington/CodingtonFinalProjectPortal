@@ -99,23 +99,19 @@ public class UpdateEventServlet extends HttpServlet {
 	
 		SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date dateInput = null;
-		   try {
-		     dateInput = originalFormat.parse(request.getParameter("date").toString());
-		     event.setDate_event(dateInput);
-
-		   }catch (ParseException ex) {
-
-	       }
-		
-		event.setStartTime(request.getParameter("startTime"));
-		event.setDuration(request.getParameter("duration"));
-		event.setEventType(request.getParameter("typeOfEvent"));
-		event.setSeatsAvailable(Integer.parseInt(request.getParameter("seats")));
 		
 		try {
+			dateInput = originalFormat.parse(request.getParameter("date").toString());
+		    event.setDate_event(dateInput);
+			event.setStartTime(request.getParameter("startTime"));
+			event.setDuration(request.getParameter("duration"));
+			event.setEventType(request.getParameter("typeOfEvent"));
+			event.setSeatsAvailable(Integer.parseInt(request.getParameter("seats")));
+			
+			
 			if(eventService.updateEvent(event) > 0){
 				session.setAttribute("Success", "Successfully Event updated");
-				session.setAttribute("ViewSuccess", "Yes");
+				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Event values");
 				response.sendRedirect("updateEvent");

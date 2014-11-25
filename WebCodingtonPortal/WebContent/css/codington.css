@@ -173,7 +173,7 @@
 	   	
    	
 		#content .center_nav input,
-		#content textarea
+		#content .center_nav select
 		{
 			width: 80%;
 		}
@@ -194,11 +194,11 @@
 			margin: 4%;
 		}
 		
-		form input[type="text"]:focus,
-		form input[type="text"].focus 
+		form select
 		{
-		  	border: solid 3px #6699CC;
+		  	padding: 5px;
 		}
+		
 		form input[type="text"] 
 		{
 		  	padding: 10px;

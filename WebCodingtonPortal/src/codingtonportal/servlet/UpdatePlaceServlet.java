@@ -107,7 +107,7 @@ public class UpdatePlaceServlet extends HttpServlet {
 		try {
 			if(placeService.updatePlace(place) > 0){
 				session.setAttribute("Success", "Successfully Event updated");
-				session.setAttribute("ViewSuccess", "Yes");
+				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Place values");
 				response.sendRedirect("updatePlace");

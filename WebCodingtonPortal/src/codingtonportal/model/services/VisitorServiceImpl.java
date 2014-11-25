@@ -344,7 +344,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 		
 		try {    
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatepassword"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePassword"));
 			// Add conditions
 			statementSQL.setString(1, visitor.getPassword());
 			// Where clauses

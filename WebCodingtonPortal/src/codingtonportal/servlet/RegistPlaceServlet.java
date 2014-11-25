@@ -50,15 +50,14 @@ public class RegistPlaceServlet extends HttpServlet {
 		}
 		else
 		{
-			if(session.getAttribute("ViewSuccess")!= null && !session.getAttribute("ViewSuccess").toString().equals("YES")){
+			if(session.getAttribute("ViewSuccess")!= null && session.getAttribute("ViewSuccess").toString().equals("YES")){
 				session.setAttribute("Error", null);
-				session.setAttribute("ViewSuccess", null);
+				
 				response.sendRedirect("admin");
 			}
 			else {
 				session.setAttribute("Error", null);
 				session.setAttribute("Success", null);
-				session.setAttribute("ViewSuccess", "YES");
 				
 				try {
 					listTypePlace = typePlaceService.viewTypePlace();
@@ -124,7 +123,6 @@ public class RegistPlaceServlet extends HttpServlet {
 		
 		*/
 		
-		
 		place.setName(request.getParameter("placeName"));
 		place.setDescription(request.getParameter("description"));
 		//place.setImage(request.getParameter("image"));
@@ -139,6 +137,7 @@ public class RegistPlaceServlet extends HttpServlet {
 		try {
 			if(placeService.insertPlace(place) > 0){
 				session.setAttribute("Success", "Successfully Place created ");
+				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Place values");
 			}

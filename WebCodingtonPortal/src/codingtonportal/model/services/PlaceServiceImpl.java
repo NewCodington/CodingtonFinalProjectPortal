@@ -170,7 +170,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 
 		try { 
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertplace"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertPlace"));
 			// Add conditions
 			statementSQL.setString(1, place.getName());
 			statementSQL.setString(2, place.getRegion());

@@ -51,6 +51,14 @@ public class VisitorProfileServlet extends HttpServlet {
 		EventServiceImpl eventService=new EventServiceImpl();
 		EventSignUpImpl eventSignUp=new EventSignUpImpl();
 		
+		
+		if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
+			session.setAttribute("ViewSuccess", null);
+		}
+		else
+			session.setAttribute("Success", null);
+		
+		
 		//Params of jsp for get
 		String register=null;
 		register=request.getParameter("register");

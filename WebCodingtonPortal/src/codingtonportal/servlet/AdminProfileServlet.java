@@ -64,7 +64,7 @@ public class AdminProfileServlet extends HttpServlet {
 		deletePlace = request.getParameter("deletePlace");
 		
 		try {
-			if(session.getAttribute("ViewSuccess")!=null && !session.getAttribute("ViewSuccess").toString().equals("YES")) {
+			if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
 				session.setAttribute("ViewSuccess", null);
 			}
 			else
@@ -82,13 +82,13 @@ public class AdminProfileServlet extends HttpServlet {
 			if(deleteEvent!=null){ 
 				eventService.deleteEvent(Integer.parseInt((deleteEvent)));
 				session.setAttribute("Success", "Successfully Event deleted");
-				session.setAttribute("ViewSuccess", "YES");
+				session.setAttribute("ViewSuccess", null);
 			}
 			
 			if(deletePlace!=null){ 
 				placeService.deletePlace(Integer.parseInt((deletePlace)));
 				session.setAttribute("Success", "Successfully Place deleted");
-				session.setAttribute("ViewSuccess", "YES");
+				session.setAttribute("ViewSuccess", null);
 			}
 			
 			

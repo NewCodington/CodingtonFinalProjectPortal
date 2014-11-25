@@ -102,8 +102,8 @@ public class UpdatePasswordVisitorServlet extends HttpServlet {
 		
 		try {
 			if(visitorService.updatePassword(visitor) > 0){
-				session.setAttribute("Success", "Successfully Visitor updated");
-				session.setAttribute("ViewSuccess", "Yes");
+				session.setAttribute("Success", "Successfully Visitor Password updated");
+				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Visitor values");
 				response.sendRedirect("updateVisitor");

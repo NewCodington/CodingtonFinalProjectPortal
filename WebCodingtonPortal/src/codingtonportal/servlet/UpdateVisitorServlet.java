@@ -108,7 +108,7 @@ public class UpdateVisitorServlet extends HttpServlet {
 		try {
 			if(visitorService.updateVisitor(visitor) > 0){
 				session.setAttribute("Success", "Successfully Visitor updated");
-				session.setAttribute("ViewSuccess", "Yes");
+				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Visitor values");
 				response.sendRedirect("updateVisitor");

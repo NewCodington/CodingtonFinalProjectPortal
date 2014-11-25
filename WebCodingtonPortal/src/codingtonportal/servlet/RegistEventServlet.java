@@ -47,13 +47,13 @@ public class RegistEventServlet extends HttpServlet {
 		else{
 			if(session.getAttribute("ViewSuccess")!= null && session.getAttribute("ViewSuccess").toString().equals("YES")){
 				session.setAttribute("Error", null);
-				session.setAttribute("ViewSuccess", null);
+
 				response.sendRedirect("admin");
 			}
 			else {
 				session.setAttribute("Error", null);
 				session.setAttribute("Success", null);
-				session.setAttribute("ViewSuccess", "YES");
+				
 				response.sendRedirect("registerEvent.jsp");
 			}				
 		}
@@ -95,6 +95,7 @@ public class RegistEventServlet extends HttpServlet {
 		try {
 			if(eventService.insertEvent(event) > 0){
 				session.setAttribute("Success", "Successfully created Event");
+				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Event values");
 			}
