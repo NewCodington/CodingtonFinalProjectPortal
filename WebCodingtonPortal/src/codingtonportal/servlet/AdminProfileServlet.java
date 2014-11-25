@@ -64,13 +64,6 @@ public class AdminProfileServlet extends HttpServlet {
 		
 		try {
 
-			if(session.getAttribute("ViewSuccess")!=null && !session.getAttribute("ViewSuccess").toString().equals("YES")) {
-				session.setAttribute("ViewSuccess", null);
-			}
-			else
-				session.setAttribute("Success", null);
-			
-			
 			if(updateEvent!=null){ 
 				//LLamo a la pagina para poder modificar los parametros
 				response.sendRedirect("updateEvent?idEvent="+updateEvent);
@@ -82,15 +75,18 @@ public class AdminProfileServlet extends HttpServlet {
 			
 			if(deleteEvent!=null){ 
 				eventService.deleteEvent(Integer.parseInt((deleteEvent)));
-				session.setAttribute("Success", "Successfully Event deleted");
-				session.setAttribute("ViewSuccess", null);
 			}
 			
 			if(deletePlace!=null){ 
 				placeService.deletePlace(Integer.parseInt((deletePlace)));
-				session.setAttribute("Success", "Successfully Place deleted");
+			}
+			
+			
+			if(session.getAttribute("ViewSuccess")!=null && !session.getAttribute("ViewSuccess").toString().equals("YES")) {
 				session.setAttribute("ViewSuccess", null);
 			}
+			else
+				session.setAttribute("Success", null);
 			
 			
 			eventsList = eventService.viewEvent();

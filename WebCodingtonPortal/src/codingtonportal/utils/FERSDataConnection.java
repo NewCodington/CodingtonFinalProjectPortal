@@ -7,13 +7,10 @@
 package codingtonportal.utils;
 
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 
 
 /**
@@ -22,27 +19,63 @@ import javax.sql.DataSource;
  */
 
 public class FERSDataConnection {
-	Context ctx;
-    Connection con;
-    DataSource ds;
-	
-    public FERSDataConnection() throws NamingException{
-    	  		
-        ctx = new InitialContext();
-        ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/CodingtonDB");
-    	    	    	
-    }    
-	
+     // las variables hay que cambiarlas
+//    private String url= "jdbc:oracle:thin:@localhost:1521:xe";
+	static Connection connection ;
+	private String driver;
+	private String url;
+    private String user;
+    private String pass;
     
-    public Connection getConnection() throws ClassNotFoundException, SQLException, NamingException{      
-        con = ds.getConnection();
-
-      return con;
+	
+    public FERSDataConnection() throws IOException{
+    	PropertyAccess conexion= new PropertyAccess();
+    	
+    	this.driver=conexion.getProperty("driver");
+    	this.url=conexion.getProperty("connection");
+    	this.user= conexion.getProperty("username");
+    	this.pass= conexion.getProperty("password");
+    	
     }
-  
     
-    public void close() throws SQLException {	
-		con.close();
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	public String getUser (){
+		return user;
+	}
+	
+	public void setUser (String user){
+		this.user= user;
+	}
+	
+	public String getPass (){
+		return pass;
+	}
+	
+	public void setPass(String pass){
+		this.pass=pass;
+	}
+    
+  public Connection getConnection() throws ClassNotFoundException, SQLException{
+      
+          //Cargamos el driver que está en libraries mysql y establecemos la conexión.
+    	  
+    	  
+			Class.forName(this.driver);
+			connection = DriverManager.getConnection(this.url, this.user, this.pass);
+
+      return connection;
+  }
+  
+  public void close() throws SQLException
+	{	
+		connection.close();
 	}
     
 }

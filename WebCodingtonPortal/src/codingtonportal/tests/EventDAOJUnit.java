@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import javax.naming.NamingException;
-
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -46,9 +44,6 @@ public class EventDAOJUnit extends TestCase{
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
@@ -63,9 +58,6 @@ public class EventDAOJUnit extends TestCase{
 			try{
 				assertNotNull(serviceEvent.viewEvent());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
@@ -95,9 +87,6 @@ public class EventDAOJUnit extends TestCase{
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
@@ -115,9 +104,6 @@ public class EventDAOJUnit extends TestCase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -138,9 +124,6 @@ public class EventDAOJUnit extends TestCase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

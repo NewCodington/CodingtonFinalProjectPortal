@@ -47,6 +47,10 @@
 				<div class = content>
 					<p><a href="visitor" class="link">My Page </a></p>
 					<hr />
+					<p><a href="updateVisitor" class="link">Update Information </a></p>
+					<hr />
+					<p><a href="updatePasswordVisitor" class="link">Update Password </a></p>
+					<hr />
 					<p><a href="logout" class="link">Logout </a></p>
 				</div>
 			</div>

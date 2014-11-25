@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.NamingException;
-
 import codingtonportal.model.dao.interfaces.EventSignUpDAO;
 import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
@@ -30,9 +28,8 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
-	 * @throws NamingException 
 	 */
-	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -87,9 +84,8 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
-	 * @throws NamingException 
 	 */
-	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent) throws IOException, ClassNotFoundException, SQLException, NamingException {
+	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent) throws IOException, ClassNotFoundException, SQLException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -138,10 +134,9 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
-	 * @throws NamingException 
 	 */
 	@Override
-	public Integer incrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public Integer incrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -197,10 +192,9 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
-	 * @throws NamingException 
 	 */
 	@Override
-	public Integer decrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public Integer decrementSeats(Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -260,10 +254,9 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
-	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Integer> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public ArrayList<Integer> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, IOException, SQLException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -324,10 +317,9 @@ public class EventSignUpImpl implements EventSignUpDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
-	 * @throws NamingException 
 	 */
 	@Override
-	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, IOException, SQLException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();

@@ -5,8 +5,6 @@ package codingtonportal.tests;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.naming.NamingException;
-
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -47,9 +45,6 @@ public class PlaceDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		 
 	}
@@ -68,9 +63,6 @@ public class PlaceDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -93,9 +85,6 @@ public class PlaceDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		 
 	}
@@ -115,9 +104,6 @@ public class PlaceDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
@@ -136,9 +122,6 @@ public class PlaceDAOJUnit extends TestCase {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

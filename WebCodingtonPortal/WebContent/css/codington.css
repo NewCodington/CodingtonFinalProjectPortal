@@ -114,15 +114,13 @@
 	    {
 			text-align: justify;
 		}
-		#content .right_nav .message,
-		#content .center_nav .message
+		#content .right_nav .message
 	    {
 		    font-size: 18px;
 		    color:blue;	
 		    margin-bottom: 15px;
 	   	}
-		#content .right_nav .error,
-		#content .center_nav .error
+		#content .right_nav .error
 	    {
 		    font-size: 18px;
 		    color:red;	

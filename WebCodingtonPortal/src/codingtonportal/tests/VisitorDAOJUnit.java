@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import javax.naming.NamingException;
-
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -44,9 +42,6 @@ public class VisitorDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
@@ -65,9 +60,6 @@ public class VisitorDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
@@ -85,9 +77,6 @@ public class VisitorDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -109,9 +98,6 @@ public class VisitorDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
@@ -129,9 +115,6 @@ public class VisitorDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -153,9 +136,6 @@ public class VisitorDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
@@ -173,9 +153,6 @@ public class VisitorDAOJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -197,9 +174,6 @@ public class VisitorDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
@@ -219,9 +193,6 @@ public class VisitorDAOJUnit extends TestCase {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
@@ -237,9 +208,6 @@ public class VisitorDAOJUnit extends TestCase {
 			try{
 				assertTrue(serviceVisitor.isAdmin(visit));	
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		

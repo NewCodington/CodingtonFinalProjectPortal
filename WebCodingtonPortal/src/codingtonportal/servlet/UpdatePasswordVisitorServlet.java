@@ -2,32 +2,31 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
-import codingtonportal.model.domain.Place;
-import codingtonportal.model.services.PlaceServiceImpl;
-
+import codingtonportal.model.domain.Visitor;
+import codingtonportal.model.services.VisitorServiceImpl;
 
 
 
 /**
  * Servlet implementation class SigninServlet
  */
-@WebServlet(description = "Servlet for Regist Event", urlPatterns = { "/updatePlace" })
-public class UpdatePlaceServlet extends HttpServlet {
+@WebServlet(description = "Servlet for Update Password Visitor", urlPatterns = { "/updatePasswordVisitor" })
+public class UpdatePasswordVisitorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePlaceServlet() {
+    public UpdatePasswordVisitorServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,21 +38,24 @@ public class UpdatePlaceServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		String idPlace=null;
-		Place place=new Place();
-		PlaceServiceImpl  placeService = new PlaceServiceImpl();
+		
+		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+		Visitor visitor=new Visitor();
 		
 		
-		idPlace=request.getParameter("updatePlace");
-		session.setAttribute("idPlace", idPlace);
-		
+		String idVisitor=null;
+		idVisitor=session.getAttribute("idVisitor").toString();
 
-		if(idPlace!=null)
+		if(idVisitor!=null)
 		{
-			place.setIdPlace(Integer.parseInt(idPlace));
+			visitor.setIdVisitor(Integer.parseInt(idVisitor));
 			try {
-				Place placeUpdate=new Place(placeService.selectPlace(place));
-				session.setAttribute("PLACE", placeUpdate);
+				Visitor visitorUpdate=new Visitor(visitorService.selectVisitor(visitor));
+				
+				session.setAttribute("VISITOR", visitorUpdate);
+			
+			
+			
 			
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -65,7 +67,7 @@ public class UpdatePlaceServlet extends HttpServlet {
 				
 		}
 		
-		response.sendRedirect("updatePlace.jsp");
+		response.sendRedirect("updatePasswordVisitor.jsp");
 		
 	}
 
@@ -75,39 +77,34 @@ public class UpdatePlaceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		String idPlace=null;
+		
+		String idVisitor=null;
+		idVisitor=session.getAttribute("idVisitor").toString();
 		
 		
-		Place place=new Place();
 		
-		
-		
-		idPlace=(String) session.getAttribute("idPlace");
-		place.setIdPlace(Integer.parseInt(idPlace));
-		
-		
-		PlaceServiceImpl  placeService = new PlaceServiceImpl();
-		
-		place.setName(request.getParameter("placeName"));
-		place.setDescription(request.getParameter("description"));
-		place.setRegion(request.getParameter("region"));
-		
-		//place.setImage(request.getParameter("image"));
-		
+		Visitor visitor=new Visitor();
 	
-		place.setAddress(request.getParameter("address"));
-		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
 		
-
+		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+		
+		
+		
+		visitor.setIdVisitor(Integer.parseInt(idVisitor));
+		visitor.setPassword(request.getParameter("pass"));
+	
+		
 		
 		try {
-			if(placeService.updatePlace(place) > 0){
-				session.setAttribute("Success", "Successfully update Place");
+			if(visitorService.updatePassword(visitor) > 0){
+				session.setAttribute("Success", "Successfully Visitor updated");
+				session.setAttribute("ViewSuccess", "Yes");
 			}else{
-				session.setAttribute("Error", "Incorrect Place values");
+				session.setAttribute("Error", "Incorrect Visitor values");
+				response.sendRedirect("updateVisitor");
 			}
 			
-			response.sendRedirect("admin");
+			response.sendRedirect("visitor");
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -115,7 +112,7 @@ public class UpdatePlaceServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 	}
 
 }
