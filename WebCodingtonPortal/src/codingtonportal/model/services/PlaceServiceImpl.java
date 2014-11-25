@@ -172,7 +172,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 
 		try { 
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertplace"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertPlace"));
 			// Add conditions
 			statementSQL.setString(1, place.getName());
 			statementSQL.setString(2, place.getRegion());
@@ -222,7 +222,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 
 		try {    
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateplace"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePlace"));
 			// Add conditions
 			statementSQL.setString(1, place.getName());
 			statementSQL.setString(2, place.getRegion());
@@ -273,7 +273,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 
 		try {    
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteplace"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deletePlace"));
 			//Where clauses
 			statementSQL.setInt(1, idPlace);
 

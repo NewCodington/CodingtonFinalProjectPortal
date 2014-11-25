@@ -92,13 +92,13 @@ public class UpdatePlaceServlet extends HttpServlet {
 		
 		PlaceServiceImpl  placeService = new PlaceServiceImpl();
 		
+		place.setIdPlace(Integer.parseInt(idPlace));
 		place.setName(request.getParameter("placeName"));
 		place.setDescription(request.getParameter("description"));
 		place.setRegion(request.getParameter("region"));
 		
 		//place.setImage(request.getParameter("image"));
 		
-	
 		place.setAddress(request.getParameter("address"));
 		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
 		
@@ -106,9 +106,11 @@ public class UpdatePlaceServlet extends HttpServlet {
 		
 		try {
 			if(placeService.updatePlace(place) > 0){
-				session.setAttribute("Success", "Successfully update Place");
+				session.setAttribute("Success", "Successfully Event updated");
+				session.setAttribute("ViewSuccess", "Yes");
 			}else{
 				session.setAttribute("Error", "Incorrect Place values");
+				response.sendRedirect("updatePlace");
 			}
 			
 			response.sendRedirect("admin");

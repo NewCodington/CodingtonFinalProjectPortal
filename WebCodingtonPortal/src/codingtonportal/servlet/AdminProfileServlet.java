@@ -64,30 +64,32 @@ public class AdminProfileServlet extends HttpServlet {
 		deletePlace = request.getParameter("deletePlace");
 		
 		try {
-
-			if(updateEvent!=null){ 
-				//LLamo a la pagina para poder modificar los parametros
-				response.sendRedirect("updateEvent?idEvent="+updateEvent);
-			}
-			
-			if(updatePlace!=null){ 
-				response.sendRedirect("updatePlace");
-			}
-			
-			if(deleteEvent!=null){ 
-				eventService.deleteEvent(Integer.parseInt((deleteEvent)));
-			}
-			
-			if(deletePlace!=null){ 
-				placeService.deletePlace(Integer.parseInt((deletePlace)));
-			}
-			
-			
 			if(session.getAttribute("ViewSuccess")!=null && !session.getAttribute("ViewSuccess").toString().equals("YES")) {
 				session.setAttribute("ViewSuccess", null);
 			}
 			else
 				session.setAttribute("Success", null);
+			
+
+			if(updateEvent!=null){ 
+				response.sendRedirect("updateEvent?idEvent="+updateEvent);
+			}
+			
+			if(updatePlace!=null){ 
+				response.sendRedirect("updatePlace?idPlace="+updatePlace);
+			}
+			
+			if(deleteEvent!=null){ 
+				eventService.deleteEvent(Integer.parseInt((deleteEvent)));
+				session.setAttribute("Success", "Successfully Event deleted");
+				session.setAttribute("ViewSuccess", "YES");
+			}
+			
+			if(deletePlace!=null){ 
+				placeService.deletePlace(Integer.parseInt((deletePlace)));
+				session.setAttribute("Success", "Successfully Place deleted");
+				session.setAttribute("ViewSuccess", "YES");
+			}
 			
 			
 			eventsList = eventService.viewEvent();
