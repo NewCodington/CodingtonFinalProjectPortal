@@ -60,6 +60,7 @@
 			<tr>
 				<th>Event Name</th>
 				<th>Description</th>
+				<th>Date</th>
 				<th>Duration</th>
 				<th>Event Type</th>
 				<th>Seats Available</th>
@@ -72,6 +73,7 @@
 			<tr>
 				<td><%=event.getName()%></td>
 				<td><%=event.getDescription()%></td>
+				<td><%=event.getDate_eventString()%></td>
 				<td><%=event.getDuration()%></td>
 				<td><%=event.getEventType()%></td>
 				<td><%=event.getSeatsAvailable()%></td>
