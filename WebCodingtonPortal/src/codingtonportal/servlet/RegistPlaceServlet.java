@@ -1,35 +1,19 @@
 package codingtonportal.servlet;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
-import codingtonportal.model.domain.RegionPlace;
 import codingtonportal.model.domain.TypePlace;
-import codingtonportal.model.services.EventServiceImpl;
-import codingtonportal.model.services.EventSignUpImpl;
 import codingtonportal.model.services.PlaceServiceImpl;
-import codingtonportal.model.services.RegionPlaceServiceImpl;
 import codingtonportal.model.services.TypePlaceServiceImpl;
 
 
@@ -56,10 +40,8 @@ public class RegistPlaceServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		ArrayList<TypePlace> listTypePlace = null;
-		ArrayList<RegionPlace> listRegionPlace = null;
 		
-		TypePlaceServiceImpl eventService=new TypePlaceServiceImpl();
-		RegionPlaceServiceImpl eventSignUp=new RegionPlaceServiceImpl();
+		TypePlaceServiceImpl typePlaceService=new TypePlaceServiceImpl();
 		
 		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals(""))
@@ -68,16 +50,32 @@ public class RegistPlaceServlet extends HttpServlet {
 		}
 		else
 		{
-			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
+			if(session.getAttribute("ViewSuccess")!= null && !session.getAttribute("ViewSuccess").toString().equals("YES")){
 				session.setAttribute("Error", null);
+				session.setAttribute("ViewSuccess", null);
 				response.sendRedirect("admin");
 			}
 			else {
 				session.setAttribute("Error", null);
 				session.setAttribute("Success", null);
+				session.setAttribute("ViewSuccess", "YES");
 				
-				
-				response.sendRedirect("registerPlace.jsp");
+				try {
+					listTypePlace = typePlaceService.viewTypePlace();
+					
+					session.setAttribute("LISTTYPEPLACE", listTypePlace);
+					response.sendRedirect("registerPlace.jsp");
+					
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}				
 		}
 	}
@@ -129,13 +127,10 @@ public class RegistPlaceServlet extends HttpServlet {
 		
 		place.setName(request.getParameter("placeName"));
 		place.setDescription(request.getParameter("description"));
-		place.setRegion(request.getParameter("region"));
-		
 		//place.setImage(request.getParameter("image"));
-		
-	
 		place.setAddress(request.getParameter("address"));
 		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
+		place.setRegion("1");
 		
 
 		//Falta incluir la fecha y el tiempo que dura

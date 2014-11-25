@@ -2,6 +2,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="codingtonportal.model.domain.TypePlace"%>
+
 <html>
 	  
 	<head>
@@ -69,14 +72,6 @@
 					  	<input type="text" name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required" />
 					  	<br />
 					</div>
-					 
-					<div class="field"><p>Region:</p>
-					  	<select id="region" name="region" required>
-							<option value="1" selected>Norte</option>
-							<option value="2">Sur</option>
-						</select>
-						<br /><br />
-					</div>
 					    
 					<div class="field"><p>Image:</p> 
 						<input type="file" id="image" name="image" id="image" required />
@@ -88,8 +83,21 @@
 					    <br /><br />
 				  	</div>
 				  		
+				  	<%
+						ArrayList<TypePlace> typePlaceList = new ArrayList<TypePlace>();
+						typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+					%>
+					
 					<div class="field"><p>Type Place:</p>
-						<input type="text" id="typePlace" name="typePlace" required title="Field required" />
+						<select id="typePlace" name="typePlace" required>
+							<%
+								for (TypePlace typePlace : typePlaceList) {
+							%>
+							<option value="<%= typePlace.getIdTypePlace()%>"><%=typePlace.getName() %></option>
+							<%
+								}
+							%>
+						</select>
 						<br />
 					</div>
 					

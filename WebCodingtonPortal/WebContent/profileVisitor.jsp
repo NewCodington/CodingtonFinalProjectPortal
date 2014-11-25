@@ -61,17 +61,13 @@
 				
 				<div class = "section">
 				
-				
-				<div class="search">		
-					<form method="post" action="visitor">	
-						<input type="text" name="search" id = "search"   placeholder="Search"   />
-						<input  type="submit" class="buscar" value="Search" />
-					</form>
-				</div>
-				
-				
-					
-				
+					<div class="search">		
+						<form method="post" action="visitor">	
+							<input type = "text" name="search" id="search" placeholder="Search" />
+							<input type= "submit" value="Search" />
+						</form>
+					</div>
+
 					<div class="title">EVENTS <hr></hr></div>
 					
 					<%

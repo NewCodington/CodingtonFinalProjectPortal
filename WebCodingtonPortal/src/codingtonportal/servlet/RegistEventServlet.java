@@ -45,13 +45,15 @@ public class RegistEventServlet extends HttpServlet {
 			response.sendRedirect("registerEvent.jsp");
 		}
 		else{
-			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
+			if(session.getAttribute("ViewSuccess")!= null && session.getAttribute("ViewSuccess").toString().equals("YES")){
 				session.setAttribute("Error", null);
+				session.setAttribute("ViewSuccess", null);
 				response.sendRedirect("admin");
 			}
 			else {
 				session.setAttribute("Error", null);
 				session.setAttribute("Success", null);
+				session.setAttribute("ViewSuccess", "YES");
 				response.sendRedirect("registerEvent.jsp");
 			}				
 		}

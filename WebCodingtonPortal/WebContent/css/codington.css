@@ -138,6 +138,18 @@
 	    	font-weight: bold;
 		}
 		
+		#content .right_nav .section .search form input[type="text"] 
+		{
+			width: 75% !important;
+		  	font-size: 18px;
+		 	border-radius: 10px;
+		}
+		
+		#content .right_nav .section .search form input[type="submit"] 
+		{
+			width: 15% !important;
+		}
+		
 		#content .right_nav .section table 
 		{
 			width: 100%;
