@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -23,8 +24,13 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
+import codingtonportal.model.domain.RegionPlace;
+import codingtonportal.model.domain.TypePlace;
 import codingtonportal.model.services.EventServiceImpl;
+import codingtonportal.model.services.EventSignUpImpl;
 import codingtonportal.model.services.PlaceServiceImpl;
+import codingtonportal.model.services.RegionPlaceServiceImpl;
+import codingtonportal.model.services.TypePlaceServiceImpl;
 
 
 
@@ -49,6 +55,12 @@ public class RegistPlaceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
+		ArrayList<TypePlace> listTypePlace = null;
+		ArrayList<RegionPlace> listRegionPlace = null;
+		
+		TypePlaceServiceImpl eventService=new TypePlaceServiceImpl();
+		RegionPlaceServiceImpl eventSignUp=new RegionPlaceServiceImpl();
+		
 		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals(""))
 		{
@@ -63,6 +75,8 @@ public class RegistPlaceServlet extends HttpServlet {
 			else {
 				session.setAttribute("Error", null);
 				session.setAttribute("Success", null);
+				
+				
 				response.sendRedirect("registerPlace.jsp");
 			}				
 		}

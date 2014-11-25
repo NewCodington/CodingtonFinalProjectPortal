@@ -37,10 +37,14 @@
 			<selectVisitorForEvent>SELECT idVisitorR FROM codington.eventregistration WHERE (idEventR = ? AND idVisitorR = ?);</selectVisitorForEvent></signUp>
 		<RegionPlace>
 			<viewRegionPlace>SELECT * FROM codington.regionplace;</viewRegionPlace>
-			<selectRegionPlace>SELECT * FROM codington.regionplace WHERE (idRegionPlace = ?);</selectRegionPlace></RegionPlace>
+			<selectRegionPlace>SELECT * FROM codington.regionplace WHERE (idRegionPlace = ?);</selectRegionPlace>
+			<getRegionPlace>SELECT * FROM codington.regionplace INNER JOIN condington.typeplace ON codington.regionplace .idRegionPlace = condington.typeplace.RegionPlace WHERE (condington.typeplace.idTypePlace = ?);</getRegionPlace>
+		</RegionPlace>
 		<TypePlace>
 			<viewTypePlace>SELECT * FROM codington.typeplace;</viewTypePlace>
-			<selectTypePlace>SELECT * FROM codington.typeplace WHERE (idTypePlace = ?);</selectTypePlace></TypePlace></connection>
+			<selectTypePlace>SELECT * FROM codington.typeplace WHERE (idTypePlace = ?);</selectTypePlace>
+		</TypePlace>
+	</connection>
 	
 	
 	<constants>

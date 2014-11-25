@@ -72,7 +72,7 @@
 					 
 					<div class="field"><p>Region:</p>
 					  	<select id="region" name="region" required>
-							<option value="1">Norte</option>
+							<option value="1" selected>Norte</option>
 							<option value="2">Sur</option>
 						</select>
 						<br /><br />
