@@ -66,7 +66,7 @@
 				
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 
-				<form method="post" action="registerPlace">
+				<form method="post" action="updatePlace">
 					<div class="title">New Place</div>
 					<br />
 					
