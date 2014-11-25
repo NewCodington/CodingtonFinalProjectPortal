@@ -4,7 +4,8 @@
 	<connection>
 		<event >
 			<selectEvent>SELECT * FROM codington.event WHERE (idEvent = ?);</selectEvent>
-			<viewEvent>SELECT * FROM codington.event;</viewEvent>
+			<viewEvent>SELECT * FROM codington.event ORDER BY Date_event;</viewEvent>
+			<searchEvent>SELECT * FROM codington.event  WHERE (Name LIKE CONCAT('%',?,'%'));</searchEvent>
 			<insertEvent>INSERT INTO codington.event(Name, Description, Place, Date_event, StartTime, Duration, Event_type, Seats_available) VALUES (?, ?, ?, ?, ?, ?, ?, ?);</insertEvent>
 			<deleteEvent>DELETE FROM codington.event WHERE (idEvent = ?);</deleteEvent>
 			<updateEvent>UPDATE codington.event SET Name = ?, Description = ?, Place = ?, Date_event = ?, StartTime = ?, Duration = ?, Event_type = ?, Seats_available = ? WHERE (idEvent = ?);</updateEvent>
@@ -25,9 +26,8 @@
 			<insertVisitor>INSERT INTO codington.visitor(First_name, Last_name, DNI, Email, Phone_number, Address, Username, Password, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,? );</insertVisitor>
 			<updateVisitor>UPDATE codington.visitor SET First_name=?, Last_name=?, DNI=?, Email=?, Phone_number=?, Address=? WHERE (idVisitor=?);</updateVisitor>
 			<updatePassword>UPDATE codington.visitor SET Password=? WHERE (idVisitor=?);</updatePassword>
-			<deleteVisitor>DELETE FROM codington.visitor WHERE (idVisitor=?);</deleteVisitor><viewEvent>SELECT * FROM codington.event ORDER BY Date_event;</viewEvent>
-			<searchEvent>SELECT * FROM codington.event  WHERE (Name LIKE '%?%');</searchEvent>
-			</visitor>
+			<deleteVisitor>DELETE FROM codington.visitor WHERE (idVisitor=?);</deleteVisitor>
+		</visitor>
 		
 		<signUp>
 			<registerForNewEvent>INSERT INTO  codington.eventregistration (idVisitorR,idEventR) VALUES (?,?);</registerForNewEvent>
@@ -35,7 +35,12 @@
 			<selectSeats>SELECT Seats_available FROM codington.event WHERE (idEvent = ?);</selectSeats><updateSeats>UPDATE codington.event SET Seats_available = ? WHERE (idEvent = ?);</updateSeats>
 			<selectEventForVisitor>SELECT idEventR FROM codington.eventregistration WHERE (idVisitorR = ?);</selectEventForVisitor>
 			<selectVisitorForEvent>SELECT idVisitorR FROM codington.eventregistration WHERE (idEventR = ? AND idVisitorR = ?);</selectVisitorForEvent></signUp>
-	</connection>
+		<RegionPlace>
+			<viewRegionPlace>SELECT * FROM codington.regionplace;</viewRegionPlace>
+			<selectRegionPlace>SELECT * FROM codington.regionplace WHERE (idRegionPlace = ?);</selectRegionPlace></RegionPlace>
+		<TypePlace>
+			<viewTypePlace>SELECT * FROM codington.typeplace;</viewTypePlace>
+			<selectTypePlace>SELECT * FROM codington.typeplace WHERE (idTypePlace = ?);</selectTypePlace></TypePlace></connection>
 	
 	
 	<constants>
