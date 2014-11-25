@@ -47,7 +47,7 @@
 		
 	<div class = "section">
 			
-		<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+		<br><b><a style="color:blue"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></a></b>
 			
 		<div id="Estilo1">EVENTS <hr></hr></div>
 	
@@ -60,7 +60,6 @@
 			<tr>
 				<th>Event Name</th>
 				<th>Description</th>
-				<th>Date</th>
 				<th>Duration</th>
 				<th>Event Type</th>
 				<th>Seats Available</th>
@@ -73,7 +72,6 @@
 			<tr>
 				<td><%=event.getName()%></td>
 				<td><%=event.getDescription()%></td>
-				<td><%=event.getDate_eventString()%></td>
 				<td><%=event.getDuration()%></td>
 				<td><%=event.getEventType()%></td>
 				<td><%=event.getSeatsAvailable()%></td>
@@ -115,7 +113,8 @@
 				<td><%=place.getImage()%></td>
 				<td><%=place.getAddress()%></td>
 				<td><%=place.getDescription()%></td>
-				<td><a href = <%="admin?updatePlace=" + place.getIdPlace() %>>Update</a></td>
+							  
+				<td><a href = <%="updatePlace?updatePlace=" + place.getIdPlace() %>>Update</a></td>
 				<td><a href = <%="admin?deletePlace=" + place.getIdPlace() %>>Delete</a></td>
 			</tr>
 			<%

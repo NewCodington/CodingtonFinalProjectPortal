@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
@@ -46,8 +47,24 @@ public class RegistPlaceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/registerPlace.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals(""))
+		{
+			response.sendRedirect("registerPlace.jsp");
+		}
+		else
+		{
+			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
+				session.setAttribute("Error", null);
+				response.sendRedirect("admin");
+			}
+			else {
+				session.setAttribute("Error", null);
+				session.setAttribute("Success", null);
+				response.sendRedirect("registerPlace.jsp");
+			}				
+		}
 	}
 
 	/**
@@ -55,6 +72,8 @@ public class RegistPlaceServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		
+		HttpSession session = request.getSession();
 		
 		Place place=new Place();
 		PlaceServiceImpl  placeService = new PlaceServiceImpl();
@@ -106,18 +125,16 @@ public class RegistPlaceServlet extends HttpServlet {
 
 		//Falta incluir la fecha y el tiempo que dura
 	
+		
 		try {
-			
-			
-			if(placeService.insertPlace(place) >= 0){
-				
-					RequestDispatcher dispatcher=request.getRequestDispatcher("/registPlace.jsp?msg=Evento creado con éxito");
-					dispatcher.forward(request, response);
-
+			if(placeService.insertPlace(place) > 0){
+				session.setAttribute("Success", "Successfully Place created ");
 			}else{
-				RequestDispatcher dispatcher=request.getRequestDispatcher("/registPlace.jsp?msg=Incorrect");
-				dispatcher.forward(request, response);
+				session.setAttribute("Error", "Incorrect Place values");
 			}
+			
+			response.sendRedirect("registerPlace");
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,5 +143,13 @@ public class RegistPlaceServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
+		
+		
+		
+		
+		
+		
+	
 
 }
