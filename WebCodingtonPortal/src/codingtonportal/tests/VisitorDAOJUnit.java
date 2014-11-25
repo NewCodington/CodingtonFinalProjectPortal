@@ -3,6 +3,7 @@ package codingtonportal.tests;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import junit.framework.TestCase;
 import org.junit.After;
@@ -130,7 +131,7 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 
 	@Test
-	public void testsearchEvent() throws SQLException {				
+	public void testsearchEvent() throws SQLException, ParseException {				
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {
 			assertNotNull(serviceVisitor.searchEvent("FRI"));	
@@ -144,7 +145,7 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 
 	@Test
-	public void testviewEvent () throws SQLException{				
+	public void testviewEvent () throws SQLException, ParseException{				
 		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
 		try {			
 			assertNotNull(serviceVisitor.viewEvent());			

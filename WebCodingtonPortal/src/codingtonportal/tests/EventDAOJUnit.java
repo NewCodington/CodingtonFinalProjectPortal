@@ -3,6 +3,7 @@ package codingtonportal.tests;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import junit.framework.TestCase;
 import org.junit.After;
@@ -28,7 +29,7 @@ public class EventDAOJUnit extends TestCase{
 
 	
 	@Test
-	public void testSelectEvent () throws SQLException{
+	public void testSelectEvent () throws SQLException, ParseException{
 		Event events= new Event(2,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12,null);
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
@@ -43,7 +44,7 @@ public class EventDAOJUnit extends TestCase{
 	}
 	
 	@Test
-	public void testviewEvent (){
+	public void testviewEvent () throws ParseException{
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
 			try{
@@ -62,7 +63,7 @@ public class EventDAOJUnit extends TestCase{
 	}
 	
 	@Test
-	public void testInsertEvent() throws SQLException {
+	public void testInsertEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
@@ -92,7 +93,7 @@ public class EventDAOJUnit extends TestCase{
 	}
 	
 	@Test
-	public void testUpdateEvent() throws SQLException {
+	public void testUpdateEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
