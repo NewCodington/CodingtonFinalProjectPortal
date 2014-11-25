@@ -2,6 +2,9 @@ package codingtonportal.tests;
 
 
 import java.sql.SQLException;
+
+import javax.naming.NamingException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +37,9 @@ public class ConnectionDatabaseJUnit extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

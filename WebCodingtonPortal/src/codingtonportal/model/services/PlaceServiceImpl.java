@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.NamingException;
+
 import codingtonportal.model.dao.interfaces.PlaceDAO;
 import codingtonportal.model.domain.Place;
 import codingtonportal.utils.PropertyAccess;
@@ -28,9 +30,10 @@ public class PlaceServiceImpl implements PlaceDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Place selectPlace(Place place) throws IOException, SQLException, ClassNotFoundException {
+	public Place selectPlace(Place place) throws IOException, SQLException, ClassNotFoundException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -86,9 +89,10 @@ public class PlaceServiceImpl implements PlaceDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Place> viewPlace() throws IOException, ClassNotFoundException, SQLException {
+	public ArrayList<Place> viewPlace() throws IOException, ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -155,9 +159,10 @@ public class PlaceServiceImpl implements PlaceDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Integer insertPlace(Place place) throws IOException, ClassNotFoundException, SQLException {  
+	public Integer insertPlace(Place place) throws IOException, ClassNotFoundException, SQLException, NamingException {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -204,9 +209,10 @@ public class PlaceServiceImpl implements PlaceDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Integer updatePlace(Place place) throws IOException, ClassNotFoundException, SQLException   {  
+	public Integer updatePlace(Place place) throws IOException, ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -254,9 +260,10 @@ public class PlaceServiceImpl implements PlaceDAO {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
 	@Override
-	public Integer deletePlace(int idPlace) throws IOException, ClassNotFoundException, SQLException   {  
+	public Integer deletePlace(int idPlace) throws IOException, ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
