@@ -2,17 +2,24 @@ package codingtonportal.model.domain;
 
 public class Museum extends Place{
 	
-	//Atribute
+	/**
+	 * Parameters.
+	 */
 	private int idMuseum;
 	private String typeMuseum;
 	
-	//Constructor
-	
+	/**
+	 * Void Constructor
+	 */		
 	Museum(){
 		this.idMuseum = 0;
 		this.typeMuseum = null;
 	}
 
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public int getIdMuseum() {
 		return idMuseum;
 	}

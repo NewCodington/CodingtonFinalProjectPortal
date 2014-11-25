@@ -2,16 +2,26 @@ package codingtonportal.model.domain;
 
 public class Park extends Place {
 	
-	//Atributes
+
+	/**
+	 * Parameters.
+	 */
 	private int idPark;
 	private String parkCategory;
 
-	// Void Constructor
+
+	/**
+	 * Void Constructor
+	 */
 	Park(){
 	this.idPark = 0;
 	this.parkCategory = null;
 	}
 
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public int getIdPark() {
 		return idPark;
 	}

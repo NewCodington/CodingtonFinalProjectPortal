@@ -2,18 +2,24 @@ package codingtonportal.model.domain;
 
 public class Theatre extends Place {
 
-	// Parameters
-	
+	/**
+	 * Parameters.
+	 */
 	private int idTheatre;
 	
-	// Void constructor
-	
+	/**
+	 * Void constructor.
+	 */
 	Theatre()
 	{
 		this.idTheatre = 0;
 		
 	}
 
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public int getIdTheatre() {
 		return idTheatre;
 	}

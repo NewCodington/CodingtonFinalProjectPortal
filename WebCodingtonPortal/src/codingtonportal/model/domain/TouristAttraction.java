@@ -2,12 +2,16 @@ package codingtonportal.model.domain;
 
 public class TouristAttraction extends Place {
 	
-	//Parameters
+	/**
+	 * Parameters.
+	 */
 	private int idTouristAttraction;
 	private String typeTouristAttraction;
 	private int noPeople;
 	
-	// Void constructor
+	/**
+	 * Void constructor.
+	 */
 	TouristAttraction(){
 		this.idTouristAttraction = 0;
 		this.typeTouristAttraction = null;
@@ -15,6 +19,10 @@ public class TouristAttraction extends Place {
 		
 	}
 
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public int getIdTouristAttraction() {
 		return idTouristAttraction;
 	}
