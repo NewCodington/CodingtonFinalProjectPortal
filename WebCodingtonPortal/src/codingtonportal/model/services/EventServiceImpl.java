@@ -176,7 +176,7 @@ public class EventServiceImpl implements EventDAO {
 		
 		try {
 			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchevent"));
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("searchEvent"));
 			// Add conditions
 			statementSQL.setString(1,Name);
 			
