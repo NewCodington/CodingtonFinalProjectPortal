@@ -1,96 +1,121 @@
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@page import="codingtonportal.model.domain.Place"%>
 	 
+<html>
+	  
 	<head>
-	 <%@page import="codingtonportal.model.domain.Place"%>
-	<link rel="stylesheet" type="text/css" href="css/codington.css">
+		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script language="javascript" src="Register.js"></script>
+		<title>Place Update Page</title>
 	</head>
 
-<body>
 
-<%
-			Place place = new Place();
-			place=(Place)session.getAttribute("PLACE");
-%>
-
+	<%
+		Place place = new Place();
+		place=(Place)session.getAttribute("PLACE");
+	%>
 
 
 
-<div class="header">
-	<p class="cabecera">
-	<table width="100%" border="0">
-      <tr>
-        <td width="284" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
-        <td width="499"><div align="center">New Codington Portal</div></td>	
-        <td width="151">&nbsp;</td>
-        <td width="6"></p>
-      </tr>
-      <tr>
-        <td><p class="cabecera2">One of the World's Best Cities 2014</p></td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
-</div>
 
-<div class = "nav_log">
+<body id="body">
 
-<br><b><a style="color:red"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></a></b>
+		<div id="header">
+			<table>
+		    	<tr>
+		      		<td class="colum1" rowspan="2">
+		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
+		        	</td>
+		        	<td class="colum2">
+		        		<div class="title">New Codington Portal</div>
+		        	</td>	
+		        	<td class="colum3">&nbsp;</td>
+		      		</tr>
+		      	<tr>
+		        	<td>
+		        		<div class="subtitle">One of the World's Best Cities 2014</div>
+		        	</td>
+		        	<td>&nbsp;</td>
+		      	</tr>
+		    </table>
+		    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
+		</div>
+
+		<div id="content">
+			
+			<div class = "left_nav">
+				<div class = "title"><p><%=session.getAttribute("Admin") %>'s Menu</p></div>
+				<hr size=10 />
+				
+				<div class = content>	
+					<p><a href="admin" class="link">My Page </a></p>
+					<hr />
+					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<hr />
+					<p><a href="logout" class="link">Logout </a></p>
+				</div>
+			</div>
 	
-	<form method="post" action="updatePlace">
+	
+			<div class="center_nav">
+				
+				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 
-		<p class = "title">
-        	Update Place	    
-        </p>
+				<form method="post" action="registerPlace">
+					<div class="title">New Place</div>
+					<br />
+					
+					<div class="field"><p>Place name:</p> 
+					  	<input type="text" id="placeName" name="placeName" value="<%= place.getName() %>" pattern="\S{1,45}" title="1 to 45 characters" required />
+					  	<br />
+					</div>
+					 
+					<div class="field"><p>Description:</p> 
+					  	<input type="text" name="description" value="<%= place.getDescription() %>" title="1 to 45 characters" pattern="\S{1,45}" required="required" />
+					  	<br />
+					</div>
+					 
+					<div class="field"><p>Region:</p>
+					  	<select id="region" name="region" value="<%= place.getRegion() %>" required>
+							<option value="1">Norte</option>
+							<option value="2">Sur</option>
+						</select>
+						<br /><br />
+					</div>
+					    
+					<div class="field"><p>Image:</p> 
+						<input type="file" id="image" name="image" value="<%= place.getImage() %>" id="image" required />
+						<br /><br />
+				  	</div>
+				  		
+				  	<div class="field"><p>Address:</p> 
+					    <input type="text" id="address" name="address" value="<%= place.getAddress() %>" pattern="\S{1,45}" title="1 to 45 characters" required/>
+					    <br /><br />
+				  	</div>
+				  		
+					<div class="field"><p>Type Place:</p>
+						<input type="text" id="typePlace" name="typePlace" value="<%= place.getTypePlace() %>" required title="Field required" />
+						<br />
+					</div>
+					
+					<div class="input">
+						<input type="submit" value="Submit" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+						<br />
+					</div>  
+				</form>
+			</div>
+		</div>
 		
-		  Place name: 
-		  <br>
-		  <input type="text" name="placeName"  value="<%= place.getName() %>" pattern="\S{1,45}" title="1 to 45 characters" required >
-	      </p>
-		 
-		    <p>Description: 
-		  <br>
-		  <input type="text" name="description" title="1 to 45 characters"  value="<%= place.getDescription() %>" pattern="\S{1,45}" required="required"></input>
-		    </p>
-		 
-		    <p>Region:
-		  <br>
-		  <input type="text" name="region" value="<%= place.getRegion() %>" pattern="\S{1,45}" title="1 to 45 characters" required/>
-		    </p>
-		    <p>Image: 
-		      <br>
-		      <input type="file" name="image" value="<%= place.getImage() %>" id="image"  />
-		      <br>
-		  
-		   
-	  
-		  Address: <br>
-		    <input type="text" name="address"  value="<%= place.getAddress() %>" pattern="\S{1,45}" title="1 to 45 characters" required/>
-	  </p>
-		    <p>Type Place  : <br>
-	          <input type="text" name="typePlace" value="<%= place.getTypePlace() %>"required title="Field required"/>
-   
-		      </p>
-		        </p>
-		    <p class = "input">
-				<input type="submit" value="Submit">
-				<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';">
-		</p>
-	  
-
-	</form>
+		
+		<div id ="footer">
+			<p>New Codignton Portal - December, 2014</p>
+		</div>
 	
-	
-
-</div>
-
-
-
-
-<div class ="footer">
-New Codignton Portal - December, 2014
-</div>
-
-</body>
-</html>
-
+	</body>
 </html>

@@ -50,10 +50,12 @@
 
 			
 			<div class="right_nav">
-				<h1>History of New Codignton</h1>
-			
-				<p>New Codington a new city is formed by the union of two small towns separated by the New Codington River that formerly was called the River Coder. Each of the zones has a tower and various public spaces. In the north are the Museum, the Theater, the Large Business and Stadium. While in the south, are the open spaces as well as the Zoo, the typical Markets, Tourist Attractions and the Park. </p>
-              	<p> It is an annual festival held during the summer to celebrate the founding of the city. During the festival, various events are held in different places. Each year these events will vary. </p>
+				<div class="title">History of New Codignton <hr /></div>
+				
+				<div class="content">
+					<p>New Codington a new city is formed by the union of two small towns separated by the New Codington River that formerly was called the River Coder. Each of the zones has a tower and various public spaces. In the north are the Museum, the Theater, the Large Business and Stadium. While in the south, are the open spaces as well as the Zoo, the typical Markets, Tourist Attractions and the Park. </p>
+	              	<p> It is an annual festival held during the summer to celebrate the founding of the city. During the festival, various events are held in different places. Each year these events will vary. </p>
+	            </div>
 			</div>
 		</div>
 

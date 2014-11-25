@@ -1,104 +1,125 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@page import="codingtonportal.model.domain.Event"%>
+
 <html>
-	 
+	  
 	<head>
-	 <%@page import="codingtonportal.model.domain.Event"%>
-	<link rel="stylesheet" type="text/css" href="css/codington.css">
+		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script language="javascript" src="Register.js"></script>
+		<title>Event Update Page</title>
 	</head>
 
-<body>
+	<%
+		Event event = new Event();
+		event=(Event)session.getAttribute("EVENT");
+	%>
 
-<%
-			Event event = new Event();
-			event=(Event)session.getAttribute("EVENT");
-%>
+	<body id="body">
 
+		<div id="header">
+			<table>
+		    	<tr>
+		      		<td class="colum1" rowspan="2">
+		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
+		        	</td>
+		        	<td class="colum2">
+		        		<div class="title">New Codington Portal</div>
+		        	</td>	
+		        	<td class="colum3">&nbsp;</td>
+		      		</tr>
+		      	<tr>
+		        	<td>
+		        		<div class="subtitle">One of the World's Best Cities 2014</div>
+		        	</td>
+		        	<td>&nbsp;</td>
+		      	</tr>
+		    </table>
+		    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
+		</div>
 
-
-
-<div class="header">
-	<p class="cabecera">
-	<table width="100%" border="0">
-      <tr>
-        <td width="284" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
-        <td width="499"><div align="center">New Codington Portal</div></td>	
-        <td width="151">&nbsp;</td>
-        <td width="6"></p>
-      </tr>
-      <tr>
-        <td><p class="cabecera2">One of the World's Best Cities 2014</p></td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
-</div>
-
-<div class = "nav_log">
-
-<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+		<div id="content">
+			
+			<div class = "left_nav">
+				<div class = "title"><p><%=session.getAttribute("Admin") %>'s Menu</p></div>
+				<hr size=10 />
+				
+				<div class = content>	
+					<p><a href="admin" class="link">My Page </a></p>
+					<hr />
+					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<hr />
+					<p><a href="logout" class="link">Logout </a></p>
+				</div>
+			</div>
 	
-	<form method="post" action="updateEvent">
-		<p class = "title">
-       Update Event </p>
-		    <p>
-		  Event name: 
-		  <br>
-		  <input type="text" id="eventName" name="eventName"  value="<%= event.getName() %>" pattern="\S{1,45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required >
-		    </p>
-		  
-		    <p>Description: 
-		  <br>
-		  <input type="text" id="description" name="description" value="<%= event.getDescription() %>" title="1 to 45 characters" pattern="\S{1,45}" placeholder="Description" required></input>
-		    </p>
-		  
-		    <p>Place:
-		  <br>
-		  <input type="text" id="place" name="place" pattern="\S{1,45}" value="<%= event.getPlace() %>" title="Enter a valid place (length between 1-45)" placeholder="Place" required/>
-		    </p>
-		  <p>Date:
-		  <br>
-		  <input type="text" id="date" name="date" pattern="\S{1,45}" value="<%= event.getDate_eventString() %>"title="Enter a valid date (length between 1-45)" placeholder="Date" required/>
-		    </p>
-		  
-		 <p>Start Time:
-		  <br>
-		  <input type="text" id="startTime" name="startTime" value="<%= event.getStartTime() %>" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Date" required/>
-		 </p>
-		    
-		 Duration: 
-		  <br>
-		  <input type="text" id="duration" name="duration" value="<%= event.getDuration() %>"  pattern="\S{1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required/><br>
-		  
-		    <p>Type of Event: 
-		  <br>
-		  <input type="text"  id="typeOfEvent"name="typeOfEvent"  value="<%= event.getEventType() %>" pattern="\S{1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required/>
-		    </p>
-		  
-	 
-	    <p>Seats Avalaible:
-		  <br>
-		  <input type="text" id="seats" name="seats" value="<%= event.getSeatsAvailable() %>" required title="Field required" placeholder="Seats Avalaible"/>
-	    </p>
+	
+			<div class="center_nav">
+				
+				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+	
+				<form method="post" action="registerEvent">
+					<div class="title">New Event</div>
+					<br />
+					    
+					<div class="field"><p>Event name:</p> 
+					  	<input type="text" id="eventName" name="eventName" value="<%= event.getName() %>" pattern="\S{1,45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
+					  	<br />
+					</div>
+					  
+					<div class="field"><p>Description:</p>
+					  <input type="text" id="description" name="description" value="<%= event.getDescription() %>" title="1 to 45 characters" pattern="\S{1,45}" placeholder="Description" required />
+					  <br />
+					</div>
+					
+					<div class="field"><p>Date:</p>
+					  	<input type="text" id="date" name="date" value="<%= event.getDate_eventString() %>" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Date" required />
+						<br />
+					</div>
+					
+					<div class="field"><p>Place:</p>
+					  	<input type="text" id="place" name="place" value="<%= event.getPlace() %>" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Place" required />
+					  	<br />
+					</div>
+					  
+					 <div class="field"><p>Start Time:</p>
+					  	<input type="text" id="startTime" name="startTime" value="<%= event.getStartTime() %>" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Date" required />
+					 	<br />
+					 </div>
+					    
+					 <div class="field"><p>Duration:</p> 
+					  	<input type="text" id="duration" name="duration" value="<%= event.getDuration() %>" pattern="\S{1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
+					  	<br />
+					 </div>
+					 
+					 <div class="field"><p>Type of Event:</p> 
+					  	<input type="text"  id="typeOfEvent"name="typeOfEvent" value="<%= event.getEventType() %>" pattern="\S{1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
+					    <br />
+					 </div>
+					  
+				 
+				    <div class="field"><p>Seats Avalaible:</p>
+					  	<input type="text" id="seats" name="seats" value="<%= event.getSeatsAvailable() %>" required title="Field required" placeholder="Seats Avalaible" />
+					  	<br />
+				    </div>
+			
+					<div class="input">
+						<input type="submit" value="Submit" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+						<br />
+					</div> 
+				</form>
+			</div>
+		</div>
 
-		<p class = "input">
-		 
-			<INPUT type="SUBMIT" value="Submit">
-			<INPUT type="BUTTON" value="Cancel"  onclick = "javascript:window.location='admin';">
-		
-		</p>
-	  
 
-	</form>
-
-</div>
-
-
-
-
-<div class ="footer">
-New Codignton Portal - December, 2014
-</div>
-
-</body>
-</html>
-
+		<div id ="footer">
+			<p>New Codignton Portal - December, 2014</p>
+		</div>
+	
+	</body>
 </html>

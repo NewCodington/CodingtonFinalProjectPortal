@@ -38,18 +38,23 @@
 		<div id="content">
 		
 			<div class = "left_nav">
-				<div class="title"> Register</div>
-				<hr />
-				<div class = "content">
-					<p><a  href=<%="registerPlace"%>>Register Place </a></p>
-					<p><a href=<%="registerEvent"%>>Register Event </a></p>
+				<div class = "title"><p><%=session.getAttribute("Admin") %>'s Menu</p></div>
+				<hr size=10 />
+				
+				<div class = content>	
+					<p><a href="admin" class="link">My Page </a></p>
+					<hr />
+					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<hr />
+					<p><a href="logout" class="link">Logout </a></p>
 				</div>
 			</div>
 	
 	
 			<div class="center_nav">		
-				<br />
-				<div class="message"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
+				
+				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
 					
 				<form method="post" action="registerPlace">
 					<div class="title">New Place</div>

@@ -31,6 +31,7 @@
 		        	<td>&nbsp;</td>
 		      	</tr>
 		    </table>
+		    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
 		</div>
 
 		
@@ -101,10 +102,10 @@
 				    </div>
 			
 					<div class="input">
-							<input type="submit" value="Submit" />
-							<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
-							<br />
-						</div> 
+						<input type="submit" value="Submit" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+						<br />
+					</div> 
 				</form>
 			</div>
 		</div>
