@@ -50,7 +50,7 @@ public class PlaceDAOJUnit extends TestCase {
 	}
 	
 	/**
-	 * Method to update a Place from the database
+	 * Method to update a specific Place from the database
 	 * @throws SQLException
 	 */
 	@Test
@@ -70,7 +70,7 @@ public class PlaceDAOJUnit extends TestCase {
 	}
 	
 	/**
-	 * Method to remove a Place from the database.
+	 * Method to remove a specific Place from the database.
 	 * @throws SQLException
 	 */
 	@Test

@@ -64,7 +64,7 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 	
 	/**
-	 * Method for a visitor logs into the application.
+	 * Method by which a Visitor logs into the application.
 	 * @throws SQLException
 	 */
 	@Test
@@ -102,7 +102,7 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 
 	/**
-	 * Method to update a Visitor from the database.
+	 * Method to update the personal information from a Visitor in the database.
 	 * @throws SQLException
 	 */
 	@Test
@@ -121,7 +121,7 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 
 	/**
-	 * Method by which a visitor updated password
+	 * Method by which a visitor updated his password.
 	 * @throws SQLException
 	 */
 	@Test
@@ -197,7 +197,7 @@ public class VisitorDAOJUnit extends TestCase {
 	}
 
 	/**
-	 * Method to check if the Visitor is the admin application.
+	 * Method to check if the Visitor is the administrator application.
 	 */
 	@Test
 	public void testisAdmin (){

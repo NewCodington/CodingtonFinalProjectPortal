@@ -31,7 +31,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 	}
 
 	/**
-	 * Method to register a Visitor into an Event unless the Visitor is registered in that Event.
+	 * Method to register a Visitor into an Event unless the Visitor is already registered in that Event.
 	 * @throws SQLException
 	 */
 	@Test

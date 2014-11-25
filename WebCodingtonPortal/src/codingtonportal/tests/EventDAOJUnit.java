@@ -28,7 +28,7 @@ public class EventDAOJUnit extends TestCase{
 	}
 
 	/**
-	 * Method to get an Event from the database.
+	 * Method to get a specific Event from the database.
 	 * @throws SQLException
 	 * @throws ParseException
 	 */
@@ -91,7 +91,7 @@ public class EventDAOJUnit extends TestCase{
 	}
 	
 	/**
-	 * Method to remove an Event from the database.
+	 * Method to remove a specific Event from the database.
 	 * @throws SQLException
 	 */
 	@Test
@@ -110,7 +110,7 @@ public class EventDAOJUnit extends TestCase{
 	}
 	
 	/**
-	 * Method to update an Event from the database.
+	 * Method to update a specific Event from the database.
 	 * @throws SQLException
 	 * @throws ParseException
 	 */
