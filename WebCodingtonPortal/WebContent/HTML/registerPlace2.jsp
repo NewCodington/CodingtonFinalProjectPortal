@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css">
+		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<script language="javascript" src="Register.js"></script>
+		<title>Register's Place Page</title>
 	</head>
 
 	<body id="body">
@@ -28,6 +30,7 @@
 		        	<td>&nbsp;</td>
 		      	</tr>
 		    </table>
+		    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
 		</div>
 		
 		
@@ -50,14 +53,15 @@
 				<form method="post" action="RegistPlaceServlet">
 					<div class="title">New Place</div>
 					<br />
+					
 					<div class="field"><p>Place name:</p> 
-					  	<input type="text" id="placeName" name="placeName" pattern="\S{1,45}" title="1 to 45 characters" required >
-					  	<br /><br />
+					  	<input type="text" id="placeName" name="placeName" pattern="\S{1,45}" title="1 to 45 characters" required />
+					  	<br />
 					</div>
 					 
 					<div class="field"><p>Description:</p> 
-					  	<textarea id="description" name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required"></textarea>
-					  	<br /><br />
+					  	<input type="text" name="description" title="1 to 45 characters" pattern="\S{1,45}" required="required" />
+					  	<br />
 					</div>
 					 
 					<div class="field"><p>Region:</p>
@@ -79,13 +83,13 @@
 				  	</div>
 				  		
 					<div class="field"><p>Type Place:</p>
-						<input type="text" id="typePlace" name="typePlace" required title="Field required"/>
+						<input type="text" id="typePlace" name="typePlace" required title="Field required" />
 						<br />
 					</div>
 					
 					<div class="input">
-						<input type="submit" value="Submit">
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';">
+						<input type="submit" value="Submit" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
 						<br />
 					</div>  
 				</form>

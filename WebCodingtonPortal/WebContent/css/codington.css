@@ -1,4 +1,281 @@
+/*
+	Body section
+	----------------------------------------------------------
+*/
+	#body 
+	{
+		margin: 0;
+	}
+
+
+	/*
+		Header section
+		------------------------------------ 
+	*/
+		#header 
+		{
+			background-color:#eeeeee;
+			text-align:center;
+			border-style: groove;
+			padding-top:8px;	
+			margin-bottom:2px;
+		}
+	
+		#header table {
+			width: 100%;
+		}
+		
+		#header table tr td.colum1{
+			width: 20%;
+		}
+		#header table tr td.colum2{
+			width: 60%;
+		}
+		#header table tr td.colum3{
+			width: 20%;
+		}
+	
+		#header table tr td .title
+		{
+			width: 100%;
+			text-align: center;
+		    font-size: 48px;
+			font-style:oblique;
+			font-weight:bold;
+		    margin-top:0; 
+		    margin-bottom:0;
+		}
+		
+		#header table tr td .subtitle
+		{
+			text-align: center;
+		    font-size: 28px;
+		    margin-top:0; 
+		    margin-bottom:0;	
+		}
+		
+		#header .menuHorizontal
+       	{			
+			background-color: #cccccc;
+			color: #333333;
+			font-size: 28px;
+		    text-align: right;
+		    width: 100%;		
+		}
+		#header .menuHorizontal a.link {
+			padding: 0 10px;
+		}
+		
+	/*
+		Content section
+		------------------------------------ 
+	*/
+		#content .left_nav
+	    {
+			background-color:#eeeeee;
+			width:13%;
+			margin-right: 2%;
+			float:left;
+			border-style: groove;
+		}
+		#content .left_nav .title
+    	{
+			font-size:24px;
+			margin: 10px 5px;
+			text-align:center;
+		}
+		#content .left_nav .content
+    	{
+	    	text-align: center;
+	    	font-size: 18px;
+	    	margin: 10px 5px;
+   		}
+	
+	
+		#content .right_nav
+	    {
+			width:84%;
+			float:left;
+		}
+		#content .right_nav p
+	    {
+			text-align: justify;
+		}
+		#content .right_nav .message
+	    {
+		    font-size: 18px;
+		    color:blue;	
+		    margin-bottom: 15px;
+	   	}
+		#content .right_nav .error
+	    {
+		    font-size: 18px;
+		    color:red;	
+		    margin-bottom: 15px;
+	   	}
+	   	
+	   	#content .right_nav .section
+	    {   
+			widht: 100%;
+			margin-bottom: 20px;
+		}
+		#content .right_nav .section .title
+	    {   
+	    	font-size: 22px;
+	    	font-weight: bold;
+		}
+		
+		#content .right_nav .section table 
+		{
+			width: 100%;
+		}
+		#content .right_nav .section table tr th
+		{
+			text-align: left;
+		}
+		
+		#content .center_nav
+		{
+			line-height:30px;
+			background-color:#eeeeee;
+			width:40%;
+			text-align:center;
+			padding:0px;	 
+			margin-left: auto;
+	        margin-right: auto;
+			margin-top: 2px;
+		}
+	   	
+   	
+		#content .center_nav input,
+		#content textarea
+		{
+			width: 80%;
+		}
+		
+		form .title
+		{
+			font-size: 25px;
+			font-weight: bold;
+		}
+		
+		form p 
+		{
+			line-height: 0px;
+		}
+		
+		form textarea
+		{
+			padding: 10px;
+			border: solid 3px #c9c9c9;
+			box-shadow: inset 0 0 0 1px #707070;
+			transition: box-shadow 0.3s, border 0.3s;
+		}
+		
+		form .input 
+		{
+			margin: 4%;
+		}
+		
+		form input[type="text"]:focus,
+		form input[type="text"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="text"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="text"]:focus,
+		form input[type="text"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="file"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="file"]:focus,
+		form input[type="file"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="tel"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="tel"]:focus,
+		form input[type="tel"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="password"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="password"]:focus,
+		form input[type="password"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}	
+		form input[type="email"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="email"]:focus,
+		form input[type="email"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="submit"], 
+		form input[type="button"] 
+		{
+			width: 40% !important;
+		  	text-align:center;
+		  	color:#0066FF;
+		  	font-size: 20px;
+		  	line-height: 2;
+		 	border-radius: 10px;
+		 	margin: 0% 2% 2% 2%;
+		}
+	
+	/*
+		Footer section
+		------------------------------------ 
+	*/
+   		#footer
+   		{
+		   	background-color:#eeeeee;;
+			color:#000000;
+			font-weight: bold;
+			clear:both;
+			text-align:center;
+			padding:5px;
+			margin-top:1%;
+   		}
+   	
+/*
+	End Body section
+	----------------------------------------------------------
+*/
 #Styles for Places pages
+
+	
 	
 	
 #Styles for Events pages
@@ -26,30 +303,8 @@ table.events tr {
 table.events tr th {
 	align: left;
 }
-
 	
 	
-	div.header
-   {
-		background-color:#eeeeee;
-		color:black;
-		text-align:center;
-		margin-top:8px;	
-		margin-bottom:2px;
-	}
-	
-	div.left_nav 
-    {
-		line-height:20px;
-		background-color:#eeeeee;
-		height:100%;
-		width:13%;
-		float:left;
-		padding:0px;
-		margin-top:0px;	 
-		border-style: groove;
-		border-width: medium;
-	}
 	div.admin
     {
 		line-height:20px;
@@ -64,12 +319,7 @@ table.events tr th {
 		border-style: groove;
 		border-width: medium;
 	}
-	div.section
-    {   
-		float: right;
-		width: 80%;		
-		padding: 15px;
-	}
+	
 	
 	div.sectionprofileright
     {   
@@ -119,89 +369,16 @@ p.region
 	    margin-bottom: 10px;
 		}
 
-   p.regionadmin
-    {
-	    text-align: center;
-	    font-size: 18px;
-	    margin-top: 10px;
-		margin-bottom:10px;
-   	}
-   
-div.nav_log 
-       {
-	    line-height:30px;
-		background-color:#eeeeee;
-		height:30%;
-		width:40%;
-		text-align:center;
-		padding:0px;	 
-		border-style: groove;
-		border-width: medium;
-		margin-left: auto;
-        margin-right: auto;
-		margin-top: 35px;
-	}
-	
-div.nav_log p.input  input{
-	width: 40%;
-	
-	
-}
-
-div.nav_log input,div.nav_log textarea{
-	width: 80%;
-}
 
 
 
-
-div.nav_log p.title{
-	text-align: center;
-	font-size: 150%;
-}
-
-div.footer
-       {
-	   	background-color:#eeeeee;;
-		color:#000000;
-		font-weight: bold;
-		clear:both;
-		text-align:center;
-		padding:5px;
-		margin-top:1%;
     }
-	
-	div.header .cabecera
-      {
-	    text-align: center;
-	    font-size: 48px;
-		font-style:oblique;
-		font-weight:bold;
-   	}
-   div.header .cabecera2
-    {
-	    text-align: center;
-	    font-size: 20px;
-   	}
-   	
-   	div .message
-    {
-	    font-size: 18px;
-	    color:blue;	
-	    margin-bottom: 15px;
-   	}
-	div .error
-    {
-	    font-size: 18px;
-	    color:red;	
-	    margin-bottom: 15px;
-   	}
+
 
 
 	div.menuHorizontal
        {
-       	width: 100%;
-       	float: right;
+       widht: 50%;
 		font-size:28px;
 		color:#333333;
 		background-color:#CCCCCC;
@@ -238,104 +415,9 @@ div.footer
 		margin-top:15px;
 		text-align:center;
 	}
-	
-		p.menuVerticalTitulosAdmin
-    {
-		font-size:24px;
-		color:#000000;
-		border:3px;
-		margin-top:2px;
-		margin-bottom:3px;
-		text-align:center;
-	}
+
 	
 	a:hover{
 	text-decoration:none;  
 	color:#FF0000;
 	}
-
-
- input[type="text"]:focus,
-input[type="text"].focus {
-  border: solid 3px #6699CC;
-}
-
-
- input[type="text"] {
-  padding: 10px;
-  border: solid 3px #c9c9c9;
-  box-shadow: inset 0 0 0 1px #707070;
-  transition: box-shadow 0.3s, border 0.3s;
-}
- input[type="text"]:focus,
-input[type="text"].focus {
-  border: solid 3px #6699CC;
-}
-
-
-input[type="file"] {
-  padding: 10px;
-  border: solid 3px #c9c9c9;
-  box-shadow: inset 0 0 0 1px #707070;
-  transition: box-shadow 0.3s, border 0.3s;
-}
- input[type="file"]:focus,
-input[type="file"].focus {
-  border: solid 3px #6699CC;
-}
-
-
-input[type="tel"] {
-  padding: 10px;
-  border: solid 3px #c9c9c9;
-  box-shadow: inset 0 0 0 1px #707070;
-  transition: box-shadow 0.3s, border 0.3s;
-}
- input[type="tel"]:focus,
-input[type="tel"].focus {
-  border: solid 3px #6699CC;
-}
-
-input[type="password"] {
-  padding: 10px;
-  border: solid 3px #c9c9c9;
-  box-shadow: inset 0 0 0 1px #707070;
-  transition: box-shadow 0.3s, border 0.3s;
-}
- input[type="password"]:focus,
-input[type="password"].focus {
-  border: solid 3px #6699CC;
-}
-
-input[type="email"] {
-  padding: 10px;
-  border: solid 3px #c9c9c9;
-  box-shadow: inset 0 0 0 1px #707070;
-  transition: box-shadow 0.3s, border 0.3s;
-}
- input[type="email"]:focus,
-input[type="email"].focus {
-  border: solid 3px #6699CC;
-}
-	
-input[type="submit"],
-input[type="button"] {
-  text-align:center;
-  padding: 1px;
-  border:  3px #6699CC;
-  color:#0066FF;
-  font-size:18px;
-  box-shadow: inset 0 0 0 3px #w;
- 
-}
- 
-
-input2[type="submit"] {
-  text-align:center;
-  padding: 5px;
-  border:  3px #6699CC;
-  color:#0066FF;
-  font-size:1px;
-  box-shadow: inset 0 0 0 3px #w;
- 
-}

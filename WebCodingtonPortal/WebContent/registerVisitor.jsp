@@ -1,94 +1,108 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html>
 	  
 	<head>
-	<link rel="stylesheet" type="text/css" href="css/codington.css">
-	<title>Visitor Register Page</title>
+		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script language="javascript" src="Register.js"></script>
+		<title>Visitor Register Page</title>
 	</head>
 
-<body>
 
-<div class="header">
-	<table width="100%" border="0">
-      <tr>
-        <td width="20%" rowspan="2"><img src="logo.gif" width=130 height=130 border=2 vspace=30 hspace=75 align=middle /></td>
-        <td width="60%"><div align="center" class="cabecera">New Codington Portal</div></td>
-        <td width="20%">&nbsp;</td>
-      </tr>
-      <tr>
-        <td><p class="cabecera2">One of the World's Best Cities 2014</p></td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
+<body id="body">
 	
-</div>
-
-<div class = "nav_log">
-
-	<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-	<form method="post" action="registerVisitor">
-		<p class = "title">
-        New User</p>
+		<div id="header">
+			<table>
+		    	<tr>
+		      		<td class="colum1" rowspan="2">
+		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
+		        	</td>
+		        	<td class="colum2">
+		        		<div class="title">New Codington Portal</div>
+		        	</td>	
+		        	<td class="colum3">&nbsp;</td>
+		      		</tr>
+		      	<tr>
+		        	<td>
+		        		<div class="subtitle">One of the World's Best Cities 2014</div>
+		        	</td>
+		        	<td>&nbsp;</td>
+		      	</tr>
+		    </table>
+		</div>
 		
-		  <p>First name: 
-		    <br>
-		    <input type="text" name="fname" id = "fname" pattern="\S{1,30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required>
-	    </p>
-		  <p>
-		  
-	    Last name: 
-		    <br>
-		    <input type="text" name="lname" id = "lname" pattern="\S{1,30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required>
-	      </p>
-		  <p>Username:
-		    <br>
-		    <input type="text" name="uname" id = "uname" pattern="\S{6,12}" title="Enter a valid username (length between 6-12)" placeholder="Username" required>
-	      </p>
-		  <p>Password: 
-		    <br>
-		    <input type="password" name="pass" id = "pass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Password" required>
-	      </p>
-		  <p>Confirm Password: 
-		    <br>
-		    <input type="password" name="cpass" id = "cpass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Confirm Password" required>
-	      </p>
-		  <p>DNI:
-		    <br>
-		    <input type="text" name="dni" id = "dni" title="Enter a valid dni(XX.XXX.XXX-L)" placeholder="Dni (XX.XXX.XXX-L)" >
-	      </p>
-		  <p>Phone Number:
-		    <br>
-		    <input type="tel" name="phone" id = "phone" placeholder="Phone Number">
-	      </p>
-		  <p>Email: 
-		    <br>
-		    <input type="email" name="email" id = "email" pattern="\S{3,200}" title="Enter a valid email (length between 3-200)" placeholder="Email" required >
-	    </p>
-		  <p>Address: 
-		    <br>
-		    <input type="text" name="adress" id = "adress" placeholder="Address">
-	  </p>
-	    <p class = "input">
-		  <INPUT type="submit" value="Submit" onclick = "return validateForm()">
-		  <INPUT type="button" value="Cancel" onclick = "javascript:window.location='login';">
-	  </p>
-	  
+		
+		<div id="content">
 
-	</form>
+			<div class = "center_nav">
 
-</div>
+				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+				
+				<form method="post" action="registerVisitor">
+					<div class="title">New User</div>
+			        <br />
+					
+					<div class="field"><p>First name:</p>
+						<input type="text" name="fname" id = "fname" pattern="\S{1,30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required />
+						<br />
+				    </div>
+					  
+				    <div class="field"><p>Last name:</p> 
+					   	<input type="text" name="lname" id = "lname" pattern="\S{1,30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required />
+				    	<br />
+				    </div>
+				    
+					<div class="field"><p>Username:</p>
+					    <input type="text" name="uname" id = "uname" pattern="\S{6,12}" title="Enter a valid username (length between 6-12)" placeholder="Username" required />
+					    <br />
+				    </div>
+					
+					<div class="field"><p>Password:</p> 
+					    <input type="password" name="pass" id = "pass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Password" required />
+					    <br />
+				    </div>
+				    
+					<div class="field"><p>Confirm Password:</p> 
+					    <input type="password" name="cpass" id = "cpass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Confirm Password" required />
+					    <br />
+				    </div>
+				    
+					<div class="field"><p>DNI:</p>
+					    <input type="text" name="dni" id = "dni" title="Enter a valid dni(XX.XXX.XXX-L)" placeholder="Dni (XX.XXX.XXX-L)" />
+					    <br />
+				   	</div>
+					
+					<div class="field"><p>Phone Number:</p>
+					    <input type="tel" name="phone" id = "phone" placeholder="Phone Number" />
+					    <br />
+				    </div>
+					
+					<div class="field"><p>Email:</p> 
+					    <input type="email" name="email" id = "email" pattern="\S{3,200}" title="Enter a valid email (length between 3-200)" placeholder="Email" required />
+				    	<br />
+				    </div>
+				    
+					<div class="field"><p>Address:</p> 
+					    <input type="text" name="adress" id = "adress" placeholder="Address" />
+					    <br />
+				  	</div>
+				  
+				  	<div class="input">
+						<input type="submit" value="Submit" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='login';" />
+						<br />
+					</div>  
+				</form>
+			</div>
+		</div>
 
 
-
-
-<div class ="footer">
-New Codignton Portal - December, 2014
-</div>
-
-</body>
-</html>
-
+		<div id ="footer">
+			<p>New Codignton Portal - December, 2014</p>
+		</div>
+	
+	</body>
 </html>
