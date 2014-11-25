@@ -2,13 +2,17 @@ package codingtonportal.model.domain;
 
 public class Stadium extends Place {
 
-	// Parameters
 	
+
+	/**
+	 * Parameters
+	 */	
 	private int idStadium;
 	private String sport;
 	
-	// Void constructor
-	
+	/**
+	 * Void constructor.
+	 */	
 	Stadium(){
 		
 		this.idStadium = 0;
@@ -16,6 +20,10 @@ public class Stadium extends Place {
 		
 	}
 
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public int getIdStadium() {
 		return idStadium;
 	}

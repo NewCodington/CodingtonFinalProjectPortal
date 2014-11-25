@@ -1,9 +1,10 @@
 package codingtonportal.model.domain;
 
 public class Visitor {
-	
-	//Parameters
 
+	/**
+	 * Parameters.
+	 */
 	private int idVisitor;
 	private String firstName;
 	private String lastName;
@@ -14,10 +15,12 @@ public class Visitor {
 	private String userName;
 	private String password;
 	private boolean admin;
-	
-	
-	
-	// Void constructor
+
+
+
+	/**
+	 * Void constructor.
+	 */
 	public Visitor()
 	{
 		this.idVisitor = 0;
@@ -30,15 +33,28 @@ public class Visitor {
 		this.userName = null;
 		this.password = null;
 		this.admin = true;
-		
-		
+
+
 	}
-	
-	//Constructor with parameters except idVisitor
+
+	/**
+	 * Constructor with parameters except idVisitor. 
+	 * This constructor is used in the following methods:
+	 * insertVisitor, updateVisitor and isAdmin.
+	 * @param userName
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param dni
+	 * @param email
+	 * @param phoneNumber
+	 * @param address
+	 * @param admin
+	 */
 	public Visitor(String userName, String password, String firstName,
 			String lastName, String dni, String email,String phoneNumber, String address, boolean admin)
 	{
-		
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dni = dni;
@@ -48,36 +64,60 @@ public class Visitor {
 		this.userName = userName;
 		this.password = password;
 		this.admin = admin;
-				
+
 	}
-	
-	//Constructor with parameters 
-		public Visitor(int idVisitor, String userName, String password, String firstName,
-				String lastName, String dni, String email,String phoneNumber, String address, boolean admin)
-		{
-			
-			this.idVisitor = idVisitor;
-			this.firstName = firstName;
-			this.lastName = lastName;
-			this.dni = dni;
-			this.email = email;
-			this.phoneNumber = phoneNumber;
-			this.address = address;
-			this.userName = userName;
-			this.password = password;
-			this.admin = admin;
-					
-		}
-	
-	//Constructor with userName and password
+
+	/**
+	 * Constructor with parameters.
+	 * This constructor is used in the following methods:
+	 * selectVisitor, viewVisitor and deleteVisitor.
+	 * @param idVisitor
+	 * @param userName
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param dni
+	 * @param email
+	 * @param phoneNumber
+	 * @param address
+	 * @param admin
+	 */
+	public Visitor(int idVisitor, String userName, String password, String firstName,
+			String lastName, String dni, String email,String phoneNumber, String address, boolean admin)
+	{
+
+		this.idVisitor = idVisitor;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dni = dni;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.userName = userName;
+		this.password = password;
+		this.admin = admin;
+
+	}
+
+	/**
+	 * Constructor with userName and password.
+	 * This constructor is used in the following methods:
+	 * loginVisitor and updatePassword.
+	 * @param userName
+	 * @param password
+	 */
 	public Visitor(String userName, String password)
 	{
+		
 		this.userName=userName;
 		this.password=password;
-				
+
 	}
-	
-	//Constructor 
+
+	/**
+	 * Constructor
+	 * @param visitor
+	 */
 	public Visitor(Visitor visitor)
 	{
 		
@@ -91,10 +131,13 @@ public class Visitor {
 		this.userName = visitor.getUserName();
 		this.password = visitor.getPassword();
 		this.admin = visitor.isAdmin();
-				
+
 	}
 
-	//GETTERS AND SETTERS
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public int getVisitorId() {
 		return idVisitor;
 	}

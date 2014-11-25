@@ -7,7 +7,10 @@ import java.text.SimpleDateFormat;
 
 public class Event {
 
-	//Parameter
+
+	/**
+	 * Parameters.
+	 */
 	private int eventId;
 	private String name;
 	private String description;
@@ -17,10 +20,12 @@ public class Event {
 	private String eventType;
 	private int seatsAvailable;
 	private Date date_event;
-	
-	
-	
-	// void Constructor
+
+
+
+	/**
+	 * Void Constructor.
+	 */
 	public Event()
 	{
 		this.eventId = 0;
@@ -34,7 +39,20 @@ public class Event {
 		this.date_event = null;
 	}
 
-	//Constructor with parameters
+	/**
+	 * Constructor with parameters. 
+	 * This constructor is used in the following methods:
+	 * selectEvent, viewEvent, searchEvent and deleteEvent.
+	 * @param eventId
+	 * @param name
+	 * @param description
+	 * @param place
+	 * @param duration
+	 * @param startTime
+	 * @param eventType
+	 * @param seatsAvailable
+	 * @param date_event
+	 */
 	public Event(int eventId, String name, String description, int place,
 			String duration, String startTime, String eventType, int seatsAvailable, Date date_event)
 	{
@@ -47,10 +65,22 @@ public class Event {
 		this.eventType = eventType;
 		this.seatsAvailable = seatsAvailable;
 		this.date_event = date_event;
-		
+
 	}
-	
-	//Constructor with parameters except id
+
+	/**
+	 * Constructor with parameters without idEvent. 
+	 * This constructor is used in the following methods:
+	 * insertEvent and updateEvent.
+	 * @param name
+	 * @param description
+	 * @param place
+	 * @param duration
+	 * @param startTime
+	 * @param eventType
+	 * @param seatsAvailable
+	 * @param date_event
+	 */
 	public Event(String name, String description, int place,
 			String duration, String startTime, String eventType, int seatsAvailable, Date date_event)
 	{		
@@ -62,10 +92,14 @@ public class Event {
 		this.eventType = eventType;
 		this.seatsAvailable = seatsAvailable;
 		this.date_event = date_event;
-		
+
 	}
-	
-	//Constructor with parameters
+
+	/**
+	 * Constructor with parameters.
+	 * @param event
+	 * @throws ParseException
+	 */
 	public Event(Event event) throws ParseException
 	{
 		this.eventId = event.getEventId();
@@ -78,12 +112,14 @@ public class Event {
 		this.seatsAvailable = event.getSeatsAvailable();
 		this.date_event = event.getDate_event();
 	}
-	
-	
-	
-	
-	//GETTERS AND SETTERS
-	
+
+
+
+
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */	
 	public int getEventId() {
 		return eventId;
 	}
@@ -157,18 +193,18 @@ public class Event {
 	public void setDate_event(java.util.Date dateInput) throws ParseException {
 		SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd" );
 		java.util.Date dateOutput = targetFormat.parse(targetFormat.format(dateInput));
-		
+
 		this.date_event = new Date(dateOutput.getTime());
 	}
 
 	public String getDate_eventString() throws ParseException {
 		SimpleDateFormat targetFormat = new SimpleDateFormat("dd-MM-yyyy" );
-		
+
 		java.util.Date dateOutput = targetFormat.parse(targetFormat.format(this.date_event));
 		String dateString = targetFormat.format(dateOutput);
-		
+
 		return dateString;
-		
+
 	}
 
 

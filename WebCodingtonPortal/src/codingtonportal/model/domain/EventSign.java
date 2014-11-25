@@ -3,13 +3,18 @@ package codingtonportal.model.domain;
 public class EventSign {
 
 
-	//Parameters
+
+	/**
+	 * Parameters.
+	 */
 	private int id;
 	private int idVisitor;
 	private int idEvent;
 	private String Name;
 
-	//Void constructor
+	/**
+	 * Void constructor.
+	 */
 	public EventSign()
 	{
 		this.id = 0;
@@ -18,7 +23,13 @@ public class EventSign {
 
 	}
 	
-	//Constructor with parameters
+
+	/**
+	 * Constructor with parameters.
+	 * @param idVisitor
+	 * @param idEvent
+	 * @param Name
+	 */
 	public EventSign(int idVisitor, int idEvent, String Name)
 	{
 		this.idVisitor = idVisitor;
@@ -27,7 +38,13 @@ public class EventSign {
 	}
 		
 
-	//Constructor with idVisitor and idEvent
+	/**
+	 * Constructor with idVisitor and idEvent.
+	 * This constructor is used in the following methods:
+	 * registerForNewEvent, unregisterForEvent, incrementSeats, decrementSeats, selectEventForVisitor and selectVisitorForEvent.
+	 * @param idVisitor
+	 * @param idEvent
+	 */
 	public EventSign(int idVisitor, int idEvent)
 	{
 		this.idVisitor = idVisitor;
@@ -35,13 +52,21 @@ public class EventSign {
 
 	}
 	
-	//Constructor with Name
+	/**
+	 * Constructor with Name.
+	 * This constructor is used in the method searchEvent.
+	 * @param Name
+	 */
 	public EventSign(String Name)
 	{
 		this.Name = Name;
 	}
 	
 
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}

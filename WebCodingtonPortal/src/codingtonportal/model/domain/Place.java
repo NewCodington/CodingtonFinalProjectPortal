@@ -5,8 +5,10 @@ import java.sql.Blob;
 
 
 public class Place {
-	
-	//Parameters	
+
+	/**
+	 * Parameters.
+	 */	
 	private int idPlace;
 	private String name;
 	private String description;
@@ -14,45 +16,66 @@ public class Place {
 	private Blob image;
 	private String address; 
 	private int typePlace; 
-	
-	
-	//void constructor
+
+
+	/**
+	 * Void constructor.
+	 */
 	public Place(){
 		this.idPlace = 0;
 		this.name = null;
 		this.description = null;
-	    this.region = null;
+		this.region = null;
 		this.image = null;
 		this.address = null;
 		this.typePlace = 0;
 	}
-	
-	// Constructor with parameters
+
+
+	/**
+	 * Constructor with parameters.
+	 * This constructor is used in the following methods:
+	 * selectPlace, viewPlace, insertPlace, updatePlace and deletePlace.
+	 * @param idPlace
+	 * @param name
+	 * @param region
+	 * @param typePlace
+	 * @param image
+	 * @param address
+	 * @param description
+	 */
 	public Place(int idPlace, String name, String region, int typePlace, Blob image, String address, String description){
 		this.idPlace = idPlace;
 		this.name = name;
 		this.description = description;
-	    this.region = region;
+		this.region = region;
 		this.image = image;
 		this.address = address;
 		this.typePlace = typePlace;
 	}
-	//Constructor with parameters
-		public Place(Place place)
-		{
-			this.idPlace = place.getIdPlace();
-			
-			this.name = place.getName();
-			this.description = place.getDescription();
-		    this.region = place.getRegion();
-			this.image = place.getImage();
-			this.address = place.getAddress();
-			this.typePlace = place.getTypePlace();
-		}
-		
 	
-	
-	// Setters and getters
+	/**
+	 * Constructor with parameters.
+	 * @param place
+	 */
+	public Place(Place place)
+	{
+		this.idPlace = place.getIdPlace();
+
+		this.name = place.getName();
+		this.description = place.getDescription();
+		this.region = place.getRegion();
+		this.image = place.getImage();
+		this.address = place.getAddress();
+		this.typePlace = place.getTypePlace();
+	}
+
+
+
+	/**
+	 * GETTERS AND SETTERS.
+	 * @return
+	 */
 	public String getAddress() {
 		return address;
 	}
@@ -110,7 +133,7 @@ public class Place {
 		return typePlace;
 	}
 
-	
+
 	public void setTypePlace(int typePlace) {
 		this.typePlace = typePlace;
 	}

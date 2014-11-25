@@ -2,16 +2,25 @@ package codingtonportal.model.domain;
 
 public class Market extends Place {
 
-	//Atributes
+
+	/**
+	 * Parameters. 
+	 */
 	private int idMarket;
 	private String typeMarket;
 	
-	//Constructor
+	/**
+	 * Void Constructor 
+	 */
 	Market(){
 		this.idMarket = 0;
 		this.typeMarket = null;
 	}
 
+	/**
+	 * GETTERS AND SETTERS
+	 * @return
+	 */
 	public int getIdMarket() {
 		return idMarket;
 	}
