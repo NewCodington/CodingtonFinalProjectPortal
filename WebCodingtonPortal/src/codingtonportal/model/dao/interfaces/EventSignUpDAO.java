@@ -8,6 +8,7 @@ import javax.naming.NamingException;
 
 
 /**
+ * 
  * The interface EventSignUpDAO shows the services that can be used or are related to the Events Registrations.
  * 
  * @author JAVA101_01

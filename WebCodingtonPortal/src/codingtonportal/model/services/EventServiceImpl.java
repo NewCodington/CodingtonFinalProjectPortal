@@ -16,6 +16,7 @@ import codingtonportal.utils.PropertyAccess;
 
 
 /**
+ * 
  * Services of Events used to select, insert, update and delete events available in the application.
  * 
  */

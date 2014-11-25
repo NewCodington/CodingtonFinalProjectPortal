@@ -11,6 +11,7 @@ import codingtonportal.model.domain.Event;
 
 
 /**
+ * 
  * The interface EventDAO shows the services that can be used or are related to the Events.
  * 
  * @author JAVA101_01

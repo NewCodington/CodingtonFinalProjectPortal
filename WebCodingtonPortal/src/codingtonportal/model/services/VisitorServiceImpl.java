@@ -302,9 +302,9 @@ public class VisitorServiceImpl implements VisitorDAO {
 			statementSQL.setString(4, visitor.getEmail());
 			statementSQL.setString(5, visitor.getPhoneNumber());
 			statementSQL.setString(6, visitor.getAddress());
-			statementSQL.setString(7, visitor.getPassword());
+			
 			// Where clauses
-			statementSQL.setInt(8, visitor.getIdVisitor());
+			statementSQL.setInt(7, visitor.getIdVisitor());
 
 			// Execute query
 			result = statementSQL.executeUpdate();

@@ -14,6 +14,7 @@ import codingtonportal.utils.PropertyAccess;
 
 
 /**
+ * 
  * Services of the Event Registration used to register or unregister for Events and update the seats of the Events. 
  * 
  */

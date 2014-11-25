@@ -14,7 +14,7 @@ public class Visitor {
 	private String userName;
 	private String password;
 	private boolean admin;
-	private int idEvent;
+	
 	
 	
 	// Void constructor
@@ -30,7 +30,7 @@ public class Visitor {
 		this.userName = null;
 		this.password = null;
 		this.admin = true;
-		this.idEvent = 0;
+		
 		
 	}
 	
@@ -79,16 +79,6 @@ public class Visitor {
 	
 	
 	
-
-	//Constructor with idVisitor and idEvent
-	public Visitor(int idVisitor, int idEvent)
-	{
-		this.idVisitor=idVisitor;
-		this.idEvent=idEvent;
-				
-	}
-		
-	
 	
 	//GETTERS AND SETTERS
 	public int getVisitorId() {
@@ -107,13 +97,6 @@ public class Visitor {
 		this.userName = userName;
 	}
 
-	public int getIdEvent() {
-		return idEvent;
-	}
-
-	public void setIdEvent(int idEvent) {
-		this.idEvent = idEvent;
-	}
 
 	public String getPassword() {
 		return password;

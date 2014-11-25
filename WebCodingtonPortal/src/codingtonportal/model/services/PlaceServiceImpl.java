@@ -15,6 +15,7 @@ import codingtonportal.utils.FERSDataConnection;
 
 
 /**
+ * 
  * Services of the Place used to select, insert, update and delete places available in the application.
  * 
  */
