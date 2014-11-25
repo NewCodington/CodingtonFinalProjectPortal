@@ -3,6 +3,7 @@ package codingtonportal.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -100,6 +101,9 @@ HttpSession session = request.getSession();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		response.sendRedirect("registerVisitor");
