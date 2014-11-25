@@ -30,6 +30,10 @@ public class EventSignUpDAOJUnit extends TestCase {
 		super.tearDown();
 	}
 
+	/**
+	 * Method to register a Visitor into an Event unless the Visitor is already registered in that Event.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testregisterForNewEvent() throws SQLException {
 		EventSign eventSigns= new EventSign(3,4);
@@ -45,6 +49,10 @@ public class EventSignUpDAOJUnit extends TestCase {
 		}
 	}
 
+	/**
+	 * Method to unregister a Visitor from an Event if the Visitor is registered in that Event.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testunregisterForEvent() throws SQLException {
 		EventSign eventSigns= new EventSign(2,4);
@@ -60,6 +68,10 @@ public class EventSignUpDAOJUnit extends TestCase {
 		}
 	}
 
+	/**
+	 * Method to update the seats available in an specified Event when a visitor is unregistered from that Event.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testincrementSeats() throws SQLException {
 		EventSign eventSigns= new EventSign(2,4);
@@ -75,6 +87,10 @@ public class EventSignUpDAOJUnit extends TestCase {
 		}
 	}
 	
+	/**
+	 * Method to update the seats available in an specified Event when a visitor is registered in that Event.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testdecrementSeats() throws SQLException {
 		EventSign eventSigns= new EventSign(2,4);
@@ -90,6 +106,10 @@ public class EventSignUpDAOJUnit extends TestCase {
 		}
 	}
 	
+	/**
+	 * Method to get all the Ids of Events in which each visitor has registered.
+
+	 */
 	@Test	
 	public void testselectEventForVisitor (){
 		EventSign eventSigns= new EventSign(3,4);
@@ -110,7 +130,9 @@ public class EventSignUpDAOJUnit extends TestCase {
 		}
 	}
 	
-	
+	/**
+	 * Method to obtain if the Event has registered for a Visitor.
+	 */
 	@Test
 	public void testselectVisitorForEvent() {
 		EventSign eventSigns = new EventSign(3,4);								                                   		

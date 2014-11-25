@@ -29,6 +29,10 @@ public class PlaceDAOJUnit extends TestCase {
 		super.tearDown();
 	}
 
+	/**
+	 * Method to insert a Place into the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testinsertplace() throws SQLException {
 		Place places = new Place (34, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
@@ -45,6 +49,10 @@ public class PlaceDAOJUnit extends TestCase {
 		 
 	}
 	
+	/**
+	 * Method to update a specific Place from the database
+	 * @throws SQLException
+	 */
 	@Test
 	public void testupdateplace() throws SQLException {
 		Place places = new Place (36, "Museum", "1", 1, null,"C/olvido", "Actualizar");
@@ -61,6 +69,10 @@ public class PlaceDAOJUnit extends TestCase {
 		 
 	}
 	
+	/**
+	 * Method to remove a specific Place from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testdeleteplace() throws SQLException {
 		Place places = new Place (39, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
@@ -77,6 +89,10 @@ public class PlaceDAOJUnit extends TestCase {
 		 
 	}
 	
+	/**
+	 * Method to view all available Place from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testviewPlace () throws SQLException{
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
@@ -91,6 +107,10 @@ public class PlaceDAOJUnit extends TestCase {
 		}
 	}
 	
+	/**
+	 * Method to get an specific Event from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testselectPlace () throws SQLException{
 		Place places = new Place (38, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");

@@ -3,6 +3,7 @@ package codingtonportal.tests;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import junit.framework.TestCase;
 import org.junit.After;
@@ -26,9 +27,13 @@ public class EventDAOJUnit extends TestCase{
 		super.tearDown();
 	}
 
-	
+	/**
+	 * Method to get a specific Event from the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
-	public void testSelectEvent () throws SQLException{
+	public void testSelectEvent () throws SQLException, ParseException{
 		Event events= new Event(2,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12,null);
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
@@ -42,8 +47,12 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to view all available events from the database.
+	 * @throws ParseException
+	 */
 	@Test
-	public void testviewEvent (){
+	public void testviewEvent () throws ParseException{
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
 			try{
@@ -61,8 +70,13 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to insert an Event in the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
-	public void testInsertEvent() throws SQLException {
+	public void testInsertEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {
@@ -76,6 +90,10 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to remove a specific Event from the database.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testDeleteEvent() throws SQLException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
@@ -91,8 +109,13 @@ public class EventDAOJUnit extends TestCase{
 		}
 	}
 	
+	/**
+	 * Method to update a specific Event from the database.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	@Test
-	public void testUpdateEvent() throws SQLException {
+	public void testUpdateEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
 		EventServiceImpl serviceEvent = new EventServiceImpl();
 		try {

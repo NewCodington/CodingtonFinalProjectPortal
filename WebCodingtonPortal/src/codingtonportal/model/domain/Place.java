@@ -37,6 +37,19 @@ public class Place {
 		this.address = address;
 		this.typePlace = typePlace;
 	}
+	//Constructor with parameters
+		public Place(Place place)
+		{
+			this.idPlace = place.getIdPlace();
+			
+			this.name = place.getName();
+			this.description = place.getDescription();
+		    this.region = place.getRegion();
+			this.image = place.getImage();
+			this.address = place.getAddress();
+			this.typePlace = place.getTypePlace();
+		}
+		
 	
 	
 	// Setters and getters
