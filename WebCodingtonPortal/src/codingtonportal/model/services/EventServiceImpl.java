@@ -1,6 +1,5 @@
 package codingtonportal.model.services;
 
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,14 +28,13 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @return Event class with the Event requested or NULL if the event does not exists.
 	 * 
-	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
 	 * @throws NamingException 
 	 */
 	@Override
-	public Event selectEvent(Event event) throws IOException,ClassNotFoundException, SQLException, ParseException, NamingException {
+	public Event selectEvent(Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
 		FERSDataConnection con = new FERSDataConnection(); 
 		PropertyAccess connection = new PropertyAccess();
@@ -92,14 +90,13 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @return ArrayList<Event> with all Events that exists or NULL if there is no Event.
 	 * 
-	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Event> viewEvent() throws IOException,ClassNotFoundException, SQLException, ParseException, NamingException {
+	public ArrayList<Event> viewEvent() throws ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -164,14 +161,13 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @return ArrayList<Event> with all matching events that exists or NULL if there isn't events.
 	 * 
-	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Event> searchEvent(String Name) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException {
+	public ArrayList<Event> searchEvent(String Name) throws ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -241,14 +237,13 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @return Number of rows affected in the database. If the insert is correct, return 1, else return 0.
 	 * 
-	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException   {  
+	public Integer insertEvent(Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -293,14 +288,13 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @return Number of rows affected in the database. If the update is correct, return 1, else return 0.
 	 * 
-	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws ParseException 
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException {
+	public Integer updateEvent(Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -349,13 +343,12 @@ public class EventServiceImpl implements EventDAO {
 	 * 
 	 * @return Number of rows affected in the database. If the delete is correct, return 1, else return 0.
 	 * 
-	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException, NamingException   {  
+	public Integer deleteEvent(Integer idEvent) throws ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();

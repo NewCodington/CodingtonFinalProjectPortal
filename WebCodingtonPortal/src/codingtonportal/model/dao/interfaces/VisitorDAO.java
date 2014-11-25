@@ -1,6 +1,5 @@
 package codingtonportal.model.dao.interfaces;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.naming.NamingException;
@@ -16,12 +15,12 @@ import codingtonportal.model.domain.Visitor;
  *
  */
 public interface VisitorDAO {
-	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException;
-	public ArrayList<Visitor> viewVisitor() throws IOException, ClassNotFoundException, SQLException, NamingException;
-	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException;
-	public Integer insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException, NamingException;
-	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException;
-	public Integer updatePassword(Visitor visitor) throws IOException, ClassNotFoundException, SQLException, NamingException;
-	public Integer deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException, NamingException;	
-	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException;
+	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
+	public ArrayList<Visitor> viewVisitor() throws ClassNotFoundException, SQLException, NamingException;
+	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
+	public Integer insertVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
+	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
+	public Integer updatePassword(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
+	public Integer deleteVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;	
+	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
 }

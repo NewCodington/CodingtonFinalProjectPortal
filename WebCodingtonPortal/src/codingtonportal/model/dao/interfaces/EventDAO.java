@@ -1,6 +1,5 @@
 package codingtonportal.model.dao.interfaces;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,10 +17,10 @@ import codingtonportal.model.domain.Event;
  *
  */
 public interface EventDAO {
-	public Event selectEvent (Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
-	public ArrayList<Event> viewEvent () throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
-	public ArrayList<Event> searchEvent(String Name) throws IOException,ClassNotFoundException, SQLException, ParseException, NamingException;
-	public Integer insertEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
-	public Integer deleteEvent(Integer idEvent) throws IOException, ClassNotFoundException, SQLException, NamingException;
-	public Integer updateEvent(Event event) throws IOException, ClassNotFoundException, SQLException, ParseException, NamingException;
+	public Event selectEvent (Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException;
+	public ArrayList<Event> viewEvent () throws ClassNotFoundException, SQLException, ParseException, NamingException;
+	public ArrayList<Event> searchEvent(String Name) throws ClassNotFoundException, SQLException, ParseException, NamingException;
+	public Integer insertEvent(Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException;
+	public Integer deleteEvent(Integer idEvent) throws ClassNotFoundException, SQLException, NamingException;
+	public Integer updateEvent(Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException;
 }

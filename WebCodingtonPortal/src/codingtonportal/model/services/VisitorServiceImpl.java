@@ -34,7 +34,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection = new PropertyAccess();
@@ -98,7 +98,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Visitor> viewVisitor() throws IOException, ClassNotFoundException, SQLException, NamingException {
+	public ArrayList<Visitor> viewVisitor() throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -171,7 +171,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -229,7 +229,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer insertVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException, NamingException   {  
+	public Integer insertVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -282,7 +282,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -335,7 +335,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer updatePassword(Visitor visitor) throws IOException, ClassNotFoundException, SQLException, NamingException {
+	public Integer updatePassword(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -382,7 +382,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer deleteVisitor(Visitor visitor) throws IOException, ClassNotFoundException, SQLException, NamingException {
+	public Integer deleteVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection con= new FERSDataConnection(); 
 		PropertyAccess connection= new PropertyAccess();
@@ -427,7 +427,7 @@ public class VisitorServiceImpl implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, IOException, SQLException, NamingException {
+	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		FERSDataConnection conex= new FERSDataConnection(); 
 		PropertyAccess conexion= new PropertyAccess();
