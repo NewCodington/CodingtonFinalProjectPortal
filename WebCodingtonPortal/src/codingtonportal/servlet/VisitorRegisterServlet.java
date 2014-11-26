@@ -42,6 +42,7 @@ public class VisitorRegisterServlet extends HttpServlet {
 		else{
 			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
 				session.setAttribute("Error", null);
+				session.setAttribute("Success", null);
 				response.sendRedirect("login");
 			}
 			else {
