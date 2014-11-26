@@ -462,5 +462,63 @@ public class VisitorServiceImpl implements VisitorDAO {
 		if (result == 1)	return true;
 		else 				return false;
 	}
+
+
+
+	
+
+	/**
+	 * Method to check if the Username Visitor exits in the application.
+	 * 
+	 * @param visitor : Visitor class with the data necessary to check.
+	 * 
+	 * @return Boolean that indicates if the Username exits or not.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 * @throws NamingException 
+	 */
+	@Override
+	public Integer exitsUsernameVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
+		// Initialize variables
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		PreparedStatement statementSQL = null;
+		Integer result = null;
+				
+		try {    
+			// Create the Statement
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("exitsUserVisitor"));
+			// Add conditions
+			statementSQL.setString(1, visitor.getUserName());
+
+			// Execute query
+			ResultSet rs = statementSQL.executeQuery();
+					
+			// If the Visitor doesn't exists
+			if(!rs.next()) {
+				result = -1;
+			}
+					
+			else {
+				// Get the Id of the Visitor
+				result = 0;
+				// Close the Resulset
+				rs.close();
+			}
+			 
+		// Close the Statement and Connection
+		} finally {
+			if (statementSQL != null) {
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		// Return the Id of Visitor if exists in the application
+		return result;
+	}
 	
 }

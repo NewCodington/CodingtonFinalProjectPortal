@@ -32,7 +32,7 @@ public class Visitor {
 		this.address = null;
 		this.userName = null;
 		this.password = null;
-		this.admin = true;
+		this.admin = false;
 
 
 	}

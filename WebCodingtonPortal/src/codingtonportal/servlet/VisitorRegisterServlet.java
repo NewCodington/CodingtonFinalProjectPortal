@@ -36,6 +36,9 @@ public class VisitorRegisterServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
+		session.setAttribute("ErrorUser", null);
+		session.setAttribute("VisitorInfo", null);
+		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
 			response.sendRedirect("registerEvent.jsp");
 		}
@@ -64,9 +67,9 @@ public class VisitorRegisterServlet extends HttpServlet {
 			Visitor visitor=new Visitor();
 			VisitorServiceImpl  visitorService = new VisitorServiceImpl();
 			
+			visitor.setUserName(request.getParameter("uname"));
 			visitor.setFirstName(request.getParameter("fname"));
 			visitor.setLastName(request.getParameter("lname"));
-			visitor.setUserName(request.getParameter("uname"));
 			visitor.setPassword(request.getParameter("pass"));
 			visitor.setEmail(request.getParameter("email"));
 			visitor.setDni(request.getParameter("dni"));
@@ -74,10 +77,22 @@ public class VisitorRegisterServlet extends HttpServlet {
 			visitor.setAddress(request.getParameter("adress"));
 			visitor.setAdmin(false);
 			
-			if(visitorService.insertVisitor(visitor) > 0){
-				session.setAttribute("Success", "Successfully created visitor");
-			}else{
-				session.setAttribute("Error", "Incorrect Visitor values");
+			if((visitorService.exitsUsernameVisitor(visitor)) == 0) {
+				session.setAttribute("VisitorInfo", visitor);
+				session.setAttribute("ErrorUser", "Username already exists");
+				response.sendRedirect("registerVisitor.jsp");
+			}
+			else {
+				session.setAttribute("VisitorInfo", null);
+				session.setAttribute("ErrorUser", null);
+				
+				if(visitorService.insertVisitor(visitor) > 0){
+					session.setAttribute("Success", "Successfully created visitor");
+				}else{
+					session.setAttribute("Error", "Incorrect Visitor values");
+				}
+			
+				response.sendRedirect("registerVisitor");	
 			}
 
 		} catch (ClassNotFoundException e1) {
@@ -90,8 +105,6 @@ public class VisitorRegisterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		response.sendRedirect("registerVisitor");
 	}
 
 }

@@ -27,7 +27,7 @@
 			<updateVisitor>UPDATE codington.visitor SET First_name=?, Last_name=?, DNI=?, Email=?, Phone_number=?, Address=? WHERE (idVisitor=?);</updateVisitor>
 			<updatePassword>UPDATE codington.visitor SET Password=? WHERE (idVisitor=?);</updatePassword>
 			<deleteVisitor>DELETE FROM codington.visitor WHERE (idVisitor=?);</deleteVisitor>
-		</visitor>
+			<exitsUserVisitor>SELECT * FROM codington.visitor WHERE (Username = ?);</exitsUserVisitor></visitor>
 		
 		<signUp>
 			<registerForNewEvent>INSERT INTO  codington.eventregistration (idVisitorR,idEventR) VALUES (?,?);</registerForNewEvent>

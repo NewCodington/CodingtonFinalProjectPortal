@@ -2,6 +2,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<%@page import="codingtonportal.model.domain.Visitor"%>
+
 <html>
 	  
 	<head>
@@ -41,53 +43,60 @@
 			<div class = "center_nav">
 
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-				
+
+				<%
+					Visitor visitor = null;
+					if (session.getAttribute("VisitorInfo") != null) {
+						visitor = (Visitor) session.getAttribute("VisitorInfo");
+					}
+				%>				
 				<form method="post" id="f" name="f" action="registerVisitor" onsubmit = "return validateForm();">
 					<div class="title">New User</div>
 			        <br />
 					
 					<div class="field"><p>First name:</p>
-						<input type="text" name="fname" id = "fname" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required />
+						<input type="text" name="fname" id = "fname" value="<%= visitor!=null?visitor.getFirstName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required />
 						<br />
 				    </div>
 					  
 				    <div class="field"><p>Last name:</p> 
-					   	<input type="text" name="lname" id = "lname" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required />
+					   	<input type="text" name="lname" id = "lname" value="<%= visitor!=null?visitor.getLastName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required />
 				    	<br />
 				    </div>
 				    
+				    <div class="error"><%= session.getAttribute("ErrorUser")!=null?session.getAttribute("ErrorUser").toString():""%></div>
 					<div class="field"><p>Username:</p>
-					    <input type="text" name="uname" id = "uname" pattern="\S{6,12}" title="Enter a valid username (length between 6-12)" placeholder="Username" required />
+					    <input type="text" name="uname" id = "uname" value="<%= visitor!=null?visitor.getUserName():""%>" pattern="\S{6,12}" title="Enter a valid username (length between 6-12)" placeholder="Username" required />
 					    <br />
 				    </div>
 					
 					<div class="field"><p>Password:</p> 
-					    <input type="password" name="pass" id = "pass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Password" required />
+					    <input type="password" name="pass" id = "pass" value="" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Password" required />
 					    <br />
 				    </div>
 				    
 					<div class="field"><p>Confirm Password:</p> 
-					    <input type="password" name="cpass" id = "cpass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Confirm Password" required />
+					    <input type="password" name="cpass" id = "cpass" value="" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Confirm Password" required />
 					    <br />
 				    </div>
 				    
 					<div class="field"><p>DNI:</p>
-					    <input type="text" name="dni" id = "dni" title="Enter a valid dni(XX.XXX.XXX-L)" placeholder="Dni (XX.XXX.XXX-L)" />
+					    <input type="text" name="dni" id = "dni" value="<%= visitor!=null?visitor.getDni():""%>" title="Enter a valid dni(XX.XXX.XXX-L)" placeholder="Dni (XX.XXX.XXX-L)" />
 					    <br />
 				   	</div>
 					
 					<div class="field"><p>Phone Number:</p>
-					    <input type="tel" name="phone" id = "phone" placeholder="Phone Number" />
+					    <input type="tel" name="phone" id = "phone" value="<%= visitor!=null?visitor.getPhoneNumber():""%>" placeholder="Phone Number" />
 					    <br />
 				    </div>
 					
 					<div class="field"><p>Email:</p> 
-					    <input type="email" name="email" id = "email" pattern="\S{3,200}" title="Enter a valid email (length between 3-200)" placeholder="Email" required />
+					    <input type="email" name="email" id = "email" value="<%= visitor!=null?visitor.getEmail():""%>" pattern="\S{3,200}" title="Enter a valid email (length between 3-200)" placeholder="Email" required />
 				    	<br />
 				    </div>
 				    
 					<div class="field"><p>Address:</p> 
-					    <input type="text" name="adress" id = "adress" placeholder="Address" />
+					    <input type="text" name="adress" id = "adress" value="<%= visitor!=null?visitor.getAddress():""%>" placeholder="Address" />
 					    <br />
 				  	</div>
 				  
