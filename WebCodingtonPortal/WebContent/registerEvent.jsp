@@ -75,7 +75,7 @@
 					</div>
 					
 					<div class="field"><p>Date:</p>
-					  	<input type="text" id="date" name="date" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Date" required />
+					  	<input type="text" id="date" name="date" pattern="[0-9]{2}+[-]+[0-9]{2}+[-]+[0-9]{4}" title="Enter a valid place (dd-mm-aaaa)" placeholder="Date" required />
 						<br />
 					</div>
 					
