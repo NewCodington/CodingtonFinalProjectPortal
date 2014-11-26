@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
 import codingtonportal.model.services.EventServiceImpl;
-import codingtonportal.model.services.EventSignUpImpl;
 import codingtonportal.model.services.PlaceServiceImpl;
 
 /**

@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -17,10 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
 import codingtonportal.model.domain.Place;
-import codingtonportal.model.domain.TypePlace;
 import codingtonportal.model.services.EventServiceImpl;
 import codingtonportal.model.services.PlaceServiceImpl;
-import codingtonportal.model.services.TypePlaceServiceImpl;
 
 
 
