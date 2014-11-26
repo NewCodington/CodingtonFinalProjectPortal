@@ -37,21 +37,29 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("ErrorLogin")!= null && !session.getAttribute("ErrorLogin").toString().equals("")){
+		if (session.getAttribute("ViewError")!= null && session.getAttribute("ViewError").toString().equals("YES")) {
+			session.setAttribute("ViewError", null);
+			
 			response.sendRedirect("login.jsp");
 		}
-		else{
-			session.setAttribute("ErrorLogin", null);
-			
-			if(session.getAttribute("Visitor")!= null)
-				response.sendRedirect("visitor");
-			
-			else if (session.getAttribute("Admin")!= null) 
-				response.sendRedirect("admin");
-			else
+		else {
+			session.setAttribute("Error", null);
+		
+			if(session.getAttribute("ErrorLogin")!= null && !session.getAttribute("ErrorLogin").toString().equals("")){
 				response.sendRedirect("login.jsp");
 			}
-		
+			else {
+				session.setAttribute("ErrorLogin", null);
+				
+				if(session.getAttribute("Visitor")!= null)
+					response.sendRedirect("visitor");
+				
+				else if (session.getAttribute("Admin")!= null) 
+					response.sendRedirect("admin");
+				else
+					response.sendRedirect("login.jsp");
+			}
+		}
 	}
 
 	/**
