@@ -57,24 +57,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		
-		Visitor visitor = new Visitor(request.getParameter("username"), request.getParameter("password"));
 
-		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
-		
 		try {
+			Visitor visitor = new Visitor(request.getParameter("username"), request.getParameter("password"));
+
+			VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+
 			visitor.setIdVisitor(visitorService.loginVisitor(visitor));
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
+				
 			if ((visitor.getIdVisitor()) >= 0) {
 				if(visitorService.isAdmin(visitor)){
 
@@ -89,7 +79,6 @@ public class LoginServlet extends HttpServlet {
 
 					response.sendRedirect("visitor");
 				}
-				
 
 			}else{
 				session.setAttribute("ErrorLogin", "User or password incorrect");

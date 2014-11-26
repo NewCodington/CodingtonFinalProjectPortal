@@ -34,9 +34,7 @@ public class VisitorRegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		
-		
-HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
 			response.sendRedirect("registerEvent.jsp");
@@ -52,47 +50,35 @@ HttpSession session = request.getSession();
 				response.sendRedirect("registerVisitor.jsp");
 			}				
 		}
-		
-		
-		
-		
-		//response.sendRedirect("registerVisitor.jsp");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		
+		response.setContentType("text/html");		
 		HttpSession session = request.getSession();
-		
-		
-		Visitor visitor=new Visitor();
-		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
-		
-		visitor.setFirstName(request.getParameter("fname"));
-		visitor.setLastName(request.getParameter("lname"));
-		visitor.setUserName(request.getParameter("uname"));
-		visitor.setPassword(request.getParameter("pass"));
-		visitor.setEmail(request.getParameter("email"));
-		visitor.setDni(request.getParameter("dni"));
-		visitor.setPhoneNumber(request.getParameter("phone"));
-		visitor.setAddress(request.getParameter("adress"));
-		visitor.setAdmin(false);
 
-		
-		
-		
 		try {
+			Visitor visitor=new Visitor();
+			VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+			
+			visitor.setFirstName(request.getParameter("fname"));
+			visitor.setLastName(request.getParameter("lname"));
+			visitor.setUserName(request.getParameter("uname"));
+			visitor.setPassword(request.getParameter("pass"));
+			visitor.setEmail(request.getParameter("email"));
+			visitor.setDni(request.getParameter("dni"));
+			visitor.setPhoneNumber(request.getParameter("phone"));
+			visitor.setAddress(request.getParameter("adress"));
+			visitor.setAdmin(false);
+			
 			if(visitorService.insertVisitor(visitor) > 0){
 				session.setAttribute("Success", "Successfully created visitor");
 			}else{
 				session.setAttribute("Error", "Incorrect Visitor values");
 			}
-			
-			
-			
+
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -105,10 +91,6 @@ HttpSession session = request.getSession();
 		}
 		
 		response.sendRedirect("registerVisitor");
-		
-		
-		
-		
 	}
 
 }

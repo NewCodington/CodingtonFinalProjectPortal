@@ -87,32 +87,25 @@ public class RegistEventServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		Event event=new Event();
-		
-		EventServiceImpl  eventService = new EventServiceImpl();
-		
-		event.setName(request.getParameter("eventName"));
-		event.setDescription(request.getParameter("description"));
-		event.setPlace(Integer.parseInt(request.getParameter("place")));
-	
-		SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy");
-		java.util.Date dateInput = null;
-		   try {
-		     dateInput = originalFormat.parse(request.getParameter("date").toString());
-		     
-		     event.setDate_event(dateInput);
-
-		   }catch (ParseException ex) {
-
-	       }
-		
-		
-		event.setStartTime(request.getParameter("startTime"));
-		event.setDuration(request.getParameter("duration"));
-		event.setEventType(request.getParameter("typeOfEvent"));
-		event.setSeatsAvailable(Integer.parseInt(request.getParameter("seats")));
-		
 		try {
+			Event event=new Event();
+			
+			EventServiceImpl  eventService = new EventServiceImpl();
+			
+			event.setName(request.getParameter("eventName"));
+			event.setDescription(request.getParameter("description"));
+			event.setPlace(Integer.parseInt(request.getParameter("place")));
+		
+			SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy");
+			java.util.Date dateInput = null;
+			dateInput = originalFormat.parse(request.getParameter("date").toString());
+			   
+			event.setDate_event(dateInput);
+			event.setStartTime(request.getParameter("startTime"));
+			event.setDuration(request.getParameter("duration"));
+			event.setEventType(request.getParameter("typeOfEvent"));
+			event.setSeatsAvailable(Integer.parseInt(request.getParameter("seats")));
+			
 			if(eventService.insertEvent(event) > 0){
 				session.setAttribute("Success", "Successfully created Event");
 				session.setAttribute("ViewSuccess", "YES");

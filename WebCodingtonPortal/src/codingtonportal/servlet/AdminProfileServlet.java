@@ -44,25 +44,23 @@ public class AdminProfileServlet extends HttpServlet {
 		ArrayList<Event> eventsList=null;
 		ArrayList<Place> placesList=null;
 		
-		EventServiceImpl eventService=new EventServiceImpl();
-		PlaceServiceImpl placeService=new PlaceServiceImpl();
-		
-		
-		
-		//Params of jsp for get
-		String updateEvent = null;
-		updateEvent = request.getParameter("updateEvent");
-		
-		String deleteEvent = null;
-		deleteEvent = request.getParameter("deleteEvent");
-		
-		String updatePlace = null;
-		updatePlace = request.getParameter("updatePlace");
-		
-		String deletePlace = null;
-		deletePlace = request.getParameter("deletePlace");
-		
 		try {
+			EventServiceImpl eventService=new EventServiceImpl();
+			PlaceServiceImpl placeService=new PlaceServiceImpl();
+
+			//Params of jsp for get
+			String updateEvent = null;
+			updateEvent = request.getParameter("updateEvent");
+			
+			String deleteEvent = null;
+			deleteEvent = request.getParameter("deleteEvent");
+			
+			String updatePlace = null;
+			updatePlace = request.getParameter("updatePlace");
+			
+			String deletePlace = null;
+			deletePlace = request.getParameter("deletePlace");
+			
 			if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
 				session.setAttribute("ViewSuccess", null);
 			}

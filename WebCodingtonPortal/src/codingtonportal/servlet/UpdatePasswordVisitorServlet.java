@@ -35,12 +35,10 @@ public class UpdatePasswordVisitorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		
-		
+
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
 		Visitor visitor=new Visitor();
-		
-		
+	
 		String idVisitor=null;
 		idVisitor=session.getAttribute("idVisitor").toString();
 
@@ -51,10 +49,7 @@ public class UpdatePasswordVisitorServlet extends HttpServlet {
 				Visitor visitorUpdate=new Visitor(visitorService.selectVisitor(visitor));
 				
 				session.setAttribute("VISITOR", visitorUpdate);
-			
-			
-			
-			
+
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,8 +63,7 @@ public class UpdatePasswordVisitorServlet extends HttpServlet {
 				
 		}
 		
-		response.sendRedirect("updatePasswordVisitor.jsp");
-		
+		response.sendRedirect("updatePasswordVisitor.jsp");	
 	}
 
 	/**
@@ -80,23 +74,14 @@ public class UpdatePasswordVisitorServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String idVisitor=null;
-		idVisitor=session.getAttribute("idVisitor").toString();
-		
-		
-		
-		Visitor visitor=new Visitor();
 	
-		
-		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
-		
-		
-		
-		visitor.setIdVisitor(Integer.parseInt(idVisitor));
-		visitor.setPassword(request.getParameter("pass"));
-	
-		
-		
 		try {
+			idVisitor=session.getAttribute("idVisitor").toString();	
+			Visitor visitor=new Visitor();
+			VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+			visitor.setIdVisitor(Integer.parseInt(idVisitor));
+			visitor.setPassword(request.getParameter("pass"));
+			
 			if(visitorService.updatePassword(visitor) > 0){
 				session.setAttribute("Success", "Successfully Visitor Password updated");
 				session.setAttribute("ViewSuccess", "YES");
@@ -118,5 +103,4 @@ public class UpdatePasswordVisitorServlet extends HttpServlet {
 			e.printStackTrace();
 		} 
 	}
-
 }

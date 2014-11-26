@@ -63,9 +63,6 @@ public class UpdateEventServlet extends HttpServlet {
 				
 				session.setAttribute("EVENT", eventUpdate);
 			
-			
-			
-			
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -83,7 +80,6 @@ public class UpdateEventServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect("updateEvent.jsp");
-		
 	}
 
 	/**

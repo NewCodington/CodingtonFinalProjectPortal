@@ -50,11 +50,9 @@ public class UpdatePlaceServlet extends HttpServlet {
 		Place place=new Place();
 		PlaceServiceImpl  placeService = new PlaceServiceImpl();
 		
-		
 		idPlace=request.getParameter("updatePlace");
 		session.setAttribute("idPlace", idPlace);
 		
-
 		if(idPlace!=null)
 		{
 			place.setIdPlace(Integer.parseInt(idPlace));
@@ -79,7 +77,6 @@ public class UpdatePlaceServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect("updatePlace.jsp");
-		
 	}
 
 	/**
