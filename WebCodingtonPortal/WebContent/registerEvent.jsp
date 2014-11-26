@@ -70,12 +70,12 @@
 					</div>
 					  
 					<div class="field"><p>Description:</p>
-					  <input type="text" id="description" name="description" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
+					  <input type="text" id="description" name="description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
 					  <br />
 					</div>
 					
 					<div class="field"><p>Date:</p>
-					  	<input type="text" id="date" name="date" pattern="[0-9]{2}+[-]+[0-9]{2}+[-]+[0-9]{4}" title="Enter a valid place (dd-mm-aaaa)" placeholder="Date" required />
+					  	<input type="text" id="date" name="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-aaaa)" placeholder="Date" required />
 						<br />
 					</div>
 					
@@ -96,23 +96,23 @@
 					</div>
 					  
 					 <div class="field"><p>Start Time:</p>
-					  	<input type="text" id="startTime" name="startTime" pattern="\S{1,45}" title="Enter a valid place (length between 1-45)" placeholder="Date" required />
+					  	<input type="text" id="startTime" name="startTime" pattern="[][a-zA-Z0-9]| |/|\|@|#|$|%|&]{15}" title="Enter a valid start time (length between 1-15)" placeholder="Date" required />
 					 	<br />
 					 </div>
 					    
 					 <div class="field"><p>Duration:</p> 
-					  	<input type="text" id="duration" name="duration"  pattern="\S{1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
+					  	<input type="text" id="duration" name="duration"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
 					  	<br />
 					 </div>
 					 
 					 <div class="field"><p>Type of Event:</p> 
-					  	<input type="text"  id="typeOfEvent"name="typeOfEvent"  pattern="\S{1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
+					  	<input type="text"  id="typeOfEvent"name="typeOfEvent"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
 					    <br />
 					 </div>
 					  
 				 
 				    <div class="field"><p>Seats Avalaible:</p>
-					  	<input type="text" id="seats" name="seats" required title="Field required" placeholder="Seats Avalaible" />
+					  	<input type="text" id="seats" name="seats" pattern = "[0-9]{1,20}" required title="Field required" placeholder="Seats Avalaible" />
 					  	<br />
 				    </div>
 			
