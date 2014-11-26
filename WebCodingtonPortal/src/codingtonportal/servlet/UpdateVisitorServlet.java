@@ -2,10 +2,6 @@ package codingtonportal.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +40,6 @@ public class UpdateVisitorServlet extends HttpServlet {
 		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
 		Visitor visitor=new Visitor();
 		
-		
 		String idVisitor=null;
 		idVisitor=session.getAttribute("idVisitor").toString();
 
@@ -55,10 +50,7 @@ public class UpdateVisitorServlet extends HttpServlet {
 				Visitor visitorUpdate=new Visitor(visitorService.selectVisitor(visitor));
 				
 				session.setAttribute("VISITOR", visitorUpdate);
-			
-			
-			
-			
+
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -83,29 +75,22 @@ public class UpdateVisitorServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		String idVisitor=null;
-		idVisitor=session.getAttribute("idVisitor").toString();
-		
-		
-		
-		Visitor visitor=new Visitor();
-	
-		
-		VisitorServiceImpl  visitorService = new VisitorServiceImpl();
-		
-		
-		
-		visitor.setIdVisitor(Integer.parseInt(idVisitor));
-		visitor.setFirstName(request.getParameter("fname"));
-		visitor.setLastName(request.getParameter("lname"));
-		visitor.setEmail(request.getParameter("email"));
-		visitor.setDni(request.getParameter("dni"));
-		visitor.setPhoneNumber(request.getParameter("phone"));
-		visitor.setAddress(request.getParameter("adress"));
-		visitor.setAdmin(false);
-		
 		
 		try {
+			String idVisitor=null;
+			idVisitor=session.getAttribute("idVisitor").toString();
+			
+			Visitor visitor=new Visitor();
+			VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+			visitor.setIdVisitor(Integer.parseInt(idVisitor));
+			visitor.setFirstName(request.getParameter("fname"));
+			visitor.setLastName(request.getParameter("lname"));
+			visitor.setEmail(request.getParameter("email"));
+			visitor.setDni(request.getParameter("dni"));
+			visitor.setPhoneNumber(request.getParameter("phone"));
+			visitor.setAddress(request.getParameter("adress"));
+			visitor.setAdmin(false);
+			
 			if(visitorService.updateVisitor(visitor) > 0){
 				session.setAttribute("Success", "Successfully Visitor updated");
 				session.setAttribute("ViewSuccess", "YES");

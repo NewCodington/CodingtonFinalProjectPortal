@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -64,9 +63,6 @@ public class UpdateEventServlet extends HttpServlet {
 				
 				session.setAttribute("EVENT", eventUpdate);
 			
-			
-			
-			
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -84,7 +80,6 @@ public class UpdateEventServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect("updateEvent.jsp");
-		
 	}
 
 	/**

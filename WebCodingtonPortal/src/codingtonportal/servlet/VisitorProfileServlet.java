@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,33 +41,31 @@ public class VisitorProfileServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		session.setAttribute("ErrorLogin", null);
 		
-		
-		ArrayList<Integer> listIdEvent = null;
-		ArrayList<Event> eventsRegisterList = null;
-		ArrayList<Event> eventsList=null;
-		
-		EventServiceImpl eventService=new EventServiceImpl();
-		EventSignUpImpl eventSignUp=new EventSignUpImpl();
-		
-		
-		if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
-			session.setAttribute("ViewSuccess", null);
-		}
-		else
-			session.setAttribute("Success", null);
-		
-		
-		//Params of jsp for get
-		String register=null;
-		register=request.getParameter("register");
-		
-		String unregister=null;
-		unregister=request.getParameter("unregister");
-		
-		String idVisitor=null;
-		idVisitor=session.getAttribute("idVisitor").toString();
-		
 		try {
+			ArrayList<Integer> listIdEvent = null;
+			ArrayList<Event> eventsRegisterList = null;
+			ArrayList<Event> eventsList=null;
+			
+			EventServiceImpl eventService=new EventServiceImpl();
+			EventSignUpImpl eventSignUp=new EventSignUpImpl();
+			
+			
+			if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
+				session.setAttribute("ViewSuccess", null);
+			}
+			else
+				session.setAttribute("Success", null);
+			
+			
+			//Params of jsp for get
+			String register=null;
+			register=request.getParameter("register");
+			
+			String unregister=null;
+			unregister=request.getParameter("unregister");
+			
+			String idVisitor=null;
+			idVisitor=session.getAttribute("idVisitor").toString();
 			
 			//si vienen los parametros meto el nuevo evento a ese visitor
 			if(register!=null){ 

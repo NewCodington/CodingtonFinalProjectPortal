@@ -43,7 +43,6 @@ public class RegistPlaceServlet extends HttpServlet {
 		ArrayList<TypePlace> listTypePlace = null;
 		TypePlaceServiceImpl typePlaceService=new TypePlaceServiceImpl();
 		
-		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals(""))
 		{
 			response.sendRedirect("registerPlace.jsp");
@@ -150,13 +149,4 @@ public class RegistPlaceServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
-		
-		
-		
-		
-		
-		
-	
-
 }
