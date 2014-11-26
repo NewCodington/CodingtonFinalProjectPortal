@@ -16,7 +16,16 @@
 
 	
 	<body id="body">
-	
+	<%
+	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+		response.sendRedirect("login");
+	}
+	else if (session.getAttribute("Admin")!=null) {
+		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
+		response.sendRedirect("admin");
+	}
+	else
+	%> 
 		<div id="header">
 			<table>
 		    	<tr>
@@ -55,7 +64,7 @@
 			</div>
 
 			<div class="right_nav">
-				
+				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
 				
 				<div class = "section">

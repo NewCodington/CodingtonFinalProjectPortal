@@ -21,7 +21,20 @@
 	%>
 
 	<body id="body">
-
+	<%
+	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+		response.sendRedirect("login");
+	}
+	else if (session.getAttribute("Visitor")!=null) {
+		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
+		response.sendRedirect("visitor");
+	}
+	else {
+		if(session.getAttribute("idEvent") == null) {
+			response.sendRedirect("admin");
+		}
+	}
+	%> 
 		<div id="header">
 			<table>
 		    	<tr>

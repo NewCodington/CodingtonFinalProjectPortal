@@ -13,7 +13,11 @@
 
 
 	<body id="body">
-	
+	<%
+	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+		response.sendRedirect("login");
+	}
+	%> 
 		<div id="header">
 			<table>
 		    	<tr>

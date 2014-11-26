@@ -8,15 +8,24 @@
 <%@page import="codingtonportal.model.domain.Place"%>
 
 <html>
-	  
+	
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/codington.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="session.js"></script>
 		<title>Bienvenido <%=session.getAttribute("Admin") %></title>
 	</head>
 
-
 	<body id="body">
+	<%
+	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+		response.sendRedirect("login");
+	}
+	else if (session.getAttribute("Visitor")!=null) {
+		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
+		response.sendRedirect("visitor");
+	}
+	%> 
 	
 		<div id="header">
 			<table>
@@ -65,6 +74,12 @@
 					<%
 						ArrayList<Event> eventList = new ArrayList<Event>();
 						eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
+						if (eventList == null){
+					%>
+						<div class="message"><p>Not Exit Events</p></div>
+					<%	
+						}
+						else {	
 					%>
 								
 				  	<table>
@@ -98,6 +113,9 @@
 							}
 						%>
 					</table>
+					<%
+						}
+					%>
 				</div>
 		 
 			<div class = "section">
@@ -106,6 +124,12 @@
 				<%
 				ArrayList<Place> placeList = new ArrayList<Place>();
 				placeList = (ArrayList<Place>) session.getAttribute("PLACELIST");
+				if (placeList == null){
+				%>
+					<div class="message"><p>Not Exit Places</p></div>
+				<%	
+					}
+					else {	
 				%>
 								
 		  		<table>
@@ -135,6 +159,9 @@
 						}
 					%>
 				</table>
+				<%
+					}
+				%>
 		  	</div>
 		</div>
 		

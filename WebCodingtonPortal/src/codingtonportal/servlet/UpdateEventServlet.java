@@ -44,7 +44,7 @@ public class UpdateEventServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		ArrayList<Place> listPlace = null;
 		PlaceServiceImpl PlaceService=new PlaceServiceImpl();
-		
+		session.setAttribute("idEvent", null);
 		String idEvent=null;
 		EventServiceImpl  eventService = new EventServiceImpl();
 		Event event=new Event();
