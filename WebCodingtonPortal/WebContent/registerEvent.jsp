@@ -65,12 +65,12 @@
 					<br />
 					    
 					<div class="field"><p>Event name:</p> 
-					  	<input type="text" id="eventName" name="eventName" pattern="\S{1,45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
+					  	<input type="text" id="eventName" name="eventName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
 					  	<br />
 					</div>
 					  
 					<div class="field"><p>Description:</p>
-					  <input type="text" id="description" name="description" title="1 to 45 characters" pattern="\S{1,45}" placeholder="Description" required />
+					  <input type="text" id="description" name="description" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
 					  <br />
 					</div>
 					
