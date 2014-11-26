@@ -16,27 +16,23 @@
 	</head>
 
 
-	<%
-		Place place = new Place();
-		place=(Place)session.getAttribute("PLACE");
-	%>
-
-
-
-
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		response.sendRedirect("login");
+		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
 		response.sendRedirect("visitor");
+		return;
 	}
 	else
 	{
-		if(session.getAttribute("idPlace") == null)
-			response.sendRedirect("updatePlace");
+		if(session.getAttribute("idPlace") == null) {
+			response.sendRedirect("admin");
+			return;	
+		}
 	}
 	%> 
 		<div id="header">
@@ -81,6 +77,11 @@
 				
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 
+				<%
+					if (session.getAttribute("idPlace") != null) {
+						Place place = (Place)session.getAttribute("PLACE");
+						ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+				%>
 				<form method="post" action="updatePlace">
 					<div class="title">New Place</div>
 					<br />
@@ -106,10 +107,6 @@
 				  	</div>
 				  		
 					<div class="field"><p>Type Place:</p>
-						<%
-							ArrayList<TypePlace> typePlaceList = new ArrayList<TypePlace>();
-							typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
-						%>
 						<select id="typePlace" name="typePlace" required>
 							<%
 								for (TypePlace typePlace : typePlaceList) {
@@ -128,6 +125,9 @@
 						<br />
 					</div>  
 				</form>
+				<%
+					}
+				%>
 			</div>
 		</div>
 		

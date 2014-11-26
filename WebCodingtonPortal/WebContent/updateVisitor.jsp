@@ -12,21 +12,25 @@
 		<script language="javascript" src="Register.js"></script>
 		<title>Visitor Update Page</title>
 	</head>
-
-	<%
-		Visitor visitor=new Visitor();
-		visitor=(Visitor)session.getAttribute("VISITOR");
-	%>
+	
 
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		response.sendRedirect("login");
+		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
 		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
 		response.sendRedirect("admin");
+		return;
+	}else {
+		if (session.getAttribute("VISITOR") == null) {
+			response.sendRedirect("visitor");
+			return;
+		}
 	}
+
 	%> 
 		<div id="header">
 			<table>
@@ -55,6 +59,10 @@
 
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				
+				<%
+					Visitor visitor=(Visitor)session.getAttribute("VISITOR");
+				%>
+	
 				<form method="post" action="updateVisitor">
 					<div class="title">New User</div>
 			        <br />

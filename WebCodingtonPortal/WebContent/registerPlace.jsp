@@ -14,14 +14,17 @@
 		<title>Register's Place Page</title>
 	</head>
 
+
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		response.sendRedirect("login");
+		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
 		response.sendRedirect("visitor");
+		return;
 	}
 	else
 	{
@@ -98,8 +101,8 @@
 					
 					<div class="field"><p>Type Place:</p>
 						<%
-							ArrayList<TypePlace> typePlaceList = new ArrayList<TypePlace>();
-							typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+							if (session.getAttribute("LISTTYPEPLACE") != null) {
+								ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
 						%>
 						<select id="typePlace" name="typePlace" required>
 							<%
@@ -110,6 +113,9 @@
 								}
 							%>
 						</select>
+						<%
+							}
+						%>
 						<br />
 					</div>
 					

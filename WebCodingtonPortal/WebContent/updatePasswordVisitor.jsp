@@ -22,10 +22,12 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		response.sendRedirect("login");
+		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
 		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
 		response.sendRedirect("admin");
+		return;
 	}
 	%>
 		<div id="header">

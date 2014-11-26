@@ -39,7 +39,7 @@ public class VisitorProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session=request.getSession();
-		session.setAttribute("ErrorLogin", null);
+		session.setAttribute("Access", "access");	
 		
 		try {
 			ArrayList<Integer> listIdEvent = null;
@@ -136,6 +136,7 @@ public class VisitorProfileServlet extends HttpServlet {
 		try {
 			
 			eventsList = eventService.searchEvent(search);
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,6 +150,7 @@ public class VisitorProfileServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		session.setAttribute("EVENTLIST", eventsList);
 		response.sendRedirect("profileVisitor.jsp");
 	}

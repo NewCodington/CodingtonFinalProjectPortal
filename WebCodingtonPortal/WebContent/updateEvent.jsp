@@ -15,11 +15,6 @@
 		<title>Event Update Page</title>
 	</head>
 
-	<%
-		Event event = new Event();
-		event=(Event)session.getAttribute("EVENT");
-	%>
-
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
@@ -32,6 +27,7 @@
 	else {
 		if(session.getAttribute("idEvent") == null) {
 			response.sendRedirect("admin");
+			return;
 		}
 	}
 	%> 
@@ -77,6 +73,11 @@
 				
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 	
+				<% 
+					if (session.getAttribute("idEvent") != null) {
+						Event event=(Event)session.getAttribute("EVENT");
+						ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
+				%>
 				<form method="post" action="updateEvent">
 					<div class="title">New Event</div>
 					<br />
@@ -97,20 +98,15 @@
 					</div>
 					
 					<div class="field"><p>Place:</p>
-					  	<%
-							ArrayList<Place> placeList = new ArrayList<Place>();
-							placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
-						%>
 						<select id="place" name="place" required>
 							<%
 								for (Place place : placeList) {
 							%>
-							<option value="<%= place.getIdPlace()%>" <%= event.getPlace() == place.getIdPlace()?"selected":"" %>> <%=place.getName() %></option>
+							<option value="<%= place.getIdPlace()%>" <%=place.getIdPlace() == event.getPlace()?"selected":"" %>><%=place.getName()%></option>
 							<%
 								}
 							%>
 						</select>
-					  	<br />
 					</div>
 					  
 					 <div class="field"><p>Start Time:</p>
@@ -140,6 +136,9 @@
 						<br />
 					</div> 
 				</form>
+				<%
+					}
+				%>
 			</div>
 		</div>
 

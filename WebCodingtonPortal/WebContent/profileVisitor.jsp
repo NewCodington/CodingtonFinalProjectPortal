@@ -19,10 +19,12 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		response.sendRedirect("login");
+		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
 		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
 		response.sendRedirect("admin");
+		return;
 	}
 	else
 	%> 
@@ -79,14 +81,17 @@
 					<div class="title">EVENTS <hr></hr></div>
 					
 					<%
-						ArrayList<Event> eventList = new ArrayList<Event>();
-						eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
-						if (eventList == null){
+						ArrayList<Event> eventList = null;
+						if (session.getAttribute("EVENTLIST") == null){
 					%>
+						
 					<div class="message"><p>Not found Events</p></div>
+					
 					<%	
 						}
-						else {	
+						else {
+							eventList = new ArrayList<Event>();
+							eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
 					%>
 					<table>
 						<tr>
@@ -128,18 +133,18 @@
 				<div class="title">Events Resgistration<hr /></div>
 
 				<%
-					ArrayList<Event> eventRegisterList = new ArrayList<Event>();
-					eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGISTERLIST");
-					if (eventRegisterList == null){
+					ArrayList<Event> eventRegisterList = null;
+					if (session.getAttribute("EVENTREGISTERLIST") == null){
 				%>
-				
+						
 				<div class="message"><p>There are no Events Registered for you</p></div>	
-				
+						
 				<%	
 					}
 					else {	
+						eventRegisterList = new ArrayList<Event>();
+						eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGISTERLIST");
 				%>
-				
 				<table>
 					<tr>
 						<th>Event Name</th>

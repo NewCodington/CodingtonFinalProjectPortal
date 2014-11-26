@@ -16,6 +16,7 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		response.sendRedirect("login");
+		return;
 	}
 	%> 
 		<div id="header">
@@ -43,11 +44,26 @@
 		<div id="content">
 
 			<div class = "left_nav">
-				<div class = "title"><%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?session.getAttribute("Visitor").toString():session.getAttribute("Admin").toString() %>'s Menu</div>
+				<div class = "title"><%= session.getAttribute("Visitor")!=null?session.getAttribute("Visitor").toString():session.getAttribute("Admin").toString() %>'s Menu</div>
 				<hr size=10 />
 				
 				<div class = content>	
 					<p><a class="link" href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"visitor":"admin" %>>My Page </a></p>
+					<hr />
+					<%
+						if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
+						{
+					%>
+							<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
+							<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<%
+						}else {
+					%>
+							<p><a href="updateVisitor" class="link">Update Information </a></p>
+							<p><a href="updatePasswordVisitor" class="link">Update Password </a></p>
+					<%
+						}
+					%>
 					<hr />
 					<p><a href="logout" class="link">Logout </a></p>
 				</div>

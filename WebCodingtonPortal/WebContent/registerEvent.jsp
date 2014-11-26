@@ -19,10 +19,12 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		response.sendRedirect("login");
+		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
 		response.sendRedirect("visitor");
+		return;
 	}
 	else {
 		if(session.getAttribute("LISTPLACE") == null)
@@ -93,8 +95,8 @@
 					
 					<div class="field"><p>Place:</p>
 					  	<%
-							ArrayList<Place> placeList = new ArrayList<Place>();
-							placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
+					  		if (session.getAttribute("LISTPLACE") != null) {
+								ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
 						%>
 						<select id="place" name="place" required>
 							<%
@@ -105,6 +107,9 @@
 								}
 							%>
 						</select>
+						<%
+							}
+						%>
 					</div>
 					  
 					 <div class="field"><p>Start Time:</p>

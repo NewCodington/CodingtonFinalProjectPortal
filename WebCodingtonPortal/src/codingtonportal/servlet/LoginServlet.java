@@ -41,6 +41,8 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("login.jsp");
 		}
 		else{
+			session.setAttribute("ErrorLogin", null);
+			
 			if(session.getAttribute("Visitor")!= null)
 				response.sendRedirect("visitor");
 			else if (session.getAttribute("Admin")!= null) 

@@ -20,9 +20,11 @@
 	if (session.getAttribute("Visitor")!=null) {
 		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
 		response.sendRedirect("visitor");
+		return;
 	}
 	else if(session.getAttribute("Admin")!=null) {
 		response.sendRedirect("admin");
+		return;
 	}
 	%> 
 		<div id="header">
