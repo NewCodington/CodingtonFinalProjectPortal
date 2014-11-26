@@ -3,6 +3,7 @@ package codingtonportal.tests;
 
 
 
+import java.sql.Blob;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -37,7 +38,7 @@ public class PlaceDAOJUnit extends TestCase {
 	 */
 	@Test
 	public void testinsertplace() throws SQLException {
-		Place places = new Place (34, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
+		Place places = new Place (34, "Museum", 1, null,"C/olvido", "Quiero aparecer");
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.insertPlace(places));		
@@ -57,7 +58,7 @@ public class PlaceDAOJUnit extends TestCase {
 	 */
 	@Test
 	public void testupdateplace() throws SQLException {
-		Place places = new Place (36, "Museum", "1", 1, null,"C/olvido", "Actualizar");
+		Place places = new Place (36, "Museum", 1, null,"C/olvido", "Actualizar");
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.updatePlace(places));		
@@ -77,7 +78,7 @@ public class PlaceDAOJUnit extends TestCase {
 	 */
 	@Test
 	public void testdeleteplace() throws SQLException {
-		Place places = new Place (39, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
+		Place places = new Place (39, "Museum", 1, null,"C/olvido", "Quiero aparecer");
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.deletePlace(places.getIdPlace()));		
@@ -115,7 +116,7 @@ public class PlaceDAOJUnit extends TestCase {
 	 */
 	@Test
 	public void testselectPlace () throws SQLException{
-		Place places = new Place (38, "Museum", "1", 1, null,"C/olvido", "Quiero aparecer");
+		Place places = new Place (38, "Museum", 1, null,"C/olvido", "Quiero aparecer");
 		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
 		try {
 			assertNotNull(servicePlace.selectPlace(places));
