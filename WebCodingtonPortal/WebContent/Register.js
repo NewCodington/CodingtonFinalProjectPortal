@@ -58,7 +58,6 @@ function validateConfirmPass(){
 function validateDni(){
 
 	var dni = document.getElementById("dni").value;
-	alert(dni);
 	var numdni;
 	var ldni = 'TRWAGMYFPDXBNJZSQVHLCKE';
 
