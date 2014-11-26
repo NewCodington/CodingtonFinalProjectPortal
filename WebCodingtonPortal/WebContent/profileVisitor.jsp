@@ -72,6 +72,12 @@
 					<%
 						ArrayList<Event> eventList = new ArrayList<Event>();
 						eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
+						if (eventList == null){
+					%>
+					<div class="message"><p>Not found Events</p></div>
+					<%	
+						}
+						else {	
 					%>
 					<table>
 						<tr>
@@ -101,9 +107,12 @@
 							<td><a href = <%="visitor?register=" + event.getEventId() %>>Register</a></td>
 						</tr>
 						<%
-						}
+							}
 						%>
 					</table>
+					<%
+						}
+					%>
 				</div>
 				
 			<div class = "section">
