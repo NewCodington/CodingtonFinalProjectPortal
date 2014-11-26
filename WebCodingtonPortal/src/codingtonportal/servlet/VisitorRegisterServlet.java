@@ -36,21 +36,20 @@ public class VisitorRegisterServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("ErrorUser", null);
-		session.setAttribute("VisitorInfo", null);
-		
 		if(session.getAttribute("Error")!= null && !session.getAttribute("Error").toString().equals("")){
 			response.sendRedirect("registerEvent.jsp");
 		}
 		else{
-			if(session.getAttribute("Success")!= null && !session.getAttribute("Success").toString().equals("")){
-				session.setAttribute("Error", null);
-				session.setAttribute("Success", null);
+			if(session.getAttribute("ViewSuccess")!= null && session.getAttribute("ViewSuccess").toString().equals("YES")){
+				session.setAttribute("ViewSuccess", null);
+				
 				response.sendRedirect("login");
 			}
 			else {
-				session.setAttribute("Error", null);
 				session.setAttribute("Success", null);
+				session.setAttribute("ErrorUser", null);
+				session.setAttribute("VisitorInfo", null);
+				
 				response.sendRedirect("registerVisitor.jsp");
 			}				
 		}
@@ -87,9 +86,12 @@ public class VisitorRegisterServlet extends HttpServlet {
 				session.setAttribute("ErrorUser", null);
 				
 				if(visitorService.insertVisitor(visitor) > 0){
-					session.setAttribute("Success", "Successfully created visitor");
+					session.setAttribute("Success", "Successfully visitor created");
+					session.setAttribute("ViewSuccess", "YES");
+					session.setAttribute("Error", null);
 				}else{
 					session.setAttribute("Error", "Incorrect Visitor values");
+					session.setAttribute("ViewSuccess", null);
 				}
 			
 				response.sendRedirect("registerVisitor");	

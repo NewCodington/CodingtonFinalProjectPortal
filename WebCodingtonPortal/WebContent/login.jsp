@@ -39,6 +39,8 @@
 			<div class="center_nav">
 				<br />
 				<div class="error"><%= session.getAttribute("ErrorLogin")!=null?session.getAttribute("ErrorLogin").toString():""%></div>
+				<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+				
 				
 				<form method="post" action="login">
 					<div class="title">Sign In</div>

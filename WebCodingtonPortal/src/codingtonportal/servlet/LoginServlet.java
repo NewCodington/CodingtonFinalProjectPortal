@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
 			
 			if(session.getAttribute("Visitor")!= null)
 				response.sendRedirect("visitor");
+			
 			else if (session.getAttribute("Admin")!= null) 
 				response.sendRedirect("admin");
 			else
@@ -84,6 +85,7 @@ public class LoginServlet extends HttpServlet {
 
 			}else{
 				session.setAttribute("ErrorLogin", "User or password incorrect");
+				
 				response.sendRedirect("login");
 			}
 		} catch (ClassNotFoundException e) {

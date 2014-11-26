@@ -87,6 +87,7 @@ public class UpdatePasswordVisitorServlet extends HttpServlet {
 				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Visitor values");
+				
 				response.sendRedirect("updateVisitor");
 			}
 			

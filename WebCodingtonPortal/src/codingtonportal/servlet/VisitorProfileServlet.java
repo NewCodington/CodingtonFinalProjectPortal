@@ -39,7 +39,6 @@ public class VisitorProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession session=request.getSession();
-		session.setAttribute("Access", "access");	
 		
 		try {
 			ArrayList<Integer> listIdEvent = null;
@@ -48,14 +47,6 @@ public class VisitorProfileServlet extends HttpServlet {
 			
 			EventServiceImpl eventService=new EventServiceImpl();
 			EventSignUpImpl eventSignUp=new EventSignUpImpl();
-			
-			
-			if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
-				session.setAttribute("ViewSuccess", null);
-			}
-			else
-				session.setAttribute("Success", null);
-			
 			
 			//Params of jsp for get
 			String register=null;
@@ -69,14 +60,24 @@ public class VisitorProfileServlet extends HttpServlet {
 			
 			//si vienen los parametros meto el nuevo evento a ese visitor
 			if(register!=null){ 
-				if(eventSignUp.registerForNewEvent(Integer.parseInt(idVisitor), Integer.parseInt(register)) == null)
-					session.setAttribute("Error", "You're already registered on this event");
-				else
-					session.setAttribute("Error", null);
+				if(eventSignUp.registerForNewEvent(Integer.parseInt(idVisitor), Integer.parseInt(register)) == null) {
+					session.setAttribute("Error", "You're already registered in this event");
+					session.setAttribute("ViewError", "YES");
+				}
+				else {
+					session.setAttribute("Success", "Succesfully registered in this event");
+					session.setAttribute("ViewSuccess", "YES");
+				}
 			}
 			if(unregister!=null){ 
-				eventSignUp.unregisterForEvent(Integer.parseInt(idVisitor), Integer.parseInt(unregister));
-				session.setAttribute("Error", null);
+				if(eventSignUp.unregisterForEvent(Integer.parseInt(idVisitor), Integer.parseInt(unregister)) == null) {
+					session.setAttribute("Error", "You're already registered in this event");
+					session.setAttribute("ViewError", "YES");
+				}
+				else {
+					session.setAttribute("Success", "Succesfully unregistered in this event");
+					session.setAttribute("ViewSuccess", "YES");
+				}
 			}
 			
 			listIdEvent = eventSignUp.selectEventForVisitor(Integer.parseInt(idVisitor));
@@ -96,6 +97,21 @@ public class VisitorProfileServlet extends HttpServlet {
 			
 			session.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
 			session.setAttribute("EVENTLIST", eventsList);
+			
+			
+			if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
+				session.setAttribute("ViewSuccess", null);
+				session.setAttribute("Error", null);
+			}
+			else 
+				session.setAttribute("Success", null);
+			
+			if(session.getAttribute("ViewError")!=null && session.getAttribute("ViewError").toString().equals("YES")) {
+				session.setAttribute("ViewError", null);
+				session.setAttribute("Success", null);
+			}
+			else 
+				session.setAttribute("Error", null);
 			
 			
 			response.sendRedirect("profileVisitor.jsp");
@@ -129,6 +145,14 @@ public class VisitorProfileServlet extends HttpServlet {
 		
 		String search=null;
 		search=request.getParameter("search");
+		
+		if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
+			session.setAttribute("ViewSuccess", null);
+		}
+		else {
+			session.setAttribute("Success", null);
+			session.setAttribute("Error", null);
+		}
 		
 		ArrayList<Event> eventsList=null;
 		EventServiceImpl eventService=new EventServiceImpl();

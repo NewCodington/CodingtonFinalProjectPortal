@@ -50,6 +50,8 @@ public class UpdateVisitorServlet extends HttpServlet {
 				Visitor visitorUpdate=new Visitor(visitorService.selectVisitor(visitor));
 				
 				session.setAttribute("VISITOR", visitorUpdate);
+				
+				response.sendRedirect("updateVisitor.jsp");
 
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -63,8 +65,6 @@ public class UpdateVisitorServlet extends HttpServlet {
 			}
 				
 		}
-		
-		response.sendRedirect("updateVisitor.jsp");
 		
 	}
 
@@ -96,6 +96,7 @@ public class UpdateVisitorServlet extends HttpServlet {
 				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Visitor values");
+				
 				response.sendRedirect("updateVisitor");
 			}
 			
