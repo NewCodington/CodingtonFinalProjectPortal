@@ -41,18 +41,23 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("ViewErrorPriv", null);
 			session.setAttribute("Error", null);
 			session.setAttribute("ErrorLogin", null);
+			
+			response.sendRedirect("login.jsp");
 		}
 		else {
 			if (session.getAttribute("ViewError")!= null && session.getAttribute("ViewError").toString().equals("YES")) {
 				session.setAttribute("ViewError", null);
 				session.setAttribute("ErrorPriv", null);
 				session.setAttribute("ErrorLogin", null);
+				
+				response.sendRedirect("login.jsp");
 			}
 			else {
 				if(session.getAttribute("ErrorLogin")!= null && !session.getAttribute("ErrorLogin").toString().equals("")){
-					response.sendRedirect("login.jsp");
 					session.setAttribute("Error", null);
 					session.setAttribute("ErrorPriv", null);
+					
+					response.sendRedirect("login.jsp");
 				}
 				else {
 					session.setAttribute("Error", null);
@@ -61,16 +66,15 @@ public class LoginServlet extends HttpServlet {
 					
 					if(session.getAttribute("Visitor")!= null) {
 						response.sendRedirect("visitor");
-						return;
 					}
 					else if (session.getAttribute("Admin")!= null) { 
 						response.sendRedirect("admin");
-						return;
 					}
+					else
+						response.sendRedirect("login.jsp");
 				}
 			}
 		}
-		response.sendRedirect("login.jsp");
 	}
 
 	/**
