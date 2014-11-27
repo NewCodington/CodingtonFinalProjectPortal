@@ -120,6 +120,8 @@
 					%>
 				</div>
 		 
+		 	</div>
+		 	
 			<div class = "section">
 				<div class="title">PLACES<hr /></div>
 		
