@@ -37,29 +37,40 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("ViewError")!= null && session.getAttribute("ViewError").toString().equals("YES")) {
-			session.setAttribute("ViewError", null);
-			
-			response.sendRedirect("login.jsp");
+		if (session.getAttribute("ViewErrorPriv")!= null && session.getAttribute("ViewErrorPriv").toString().equals("YES")) {
+			session.setAttribute("ViewErrorPriv", null);
+			session.setAttribute("Error", null);
+			session.setAttribute("ErrorLogin", null);
 		}
 		else {
-			session.setAttribute("Error", null);
-		
-			if(session.getAttribute("ErrorLogin")!= null && !session.getAttribute("ErrorLogin").toString().equals("")){
-				response.sendRedirect("login.jsp");
+			if (session.getAttribute("ViewError")!= null && session.getAttribute("ViewError").toString().equals("YES")) {
+				session.setAttribute("ViewError", null);
+				session.setAttribute("ErrorPriv", null);
+				session.setAttribute("ErrorLogin", null);
 			}
 			else {
-				session.setAttribute("ErrorLogin", null);
-				
-				if(session.getAttribute("Visitor")!= null)
-					response.sendRedirect("visitor");
-				
-				else if (session.getAttribute("Admin")!= null) 
-					response.sendRedirect("admin");
-				else
+				if(session.getAttribute("ErrorLogin")!= null && !session.getAttribute("ErrorLogin").toString().equals("")){
 					response.sendRedirect("login.jsp");
+					session.setAttribute("Error", null);
+					session.setAttribute("ErrorPriv", null);
+				}
+				else {
+					session.setAttribute("Error", null);
+					session.setAttribute("ErrorPriv", null);
+					session.setAttribute("ErrorLogin", null);
+					
+					if(session.getAttribute("Visitor")!= null) {
+						response.sendRedirect("visitor");
+						return;
+					}
+					else if (session.getAttribute("Admin")!= null) { 
+						response.sendRedirect("admin");
+						return;
+					}
+				}
 			}
 		}
+		response.sendRedirect("login.jsp");
 	}
 
 	/**

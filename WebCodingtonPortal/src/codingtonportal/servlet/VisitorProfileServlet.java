@@ -40,7 +40,7 @@ public class VisitorProfileServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session=request.getSession();
 		
-		try {
+		try {		
 			ArrayList<Integer> listIdEvent = null;
 			ArrayList<Event> eventsRegisterList = null;
 			ArrayList<Event> eventsList=null;
@@ -99,20 +99,30 @@ public class VisitorProfileServlet extends HttpServlet {
 			session.setAttribute("EVENTLIST", eventsList);
 			
 			
-			if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
-				session.setAttribute("ViewSuccess", null);
+			if (session.getAttribute("ViewErrorPriv")!= null && session.getAttribute("ViewErrorPriv").toString().equals("YES")) {
+				session.setAttribute("ViewErrorPriv", null);
 				session.setAttribute("Error", null);
-			}
-			else 
-				session.setAttribute("Success", null);
-			
-			if(session.getAttribute("ViewError")!=null && session.getAttribute("ViewError").toString().equals("YES")) {
-				session.setAttribute("ViewError", null);
 				session.setAttribute("Success", null);
 			}
-			else 
-				session.setAttribute("Error", null);
-			
+			else {	
+				if(session.getAttribute("ViewSuccess")!=null && session.getAttribute("ViewSuccess").toString().equals("YES")) {
+					session.setAttribute("ViewSuccess", null);
+					session.setAttribute("Error", null);
+					session.setAttribute("ErrorPriv", null);
+				}
+				else {
+					if(session.getAttribute("ViewError")!=null && session.getAttribute("ViewError").toString().equals("YES")) {
+						session.setAttribute("ViewError", null);
+						session.setAttribute("Success", null);
+						session.setAttribute("ErrorPriv", null);
+					}
+					else { 
+						session.setAttribute("Error", null);
+						session.setAttribute("ErrorPriv", null);
+						session.setAttribute("Success", null);
+					}
+				}
+			}
 			
 			response.sendRedirect("profileVisitor.jsp");
 			

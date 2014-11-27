@@ -18,11 +18,16 @@
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		session.setAttribute("ViewErrorPriv", "YES");
+		
 		response.sendRedirect("login");
 		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
-		//session.setAttribute("Error", "You do not have administrator privileges. You will be redirected to your profile page");
+		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		session.setAttribute("ViewErrorPriv", "YES");
+		
 		response.sendRedirect("visitor");
 		return;
 	}

@@ -15,6 +15,9 @@
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		session.setAttribute("ViewErrorPriv", "YES");
+		
 		response.sendRedirect("login");
 		return;
 	}
@@ -73,15 +76,15 @@
 				<div class="title">SITE MAP <hr /></div>
 				
 				<div class="content">
-					<p><a href="login" class="link">Login </a></p>
-				  	<blockquote><a href="register" class="link">Register Visitor Page</a></blockquote>
-				  	<blockquote><a href="visitor" class="link">Visitor's Page </a></blockquote>
-				  	<blockquote><a href="admin" class="link">Admin's Page </a></blockquote>
-				  	<blockquote><blockquote><a href="registerEvent" class="link">Event's Registration Page </a></blockquote></blockquote>
-				  	<blockquote><blockquote><a href="registerPlace" class="link">Place's Registration Page </a></blockquote></blockquote>
-				  	<blockquote><a href="history.jsp" class="link">History Page</a></blockquote>
-				  	<blockquote><a href="siteMap.jsp" class="link">SiteMap Page</a></blockquote>
-				  	<blockquote><a href="admin" class="link">About Page</a></blockquote>
+					<p>Login </a></p>
+				  	<blockquote>Register Visitor Page</a></blockquote>
+				  	<blockquote>Visitor's Page </a></blockquote>
+				  	<blockquote>Admin's Page </a></blockquote>
+				  	<blockquote><blockquote>Event's Registration Page </a></blockquote></blockquote>
+				  	<blockquote><blockquote>Place's Registration Page </a></blockquote></blockquote>
+				  	<blockquote>History Page</a></blockquote>
+				  	<blockquote>SiteMap Page</a></blockquote>
+				  	<blockquote>About Page</a></blockquote>
 			  	</div>
 			</div>
 		</div>

@@ -14,6 +14,9 @@
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		session.setAttribute("ViewErrorPriv", "YES");
+		
 		response.sendRedirect("login");
 		return;
 	}
