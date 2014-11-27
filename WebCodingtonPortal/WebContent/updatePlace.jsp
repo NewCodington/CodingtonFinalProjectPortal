@@ -91,7 +91,7 @@
 						ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
 				%>
 				<form method="post" action="updatePlace">
-					<div class="title">New Place</div>
+					<div class="title">Update Place</div>
 					<br />
 					
 					<div class="field"><p>Place name:</p> 

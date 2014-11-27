@@ -69,7 +69,7 @@
 				%>
 	
 				<form method="post" action="updateVisitor">
-					<div class="title">New User</div>
+					<div class="title">Update User</div>
 			        <br />
 					
 					<div class="field"><p>First name:</p>

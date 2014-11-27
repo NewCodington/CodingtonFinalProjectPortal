@@ -63,7 +63,7 @@
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				
 				<form method="post" action="updatePasswordVisitor">
-					<div class="title">New User</div>
+					<div class="title">Update Password</div>
 			        <br />
 					
 					<div class="field"><p>Password:</p> 

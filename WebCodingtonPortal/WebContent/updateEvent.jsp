@@ -87,7 +87,7 @@
 						ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
 				%>
 				<form method="post" action="updateEvent">
-					<div class="title">New Event</div>
+					<div class="title">Update Event</div>
 					<br />
 					    
 					<div class="field"><p>Event name:</p> 
