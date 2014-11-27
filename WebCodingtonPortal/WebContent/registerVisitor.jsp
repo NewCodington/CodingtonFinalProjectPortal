@@ -70,12 +70,12 @@
 			        <br />
 					
 					<div class="field"><p>First name:</p>
-						<input type="text" name="fname" id = "fname" value="<%= visitor!=null?visitor.getFirstName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required />
+						<input type="text" name="fname" id = "fname" value="<%= visitor!=null?visitor.getFirstName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required />
 						<br />
 				    </div>
 					  
 				    <div class="field"><p>Last name:</p> 
-					   	<input type="text" name="lname" id = "lname" value="<%= visitor!=null?visitor.getLastName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required />
+					   	<input type="text" name="lname" id = "lname" value="<%= visitor!=null?visitor.getLastName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required />
 				    	<br />
 				    </div>
 				    
@@ -111,7 +111,7 @@
 				    </div>
 				    
 					<div class="field"><p>Address:</p> 
-					    <input type="text" name="adress" id = "adress" value="<%= visitor!=null?visitor.getAddress():""%>" placeholder="Address" />
+					    <input type="text" name="adress" id = "adress" value="<%= visitor!=null?visitor.getAddress():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" placeholder="Address" />
 					    <br />
 				  	</div>
 				  

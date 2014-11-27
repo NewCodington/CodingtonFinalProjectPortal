@@ -95,12 +95,12 @@
 					<br />
 					
 					<div class="field"><p>Place name:</p> 
-					  	<input type="text" id="placeName" name="placeName" value="<%= place.getName() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="1 to 45 characters" required />
+					  	<input type="text" id="placeName" name="placeName" value="<%= place.getName() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="1 to 45 characters" required />
 					  	<br />
 					</div>
 					 
 					<div class="field"><p>Description:</p> 
-					  	<input type="text" name="description" value="<%= place.getDescription() %>" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" required="required" />
+					  	<input type="text" name="description" value="<%= place.getDescription() %>" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" required="required" />
 					  	<br />
 					</div>
 					    
@@ -110,7 +110,7 @@
 				  	</div>
 				  		
 				  	<div class="field"><p>Address:</p> 
-					    <input type="text" id="address" name="address" value="<%= place.getAddress() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="1 to 45 characters" required/>
+					    <input type="text" id="address" name="address" value="<%= place.getAddress() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" title="1 to 45 characters" required/>
 					    <br /><br />
 				  	</div>
 				  		
