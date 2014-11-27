@@ -135,6 +135,7 @@
 				<%
 					ArrayList<Event> eventRegisterList = null;
 					if (session.getAttribute("EVENTREGISTERLIST") == null){
+					session.getAttribute("EVENTREGISTERLIST");
 				%>
 						
 				<div class="message"><p>There are no Events Registered for you</p></div>	

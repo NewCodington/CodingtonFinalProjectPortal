@@ -114,6 +114,11 @@
 	    {
 			text-align: justify;
 		}
+		#content .right_nav p.return
+	    {
+			text-align: center;
+		}
+		
 		#content .right_nav .message,
 		#content .center_nav .message
 	    {
