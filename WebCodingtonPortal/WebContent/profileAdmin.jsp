@@ -75,9 +75,8 @@
 					<div class="title">EVENTS <hr /></div>
 	
 					<%
-						ArrayList<Event> eventList = new ArrayList<Event>();
-						eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
-						if (eventList == null){
+						ArrayList<Event> eventList = null;
+						if (session.getAttribute("EVENTLIST") == null){
 					%>
 						<div class="message"><p>Not Exit Events</p></div>
 					<%	
@@ -98,6 +97,7 @@
 							<th>Actions</th>
 						</tr>
 						<%
+							eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
 							for (Event event : eventList) {
 						%>				
 						<tr>
@@ -125,9 +125,8 @@
 					<div class="title">PLACES<hr /></div>
 			
 					<%
-					ArrayList<Place> placeList = new ArrayList<Place>();
-					placeList = (ArrayList<Place>) session.getAttribute("PLACELIST");
-					if (placeList == null){
+						ArrayList<Place> placeList = null;
+						if (session.getAttribute("PLACELIST") == null){
 					%>
 						<div class="message"><p>Not Exit Places</p></div>
 					<%	
@@ -146,6 +145,7 @@
 							<th>Actions</th>
 						</tr>
 						<%
+							placeList = (ArrayList<Place>) session.getAttribute("PLACELIST");
 							for (Place place : placeList) {
 						%>				
 						<tr>

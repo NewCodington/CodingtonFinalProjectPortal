@@ -90,7 +90,6 @@
 					<%	
 						}
 						else {
-							eventList = new ArrayList<Event>();
 							eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
 					%>
 					<table>
@@ -135,7 +134,6 @@
 				<%
 					ArrayList<Event> eventRegisterList = null;
 					if (session.getAttribute("EVENTREGISTERLIST") == null){
-					session.getAttribute("EVENTREGISTERLIST");
 				%>
 						
 				<div class="message"><p>There are no Events Registered for you</p></div>	
@@ -143,7 +141,6 @@
 				<%	
 					}
 					else {	
-						eventRegisterList = new ArrayList<Event>();
 						eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGISTERLIST");
 				%>
 				<table>
