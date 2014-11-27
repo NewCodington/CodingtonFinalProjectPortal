@@ -10,19 +10,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import springcodingtonportal.utils.FERSDataConnection;
+import springcodingtonportal.utils.SpringDataSource;
 import junit.framework.TestCase;
 
 
 
 public class ConnectionDatabaseJUnit extends TestCase {
 
-	FERSDataConnection connection;
+	SpringDataSource connection;
 	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		connection = new FERSDataConnection();
+		connection = new SpringDataSource();
 		
 	}
 

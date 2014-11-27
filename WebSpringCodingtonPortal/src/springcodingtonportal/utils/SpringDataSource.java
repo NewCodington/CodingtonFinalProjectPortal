@@ -22,12 +22,12 @@ import javax.sql.DataSource;
  */
 
 
-public class FERSDataConnection {
+public class SpringDataSource {
 	Context ctx;
     Connection con;
     DataSource ds;
 	
-    public FERSDataConnection() throws NamingException{
+    public SpringDataSource() throws NamingException{
     	  		
         ctx = new InitialContext();
         ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/CodingtonDB");

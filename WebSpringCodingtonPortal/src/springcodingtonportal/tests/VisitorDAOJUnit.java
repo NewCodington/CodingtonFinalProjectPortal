@@ -15,12 +15,12 @@ import springcodingtonportal.model.domain.Visitor;
 import codingtonportal.model.services.VisitorServiceImpl;
 
 public class VisitorDAOJUnit extends TestCase {
-	VisitorServiceImpl visitor;
+	VisitorServiceJDBC visitor;
 
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		visitor = new VisitorServiceImpl();
+		visitor = new VisitorServiceJDBC();
 	}
 
 	@After
@@ -35,7 +35,7 @@ public class VisitorDAOJUnit extends TestCase {
 	@Test
 	public void testSelectVisitor () throws SQLException{
 		Visitor visit= new Visitor(23, "Charlay", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {
 			assertNotNull(serviceVisitor.selectVisitor(visit));
 		} catch (ClassNotFoundException e) {
@@ -53,7 +53,7 @@ public class VisitorDAOJUnit extends TestCase {
 	 */
 	@Test
 	public void testviewVisitor () throws SQLException{				
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {
 			assertNotNull(serviceVisitor.viewVisitor());			
 		} catch (ClassNotFoundException e) {
@@ -72,7 +72,7 @@ public class VisitorDAOJUnit extends TestCase {
 	@Test
 	public void testloginVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Charlay", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {
 			assertNotNull(serviceVisitor.loginVisitor(visit));
 		} catch (ClassNotFoundException e) {
@@ -91,7 +91,7 @@ public class VisitorDAOJUnit extends TestCase {
 	@Test
 	public void testinsertVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Carlos", "dafkj","Explicacion","jim", "45.2", "emai", "9874","12",true);		
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {
 			assertNotNull(serviceVisitor.insertVisitor(visit));
 		} catch (ClassNotFoundException e) {
@@ -110,7 +110,7 @@ public class VisitorDAOJUnit extends TestCase {
 	@Test
 	public void testupdateVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Charly", "dafkj","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {
 			assertNotNull(serviceVisitor.updateVisitor(visit));
 		} catch (ClassNotFoundException e) {
@@ -129,7 +129,7 @@ public class VisitorDAOJUnit extends TestCase {
 	@Test
 	public void testupdatePassword() throws SQLException {
 		Visitor visit= new Visitor(16, "Charly", "facilisimo","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {			
 			assertNotNull(serviceVisitor.updatePassword(visit));
 		} catch (ClassNotFoundException e) {
@@ -148,7 +148,7 @@ public class VisitorDAOJUnit extends TestCase {
 	@Test
 	public void testdeleteVisitor() throws SQLException {
 		Visitor visit= new Visitor(16, "Charly", "facilisimo","Carlos Perez","jim", "45.2", "Soy muy guapo", "9874","12",true);		
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {
 			assertNotNull(serviceVisitor.deleteVisitor(visit));
 		} catch (ClassNotFoundException e) {
@@ -167,7 +167,7 @@ public class VisitorDAOJUnit extends TestCase {
 	public void testisAdmin (){
 		
 		Visitor visit=new Visitor("Charly","dafkj","Peter","Pan","08.512.254-T","Peter.Pan12@gmail.com","6945269854","Puy Chemin,12,New Codington", false);
-		VisitorServiceImpl serviceVisitor = new VisitorServiceImpl();
+		VisitorServiceJDBC serviceVisitor = new VisitorServiceJDBC();
 		try {
 			try{
 				assertTrue(serviceVisitor.isAdmin(visit));	
