@@ -50,6 +50,7 @@
 		    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
 		</div>
 		
+		
 		<div id="content">
 		
 			<div class = "left_nav">
@@ -119,54 +120,53 @@
 						}
 					%>
 				</div>
-		 
-		 	</div>
 		 	
-			<div class = "section">
-				<div class="title">PLACES<hr /></div>
-		
-				<%
-				ArrayList<Place> placeList = new ArrayList<Place>();
-				placeList = (ArrayList<Place>) session.getAttribute("PLACELIST");
-				if (placeList == null){
-				%>
-					<div class="message"><p>Not Exit Places</p></div>
-				<%	
-					}
-					else {	
-				%>
-								
-		  		<table>
-					<tr>
-						<th>Place Name</th>
-						<th>Region</th>
-						<th>Type Place</th>
-						<th>Image</th>
-						<th>Address</th>
-						<th>Description</th>
-						<th>Actions</th>
-					</tr>
+				<div class = "section">
+					<div class="title">PLACES<hr /></div>
+			
 					<%
-						for (Place place : placeList) {
-					%>				
-					<tr>
-						<td><%=place.getName()%></td>
-						<td><%=place.getRegionString(place.getTypePlace())%></td>
-						<td><%=place.getTypePlaceString()%></td>
-						<td><%=place.getImage()%></td>
-						<td><%=place.getAddress()%></td>
-						<td><%=place.getDescription()%></td>
-						<td><a href = <%="updatePlace?updatePlace=" + place.getIdPlace() %>>Update</a></td>
-						<td><a href = <%="admin?deletePlace=" + place.getIdPlace() %>>Delete</a></td>
-					</tr>
+					ArrayList<Place> placeList = new ArrayList<Place>();
+					placeList = (ArrayList<Place>) session.getAttribute("PLACELIST");
+					if (placeList == null){
+					%>
+						<div class="message"><p>Not Exit Places</p></div>
+					<%	
+						}
+						else {	
+					%>
+									
+			  		<table>
+						<tr>
+							<th>Place Name</th>
+							<th>Region</th>
+							<th>Type Place</th>
+							<th>Image</th>
+							<th>Address</th>
+							<th>Description</th>
+							<th>Actions</th>
+						</tr>
+						<%
+							for (Place place : placeList) {
+						%>				
+						<tr>
+							<td><%=place.getName()%></td>
+							<td><%=place.getRegionString(place.getTypePlace())%></td>
+							<td><%=place.getTypePlaceString()%></td>
+							<td><%=place.getImage()%></td>
+							<td><%=place.getAddress()%></td>
+							<td><%=place.getDescription()%></td>
+							<td><a href = <%="updatePlace?updatePlace=" + place.getIdPlace() %>>Update</a></td>
+							<td><a href = <%="admin?deletePlace=" + place.getIdPlace() %>>Delete</a></td>
+						</tr>
+						<%
+							}
+						%>
+					</table>
 					<%
 						}
 					%>
-				</table>
-				<%
-					}
-				%>
-		  	</div>
+			  	</div>
+			</div>
 		</div>
 		
 		<div id ="footer">
