@@ -16,6 +16,7 @@ import codingtonportal.model.domain.Place;
 import codingtonportal.model.domain.TypePlace;
 import codingtonportal.model.services.PlaceServiceImpl;
 import codingtonportal.model.services.TypePlaceServiceImpl;
+import codingtonportal.utils.ImageConversion;
 
 
 
@@ -88,41 +89,18 @@ public class RegistPlaceServlet extends HttpServlet {
 		
 		Place place=new Place();
 		PlaceServiceImpl  placeService = new PlaceServiceImpl();
-		
-		/*   Imagen
-		 DiskFileItemFactory factory = new DiskFileItemFactory();
-         ServletFileUpload sfu  = new ServletFileUpload(factory);
-
-            if (! ServletFileUpload.isMultipartContent(request)) {
-                System.out.println("sorry. No file uploaded");
-                return;
-            }
-
-            // parse request
-            List items = null;
-			try {
-				items = sfu.parseRequest(request);
-			} catch (FileUploadException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//            FileItem  id = (FileItem) items.get(0);
-//            String photoid =  id.getString();
-//            
-//            FileItem title = (FileItem) items.get(1);
-//            String   phototitle =  title.getString();
-
-            // get uploaded file
-            FileItem file = (FileItem) items.get(3);
-            
-		
-		
-		
-		  ps.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
-		
-		*/	
-		
+		ImageConversion nev= new ImageConversion();
 		try {
+			nev.insertImage(request, response);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		/*try {
 			place.setName(request.getParameter("placeName"));
 			place.setDescription(request.getParameter("description"));
 			//place.setImage(request.getParameter("image"));
@@ -147,6 +125,6 @@ public class RegistPlaceServlet extends HttpServlet {
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
