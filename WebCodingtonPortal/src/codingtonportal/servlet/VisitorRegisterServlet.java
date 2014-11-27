@@ -41,8 +41,6 @@ public class VisitorRegisterServlet extends HttpServlet {
 		}
 		else{
 			if(session.getAttribute("ViewSuccess")!= null && session.getAttribute("ViewSuccess").toString().equals("YES")){
-				session.setAttribute("ViewSuccess", null);
-				
 				response.sendRedirect("login");
 			}
 			else {
@@ -88,7 +86,6 @@ public class VisitorRegisterServlet extends HttpServlet {
 				if(visitorService.insertVisitor(visitor) > 0){
 					session.setAttribute("Success", "Successfully visitor created");
 					session.setAttribute("ViewSuccess", "YES");
-					session.setAttribute("Error", null);
 				}else{
 					session.setAttribute("Error", "Incorrect Visitor values");
 					session.setAttribute("ViewSuccess", null);

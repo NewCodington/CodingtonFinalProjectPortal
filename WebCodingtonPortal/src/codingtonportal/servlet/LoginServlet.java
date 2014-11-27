@@ -41,37 +41,52 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("ViewErrorPriv", null);
 			session.setAttribute("Error", null);
 			session.setAttribute("ErrorLogin", null);
+			session.setAttribute("Success", null);
 			
 			response.sendRedirect("login.jsp");
 		}
 		else {
-			if (session.getAttribute("ViewError")!= null && session.getAttribute("ViewError").toString().equals("YES")) {
-				session.setAttribute("ViewError", null);
+			if (session.getAttribute("ViewErrorLogin")!= null && session.getAttribute("ViewErrorLogin").toString().equals("YES")) {
+				session.setAttribute("ViewErrorLogin", null);
 				session.setAttribute("ErrorPriv", null);
-				session.setAttribute("ErrorLogin", null);
+				session.setAttribute("Error", null);
+				session.setAttribute("Success", null);
 				
 				response.sendRedirect("login.jsp");
 			}
 			else {
-				if(session.getAttribute("ErrorLogin")!= null && !session.getAttribute("ErrorLogin").toString().equals("")){
-					session.setAttribute("Error", null);
+				if (session.getAttribute("ViewError")!= null && session.getAttribute("ViewError").toString().equals("YES")) {
+					session.setAttribute("ViewError", null);
 					session.setAttribute("ErrorPriv", null);
+					session.setAttribute("ErrorLogin", null);
+					session.setAttribute("Success", null);
 					
 					response.sendRedirect("login.jsp");
 				}
 				else {
-					session.setAttribute("Error", null);
-					session.setAttribute("ErrorPriv", null);
-					session.setAttribute("ErrorLogin", null);
-					
-					if(session.getAttribute("Visitor")!= null) {
-						response.sendRedirect("visitor");
-					}
-					else if (session.getAttribute("Admin")!= null) { 
-						response.sendRedirect("admin");
-					}
-					else
+					if(session.getAttribute("ViewSuccess")!= null && session.getAttribute("ViewSuccess").toString().equals("YES")){
+						session.setAttribute("ViewSuccess", null);
+						session.setAttribute("Error", null);
+						session.setAttribute("ErrorPriv", null);
+						session.setAttribute("ErrorLogin", null);
+						
 						response.sendRedirect("login.jsp");
+					}
+					else {
+						session.setAttribute("Error", null);
+						session.setAttribute("ErrorPriv", null);
+						session.setAttribute("ErrorLogin", null);
+						session.setAttribute("Success", null);
+						
+						if(session.getAttribute("Visitor")!= null) {
+							response.sendRedirect("visitor");
+						}
+						else if (session.getAttribute("Admin")!= null) { 
+							response.sendRedirect("admin");
+						}
+						else
+							response.sendRedirect("login.jsp");
+					}
 				}
 			}
 		}
@@ -108,6 +123,7 @@ public class LoginServlet extends HttpServlet {
 
 			}else{
 				session.setAttribute("ErrorLogin", "User or password incorrect");
+				session.setAttribute("ViewErrorLogin", "YES");
 				
 				response.sendRedirect("login");
 			}
