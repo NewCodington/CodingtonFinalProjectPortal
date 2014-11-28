@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.VisitorDAO;
@@ -89,18 +90,17 @@ public class VisitorServiceJDBC implements VisitorDAO {
 		// Initialize variables
 		PropertyAccess connection = new PropertyAccess();
 				
-		Visitor data = null;
-				
 		String sql = connection.getProperty("loginVisitor");
 		
 		// Create the Statement
-		data = jdbcTemplate.queryForObject(sql, new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
-
-		// Return the Visitor or null
-		if (data != null)
-			return 0;
-		else
+		try {
+			jdbcTemplate.queryForObject(sql, new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
+		
+		}catch(EmptyResultDataAccessException e) {
 			return -1;
+		}
+		return 0;
+			
 	}
 	
 	

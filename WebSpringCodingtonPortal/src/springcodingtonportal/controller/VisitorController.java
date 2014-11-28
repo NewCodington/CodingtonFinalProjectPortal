@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,9 @@ import springcodingtonportal.model.services.VisitorServiceJDBC;
 
 @Controller
 public class VisitorController {
-
+	@Autowired
+	private ApplicationContext appContext;
+	
 	private static Logger log = Logger.getLogger(VisitorController.class);
 	
 	/**
@@ -34,14 +37,13 @@ public class VisitorController {
 	 * by accepting registration details and load into database
 	 */
 	@RequestMapping("/loginVisitor.htm")
-	public ModelAndView newVisitor(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ModelAndView newVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
 		{
 			//log.info("Request or Response failed for NEWVISITOR METHOD..");
 			//throw new FERSGenericException("Error in Transaction, Please re-Try. for more information check Logfile in C:\\FERSLOG folder", new NullPointerException());
 		}
-		ApplicationContext context = new ClassPathXmlApplicationContext("CodingtonPortal-servlet.xml");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("CodingtonPortal-servlet.xml");
 		
 		Visitor v = new Visitor();
 		v.setUserName(request.getParameter("username"));
@@ -49,7 +51,7 @@ public class VisitorController {
 		
 		log.info("creating new visitor with UserName :"+v.getUserName());
 		
-		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) context.getBean("VisitorServiceJDBC");
+		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
 		Integer result= visitorService.loginVisitor(v);
 				
 				
