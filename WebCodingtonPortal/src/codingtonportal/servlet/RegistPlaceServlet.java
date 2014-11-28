@@ -90,41 +90,26 @@ public class RegistPlaceServlet extends HttpServlet {
 		Place place=new Place();
 		PlaceServiceImpl  placeService = new PlaceServiceImpl();
 		ImageConversion nev= new ImageConversion();
-		try {
-			nev.insertImage(request, response);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	
-		/*try {
-			place.setName(request.getParameter("placeName"));
-			place.setDescription(request.getParameter("description"));
-			//place.setImage(request.getParameter("image"));
-			place.setAddress(request.getParameter("address"));
-			place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
-			
+		try {
+			place = nev.insertImage(request, response);
 			if(placeService.insertPlace(place) > 0){
 				session.setAttribute("Success", "Successfully Place created ");
 				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Place values");
-			}
-			
+			}			
 			response.sendRedirect("registerPlace");
-			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+						 
 	}
 }

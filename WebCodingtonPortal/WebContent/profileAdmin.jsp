@@ -158,7 +158,7 @@
 							<td><%=place.getName()%></td>
 							<td><%=place.getRegionString(place.getTypePlace())%></td>
 							<td><%=place.getTypePlaceString()%></td>
-							<td><%=place.getImage()%></td>
+							<td><%=place.getImage()%></td>							
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>
 							<td><a href = <%="updatePlace?updatePlace=" + place.getIdPlace() %>>Update</a></td>
