@@ -98,8 +98,10 @@ public class RegistPlaceServlet extends HttpServlet {
 				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Place values");
-			}			
+			}	
+			nev.ShowImage();
 			response.sendRedirect("registerPlace");
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
