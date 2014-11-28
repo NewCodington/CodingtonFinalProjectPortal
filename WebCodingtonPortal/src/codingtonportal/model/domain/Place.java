@@ -1,5 +1,6 @@
 package codingtonportal.model.domain;
 
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -20,7 +21,7 @@ public class Place {
 	private int idPlace;
 	private String name;
 	private String description;
-	private Blob image;
+	private InputStream image;
 	private String address; 
 	private int typePlace; 
 
@@ -50,7 +51,7 @@ public class Place {
 	 * @param address
 	 * @param description
 	 */
-	public Place(int idPlace, String name, int typePlace, Blob image, String address, String description){
+	public Place(int idPlace, String name, int typePlace, InputStream image, String address, String description){
 		this.idPlace = idPlace;
 		this.name = name;
 		this.description = description;
@@ -113,12 +114,12 @@ public class Place {
 	}
 
 
-	public Blob getImage() {
+	public InputStream getImage() {
 		return image;
 	}
 
-	public void setImage(Blob image) {
-		this.image = image;
+	public void setImage(InputStream input) {
+		this.image = input;
 	}
 
 

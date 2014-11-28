@@ -1,6 +1,7 @@
 package codingtonportal.model.services;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,7 +59,8 @@ public class PlaceServiceImpl implements PlaceDAO {
 				data.setIdPlace(outdata.getInt("idPlace"));
 				data.setName(outdata.getString("Name"));
 				data.setTypePlace(outdata.getInt("TypePlace"));
-				data.setImage(outdata.getBlob("Image"));
+				//data.setImage((InputStream) outdata.getBlob("Image"));
+				data.setImage(outdata.getBinaryStream("Image"));
 				data.setAddress(outdata.getString("Address"));
 				data.setDescription(outdata.getString("Description"));	                             
 			}	
@@ -117,7 +119,8 @@ public class PlaceServiceImpl implements PlaceDAO {
 					data.setIdPlace(outdata.getInt("idPlace"));
 					data.setName(outdata.getString("Name"));
 					data.setTypePlace(outdata.getInt("TypePlace"));
-					data.setImage(outdata.getBlob("Image"));
+					//data.setImage((InputStream) outdata.getBlob("Image"));
+					data.setImage(outdata.getBinaryStream("Image"));
 					data.setAddress(outdata.getString("Address"));
 					data.setDescription(outdata.getString("Description"));
 	

@@ -80,7 +80,7 @@
 				
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
 					
-				<form method="post" action="registerPlace">
+				<form method="post" action="registerPlace" enctype="multipart/form-data">
 					<div class="title">New Place</div>
 					<br />
 					
