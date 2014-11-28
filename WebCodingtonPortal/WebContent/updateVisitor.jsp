@@ -7,14 +7,14 @@
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<link rel="stylesheet" type="text/css" href="images/BrightSide.css"/>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script language="javascript" src="Register.js"></script>
 		<title>Visitor Update Page</title>
 	</head>
 	
 
-	<body id="body">
+<body>
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
@@ -37,30 +37,45 @@
 	}
 
 	%> 
-		<div id="header">
-			<table>
-		    	<tr>
-		      		<td class="colum1" rowspan="2">
-		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
-		        	</td>
-		        	<td class="colum2">
-		        		<div class="title">New Codington Portal</div>
-		        	</td>	
-		        	<td class="colum3">&nbsp;</td>
-		      		</tr>
-		      	<tr>
-		        	<td>
-		        		<div class="subtitle">One of the World's Best Cities 2014</div>
-		        	</td>
-		        	<td>&nbsp;</td>
-		      	</tr>
-		    </table>
+		<div id="wrap">
+	 
+		<div id="header">				
+			
+			<h1 id="logo">New<span class="green">Codington</span></h1>	
+			<h2 id="slogan">One of the World's Best Cities 2014</h2> 
+		
+			
+			<!-- Menu Tabs -->
+				<ul>
+					<li id="current"><a href="history.jsp"><span>History</span></a></li>
+					<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+					<li><a href="about.jsp"><span>About</span></a></li>
+	
+				</ul>	
+													
 		</div>
 		
 		
-		<div id="content">
+		<div id="content-wrap">
+			
+		<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+		
+			<div id="sidebar">							
+				
+				<h1><%=session.getAttribute("Visitor") %></h1>
+				<ul class="sidemenu">
+					<li><a href="visitor">My Page</a></li>
+					<li><a href="updateVisitor">Update Information</a></li>
+					<li><a href="updatePasswordVisitors">Update Password</a></li>
+					<li><a href="logout">Logout</a></li>
 
-			<div class = "center_nav">
+				</ul>		
+						
+		
+			</div>
+	
+	
+		<div id="main">
 
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				
@@ -68,8 +83,10 @@
 					Visitor visitor=(Visitor)session.getAttribute("VISITOR");
 				%>
 	
-				<form method="post" action="updateVisitor">
-					<div class="title">Update User</div>
+			<div class = "section">
+			
+				<form class = "Rform" method="post" action="updateVisitor">
+					<h1>Update User</h1>
 			        <br />
 					
 					<div class="field"><p>First name:</p>
@@ -116,5 +133,6 @@
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
 	
+	</div>
 	</body>
 </html>

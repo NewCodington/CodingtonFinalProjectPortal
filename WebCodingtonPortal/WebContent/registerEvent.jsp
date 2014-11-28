@@ -8,14 +8,13 @@
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="images/BrightSide.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script language="javascript" src="Register.js"></script>
 		<title>Event Register Page</title>
 	</head>
 
 	
-	<body id="body">
+<body>
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
@@ -36,121 +35,126 @@
 			response.sendRedirect("registerEvent");
 	}
 	%> 
-		<div id="header">
-			<table>
-		    	<tr>
-		      		<td class="colum1" rowspan="2">
-		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
-		        	</td>
-		        	<td class="colum2">
-		        		<div class="title">New Codington Portal</div>
-		        	</td>	
-		        	<td class="colum3">&nbsp;</td>
-		      		</tr>
-		      	<tr>
-		        	<td>
-		        		<div class="subtitle">One of the World's Best Cities 2014</div>
-		        	</td>
-		        	<td>&nbsp;</td>
-		      	</tr>
-		    </table>
-		    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
+	
+	<div id="wrap">
+	 
+		<div id="header">				
+			
+			<h1 id="logo">New<span class="green">Codington</span></h1>	
+			<h2 id="slogan">One of the World's Best Cities 2014</h2> 
+		
+			
+			<!-- Menu Tabs -->
+				<ul>
+					<li id="current"><a href="history.jsp"><span>History</span></a></li>
+					<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+					<li><a href="about.jsp"><span>About</span></a></li>
+	
+				</ul>	
+													
 		</div>
 
 		
-		<div id="content">
-			
-			<div class = "left_nav">
-				<div class = "title"><p><%=session.getAttribute("Admin") %>'s Menu</p></div>
-				<hr size=10 />
-				
-				<div class = content>	
-					<p><a href="admin" class="link">My Page </a></p>
-					<hr />
-					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
-					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
-				</div>
-			</div>
-	
-	
-			<div class="center_nav">
-	
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+		<div id="content-wrap">
 		
-				<form method="post" action="registerEvent">
-					<div class="title">New Event</div>
-					<br />
-					    
-					<div class="field"><p>Event name:</p> 
-					  	<input type="text" id="eventName" name="eventName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
-					  	<br />
-					</div>
-					  
-					<div class="field"><p>Description:</p>
-					  <input type="text" id="description" name="description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="Enter a valid description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
-					  <br />
-					</div>
-					
-					<div class="field"><p>Date:</p>
-					  	<input type="text" id="date" name="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-aaaa)" placeholder="Date" required />
-						<br />
-					</div>
-					
-					<div class="field"><p>Place:</p>
-					  	<%
-					  		if (session.getAttribute("LISTPLACE") != null) {
-								ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
-						%>
-						<select id="place" name="place" required>
+		
+		<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+		
+			
+			<div id="sidebar">							
+				
+				<h1><%=session.getAttribute("Admin") %></h1>
+				<ul class="sidemenu">
+					<li><a href="admin">My Page</a></li>
+					<li><a href=<%="registerPlace"%>>Register Place</a></li>
+					<li><a href=<%="registerEvent"%>>Register Event</a></li>
+					<li><a href="logout">Logout</a></li>
+
+				</ul>		
+						
+		
+			</div>
+			<div id="main">
+				
+				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+			
+				<div class = "section">
+		
+						<form class = "Rform" method="post" action="registerEvent">
+							<h1>New Event</h1>
+							<br />
+							
+						<div class="field"><p>Event name:</p> 
+							<input type="text" id="eventName" name="eventName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
+							<br />
+						</div>
+						  
+						<div class="field"><p>Description:</p>
+						  <input type="text" id="description" name="description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
+						  <br />
+						</div>
+						
+						<div class="field"><p>Date:</p>
+							<input type="text" id="date" name="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-aaaa)" placeholder="Date" required />
+							<br />
+						</div>
+						
+						<div class="field"><p>Place:</p>
 							<%
-								for (Place place : placeList) {
+								if (session.getAttribute("LISTPLACE") != null) {
+									ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
 							%>
-							<option value="<%= place.getIdPlace()%>"><%=place.getName() %></option>
+							<select id="place" name="place" required>
+								<%
+									for (Place place : placeList) {
+								%>
+								<option value="<%= place.getIdPlace()%>"><%=place.getName() %></option>
+								<%
+									}
+								%>
+							</select>
 							<%
 								}
 							%>
-						</select>
-						<%
-							}
-						%>
-					</div>
-					  
-					 <div class="field"><p>Start Time:</p>
-					  	<input type="text" id="startTime" name="startTime" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}"title="Enter a valid start time (length between 1-15)" placeholder="Start Time" required />
-					 	<br />
-					 </div>
-					    
-					 <div class="field"><p>Duration:</p> 
-					  	<input type="text" id="duration" name="duration"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
-					  	<br />
-					 </div>
+						</div>
+						  
+						 <div class="field"><p>Start Time:</p>
+							<input type="text" id="startTime" name="startTime" pattern="()[a-zA-Z0-9]| |/|\|@|#|$|%|&){1,15}" title="Enter a valid start time (length between 1-15)" placeholder="Start Time" required />
+							<br />
+						 </div>
+							
+						 <div class="field"><p>Duration:</p> 
+							<input type="text" id="duration" name="duration"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
+							<br />
+						 </div>
+						 
+						 <div class="field"><p>Type of Event:</p> 
+							<input type="text"  id="typeOfEvent"name="typeOfEvent"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
+							<br />
+						 </div>
+						  
 					 
-					 <div class="field"><p>Type of Event:</p> 
-					  	<input type="text"  id="typeOfEvent"name="typeOfEvent"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
-					    <br />
-					 </div>
-					  
-				 
-				    <div class="field"><p>Seats Avalaible:</p>
-					  	<input type="text" id="seats" name="seats" pattern = "[0-9]{1,20}" required title="Field required" placeholder="Seats Avalaible" />
-					  	<br />
-				    </div>
-			
-					<div class="input">
-						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
-						<br />
-					</div> 
-				</form>
+						<div class="field"><p>Seats Avalaible:</p>
+							<input type="text" id="seats" name="seats" pattern = "[0-9]{1,20}" required title="Field required" placeholder="Seats Avalaible" />
+							<br />
+						</div>
+				
+						<div class="input">
+							<input type="submit" value="Submit" />
+							<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+							<br />
+						</div> 
+					
+					</form>
+					
+				</div>
 			</div>
 		</div>
-
-
+	
+	
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-	
+	</div>
 	</body>
 </html>
