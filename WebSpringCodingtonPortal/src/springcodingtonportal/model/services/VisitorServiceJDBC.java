@@ -2,20 +2,20 @@ package springcodingtonportal.model.services;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.VisitorDAO;
 import springcodingtonportal.model.domain.Visitor;
 import springcodingtonportal.model.mapper.VisitorMapper;
-import springcodingtonportal.utils.SpringDataSource;
-import springcodingtonportal.utils.PropertyAccess;
+import springcodingtonportal.utils.QueriesSQL;
 
 
 /**
@@ -24,18 +24,16 @@ import springcodingtonportal.utils.PropertyAccess;
  * 
  */
 public class VisitorServiceJDBC implements VisitorDAO {
-	
-	private DataSource dataSource;
+	@Autowired
+	private ApplicationContext appContext;
 	private JdbcTemplate jdbcTemplate;
 	
 	
 	public VisitorServiceJDBC() {
-		this.dataSource = null;
 		this.jdbcTemplate = null;
 	}
 	
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 	    this.jdbcTemplate = new JdbcTemplate(dataSource);
 	   }
 	
@@ -57,13 +55,12 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		PropertyAccess connection = new PropertyAccess();
-		
 		Visitor data = null;
 		
-		String sql = connection.getProperty("selectVisitor");
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
 		// Create the Statement
-		data = jdbcTemplate.queryForObject(sql, new Object[]{visitor.getIdVisitor()}, new VisitorMapper());
+		data = jdbcTemplate.queryForObject(sql.getSelectVisitor(), new Object[]{visitor.getIdVisitor()}, new VisitorMapper());
 
 		// Return the Visitor or null
 		return data;
@@ -88,13 +85,11 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		PropertyAccess connection = new PropertyAccess();
-				
-		String sql = connection.getProperty("loginVisitor");
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
 		try {
-			jdbcTemplate.queryForObject(sql, new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
+			jdbcTemplate.queryForObject(sql.getLoginVisitor(), new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
 		
 		}catch(EmptyResultDataAccessException e) {
 			return -1;
@@ -122,58 +117,12 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public ArrayList<Visitor> viewVisitor() throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		SpringDataSource con= new SpringDataSource(); 
-		PropertyAccess connection= new PropertyAccess();
 		ArrayList <Visitor> selection = null;
 		PreparedStatement statementSQL = null;
 		
-		try {
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("viewVisitor"));
-			
-			// Execute query
-			ResultSet outdata= statementSQL.executeQuery();                     
-			
-			// If the Resultset brigns the Visitor
-			if (outdata.next()) {
-				// Create an ArrayList of Visitors
-				selection = new ArrayList <Visitor>();                   
-				
-				do {   
-					// Create a new Visitor
-					Visitor data = new Visitor();
-					
-					// Complete the fields
-					data.setIdVisitor(outdata.getInt("idVisitor"));
-					data.setFirstName(outdata.getString("First_name"));
-					data.setLastName(outdata.getString("Last_name"));
-					data.setDni(outdata.getString("DNI"));
-					data.setEmail(outdata.getString("Email"));
-					data.setPhoneNumber(outdata.getString("Phone_number"));
-					data.setAddress(outdata.getString("Address"));
-					data.setUserName(outdata.getString("Username"));
-					data.setPassword(outdata.getString("Password"));
-					data.setAdmin(outdata.getBoolean("isAdmin"));
-	
-					// Add to ArrayList
-					selection.add(data);
-
-				// Continue add Places while the Resultset have
-				}while(outdata.next());
-			}
-			// Close the Resultset
-			outdata.close();
-
-		// Close the Statement and Connection
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}	
-		// Return the ArrayList of Visitors or null
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		
 		return selection;
 	}
 
@@ -195,37 +144,12 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer insertVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
-		SpringDataSource con= new SpringDataSource(); 
-		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
-		try {    
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertVisitor"));
-			// Add conditions
-			statementSQL.setString(1, visitor.getFirstName());
-			statementSQL.setString(2, visitor.getLastName());
-			statementSQL.setString(3, visitor.getDni());
-			statementSQL.setString(4, visitor.getEmail());
-			statementSQL.setString(5, visitor.getPhoneNumber());
-			statementSQL.setString(6, visitor.getAddress());
-			statementSQL.setString(7, visitor.getUserName());
-			statementSQL.setString(8, visitor.getPassword());
-			statementSQL.setBoolean(9, visitor.isAdmin());
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
 
-			// Execute query
-			result = statementSQL.executeUpdate();	     
-
-		// Close the Statement and Connection
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
 		// Return if Visitor was inserted or not 
 		return result;  
 	} 
@@ -248,37 +172,11 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		SpringDataSource con= new SpringDataSource(); 
-		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
-		try {    
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updateVisitor"));
-			// Add conditions
-			statementSQL.setString(1, visitor.getFirstName());
-			statementSQL.setString(2, visitor.getLastName());
-			statementSQL.setString(3, visitor.getDni());
-			statementSQL.setString(4, visitor.getEmail());
-			statementSQL.setString(5, visitor.getPhoneNumber());
-			statementSQL.setString(6, visitor.getAddress());
-			
-			// Where clauses
-			statementSQL.setInt(7, visitor.getIdVisitor());
-
-			// Execute query
-			result = statementSQL.executeUpdate();
-	    
-		// Close the Statement and Connection
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
 		// Return if Visitor was updated or not 
 		return result;  		
 	}
@@ -301,31 +199,13 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer updatePassword(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		SpringDataSource con= new SpringDataSource(); 
-		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
-		try {    
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("updatePassword"));
-			// Add conditions
-			statementSQL.setString(1, visitor.getPassword());
-			// Where clauses
-			statementSQL.setInt(2, visitor.getIdVisitor());
-
-			// Execute query
-			result = statementSQL.executeUpdate();		     
-
-		// Close the Statement and Connection
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		
+		
 		// Return if Visitor Password was updated or not 
 		return result;  	
 	}
@@ -348,29 +228,12 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer deleteVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		SpringDataSource con= new SpringDataSource(); 
-		PropertyAccess connection= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
-		try {    
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("deleteVisitor"));
-			//Where clauses
-			statementSQL.setInt(1, visitor.getIdVisitor());
-
-			// Execute query
-			result = statementSQL.executeUpdate();		     
-
-		// Close the Statement and Connection
-		}finally {
-			if (statementSQL != null) { 
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		
 		// Return if Visitor was deleted or not 
 		return result;  	
 	}
@@ -393,35 +256,12 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		SpringDataSource conex= new SpringDataSource(); 
-		PropertyAccess conexion= new PropertyAccess();
 		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
-		try {  
-			// Create the Statement 
-			statementSQL = conex.getConnection().prepareStatement(conexion.getProperty("loginVisitor"));
-			// Add conditions
-			statementSQL.setString(1, visitor.getUserName());
-			statementSQL.setString(2, visitor.getPassword());
-		   
-			// Execute query
-			ResultSet rs = statementSQL.executeQuery();
-			
-			// If the pair of elements exists
-			if(rs.next()) {                 
-				result = rs.getInt("isAdmin");               
-			} 
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
-		// Close the Statement and Connection
-		}finally{
-			if (statementSQL != null) {
-				statementSQL.close();
-			}
-			if (conex != null) {
-				conex.close();
-			}
-		}
+		
 		// Return indicates if is admin or not
 		if (result == 1)	return true;
 		else 				return false;
@@ -446,41 +286,11 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer exitsUsernameVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		SpringDataSource con= new SpringDataSource(); 
-		PropertyAccess connection= new PropertyAccess();
-		PreparedStatement statementSQL = null;
 		Integer result = null;
+		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 				
-		try {    
-			// Create the Statement
-			statementSQL = con.getConnection().prepareStatement(connection.getProperty("exitsUserVisitor"));
-			// Add conditions
-			statementSQL.setString(1, visitor.getUserName());
-
-			// Execute query
-			ResultSet rs = statementSQL.executeQuery();
-					
-			// If the Visitor doesn't exists
-			if(!rs.next()) {
-				result = -1;
-			}
-					
-			else {
-				// Get the Id of the Visitor
-				result = 0;
-				// Close the Resulset
-				rs.close();
-			}
-			 
-		// Close the Statement and Connection
-		} finally {
-			if (statementSQL != null) {
-				statementSQL.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		}
+		
 		// Return the Id of Visitor if exists in the application
 		return result;
 	}
