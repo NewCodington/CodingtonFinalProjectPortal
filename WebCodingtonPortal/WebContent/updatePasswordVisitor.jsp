@@ -77,7 +77,7 @@
 
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				
-				<form class = "loginform" method="post" action="updatePasswordVisitor">
+				<form class = "Rform" method="post" action="updatePasswordVisitor">
 					<h1>Update Password</h1>
 			        <br />
 					

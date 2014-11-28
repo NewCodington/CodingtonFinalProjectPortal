@@ -6,11 +6,10 @@
 	  
 <head>
 
-	<link rel="stylesheet" type="text/css" href="css/codington.css" />
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<script language="javascript" src="Register.js"></script>
 			<title>New Codington Portal</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="images/BrightSide.css" />
+			<link rel="stylesheet" type="text/css" media="screen" href="images/BrightSide.css" />
 
 </head>
 

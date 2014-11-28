@@ -66,7 +66,7 @@
 				<ul class="sidemenu">
 					<li><a href="visitor">My Page</a></li>
 					<li><a href="updateVisitor">Update Information</a></li>
-					<li><a href="updatePasswordVisitors">Update Password</a></li>
+					<li><a href="updatePasswordVisitor">Update Password</a></li>
 					<li><a href="logout">Logout</a></li>
 
 				</ul>		
