@@ -5,6 +5,11 @@ package codingtonportal.utils;
 
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -61,6 +66,30 @@ public class ImageConversion {
             return place;                 
 	}
 	
- 
+	public Blob ShowImage() throws IOException, ClassNotFoundException, NamingException{
+		
+		FERSDataConnection conex= new FERSDataConnection(); 
+		ArrayList <Place> selection = new ArrayList <Place>();
+		Blob imBlob = null;
+		try{			
+			Statement sentencia = (conex.getConnection()).createStatement();
+			ResultSet outdata= sentencia.executeQuery("select image from codington.aux_image");			
+			while (outdata.next()){
+				Place  places = new Place();
+				imBlob=outdata.getBlob("image");
+				places.setImage(outdata.getBlob("image").getBinaryStream());				
+				selection.add(places);
+			}
+			for (Place element : selection)
+				System.out.println("Soy Image fea: \n"+	element.getImage());
+		
+		}catch(SQLException e){		
+			System.out.println("Ai mai ay problemas\n" + e);
+			return null;
+		}	
+
+		return imBlob;
+	}
+
 
 }
