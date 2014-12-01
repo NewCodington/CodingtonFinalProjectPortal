@@ -1,12 +1,8 @@
 package springcodingtonportal.controller;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.naming.NamingException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,10 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import springcodingtonportal.model.domain.Place;
 import springcodingtonportal.model.domain.Event;
-import springcodingtonportal.model.domain.Visitor;
 import springcodingtonportal.model.services.EventServiceJDBC;
 import springcodingtonportal.model.services.PlaceServiceJDBC;
-import springcodingtonportal.model.services.VisitorServiceJDBC;
 import springcodingtonportal.utils.Exceptions;
 
 
@@ -113,7 +107,7 @@ public class EventController {
 		EventServiceJDBC eventService =  (EventServiceJDBC) appContext.getBean("EventServiceJDBC");
 		Event event=new Event();
 		
-		event.setEventId(idEventU);
+		//event.setEventId(idEventU);
 		event.setName(request.getParameter("eventName"));
 		event.setDescription(request.getParameter("description"));
 		event.setPlace(Integer.parseInt(request.getParameter("place")));
@@ -167,6 +161,39 @@ public class EventController {
 
 		return new ModelAndView("/profileAdmin.jsp");
 	}
+	
+	@RequestMapping("/deleteEvent.htm")
+	public ModelAndView unregisterEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("delete") Integer idEvent) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		
+		EventServiceJDBC event 	= (EventServiceJDBC) appContext.getBean("EventServiceJDBC");
+		
+		
+		
+		boolean success = false;
+		if(event.deleteEvent(idEvent) != null) {
+			success = true;
+		}
+		
+		
+		
+		
+		ModelAndView mv = load(request, response);
+		if(success) {
+			 mv.addObject("DeleteMessage", "¡¡¡  Succesfully Delete  EVENT  !!!");
+		}
+		
+	 return mv;
+	
+	}
+	
+	
+	
+	
 	
 	
 	

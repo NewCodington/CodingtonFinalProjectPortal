@@ -76,7 +76,7 @@
 			
 				<div class="section">
 					<div class="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-					<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+					<div class="message">${DeleteMessage}</div>
 			
 					<div class="title">EVENTS <hr /></div>
 	
@@ -116,7 +116,7 @@
 							<td><%=event.getSeatsAvailable()%></td>
 							<td><%=event.getStartTime()%></td>
 							<td><a href = <%="getEvent.htm?update=" + event.getEventId() %>>Update</a></td>
-							<td><a href = <%="admin?deleteEvent=" + event.getEventId() %>>Delete</a></td>
+							<td><a href = <%="deleteEvent.htm?delete=" + event.getEventId() %>>Delete</a></td>
 						</tr>
 						<%
 							}
@@ -160,8 +160,8 @@
 							<td><%=place.getImage()%></td>
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>
-							<td><a href = <%="updatePlace?updatePlace=" + place.getIdPlace() %>>Update</a></td>
-							<td><a href = <%="admin?deletePlace=" + place.getIdPlace() %>>Delete</a></td>
+							<td><a href = <%="getPlace.htm?update=" + place.getIdPlace() %>>Update</a></td>
+							<td><a href = <%="deletePlace.htm?delete=" + place.getIdPlace() %>>Delete</a></td>
 						</tr>
 						<%
 							}
