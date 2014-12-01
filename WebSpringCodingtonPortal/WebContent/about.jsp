@@ -17,7 +17,7 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("/login.jsp");
 		return;
 	}
 	%> 
@@ -50,19 +50,19 @@
 				<hr size=10 />
 				
 				<div class = content>	
-					<p><a class="link" href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"visitor":"admin" %>>My Page </a></p>
+					<p><a class="link" href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"visitorProfile.htm":"adminProfile.htm" %>>My Page </a></p>
 					<hr />
 					<%
 						if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
 						{
 					%>
-							<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-							<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+							<p ><a class="link"  href=<%="registerPlace.htm"%>>Register Place </a></p>
+							<p ><a class="link" href=<%="registerEvent.htm"%>>Register Event </a></p>
 					<%
 						}else {
 					%>
-							<p><a href="updateVisitor" class="link">Update Information </a></p>
-							<p><a href="updatePasswordVisitor" class="link">Update Password </a></p>
+							<p><a href="getVisitor.htm" class="link">Update Information </a></p>
+							<p><a href="updatePasswordVisitor.jsp" class="link">Update Password </a></p>
 					<%
 						}
 					%>
