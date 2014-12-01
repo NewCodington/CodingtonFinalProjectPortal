@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import codingtonportal.model.domain.Event;
+import codingtonportal.model.domain.Visitor;
 import codingtonportal.model.services.EventServiceImpl;
 import codingtonportal.model.services.EventSignUpImpl;
+import codingtonportal.model.services.VisitorServiceImpl;
 
 
 
@@ -44,9 +46,12 @@ public class VisitorProfileServlet extends HttpServlet {
 			ArrayList<Integer> listIdEvent = null;
 			ArrayList<Event> eventsRegisterList = null;
 			ArrayList<Event> eventsList=null;
+			Visitor visitor = null;
 			
 			EventServiceImpl eventService=new EventServiceImpl();
 			EventSignUpImpl eventSignUp=new EventSignUpImpl();
+			VisitorServiceImpl  visitorService = new VisitorServiceImpl();
+			visitor=new Visitor();
 			
 			//Params of jsp for get
 			String register=null;
@@ -57,6 +62,17 @@ public class VisitorProfileServlet extends HttpServlet {
 			
 			String idVisitor=null;
 			idVisitor=session.getAttribute("idVisitor").toString();
+			
+			
+			
+
+			if(idVisitor!=null)
+			{
+				visitor.setIdVisitor(Integer.parseInt(idVisitor));
+				Visitor visitorUpdate=new Visitor(visitorService.selectVisitor(visitor));
+					
+					session.setAttribute("VISITOR", visitorUpdate);
+			}
 			
 			//si vienen los parametros meto el nuevo evento a ese visitor
 			if(register!=null){ 

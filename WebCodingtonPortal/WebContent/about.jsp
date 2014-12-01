@@ -52,7 +52,7 @@
 			<h1>Sidebar Menu <%= session.getAttribute("Visitor")!=null?session.getAttribute("Visitor").toString():session.getAttribute("Admin").toString() %>></h1>
 			<ul class="sidemenu">
 				<li><a href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"visitor":"admin" %>>My Page</a></li>
-				
+				<li><a href="events.jsp">Town Events</a></li>
 				<%
 					if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
 					{
