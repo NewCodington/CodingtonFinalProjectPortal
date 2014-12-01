@@ -28,6 +28,24 @@
       <property name="dataSource"  ref="dataSource" />    
    </bean>
    
+   <!-- Definition for EventServiceJDBC bean -->
+ 	<bean id="EventServiceJDBC" 
+      class="springcodingtonportal.model.services.EventServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for PlaceServiceJDBC bean -->
+ 	<bean id="PlaceServiceJDBC" 
+      class="springcodingtonportal.model.services.PlaceServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for EventSignUpServiceJDBC bean -->
+ 	<bean id="EventSignUpServiceJDBC" 
+      class="springcodingtonportal.model.services.EventSignUpServiceJDBCC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
    
    
 	<!-- Queries for database -->

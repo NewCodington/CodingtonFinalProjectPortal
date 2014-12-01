@@ -18,12 +18,12 @@ import codingtonportal.model.services.EventServiceImpl;
 
 
 public class EventDAOJUnit extends TestCase{
-	EventServiceImpl event;
+	EventServiceJDBC event;
 	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		event = new EventServiceImpl();
+		event = new EventServiceJDBC();
 	}
 
 	@After
@@ -39,7 +39,7 @@ public class EventDAOJUnit extends TestCase{
 	@Test
 	public void testSelectEvent () throws SQLException, ParseException{
 		Event events= new Event(2,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12,null);
-		EventServiceImpl serviceEvent = new EventServiceImpl();
+		EventServiceJDBC serviceEvent = new EventServiceJDBC();
 		try {
 			assertNotNull(serviceEvent.selectEvent(events));						
 		} catch (ClassNotFoundException e) {
@@ -57,7 +57,7 @@ public class EventDAOJUnit extends TestCase{
 	 */
 	@Test
 	public void testviewEvent () throws ParseException{
-		EventServiceImpl serviceEvent = new EventServiceImpl();
+		EventServiceJDBC serviceEvent = new EventServiceJDBC();
 		try {
 			try{
 				assertNotNull(serviceEvent.viewEvent());
@@ -81,7 +81,7 @@ public class EventDAOJUnit extends TestCase{
 	 */
 	@Test
 	public void testsearchEvent() throws SQLException, ParseException {				
-		EventServiceImpl serviceEvent = new EventServiceImpl();
+		EventServiceJDBC serviceEvent = new EventServiceJDBC();
 		try {
 			assertNotNull(serviceEvent.searchEvent("FRI"));	
 		} catch (ClassNotFoundException e) {
@@ -101,7 +101,7 @@ public class EventDAOJUnit extends TestCase{
 	@Test
 	public void testInsertEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
-		EventServiceImpl serviceEvent = new EventServiceImpl();
+		EventServiceJDBC serviceEvent = new EventServiceJDBC();
 		try {
 			assertNotNull(serviceEvent.insertEvent(events));
 		} catch (ClassNotFoundException e) {
@@ -120,7 +120,7 @@ public class EventDAOJUnit extends TestCase{
 	@Test
 	public void testDeleteEvent() throws SQLException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
-		EventServiceImpl serviceEvent = new EventServiceImpl();
+		EventServiceJDBC serviceEvent = new EventServiceJDBC();
 		try {
 			assertNotNull(serviceEvent.deleteEvent(events.getEventId()));
 		} catch (ClassNotFoundException e) {
@@ -140,7 +140,7 @@ public class EventDAOJUnit extends TestCase{
 	@Test
 	public void testUpdateEvent() throws SQLException, ParseException {
 		Event events= new Event(001,"Charla", "Explicacion de marmotas", 3, "2 horas", "17 horas", "divulgativo",12, null);
-		EventServiceImpl serviceEvent = new EventServiceImpl();
+		EventServiceJDBC serviceEvent = new EventServiceJDBC();
 		try {
 			assertNotNull(serviceEvent.updateEvent(events));
 		} catch (ClassNotFoundException e) {

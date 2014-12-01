@@ -1,9 +1,9 @@
 package springcodingtonportal.model.services;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
+
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
@@ -86,15 +86,15 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
-		
+		Visitor data = null;
 		// Create the Statement
 		try {
-			jdbcTemplate.queryForObject(sql.getLoginVisitor(), new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
+			data = jdbcTemplate.queryForObject(sql.getLoginVisitor(), new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
 		
 		}catch(EmptyResultDataAccessException e) {
 			return -1;
 		}
-		return 0;
+		return data.getIdVisitor();
 			
 	}
 	
@@ -115,14 +115,16 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Visitor> viewVisitor() throws ClassNotFoundException, SQLException, NamingException {
+	public List<Visitor> viewVisitor() throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		ArrayList <Visitor> selection = null;
-		PreparedStatement statementSQL = null;
-		
+		List <Visitor> selection = null;
+				
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getViewVisitor(), new VisitorMapper());
 		
-		
+		// Return the ArrayList of Events or null
 		return selection;
 	}
 
@@ -144,14 +146,15 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer insertVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
-		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
-
-		// Return if Visitor was inserted or not 
-		return result;  
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getInsertVisitor(), visitor.getFirstName(), visitor.getLastName(), visitor.getDni(), visitor.getEmail(), visitor.getPhoneNumber(), visitor.getAddress(), visitor.getUserName(), visitor.getPassword(), visitor.isAdmin());
+		
+		// Return if Event was inserted or not 
+		return result; 
 	} 
 	
 	
@@ -172,13 +175,15 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
-		// Return if Visitor was updated or not 
-		return result;  		
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getUpdateVisitor(), visitor.getFirstName(), visitor.getLastName(), visitor.getDni(), visitor.getEmail(), visitor.getPhoneNumber(), visitor.getAddress(), visitor.getIdVisitor());
+		
+		// Return if Event was inserted or not 
+		return result; 		
 	}
 	
 
@@ -199,15 +204,15 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer updatePassword(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		PreparedStatement statementSQL = null;
-		Integer result = null;
-		
-		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
-		
-		
-		
-		// Return if Visitor Password was updated or not 
-		return result;  	
+				Integer result = null;
+				
+				QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+				
+				// Create the Statement
+				result = jdbcTemplate.update(sql.getUpdatePassword(), visitor.getIdVisitor());
+				
+				// Return if Event was inserted or not 
+				return result; 	 	
 	}
 	
 	
@@ -228,14 +233,15 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer deleteVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		PreparedStatement statementSQL = null;
 		Integer result = null;
 		
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getDeleteVisitor(), visitor.getIdVisitor());
 		
-		// Return if Visitor was deleted or not 
-		return result;  	
+		// Return if Event was inserted or not 
+		return result;	
 	}
 		
 	
@@ -256,15 +262,19 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		PreparedStatement statementSQL = null;
-		Integer result = null;
-		
+		Visitor v = null;
+
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
+		try {
+			v = jdbcTemplate.queryForObject(sql.getLoginVisitor(), new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
+		
+		}catch(EmptyResultDataAccessException e) {
+			return false;
+		}
 		
 		// Return indicates if is admin or not
-		if (result == 1)	return true;
-		else 				return false;
+		return v.isAdmin();
 	}
 
 
@@ -286,13 +296,19 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public Integer exitsUsernameVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		Integer result = null;
+		Visitor data = null;
 		
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
-				
 		
+		// Create the Statement
+		try {
+		data = jdbcTemplate.queryForObject(sql.getExitsUserVisitor(), new Object[]{visitor.getUserName()}, new VisitorMapper());
+			
+		}catch(EmptyResultDataAccessException e) {
+			return -1;
+		}
 		// Return the Id of Visitor if exists in the application
-		return result;
+		return data.getIdVisitor();
 	}
 	
 }

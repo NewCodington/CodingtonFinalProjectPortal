@@ -20,12 +20,12 @@ import codingtonportal.model.services.PlaceServiceImpl;
 
 public class PlaceDAOJUnit extends TestCase {
 	
-	PlaceServiceImpl place;
+	PlaceServiceJDBC place;
 
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		place = new PlaceServiceImpl();
+		place = new PlaceServiceJDBC();
 	}
 
 	@After
@@ -40,7 +40,7 @@ public class PlaceDAOJUnit extends TestCase {
 	@Test
 	public void testinsertplace() throws SQLException {
 		Place places = new Place (34, "Museum", 1, null,"C/olvido", "Quiero aparecer");
-		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
+		PlaceServiceJDBC servicePlace = new PlaceServiceJDBC();
 		try {
 			assertNotNull(servicePlace.insertPlace(places));		
 		} catch (ClassNotFoundException e) {
@@ -60,7 +60,7 @@ public class PlaceDAOJUnit extends TestCase {
 	@Test
 	public void testupdateplace() throws SQLException {
 		Place places = new Place (36, "Museum", 1, null,"C/olvido", "Actualizar");
-		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
+		PlaceServiceJDBC servicePlace = new PlaceServiceJDBC();
 		try {
 			assertNotNull(servicePlace.updatePlace(places));		
 		} catch (ClassNotFoundException e) {
@@ -80,7 +80,7 @@ public class PlaceDAOJUnit extends TestCase {
 	@Test
 	public void testdeleteplace() throws SQLException {
 		Place places = new Place (39, "Museum", 1, null,"C/olvido", "Quiero aparecer");
-		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
+		PlaceServiceJDBC servicePlace = new PlaceServiceJDBC();
 		try {
 			assertNotNull(servicePlace.deletePlace(places.getIdPlace()));		
 		} catch (ClassNotFoundException e) {
@@ -99,7 +99,7 @@ public class PlaceDAOJUnit extends TestCase {
 	 */
 	@Test
 	public void testviewPlace () throws SQLException{
-		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
+		PlaceServiceJDBC servicePlace = new PlaceServiceJDBC();
 		try {
 			assertNotNull(servicePlace.viewPlace());
 		} catch (ClassNotFoundException e) {
@@ -118,7 +118,7 @@ public class PlaceDAOJUnit extends TestCase {
 	@Test
 	public void testselectPlace () throws SQLException{
 		Place places = new Place (38, "Museum", 1, null,"C/olvido", "Quiero aparecer");
-		PlaceServiceImpl servicePlace = new PlaceServiceImpl();
+		PlaceServiceJDBC servicePlace = new PlaceServiceJDBC();
 		try {
 			assertNotNull(servicePlace.selectPlace(places));
 		} catch (ClassNotFoundException e) {

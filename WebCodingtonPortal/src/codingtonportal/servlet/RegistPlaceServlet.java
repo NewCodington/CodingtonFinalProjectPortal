@@ -1,5 +1,6 @@
 package codingtonportal.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -98,8 +99,9 @@ public class RegistPlaceServlet extends HttpServlet {
 				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Place values");
-			}	
-			nev.ShowImage();
+			}
+			//System.out.println(nev.blobToImage(place.getImage()));
+			System.out.println(nev.showImage());
 			response.sendRedirect("registerPlace");
 			
 		} catch (ClassNotFoundException e) {

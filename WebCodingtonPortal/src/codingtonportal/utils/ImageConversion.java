@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,7 +47,7 @@ public class ImageConversion {
         Place place=new Place();
         List<FileItem> items = null;	
   		FileItem input= null ;
-
+  		FERSDataConnection con= new FERSDataConnection(); 
   		
         try {
 			items = sfu.parseRequest(request);
@@ -66,47 +67,67 @@ public class ImageConversion {
         		
         	}
         }                                 
-    
+
             place.setName((String) extra.get(0));
             place.setDescription((String) extra.get(1));
             place.setImage(input.getInputStream());
             place.setAddress((String) extra.get(3));
             place.setTypePlace(Integer.parseInt((String) extra.get(4)));
-            return place;                 
+            return place;     
 	}
 	
-	public BufferedImage ShowImage() throws IOException, ClassNotFoundException, NamingException{
+/*	public  File blobToImage(InputStream in_image) throws SQLException, IOException{
+		    File image_deserialized = new File("images/" + "ESTER" + ".jpg");		    
+		    
+		    //InputStream is = image.getBinaryStream(); 
+		     FileOutputStream out = new FileOutputStream(image_deserialized); 
+
+		    int b = 0;
+		    while ((b = in_image.read()) != -1){
+		    	out.write(b);		      
+		    }
+		    return image_deserialized;
+		  }*/		  
+	
+
+	
+	public BufferedImage showImage() throws IOException, ClassNotFoundException, NamingException{
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		ArrayList <Place> selection = new ArrayList <Place>();
 		Blob imBlob = null;
 		InputStream in = null;
-		File outimage= null;
+		File outimage= new File ("imagenes/ESTER.jpg");
+
+		BufferedImage bufferedImage = null;
+		
 		try{			
 			Statement sentencia = (conex.getConnection()).createStatement();
-			ResultSet outdata= sentencia.executeQuery("select image from codington.aux_image");			
+			ResultSet outdata= sentencia.executeQuery("select image from codington.place where name= 'hola';");			
 			while (outdata.next()){
 				Place  places = new Place();
 				imBlob=outdata.getBlob("image");				
 				//places.setImage(outdata.getBlob("image").getBinaryStream());	
 				//in = outdata.getBlob("image").getBinaryStream();				
-				//OutputStream out=new FileOutputStream(outimage);
+				 OutputStream out;
 			     byte[] bytes = imBlob.getBytes(1, (int) imBlob.length());
-			     BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytes))
-			     //String s=new String(bytes);
+			     bufferedImage = ImageIO.read(new ByteArrayInputStream(bytes));
+			     //ImageIO.write(bufferedImage, "JPEG", new File("imagenes/" + "ESTER" + ".jpg"));		     
+			     
+			     ImageIO.write(bufferedImage, "JPEG", new File("C:/Users/JAVA101_01/Desktop/ESTER1.jpg"));
+			     //String s=new String(bytes);			     
 		         System.out.println(bufferedImage);  //prints bytes for the string			     
 				selection.add(places);
 				return bufferedImage;
 			}
 			for (Place element : selection)
-				System.out.println("Soy Image fea: \n"+	element.getImage());
+				System.out.println("Soy Image fea: \n"+	bufferedImage);
 		
 		}catch(SQLException e){		
 			System.out.println("Ai mai ay problemas\n" + e);
 			//return null;
 		}	
-
-		//return imBlob;
+		return bufferedImage;
 	}
 
 
