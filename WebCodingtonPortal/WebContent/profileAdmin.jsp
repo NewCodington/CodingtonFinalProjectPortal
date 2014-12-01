@@ -63,6 +63,7 @@
 			<h1><%=session.getAttribute("Admin") %></h1>
 			<ul class="sidemenu">
 				<li><a href="admin">My Page</a></li>
+				<li><a href="events.jsp">Town Events</a></li>
 				<li><a href=<%="registerPlace"%>>Register Place</a></li>
 				<li><a href=<%="registerEvent"%>>Register Event</a></li>
 				<li><a href="logout">Logout</a></li>
@@ -76,15 +77,15 @@
 			
 			<div id = "content">
 				
-				<div class="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-				<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+				<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
+				<div id="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
 										
 				
 				
 				<div class="section">
 			
-					<div class="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-					<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+					<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
+					<div id="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
 			
 					<div class="title">EVENTS <hr /></div>
 	

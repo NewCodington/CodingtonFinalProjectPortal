@@ -58,15 +58,15 @@
 		
 		<div id="content-wrap">
 		
-		
+
 		<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
-		
 			
 			<div id="sidebar">							
 				
 				<h1><%=session.getAttribute("Admin") %></h1>
 				<ul class="sidemenu">
 					<li><a href="index.html">My Page</a></li>
+					<li><a href="events.jsp">Town Events</a></li>
 					<li><a href=<%="registerPlace"%>>Register Place</a></li>
 					<li><a href=<%="registerEvent"%>>Register Event</a></li>
 					<li><a href="logout">Logout</a></li>

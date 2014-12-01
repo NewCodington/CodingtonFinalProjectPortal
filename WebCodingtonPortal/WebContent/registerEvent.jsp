@@ -66,6 +66,7 @@
 				<h1><%=session.getAttribute("Admin") %></h1>
 				<ul class="sidemenu">
 					<li><a href="admin">My Page</a></li>
+					<li><a href="events.jsp">Town Events</a></li>
 					<li><a href=<%="registerPlace"%>>Register Place</a></li>
 					<li><a href=<%="registerEvent"%>>Register Event</a></li>
 					<li><a href="logout">Logout</a></li>

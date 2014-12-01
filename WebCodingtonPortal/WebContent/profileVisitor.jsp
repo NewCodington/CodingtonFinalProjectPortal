@@ -5,6 +5,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="codingtonportal.model.domain.Event"%>
+<%@page import="codingtonportal.model.domain.Visitor" %>>
 
 
 <head>
@@ -63,6 +64,7 @@
 			<h1><%=session.getAttribute("Visitor") %></h1>
 			<ul class="sidemenu">
 				<li><a href="visitor">My Page</a></li>
+				<li><a href="events.jsp">Town Events</a></li>
 				<li><a href="updateVisitor">Update Information</a></li>
 				<li><a href="updatePasswordVisitor">Update Password</a></li>
 				<li><a href="logout">Logout</a></li>
@@ -76,9 +78,9 @@
 			
 			<div id="content">
 
-				<div class="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-				<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+				<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
+				<div id="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+				<div id="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
 							
 				
 					<div class="search">		
@@ -88,65 +90,11 @@
 						</form>
 					</div>
 					
-				<div class = "section">
-				
-					<div class="error"></div>
-					<div class="message"></div>
-					
-					<div class="title">EVENTS <hr></hr></div>
-					
-					<%
-						ArrayList<Event> eventList = null;
-						if (session.getAttribute("EVENTLIST") == null){
-					%>
-
-					<div class="message"><p>Not found Events</p></div>
-
-					<%	
-						}
-						else {
-							eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
-					%>
-					<table>
-						<tr>
-							<th>Event Name</th>
-							<th>Description</th>
-							<th>Place</th>
-							<th>Date</th>
-							<th>Duration</th>
-							<th>Event Type</th>
-							<th>Seats Available</th>
-							<th>Start Time</th>
-							<th>Action</th>
-						</tr>
-		
-						<%
-							for (Event event : eventList) {
-						%>
-									
-						<tr>
-							<td><%=event.getName()%></td>
-							<td><%=event.getDescription()%></td>
-							<td><%=event.getPlaceString()%></td>
-							<td><%=event.getDate_eventString()%></td>
-							<td><%=event.getDuration()%></td>
-							<td><%=event.getEventType()%></td>
-							<td><%=event.getSeatsAvailable()%></td>
-							<td><%=event.getStartTime()%></td>
-							<td><a href = <%="visitor?register=" + event.getEventId() %>>Register</a></td>
-						</tr>
-						<%
-							}
-						%>
-					</table>
-					<%
-						}
-					%>
-				</div>
+							
 				
 				<div class = "section">
 			
-					<div class="title">EVENTS REGISTERED<hr /></div>
+					<h1>Events Registered</h1><hr />
 
 					<%
 					ArrayList<Event> eventRegisterList = null;
@@ -196,6 +144,46 @@
 						}
 					%>					
 				</div>
+				
+				<div class = "section">
+				
+					<h1>User Information </h1><hr></hr></div>
+					
+					<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+				
+				<%
+					Visitor visitor=(Visitor)session.getAttribute("VISITOR");
+				%>
+	
+			<div class = "section">
+			
+			        <br />
+					
+					<h2>First name:<%= visitor.getFirstName() %></h2>
+						<br />
+				   
+					  
+				    <h2>Last name:<%= visitor.getLastName() %></h2>
+				    <br/>
+				    
+				    
+					<h2>DNI:<%= visitor.getDni() %></h2>
+					<br />
+				   	
+					
+					<h2>Phone Number:<%= visitor.getPhoneNumber() %></h2>
+					    <br />
+				    
+					
+					<h2>Email:<%= visitor.getEmail() %></h2>
+				    	<br />
+				    
+				    
+					<h2>Address:<%= visitor.getAddress() %></h2>
+					<br />
+				  	
+							  
+			</div>
 			</div>
 
 		

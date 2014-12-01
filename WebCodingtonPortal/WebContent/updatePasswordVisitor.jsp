@@ -64,6 +64,7 @@
 				<h1><%=session.getAttribute("Visitor") %></h1>
 				<ul class="sidemenu">
 					<li><a href="visitor">My Page</a></li>
+					<li><a href="events.jsp">Town Events</a></li>
 					<li><a href="updateVisitor">Update Information</a></li>
 					<li><a href="updatePasswordVisitor">Update Password</a></li>
 					<li><a href="logout">Logout</a></li>

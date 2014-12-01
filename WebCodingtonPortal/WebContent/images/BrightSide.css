@@ -48,6 +48,7 @@ h3 { font-size: 1.3em; }
 p, h1, h2, h3 {
 	margin: 10px 15px;
 }
+
 ul, ol {
 	margin: 10px 30px;
 	padding: 0 15px;
@@ -68,6 +69,8 @@ img.float-right {
 }
 img.float-left {
   margin: 5px 15px 5px 0px;
+}
+#main .img{
 }
 
 code {
@@ -269,13 +272,20 @@ form.loginform .register{
 	margin-bottom:3%;
 }
 
-#main .subsection1{
+#main .section2{
+	width: 100%;
+	float: left;
+}
+
+#main .section2 div.subsection1{
 	text-align:center;
 	float: left;
 	margin-bottom:3%;
-	width: 30%;
+	width: 50%;
+	height: 30%;
 	
 }
+
 
 #main2 {
 
