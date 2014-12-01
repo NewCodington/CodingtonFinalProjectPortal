@@ -36,13 +36,16 @@ public class VisitorController {
 	private static Logger log = Logger.getLogger(VisitorController.class);
 	
 	/**
+	 * method will register new Visitor into FERS system
+	 * by accepting registration details and load into database
 	 * 
 	 * @param request
 	 * @param response
-	 * @return
+	 * 
+	 * @return ModelAndView
+	 * 
 	 * @throws Exception
-	 * method will register new Visitor into FERS system
-	 * by accepting registration details and load into database
+	 * 
 	 */
 	
 	@RequestMapping("/registerVisitor.htm")
@@ -116,7 +119,7 @@ public class VisitorController {
 				session.setAttribute("Admin", v.getUserName());
 				
 				log.info("Succesfully login Administrator "+ v.getUserName());
-				mv.setViewName("/profileAdmin.jsp");
+				mv.setViewName("/profileAdmin.htm");
 				return mv;
 			}
 			else {
