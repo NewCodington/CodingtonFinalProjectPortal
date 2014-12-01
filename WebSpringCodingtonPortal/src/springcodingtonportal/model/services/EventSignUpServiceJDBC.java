@@ -2,11 +2,20 @@ package springcodingtonportal.model.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.EventSignUpDAO;
+import springcodingtonportal.model.domain.EventSign;
+import springcodingtonportal.model.mapper.EventSignUpMapper;
+import springcodingtonportal.utils.QueriesSQL;
 
 
 
@@ -15,8 +24,24 @@ import springcodingtonportal.model.dao.EventSignUpDAO;
  * Services of the Event Registration used to register or unregister for Events and update the seats of the Events. 
  * 
  */
-public class EventSignUpJDBC implements EventSignUpDAO {
+public class EventSignUpServiceJDBC implements EventSignUpDAO {
 
+	@Autowired
+	private ApplicationContext appContext;
+	private JdbcTemplate jdbcTemplate;
+	
+	
+	public EventSignUpServiceJDBC() {
+		this.jdbcTemplate = null;
+	}
+	
+	public void setDataSource(DataSource dataSource) {
+	    this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	
+	
+	
 	/**
 	 * Method to register a Visitor into an Event if the Visitor not is registered in that Event.
 	 * 
@@ -36,8 +61,18 @@ public class EventSignUpJDBC implements EventSignUpDAO {
 		Integer result = null;
 		
 		// If the visitor isn't registered
-		if (idVisitorRegistered == null) {
+		if (idVisitorRegistered == -1) {
+			// Update seats if available
+			Integer seatsAvailable = decrementSeats(idEvent);
 			
+			// If seats availabe, register a Visitor into Event
+			if (seatsAvailable != 0) {
+				QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+				
+				// Create the Statement
+				result = jdbcTemplate.update(sql.getRegisterForNewEvent(), seatsAvailable, idEvent);
+
+			}
 			
 		}
 		// Return if Visitor was registered or not 
@@ -64,6 +99,16 @@ public class EventSignUpJDBC implements EventSignUpDAO {
 		// Initialize variables
 		Integer result = null;
 		
+		// Update seats if available
+		Integer seatsAvailable = incrementSeats(idEvent);
+		
+		// Unregister for Event
+		if (seatsAvailable != null) {
+			QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+			
+			// Create the Statement
+			result = jdbcTemplate.update(sql.getUnregisterForEvent(), seatsAvailable, idEvent);
+		}
 		
 		// Return if Visitor was unregistered or not 
 		return result;  	
@@ -89,8 +134,14 @@ public class EventSignUpJDBC implements EventSignUpDAO {
 		// Initialize variables
 		Integer seats = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
-		
+		// Create the Statement
+		seats = jdbcTemplate.queryForInt(sql.getSelectSeats(),  idEvent);
+		seats++;
+		// Create the Statement
+		seats= jdbcTemplate.update(sql.getUpdateSeats(), seats, idEvent);
+					
 		// Return if Visitor was unregistered or not 
 		return seats;  	
 	}
@@ -116,9 +167,24 @@ public class EventSignUpJDBC implements EventSignUpDAO {
 		// Initialize variables
 		Integer seats = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
+		// Create the Statement
+		seats = jdbcTemplate.queryForInt(sql.getSelectSeats(),  idEvent);
+		
+		if (seats > 0) {
+			seats--;
+			// Create the Statement
+			seats= jdbcTemplate.update(sql.getUpdateSeats(), seats, idEvent);
+			
+		}
+		// If the seats are 0, not if it decreases
+		else {
+			seats = 0;
+		}
+					
 		// Return if Visitor was unregistered or not 
-		return seats;  	
+		return seats;  	 	
 	}
 
 
@@ -136,10 +202,14 @@ public class EventSignUpJDBC implements EventSignUpDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Integer> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, SQLException, NamingException {
+	public List<EventSign> selectEventForVisitor(Integer idVisitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		ArrayList <Integer> selection = null;
+		List<EventSign> selection = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getSelectEventForVisitor(),  new Object[]{idVisitor}, new EventSignUpMapper());
 		
 		// Return the Event's Ids registered for Visitor or not
 		return selection;
@@ -165,6 +235,15 @@ public class EventSignUpJDBC implements EventSignUpDAO {
 		// Initialize variables
 		Integer result = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		try {
+		// Create the Statement
+		result = jdbcTemplate.queryForInt(sql.getSelectEventForVisitor(),  new Object[]{idVisitor, idEvent});
+		
+		}catch(EmptyResultDataAccessException e) {
+			return -1;
+		}	
 		
 		// Return the Visitor's Ids registered for that Event or null
 		return result;

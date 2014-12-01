@@ -2,12 +2,19 @@ package springcodingtonportal.model.services;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.EventDAO;
 import springcodingtonportal.model.domain.Event;
+import springcodingtonportal.model.mapper.EventMapper;
+import springcodingtonportal.utils.QueriesSQL;
 
 
 
@@ -17,6 +24,21 @@ import springcodingtonportal.model.domain.Event;
  * 
  */
 public class EventServiceJDBC implements EventDAO {
+	@Autowired
+	private ApplicationContext appContext;
+	private JdbcTemplate jdbcTemplate;
+	
+	
+	public EventServiceJDBC() {
+		this.jdbcTemplate = null;
+	}
+	
+	public void setDataSource(DataSource dataSource) {
+	    this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	
+	
 	
 	/**
 	 * Method to get an Event from the database. Use an Event class to input the data required.
@@ -33,11 +55,15 @@ public class EventServiceJDBC implements EventDAO {
 	@Override
 	public Event selectEvent(Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
-		Event selection = null;
+		Event data = null;
 		
-		
-		// Return the Event or null
-		return selection;
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		data = jdbcTemplate.queryForObject(sql.getSelectEvent(), new Object[]{event.getEventId()}, new EventMapper());
+
+		// Return the Visitor or null
+		return data;
 	}
 
 	
@@ -54,10 +80,14 @@ public class EventServiceJDBC implements EventDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Event> viewEvent() throws ClassNotFoundException, SQLException, ParseException, NamingException {
+	public List<Event> viewEvent() throws ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
-		ArrayList <Event> selection = null;
-		
+		List <Event> selection = null;
+				
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getViewEvent(), new EventMapper());
 		
 		// Return the ArrayList of Events or null
 		return selection;
@@ -78,13 +108,17 @@ public class EventServiceJDBC implements EventDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Event> searchEvent(String Name) throws ClassNotFoundException, SQLException, ParseException, NamingException {
+	public List<Event> searchEvent(String Name) throws ClassNotFoundException, SQLException, ParseException, NamingException {
 		// Initialize variables
-		ArrayList <Event> selection = null;
-		
+		List <Event> selection = null;
+				
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getSearchEvent(), new EventMapper());
 		
 		// Return the ArrayList of Events or null
-		return selection; 	
+		return selection;
 	}
 
 	
@@ -109,7 +143,10 @@ public class EventServiceJDBC implements EventDAO {
 		// Initialize variables
 		Integer result = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getInsertEvent(), event.getName(), event.getDescription(), event.getPlace(), event.getDate_event(), event.getStartTime(), event.getDuration(), event.getEventType(), event.getSeatsAvailable());
 		
 		// Return if Event was inserted or not 
 		return result;  
@@ -134,8 +171,12 @@ public class EventServiceJDBC implements EventDAO {
 		// Initialize variables
 		Integer result = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
-		// Return if Event was updated or not 
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getUpdateEvent(), event.getName(), event.getDescription(), event.getPlace(), event.getDate_event(), event.getStartTime(), event.getDuration(), event.getEventType(), event.getSeatsAvailable(), event.getEventId());
+		
+		// Return if Event was inserted or not 
 		return result;  
 	}
 	
@@ -159,10 +200,13 @@ public class EventServiceJDBC implements EventDAO {
 		// Initialize variables
 		Integer result = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getDeleteEvent(), idEvent);
 		
-		// Return if Event was deleted or not 
-		return result;  
+		// Return if Event was inserted or not 
+		return result;
 	}
 	
 }

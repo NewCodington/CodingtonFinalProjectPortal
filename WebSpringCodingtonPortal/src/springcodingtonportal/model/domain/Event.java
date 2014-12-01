@@ -7,11 +7,13 @@ import java.text.SimpleDateFormat;
 
 import javax.naming.NamingException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+
 import springcodingtonportal.model.services.PlaceServiceJDBC;
 
 
 public class Event {
-
 
 	/**
 	 * Parameters.
@@ -158,7 +160,7 @@ public class Event {
 	}
 	
 	public String getPlaceString() throws ClassNotFoundException, SQLException, NamingException {
-		PlaceServiceJDBC placeService = new PlaceServiceJDBC();
+		PlaceServiceJDBC placeService =  new PlaceServiceJDBC();
 		Place p = new Place();
 		Place pOut;
 		
@@ -222,6 +224,4 @@ public class Event {
 		return dateString;
 
 	}
-
-
 }

@@ -1,10 +1,8 @@
 package springcodingtonportal.controller;
 
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,9 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import springcodingtonportal.model.domain.Event;
+import springcodingtonportal.model.domain.EventSign;
 import springcodingtonportal.model.domain.Visitor;
 import springcodingtonportal.model.services.EventServiceJDBC;
-import springcodingtonportal.model.services.EventSignUpJDBC;
+import springcodingtonportal.model.services.EventSignUpServiceJDBC;
 import springcodingtonportal.model.services.VisitorServiceJDBC;
 import springcodingtonportal.utils.Exceptions;
 
@@ -49,11 +48,11 @@ public class VisitorController {
 	 * by accepting registration details and load into database
 	 */
 	@RequestMapping("/login.htm")
-	public ModelAndView newVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView loginVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
 		{
-			log.info("Request or Response failed for NEWVISITOR METHOD..");
+			log.info("Request or Response failed for LOGINVISITOR METHOD..");
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
 		
@@ -65,10 +64,11 @@ public class VisitorController {
 		
 		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
 
-		Integer result= visitorService.loginVisitor(v);
+		v.setIdVisitor(visitorService.loginVisitor(v));
+		
 		
 		ModelAndView mv=new ModelAndView();
-		if(result == 0)
+		if(v.getIdVisitor() != -1)
 		{
 			ModelMap mp = new ModelMap();
 			
@@ -89,83 +89,51 @@ public class VisitorController {
 				
 				log.info("Succesfully login visitor "+ v.getUserName());
 				
-				
-				return new ModelAndView("/profileVisitor.htm",mp);
+				return profileVisitor(request, response, mp);
 			}
 		}
 		else
 		{
 			mv.addObject("VisitorLoginMessage", "¡¡¡  USERNAME and PASSWORD incorrect  !!!");
-			log.info("Username "+v.getUserName()+" or password incorrect ...");
+			log.info("Username "+v.getUserName()+" or PASSWORD incorrect ...");
 			return new ModelAndView("/login.jsp");
 		}		
 	}
-	
-	
-	@RequestMapping("/profileVisitor.htm")
-	public ModelAndView profileVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+
+	private ModelAndView profileVisitor(HttpServletRequest request, HttpServletResponse response, ModelMap mp) throws Exception {
 		
 		if(request==null || response==null)
 		{
-			log.info("Request or Response failed for NEWVISITOR METHOD..");
+			log.info("Request or Response failed for PROFILEVISITOR METHOD..");
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
 		
+		List<EventSign> listIdEvent = null;
+		List<Event> eventsRegisterList = null;
+		List<Event> eventsList=null;
 		
-		
-		ArrayList<Integer> listIdEvent = null;
-		ArrayList<Event> eventsRegisterList = null;
-		ArrayList<Event> eventsList=null;
-		
-		EventServiceJDBC eventService=new EventServiceJDBC();
-		EventSignUpJDBC eventSignUp=new EventSignUpJDBC();
-		
-		//Params of jsp for get
-		String register=null;
-		register=request.getParameter("register");
-		
-		String unregister=null;
-		unregister=request.getParameter("unregister");
+		EventServiceJDBC eventService 		= (EventServiceJDBC) appContext.getBean("EventServiceJDBC");
+		EventSignUpServiceJDBC eventSignUp 	= (EventSignUpServiceJDBC) appContext.getBean("EventSignUpServiceJDBC");
 		
 		String idVisitor=null;
-		idVisitor=request.getAttribute("idVisitor").toString();
+		idVisitor=mp.get("idVisitor").toString();
 		
-		//si vienen los parametros meto el nuevo evento a ese visitor
-		if(register!=null){ 
-			if(eventSignUp.registerForNewEvent(Integer.parseInt(idVisitor), Integer.parseInt(register)) == null) {
-				request.setAttribute("Error", "You're already registered in this event");
-				request.setAttribute("ViewError", "YES");
-			}
-			else {
-				request.setAttribute("Success", "Succesfully registered in this event");
-				request.setAttribute("ViewSuccess", "YES");
-			}
-		}
-		if(unregister!=null){ 
-			if(eventSignUp.unregisterForEvent(Integer.parseInt(idVisitor), Integer.parseInt(unregister)) == null) {
-				request.setAttribute("Error", "You're already registered in this event");
-				request.setAttribute("ViewError", "YES");
-			}
-			else {
-				request.setAttribute("Success", "Succesfully unregistered in this event");
-				request.setAttribute("ViewSuccess", "YES");
-			}
-		}
 		
+		eventsList = eventService.viewEvent();
 		listIdEvent = eventSignUp.selectEventForVisitor(Integer.parseInt(idVisitor));
 	
 		if(listIdEvent != null){
 			eventsRegisterList = new ArrayList <Event>();
 			
-			for (Integer element : listIdEvent){
+			for (EventSign element : listIdEvent){
 				Event data = new Event();
-				data.setEventId(element);
+				data.setEventId(element.getIdEvent());
+				
 				eventsRegisterList.add(eventService.selectEvent(data));
 			}
 			
 		}
-	
-		eventsList = eventService.viewEvent();
 		
 		request.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
 		request.setAttribute("EVENTLIST", eventsList);
@@ -196,19 +164,7 @@ public class VisitorController {
 			}
 		}
 		
-		
-		return new ModelAndView("/profileVisitor.jsp");
-		
-		
-		
-		
-		
-		
-
-		
-	
-		
-		
+		return new ModelAndView("/profileVisitor.jsp", mp);	
 	}
 	
 	

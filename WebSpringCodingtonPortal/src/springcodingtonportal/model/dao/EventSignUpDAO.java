@@ -2,9 +2,12 @@ package springcodingtonportal.model.dao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
+
+import springcodingtonportal.model.domain.Event;
+import springcodingtonportal.model.domain.EventSign;
 
 
 /**
@@ -19,6 +22,6 @@ public interface EventSignUpDAO {
 	public Integer unregisterForEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, SQLException, NamingException, IOException;
 	public Integer incrementSeats(Integer idEvent) throws ClassNotFoundException, SQLException, NamingException;
 	public Integer decrementSeats(Integer idEvent) throws ClassNotFoundException, SQLException, NamingException;
-	public ArrayList<Integer> selectEventForVisitor(Integer idEvent)throws ClassNotFoundException, SQLException, NamingException ;
+	public List<EventSign> selectEventForVisitor(Integer idEvent)throws ClassNotFoundException, SQLException, NamingException ;
 	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent)throws ClassNotFoundException, SQLException, NamingException ;
 }

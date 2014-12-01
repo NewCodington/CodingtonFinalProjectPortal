@@ -2,15 +2,12 @@ package springcodingtonportal.model.domain;
 
 public class EventSign {
 
-
-
 	/**
 	 * Parameters.
 	 */
 	private int id;
 	private int idVisitor;
 	private int idEvent;
-	private String Name;
 
 	/**
 	 * Void constructor.
@@ -20,22 +17,8 @@ public class EventSign {
 		this.id = 0;
 		this.idVisitor = 0;
 		this.idEvent = 0;
-
 	}
 	
-
-	/**
-	 * Constructor with parameters.
-	 * @param idVisitor
-	 * @param idEvent
-	 * @param Name
-	 */
-	public EventSign(int idVisitor, int idEvent, String Name)
-	{
-		this.idVisitor = idVisitor;
-		this.idEvent = idEvent;
-		this.Name = Name;
-	}
 		
 
 	/**
@@ -49,18 +32,8 @@ public class EventSign {
 	{
 		this.idVisitor = idVisitor;
 		this.idEvent = idEvent;
-
 	}
 	
-	/**
-	 * Constructor with Name.
-	 * This constructor is used in the method searchEvent.
-	 * @param Name
-	 */
-	public EventSign(String Name)
-	{
-		this.Name = Name;
-	}
 	
 
 	/**
@@ -90,14 +63,5 @@ public class EventSign {
 	public void setIdEvent(int idEvent) {
 		this.idEvent = idEvent;
 	}
-
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String Name) {
-		this.Name = Name;
-	}
-
 
 }

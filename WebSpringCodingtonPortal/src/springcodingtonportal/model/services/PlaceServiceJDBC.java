@@ -2,12 +2,19 @@ package springcodingtonportal.model.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.PlaceDAO;
 import springcodingtonportal.model.domain.Place;
+import springcodingtonportal.model.mapper.PlaceMapper;
+import springcodingtonportal.utils.QueriesSQL;
 
 
 
@@ -18,6 +25,22 @@ import springcodingtonportal.model.domain.Place;
  */
 public class PlaceServiceJDBC implements PlaceDAO {
 
+	@Autowired
+	private ApplicationContext appContext;
+	private JdbcTemplate jdbcTemplate;
+	
+	
+	public PlaceServiceJDBC() {
+		this.jdbcTemplate = null;
+	}
+	
+	public void setDataSource(DataSource dataSource) {
+	    this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	
+	
+	
 	/**
 	 * Method to get a Place from the database. Use a Place class to input the data required.
 	 * 
@@ -34,7 +57,12 @@ public class PlaceServiceJDBC implements PlaceDAO {
 		// Initialize variables
 		Place data = null;
 		
-		// Return the Place or null
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		data = jdbcTemplate.queryForObject(sql.getSelectPlace(), new Object[]{place.getIdPlace()}, new PlaceMapper());
+
+		// Return the place or null
 		return data;
 	}
 
@@ -50,10 +78,14 @@ public class PlaceServiceJDBC implements PlaceDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<Place> viewPlace() throws ClassNotFoundException, SQLException, NamingException {
+	public List<Place> viewPlace() throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		ArrayList <Place> selection = null;
+		List <Place> selection = null;
 		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getViewPlace(), new PlaceMapper());
 		
 		// Return the ArrayList of Places or null
 		return selection;
@@ -78,10 +110,14 @@ public class PlaceServiceJDBC implements PlaceDAO {
 	public Integer insertPlace(Place place) throws ClassNotFoundException, SQLException, NamingException {  
 		// Initialize variables
 		Integer result = null;
-
 		
-		// Return if Place was inserted or not 
-		return result;  
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getInsertPlace(), place.getName(), place.getTypePlace(), place.getImage(), place.getAddress(), place.getDescription());
+		
+		// Return if Event was inserted or not 
+		return result;
 	} 
 
 	
@@ -103,10 +139,14 @@ public class PlaceServiceJDBC implements PlaceDAO {
 	public Integer updatePlace(Place place) throws ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
 		Integer result = null;
-
 		
-		// Return if Place was updated or not 
-		return result;  
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getUpdatePlace(), place.getName(), place.getTypePlace(), place.getImage(), place.getAddress(), place.getDescription(), place.getIdPlace());
+		
+		// Return if Event was inserted or not 
+		return result;
 	}
 	
 	
@@ -127,10 +167,14 @@ public class PlaceServiceJDBC implements PlaceDAO {
 	public Integer deletePlace(int idPlace) throws ClassNotFoundException, SQLException, NamingException   {  
 		// Initialize variables
 		Integer result = null;
-
 		
-		// Return if Place was deleted or not 
-		return result;  
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+		
+		// Create the Statement
+		result = jdbcTemplate.update(sql.getDeletePlace(), idPlace);
+		
+		// Return if Event was inserted or not 
+		return result;
 	} 
 
 }

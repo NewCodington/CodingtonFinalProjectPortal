@@ -97,7 +97,7 @@
 					
 					<%
 						ArrayList<Event> eventList = null;
-						if (session.getAttribute("EVENTLIST") == null){
+						if (request.getAttribute("EVENTLIST") == null){
 					%>
 						
 					<div class="message"><p>Not found Events</p></div>
@@ -105,7 +105,7 @@
 					<%	
 						}
 						else {
-							eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
+							eventList = (ArrayList<Event>) request.getAttribute("EVENTLIST");
 					%>
 					<table>
 						<tr>
@@ -126,7 +126,7 @@
 						<tr>
 							<td><%=event.getName()%></td>
 							<td><%=event.getDescription()%></td>
-							<td><%=event.getPlaceString()%></td>
+							<td><%=event.getPlace()%></td>
 							<td><%=event.getDate_eventString()%></td>
 							<td><%=event.getDuration()%></td>
 							<td><%=event.getEventType()%></td>
@@ -148,7 +148,7 @@
 
 				<%
 					ArrayList<Event> eventRegisterList = null;
-					if (session.getAttribute("EVENTREGISTERLIST") == null){
+					if (request.getAttribute("EVENTREGISTERLIST") == null){
 				%>
 						
 				<div class="message"><p>There are no Events Registered for you</p></div>	
@@ -156,7 +156,7 @@
 				<%	
 					}
 					else {	
-						eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGISTERLIST");
+						eventRegisterList = (ArrayList<Event>) request.getAttribute("EVENTREGISTERLIST");
 				%>
 				<table>
 					<tr>
@@ -176,7 +176,7 @@
 					<tr>
 						<td><%=event.getName()%></td>
 						<td><%=event.getDescription()%></td>
-						<td><%=event.getPlaceString()%></td>
+						<td><%=event.getPlace()%></td>
 						<td><%=event.getDate_eventString()%></td>
 						<td><%=event.getDuration()%></td>
 						<td><%=event.getEventType()%></td>
