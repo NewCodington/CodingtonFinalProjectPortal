@@ -1,7 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/include.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
+ 
+<% response.setStatus(404); %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@page import="codingtonportal.model.domain.Event"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="codingtonportal.model.domain.Place"%>
 
 <html>
 	  
@@ -9,11 +15,11 @@
 		<link rel="stylesheet" type="text/css" href="css/codington.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script language="javascript" src="Register.js"></script>
-		<title>New Codington Portal</title>
+		<title>Error Page</title>
 	</head>
 
 	<body id="body">
-	 
+	
 		<div id="header">
 			<table>
 		    	<tr>
@@ -34,40 +40,42 @@
 		    </table>
 		</div>
 
-		
+
 		<div id="content">
-		
-			<div class="center_nav">
-				<br />
-				<div class="error">${VisitorLoginMessage}</div>				
+			<div class="right_nav">
+				<div class="error">Sorry, the page requested does not exists.</div>
 				
-				<form method="post" action="login.htm">
-					<div class="title">Sign In</div>
-					<br />
-					
-					<div class="field">
-					  	<input type="text" id = "uname" name="username" placeholder="Username" required />
-					  	<br />
-					</div>
-					
-					<div class="field">
-				    	<input type="password" id = "pass" name="password" placeholder="Password" required />
-				      	<br />
-				  	</div>
-				  <div class = "input">
-						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel" />
-				  </div>
-				</form>
-				<div><a href="registerVisitor" > Register New Visitor </a></div>
+				<%
+					if(session.getAttribute("Visitor") != null) {	
+				%>
+				
+				<br /><br />
+				<p class = "return"><a align="center" href="visitor" class="link">Return to Your Profile Page </a></p>
+				
+				<%
+					}else if(session.getAttribute("Admin") != null) {
+				%>
+				
+				<br /><br />
+				<p class = "return"><a align="center" href="admin" class="link">Return to Your Profile Page </a></p>
+				
+				<%
+					}else {
+				%>
+				
+				<br /><br />
+				<p class = "return"><a align="center" href="login" class="link">Return to Login </a></p>
+				
+				<%
+					}
+				%>
 			</div>
 		</div>
-
-
+		
+		
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-
+	
 	</body>
-
 </html>

@@ -256,15 +256,20 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	@Override
 	public boolean isAdmin(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
-		PreparedStatement statementSQL = null;
-		Integer result = null;
+		Visitor v = null;
+
 		
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
+		try {
+			v = jdbcTemplate.queryForObject(sql.getLoginVisitor(), new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
+		
+		}catch(EmptyResultDataAccessException e) {
+			return false;
+		}
 		
 		// Return indicates if is admin or not
-		if (result == 1)	return true;
-		else 				return false;
+		return v.isAdmin();
 	}
 
 
@@ -289,7 +294,10 @@ public class VisitorServiceJDBC implements VisitorDAO {
 		Integer result = null;
 		
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
-				
+		
+		// Create the Statement
+		jdbcTemplate.queryForObject(sql.getSelectVisitor(), new Object[]{visitor.getIdVisitor()}, new VisitorMapper());
+
 		
 		// Return the Id of Visitor if exists in the application
 		return result;

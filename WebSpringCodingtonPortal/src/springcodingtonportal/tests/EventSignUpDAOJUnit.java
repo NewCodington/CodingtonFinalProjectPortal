@@ -19,13 +19,13 @@ import codingtonportal.model.services.EventSignUpImpl;
 
 
 public class EventSignUpDAOJUnit extends TestCase {
-	EventSignUpImpl EventSign;
+	EventSignUpJDBC EventSign;
 	
 
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		EventSign = new EventSignUpImpl();
+		EventSign = new EventSignUpJDBC();
 	
 	}
 
@@ -41,7 +41,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 	@Test
 	public void testregisterForNewEvent() throws SQLException {
 		EventSign eventSigns= new EventSign(3,4);
-		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		EventSignUpJDBC serviceEventSignUp = new EventSignUpJDBC();
 		try {
 			assertNotNull(serviceEventSignUp.registerForNewEvent(eventSigns.getIdVisitor(),eventSigns.getIdEvent()));		
 		} catch (IOException e) {
@@ -63,7 +63,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 	@Test
 	public void testunregisterForEvent() throws SQLException {
 		EventSign eventSigns= new EventSign(2,4);
-		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		EventSignUpJDBC serviceEventSignUp = new EventSignUpJDBC();
 		try {
 			assertNotNull(serviceEventSignUp.unregisterForEvent(eventSigns.getIdVisitor(), eventSigns.getIdEvent()));			
 		} catch (IOException e) {
@@ -85,7 +85,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 	@Test
 	public void testincrementSeats() throws SQLException {
 		EventSign eventSigns= new EventSign(2,4);
-		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		EventSignUpJDBC serviceEventSignUp = new EventSignUpJDBC();
 		try {
 			assertNotNull(serviceEventSignUp.incrementSeats(eventSigns.getIdEvent()));			
 		} catch (ClassNotFoundException e) {
@@ -104,7 +104,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 	@Test
 	public void testdecrementSeats() throws SQLException {
 		EventSign eventSigns= new EventSign(2,4);
-		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		EventSignUpJDBC serviceEventSignUp = new EventSignUpJDBC();
 		try {			
 			assertNotNull(serviceEventSignUp.decrementSeats(eventSigns.getIdEvent()));			
 		} catch (ClassNotFoundException e) {
@@ -123,7 +123,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 	@Test	
 	public void testselectEventForVisitor (){
 		EventSign eventSigns= new EventSign(3,4);
-		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		EventSignUpJDBC serviceEventSignUp = new EventSignUpJDBC();
 		try {
 			try{
 				assertNotNull(serviceEventSignUp.selectEventForVisitor(eventSigns.getIdVisitor()));
@@ -146,7 +146,7 @@ public class EventSignUpDAOJUnit extends TestCase {
 	@Test
 	public void testselectVisitorForEvent() {
 		EventSign eventSigns = new EventSign(3,4);								                                   		
-		EventSignUpImpl serviceEventSignUp = new EventSignUpImpl();
+		EventSignUpJDBC serviceEventSignUp = new EventSignUpJDBC();
 		try {
 			try {
 				assertNotNull(serviceEventSignUp.selectVisitorForEvent(eventSigns.getIdVisitor(),eventSigns.getIdEvent()));
