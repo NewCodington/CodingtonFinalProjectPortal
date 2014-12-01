@@ -3,31 +3,34 @@ package codingtonportal.utils;
 
 
 
-import java.io.FileInputStream;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
 import codingtonportal.model.domain.Place;
-import codingtonportal.model.services.PlaceServiceImpl;
+
 
 
 public class ImageConversion {
@@ -37,16 +40,12 @@ public class ImageConversion {
 	 * 
 	 */
 
-	public void insertImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NamingException, ClassNotFoundException {        
+	public Place insertImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NamingException, ClassNotFoundException {        
         DiskFileItemFactory factory = new DiskFileItemFactory();            
         ServletFileUpload sfu  = new ServletFileUpload(factory);
-        //PlaceServiceImpl  placeService = new PlaceServiceImpl();
         Place place=new Place();
-        List<FileItem> items = null;
-        FERSDataConnection conex= new FERSDataConnection();
-  		PreparedStatement statementSQL = null;
-  		InputStream input= null; 
-  		FileItem input2= null ;
+        List<FileItem> items = null;	
+  		FileItem input= null ;
 
   		
         try {
@@ -59,60 +58,56 @@ public class ImageConversion {
         for (FileItem fileItem : items){
         	if (fileItem.isFormField()) {
         		String fieldValue = fileItem.getString();
-        		System.out.println(fieldValue);
         		extra.add(fieldValue);
         	}
         	else {
-
         		extra.add(fileItem.getInputStream());
-        		input2 = items.get(2);  
-        		//input = input2.getInputStream(); // InputStream
-        		input = fileItem.getInputStream();
+        		input = items.get(2);  
         		
-        		System.out.println(input);
-        		input.close();
         	}
-        }
-       
-               
-             
-      
-        try {        	
-			statementSQL = conex.getConnection().prepareStatement("INSERT INTO codington.aux_image VALUES (?,?);");
-			//statementSQL.setBinaryStream(1, input);
-			statementSQL.setBlob(1, input);
-			//statementSQL.setBinaryStream(1, input.getInputStream(), (int) input.getSize());
-		    //statementSQL.setBlob(1, input);
-		    statementSQL.setString(2, "besos");
-	        statementSQL.executeUpdate();			
-			statementSQL.close();
-			conex.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("No inserto --"+e);
-			e.printStackTrace();
-		}
-            
-        
-        /*System.IO.MemoryStream ms = new System.IO.MemoryStream();
-        // Se guarda la imagen en el buffer
-        picFoto.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-        // Se extraen los bytes del buffer para asignarlos como valor para el
-        // parámetro.
-        cmd.Parameters["@foto"].Value = ms.GetBuffer();
-
-        conn.Open();
-        cmd.ExecuteNonQuery();
-        conn.Close();*/
-	 /*String name = request.getParameter("placeName");
-     String description = request.getParameter("description");
-     String image = request.getParameter("image");
-     String address = request.getParameter("address");	     
-     String typePlace = request.getParameter("typePlace");				
-     System.out.println(name+"-"+description+"-"+image+"-"+address+"-"+typePlace);*/
-     
+        }                                 
+    
+            place.setName((String) extra.get(0));
+            place.setDescription((String) extra.get(1));
+            place.setImage(input.getInputStream());
+            place.setAddress((String) extra.get(3));
+            place.setTypePlace(Integer.parseInt((String) extra.get(4)));
+            return place;                 
 	}
 	
- 
+	public BufferedImage ShowImage() throws IOException, ClassNotFoundException, NamingException{
+		
+		FERSDataConnection conex= new FERSDataConnection(); 
+		ArrayList <Place> selection = new ArrayList <Place>();
+		Blob imBlob = null;
+		InputStream in = null;
+		File outimage= null;
+		try{			
+			Statement sentencia = (conex.getConnection()).createStatement();
+			ResultSet outdata= sentencia.executeQuery("select image from codington.aux_image");			
+			while (outdata.next()){
+				Place  places = new Place();
+				imBlob=outdata.getBlob("image");				
+				//places.setImage(outdata.getBlob("image").getBinaryStream());	
+				//in = outdata.getBlob("image").getBinaryStream();				
+				//OutputStream out=new FileOutputStream(outimage);
+			     byte[] bytes = imBlob.getBytes(1, (int) imBlob.length());
+			     BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytes))
+			     //String s=new String(bytes);
+		         System.out.println(bufferedImage);  //prints bytes for the string			     
+				selection.add(places);
+				return bufferedImage;
+			}
+			for (Place element : selection)
+				System.out.println("Soy Image fea: \n"+	element.getImage());
+		
+		}catch(SQLException e){		
+			System.out.println("Ai mai ay problemas\n" + e);
+			//return null;
+		}	
+
+		//return imBlob;
+	}
+
 
 }

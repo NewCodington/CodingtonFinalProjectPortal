@@ -1,7 +1,7 @@
 package codingtonportal.model.domain;
 
 import java.io.InputStream;
-import java.sql.Blob;
+//import java.sql.Blob;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;

@@ -174,7 +174,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 			statementSQL = con.getConnection().prepareStatement(connection.getProperty("insertPlace"));
 			// Add conditions
 			statementSQL.setString(1, place.getName());
-			statementSQL.setInt(2, place.getTypePlace());
+			statementSQL.setInt(2, place.getTypePlace());			
 			statementSQL.setBlob(3, place.getImage());
 			statementSQL.setString(4, place.getAddress());
 			statementSQL.setString(5, place.getDescription());	
@@ -188,6 +188,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 				statementSQL.close();
 			}
 			if (con != null) {
+				
 				con.close();
 			}
 		}	

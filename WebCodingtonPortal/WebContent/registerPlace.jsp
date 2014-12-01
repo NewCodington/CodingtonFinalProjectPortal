@@ -8,14 +8,13 @@
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="images/BrightSide.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script language="javascript" src="Register.js"></script>
-		<title>Register's Place Page</title>
+		<title>Event Register Page</title>
 	</head>
 
-
-	<body id="body">
+	
+<body>
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
@@ -37,105 +36,108 @@
 			response.sendRedirect("registerPlace");
 	}
 	%> 
-		<div id="header">
-			<table>
-		    	<tr>
-		      		<td class="colum1" rowspan="2">
-		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
-		        	</td>
-		        	<td class="colum2">
-		        		<div class="title">New Codington Portal</div>
-		        	</td>	
-		        	<td class="colum3">&nbsp;</td>
-		      		</tr>
-		      	<tr>
-		        	<td>
-		        		<div class="subtitle">One of the World's Best Cities 2014</div>
-		        	</td>
-		        	<td>&nbsp;</td>
-		      	</tr>
-		    </table>
-		    <div class="menuHorizontal"> <a href="history.jsp" class="link" > History </a> | <a href="siteMap.jsp" class="link">Site Map </a> | <a href="about.jsp" class="link">About </a> </div>
+	
+	<div id="wrap">
+	 
+		<div id="header">				
+			
+			<h1 id="logo">New<span class="green">Codington</span></h1>	
+			<h2 id="slogan">One of the World's Best Cities 2014</h2> 
+		
+			
+			<!-- Menu Tabs -->
+				<ul>
+					<li id="current"><a href="history.jsp"><span>History</span></a></li>
+					<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+					<li><a href="about.jsp"><span>About</span></a></li>
+	
+				</ul>	
+													
 		</div>
+
+		
+		<div id="content-wrap">
 		
 		
-		<div id="content">
+		<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
-			<div class = "left_nav">
-				<div class = "title"><p><%=session.getAttribute("Admin") %>'s Menu</p></div>
-				<hr size=10 />
+			
+			<div id="sidebar">							
 				
-				<div class = content>	
-					<p><a href="admin" class="link">My Page </a></p>
-					<hr />
-					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
-					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
-				</div>
+				<h1><%=session.getAttribute("Admin") %></h1>
+				<ul class="sidemenu">
+					<li><a href="index.html">My Page</a></li>
+					<li><a href=<%="registerPlace"%>>Register Place</a></li>
+					<li><a href=<%="registerEvent"%>>Register Event</a></li>
+					<li><a href="logout">Logout</a></li>
+
+				</ul>		
+						
+		
 			</div>
-	
-	
-			<div class="center_nav">		
+			<div id="main">
 				
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
+				
+					<div class = "section">
+		
+					<form class = "Rform" method="post" action="registerPlace" enctype="multipart/form-data">
+							<h1>New Place</h1>
+							<br />
 					
-				<form method="post" action="registerPlace" enctype="multipart/form-data">
-					<div class="title">New Place</div>
-					<br />
-					
-					<div class="field"><p>Place name:</p> 
-					  	<input type="text" id="placeName" name="placeName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="1 to 45 characters" required />
-					  	<br />
-					</div>
-					 
-					<div class="field"><p>Description:</p> 
-					  	<input type="text" name="description" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" required="required" />
-					  	<br />
-					</div>
-					    
-					<div class="field"><p>Image:</p> 
-						<input type="file" id="image" name="image" id="image" required />
-						<br /><br />
-				  	</div>
-				  		
-				  	<div class="field"><p>Address:</p> 
-					    <input type="text" id="address" name="address"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="1 to 30 characters" required/>
-					    <br /><br />
-				  	</div>
-					
-					<div class="field"><p>Type Place:</p>
-						<%
-							if (session.getAttribute("LISTTYPEPLACE") != null) {
-								ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
-						%>
-						<select id="typePlace" name="typePlace" required>
-							<%
-								for (TypePlace typePlace : typePlaceList) {
-							%>
-							<option value="<%= typePlace.getIdTypePlace()%>"><%=typePlace.getName() %></option>
-							<%
-								}
-							%>
-						</select>
-						<%
-							}
-						%>
-						<br />
-					</div>
-					
-					<div class="input">
-						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
-						<br />
-					</div>  
-				</form>
+							<div class="field"><p>Place name:</p> 
+								<input type="text" id="placeName" name="placeName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="1 to 45 characters" required />
+								<br />
+							</div>
+							 
+							<div class="field"><p>Description:</p> 
+								<input type="text" name="description" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" required="required" />
+								<br />
+							</div>
+								
+							<div class="field"><p>Image:</p> 
+								<input type="file" id="image" name="image" id="image" required />
+								<br /><br />
+							</div>
+								
+							<div class="field"><p>Address:</p> 
+								<input type="text" id="address" name="address"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="1 to 30 characters" required/>
+								<br /><br />
+							</div>
+							
+							<div class="field"><p>Type Place:</p>
+								<%
+									if (session.getAttribute("LISTTYPEPLACE") != null) {
+										ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+								%>
+								<select id="typePlace" name="typePlace" required>
+									<%
+										for (TypePlace typePlace : typePlaceList) {
+									%>
+									<option value="<%= typePlace.getIdTypePlace()%>"><%=typePlace.getName() %></option>
+									<%
+										}
+									%>
+								</select>
+								<%
+									}
+								%>
+								<br />
+							</div>
+							
+							<div class="input">
+								<input type="submit" value="Submit" />
+								<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+								<br />
+							</div>  
+					</form>
 			</div>
 		</div>
-		
+	
+	
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-	
+	</div>
 	</body>
 </html>
