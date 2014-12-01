@@ -5,17 +5,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-
 
 import springcodingtonportal.model.domain.Event;
 import springcodingtonportal.model.domain.EventSign;
@@ -31,7 +29,6 @@ import springcodingtonportal.utils.Exceptions;
  */
 
 @Controller
-
 public class VisitorController {
 	@Autowired
 	private ApplicationContext appContext;
@@ -47,14 +44,56 @@ public class VisitorController {
 	 * method will register new Visitor into FERS system
 	 * by accepting registration details and load into database
 	 */
-	@RequestMapping("/login.htm")
-	public ModelAndView loginVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+	
+	@RequestMapping("/registerVisitor.htm")
+	public ModelAndView registerVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
 		{
 			log.info("Request or Response failed for LOGINVISITOR METHOD..");
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
+		
+		Visitor visitor=new Visitor();
+		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
+		
+		visitor.setUserName(request.getParameter("uname"));
+		visitor.setFirstName(request.getParameter("fname"));
+		visitor.setLastName(request.getParameter("lname"));
+		visitor.setPassword(request.getParameter("pass"));
+		visitor.setEmail(request.getParameter("email"));
+		visitor.setDni(request.getParameter("dni"));
+		visitor.setPhoneNumber(request.getParameter("phone"));
+		visitor.setAddress(request.getParameter("adress"));
+		visitor.setAdmin(false);
+		
+		ModelAndView mv=new ModelAndView();
+		
+		if((visitorService.exitsUsernameVisitor(visitor)) != -1) {
+			request.setAttribute("VisitorInfo", visitor);
+			
+			mv.addObject("RegisterVisitorError", "¡¡¡ USERNAME already exists !!!");
+			mv.setViewName("/registerVisitor.jsp");
+			return mv;
+		}
+		else {
+			if(visitorService.insertVisitor(visitor) > 0){
+				mv.addObject("RegisterVisitorMessage", "¡¡¡ Successfully VISITOR created !!!");
+				mv.setViewName("/login.jsp");
+			}
+			return mv;
+		}
+	}
+		
+		
+		
+	@RequestMapping("/login.htm")
+	public ModelAndView loginVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for LOGINVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		HttpSession session=request.getSession();
 		
 		Visitor v = new Visitor();
 		v.setUserName(request.getParameter("username"));
@@ -68,46 +107,217 @@ public class VisitorController {
 		
 		
 		ModelAndView mv=new ModelAndView();
+		
 		if(v.getIdVisitor() != -1)
 		{
-			ModelMap mp = new ModelMap();
-			
-			mp.addAttribute("idUser", v.getIdVisitor());
-			mp.addAttribute("UserName", v.getUserName());
-			
 			if(visitorService.isAdmin(v)){
 				
-				mp.addAttribute("idAdmin", v.getIdVisitor());
-				mp.addAttribute("Admin", v.getUserName());
+				session.setAttribute("idAdmin", v.getIdVisitor());
+				session.setAttribute("Admin", v.getUserName());
 				
 				log.info("Succesfully login Administrator "+ v.getUserName());
-				return new ModelAndView("/profileAdmin.jsp", mp);
+				mv.setViewName("/profileAdmin.jsp");
+				return mv;
 			}
 			else {
-				mp.addAttribute("idVisitor", v.getIdVisitor());
-				mp.addAttribute("Visitor", v.getUserName());
+				session.setAttribute("idVisitor", v.getIdVisitor());
+				session.setAttribute("Visitor", v.getUserName());
 				
 				log.info("Succesfully login visitor "+ v.getUserName());
 				
-				return profileVisitor(request, response, mp);
+				return loadEvents(request, response);
 			}
 		}
 		else
 		{
 			mv.addObject("VisitorLoginMessage", "¡¡¡  USERNAME and PASSWORD incorrect  !!!");
 			log.info("Username "+v.getUserName()+" or PASSWORD incorrect ...");
-			return new ModelAndView("/login.jsp");
+			
+			mv.setViewName("/login.jsp");
+			return mv;
 		}		
 	}
 
-
-	private ModelAndView profileVisitor(HttpServletRequest request, HttpServletResponse response, ModelMap mp) throws Exception {
+	
+	
+	@RequestMapping("/profileVisitor.htm")
+	public ModelAndView profileVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		
+		return loadEvents(request, response);
+	}
+	
+	
+	
+	@RequestMapping("/registerEventForVisitor.htm")
+	public ModelAndView registerEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("register") Integer idEventR) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		HttpSession session=request.getSession();
+		EventSignUpServiceJDBC eventSignUp 	= (EventSignUpServiceJDBC) appContext.getBean("EventSignUpServiceJDBC");
+		
+		Integer idVisitor = Integer.parseInt(session.getAttribute("idVisitor").toString());
+		
+		boolean success = false;
+		
+		if(eventSignUp.registerForNewEvent(idVisitor, idEventR) != null) {
+			success = true;
+		}
+		
+		ModelAndView mv = loadEvents(request, response);
+		if(success) {
+			 mv.addObject("VisitorRegisterEventMessage", "¡¡¡  Succesfully registered in this EVENT  !!!");
+		}
+		else {
+			mv.addObject("VisitorRegisterEventError", "¡¡¡  You're already registered in this EVENT  !!!");
+		}
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping("/unregisterEventForVisitor.htm")
+	public ModelAndView unregisterEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("unregister") Integer idEventR) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		HttpSession session=request.getSession();
+		EventSignUpServiceJDBC eventSignUp 	= (EventSignUpServiceJDBC) appContext.getBean("EventSignUpServiceJDBC");
+		
+		Integer idVisitor = Integer.parseInt(session.getAttribute("idVisitor").toString());
+		
+		boolean success = false;
+		if(eventSignUp.unregisterForEvent(idVisitor, idEventR) != null) {
+			success = true;
+		}
+		
+		ModelAndView mv = loadEvents(request, response);
+		if(success) {
+			 mv.addObject("VisitorRegisterEventMessage", "¡¡¡  Succesfully unregistered in this EVENT  !!!");
+		}
+		
+		return mv;
+	
+	}
+	
+	
+	@RequestMapping("/getVisitor.htm")
+	public ModelAndView getVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		
+		return loadVisitor(request, response);
+	}
+	
+	
+	
+	@RequestMapping("/updateVisitor.htm")
+	public ModelAndView updateVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		HttpSession session=request.getSession();
+		
+		Visitor visitor=new Visitor();
+		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
+		
+		visitor.setIdVisitor(Integer.parseInt(session.getAttribute("idVisitor").toString()));
+		visitor.setFirstName(request.getParameter("fname"));
+		visitor.setLastName(request.getParameter("lname"));
+		visitor.setEmail(request.getParameter("email"));
+		visitor.setDni(request.getParameter("dni"));
+		visitor.setPhoneNumber(request.getParameter("phone"));
+		visitor.setAddress(request.getParameter("adress"));
+		visitor.setAdmin(false);
+		
+		boolean success = false;
+		if(visitorService.updateVisitor(visitor) > 0){
+			success = true;
+		}
+		
+		ModelAndView mv = loadEvents(request, response);
+		if(success) {
+			 mv.addObject("VisitorRegisterEventMessage", "¡¡¡  Successfully VISITOR updated  !!!");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping("/updatePasswordVisitor.htm")
+	public ModelAndView updatePasswordVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		HttpSession session=request.getSession();
+		
+		Visitor visitor=new Visitor();
+		
+		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
+		visitor.setIdVisitor(Integer.parseInt(session.getAttribute("idVisitor").toString()));
+		visitor.setPassword(request.getParameter("pass"));
+		
+		boolean success = false;
+		if(visitorService.updatePassword(visitor) > 0){
+			success = true;
+		}
+		
+		ModelAndView mv = loadEvents(request, response);
+		if(success) {
+			 mv.addObject("VisitorRegisterEventMessage", "¡¡¡  Successfully VISITOR PASSWORD updated  !!!");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping("/logout.htm")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		HttpSession session=request.getSession();
+		
+		session.removeAttribute("idVisitor");
+		session.removeAttribute("Visitor"); 
+		session.removeAttribute("idAdmin"); 
+		session.removeAttribute("Admin"); 
+	
+		session.invalidate();
+		
+		return new ModelAndView("/login.jsp");
+	}
+	
+	
+	
+	private ModelAndView loadEvents(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
 		{
 			log.info("Request or Response failed for PROFILEVISITOR METHOD..");
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
+		HttpSession session=request.getSession();
 		
 		List<EventSign> listIdEvent = null;
 		List<Event> eventsRegisterList = null;
@@ -117,7 +327,7 @@ public class VisitorController {
 		EventSignUpServiceJDBC eventSignUp 	= (EventSignUpServiceJDBC) appContext.getBean("EventSignUpServiceJDBC");
 		
 		String idVisitor=null;
-		idVisitor=mp.get("idVisitor").toString();
+		idVisitor=session.getAttribute("idVisitor").toString();
 		
 		
 		eventsList = eventService.viewEvent();
@@ -138,35 +348,29 @@ public class VisitorController {
 		request.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
 		request.setAttribute("EVENTLIST", eventsList);
 		
-		
-		if (request.getAttribute("ViewErrorPriv")!= null && request.getAttribute("ViewErrorPriv").toString().equals("YES")) {
-			request.setAttribute("ViewErrorPriv", null);
-			request.setAttribute("Error", null);
-			request.setAttribute("Success", null);
-		}
-		else {	
-			if(request.getAttribute("ViewSuccess")!=null && request.getAttribute("ViewSuccess").toString().equals("YES")) {
-				request.setAttribute("ViewSuccess", null);
-				request.setAttribute("Error", null);
-				request.setAttribute("ErrorPriv", null);
-			}
-			else {
-				if(request.getAttribute("ViewError")!=null && request.getAttribute("ViewError").toString().equals("YES")) {
-					request.setAttribute("ViewError", null);
-					request.setAttribute("Success", null);
-					request.setAttribute("ErrorPriv", null);
-				}
-				else { 
-					request.setAttribute("Error", null);
-					request.setAttribute("ErrorPriv", null);
-					request.setAttribute("Success", null);
-				}
-			}
-		}
-		
-		return new ModelAndView("/profileVisitor.jsp", mp);	
+		return new ModelAndView("/profileVisitor.jsp");	
 	}
 	
 	
+	
+	private ModelAndView loadVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for PROFILEVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		HttpSession session=request.getSession();
+		
+		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
+		Visitor visitor=new Visitor();
+
+		visitor.setIdVisitor(Integer.parseInt(session.getAttribute("idVisitor").toString()));
+		Visitor visitorUpdate=new Visitor(visitorService.selectVisitor(visitor));
+		
+		request.setAttribute("VISITOR", visitorUpdate);
+		
+		return new ModelAndView("/updateVisitor.jsp");	
+	}
 	
 }

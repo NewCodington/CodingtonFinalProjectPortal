@@ -151,7 +151,7 @@ public class VisitorServiceJDBC implements VisitorDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
-		result = jdbcTemplate.update(sql.getInsertVisitor(), visitor.getFirstName(), visitor.getLastName(), visitor.getDni(), visitor.getEmail(), visitor.getPhoneNumber(), visitor.getAddress(), visitor.getUserName(), visitor.getPassword(), visitor.isAdmin());
+		result = jdbcTemplate.update(sql.getInsertVisitor(), new Object[]{visitor.getFirstName(), visitor.getLastName(), visitor.getDni(), visitor.getEmail(), visitor.getPhoneNumber(), visitor.getAddress(), visitor.getUserName(), visitor.getPassword(), visitor.isAdmin()});
 		
 		// Return if Event was inserted or not 
 		return result; 
@@ -180,7 +180,7 @@ public class VisitorServiceJDBC implements VisitorDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
-		result = jdbcTemplate.update(sql.getUpdateVisitor(), visitor.getFirstName(), visitor.getLastName(), visitor.getDni(), visitor.getEmail(), visitor.getPhoneNumber(), visitor.getAddress(), visitor.getIdVisitor());
+		result = jdbcTemplate.update(sql.getUpdateVisitor(), new Object[]{visitor.getFirstName(), visitor.getLastName(), visitor.getDni(), visitor.getEmail(), visitor.getPhoneNumber(), visitor.getAddress(), visitor.getIdVisitor()});
 		
 		// Return if Event was inserted or not 
 		return result; 		
@@ -209,7 +209,7 @@ public class VisitorServiceJDBC implements VisitorDAO {
 				QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 				
 				// Create the Statement
-				result = jdbcTemplate.update(sql.getUpdatePassword(), visitor.getIdVisitor());
+				result = jdbcTemplate.update(sql.getUpdatePassword(), new Object[]{visitor.getPassword(), visitor.getIdVisitor()});
 				
 				// Return if Event was inserted or not 
 				return result; 	 	
@@ -238,7 +238,7 @@ public class VisitorServiceJDBC implements VisitorDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
-		result = jdbcTemplate.update(sql.getDeleteVisitor(), visitor.getIdVisitor());
+		result = jdbcTemplate.update(sql.getDeleteVisitor(), new Object[]{visitor.getIdVisitor()});
 		
 		// Return if Event was inserted or not 
 		return result;	

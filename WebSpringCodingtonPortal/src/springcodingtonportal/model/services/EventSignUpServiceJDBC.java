@@ -57,7 +57,7 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 	 */
 	public Integer registerForNewEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, SQLException, NamingException, IOException {
 		// Initialize variables
-		Integer idVisitorRegistered = selectVisitorForEvent(idVisitor, idEvent);
+		Integer idVisitorRegistered = selectVisitorForEvent(idEvent, idVisitor);
 		Integer result = null;
 		
 		// If the visitor isn't registered
@@ -70,7 +70,7 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 				QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 				
 				// Create the Statement
-				result = jdbcTemplate.update(sql.getRegisterForNewEvent(), seatsAvailable, idEvent);
+				result = jdbcTemplate.update(sql.getRegisterForNewEvent(), new Object[]{idVisitor, idEvent});
 
 			}
 			
@@ -107,7 +107,7 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 			QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 			
 			// Create the Statement
-			result = jdbcTemplate.update(sql.getUnregisterForEvent(), seatsAvailable, idEvent);
+			result = jdbcTemplate.update(sql.getUnregisterForEvent(), new Object[]{idVisitor, idEvent});
 		}
 		
 		// Return if Visitor was unregistered or not 
@@ -140,7 +140,7 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 		seats = jdbcTemplate.queryForInt(sql.getSelectSeats(),  idEvent);
 		seats++;
 		// Create the Statement
-		seats= jdbcTemplate.update(sql.getUpdateSeats(), seats, idEvent);
+		jdbcTemplate.update(sql.getUpdateSeats(), new Object[]{seats, idEvent});
 					
 		// Return if Visitor was unregistered or not 
 		return seats;  	
@@ -175,7 +175,7 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 		if (seats > 0) {
 			seats--;
 			// Create the Statement
-			seats= jdbcTemplate.update(sql.getUpdateSeats(), seats, idEvent);
+			jdbcTemplate.update(sql.getUpdateSeats(), new Object[]{seats, idEvent});
 			
 		}
 		// If the seats are 0, not if it decreases
@@ -231,7 +231,7 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer selectVisitorForEvent(Integer idVisitor, Integer idEvent) throws ClassNotFoundException, SQLException, NamingException {
+	public Integer selectVisitorForEvent(Integer idEvent, Integer idVisitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		Integer result = null;
 		
@@ -239,7 +239,7 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 		
 		try {
 		// Create the Statement
-		result = jdbcTemplate.queryForInt(sql.getSelectEventForVisitor(),  new Object[]{idVisitor, idEvent});
+		result = jdbcTemplate.queryForInt(sql.getSelectVisitorForEvent(),  new Object[]{idEvent, idVisitor});
 		
 		}catch(EmptyResultDataAccessException e) {
 			return -1;

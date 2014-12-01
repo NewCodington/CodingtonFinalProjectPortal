@@ -39,7 +39,7 @@
 		
 			<div class="center_nav">
 				<br />
-				<div class="error">${VisitorLoginMessage}</div>				
+				<div class="error">${VisitorLoginMessage}</div>	<div class="message">${RegisterVisitorMessage}</div>
 				
 				<form method="post" action="login.htm">
 					<div class="title">Sign In</div>
@@ -56,10 +56,9 @@
 				  	</div>
 				  <div class = "input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel" />
 				  </div>
 				</form>
-				<div><a href="registerVisitor" > Register New Visitor </a></div>
+				<div><a href="registerVisitor.jsp" > Register New Visitor </a></div>
 			</div>
 		</div>
 

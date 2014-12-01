@@ -2,7 +2,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page import="codingtonportal.model.domain.Visitor"%>
+<%@page import="springcodingtonportal.model.domain.Visitor"%>
 
 <html>
 	  
@@ -13,25 +13,20 @@
 		<title>Visitor Update Password Page</title>
 	</head>
 
-	<%
-		Visitor visitor=new Visitor();
-		visitor=(Visitor)session.getAttribute("VISITOR");
-	%>
-
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("login.htm");
 		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("admin");
+		response.sendRedirect("admin.htm");
 		return;
 	}
 	%>
@@ -62,7 +57,7 @@
 
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				
-				<form method="post" action="updatePasswordVisitor">
+				<form method="post" action="updatePasswordVisitor.htm">
 					<div class="title">Update Password</div>
 			        <br />
 					
@@ -78,7 +73,7 @@
 				  
 				  	<div class="input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='visitor';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileVisitor.htm';" />
 						<br />
 					</div>  
 				</form>

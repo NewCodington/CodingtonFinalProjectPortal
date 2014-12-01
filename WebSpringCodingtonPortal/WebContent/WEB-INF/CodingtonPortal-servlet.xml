@@ -42,7 +42,7 @@
    
    <!-- Definition for EventSignUpServiceJDBC bean -->
  	<bean id="EventSignUpServiceJDBC" 
-      class="springcodingtonportal.model.services.EventSignUpServiceJDBCC">
+      class="springcodingtonportal.model.services.EventSignUpServiceJDBC">
       <property name="dataSource"  ref="dataSource" />    
    </bean>
    
@@ -77,7 +77,7 @@
 		<property name="unregisterForEvent" value="DELETE FROM codington.eventregistration WHERE (idVisitorR= ? AND idEventR=?);"></property>
 		<property name="selectSeats" 	value="SELECT Seats_available FROM codington.event WHERE (idEvent = ?);"></property>
 		<property name="updateSeats" 	value="UPDATE codington.event SET Seats_available = ? WHERE (idEvent = ?);"></property>
-		<property name="selectEventForVisitor" value="SELECT idEventR FROM codington.eventregistration WHERE (idVisitorR = ?);"></property>
+		<property name="selectEventForVisitor" value="SELECT * FROM codington.eventregistration WHERE (idVisitorR = ?);"></property>
 		<property name="selectVisitorForEvent" value="SELECT idVisitorR FROM codington.eventregistration WHERE (idEventR = ? AND idVisitorR = ?);"></property>
 		
 		<property name="viewRegionPlace" value="SELECT * FROM codington.regionplace;"></property>

@@ -2,7 +2,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page import="codingtonportal.model.domain.Visitor"%>
+<%@page import="springcodingtonportal.model.domain.Visitor"%>
 
 <html>
 	  
@@ -21,7 +21,7 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitor");
+		response.sendRedirect("profileVisitor.htm");
 		return;
 	}
 	else if(session.getAttribute("Admin")!=null) {
@@ -57,15 +57,15 @@
 
 			<div class = "center_nav">
 
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+				<div class="error">${RegisterVisitorError}</div>
 
 				<%
 					Visitor visitor = null;
-					if (session.getAttribute("VisitorInfo") != null) {
-						visitor = (Visitor) session.getAttribute("VisitorInfo");
+					if (request.getAttribute("VisitorInfo") != null) {
+						visitor = (Visitor) request.getAttribute("VisitorInfo");
 					}
 				%>				
-				<form method="post" id="f" name="f" action="registerVisitor" onsubmit = "return validateForm();">
+				<form method="post" id="f" name="f" action="registerVisitor.htm" onsubmit = "return validateForm();">
 					<div class="title">New User</div>
 			        <br />
 					
@@ -117,7 +117,7 @@
 				  
 				  	<div class="input">
 						<input type="submit" value="Submit"  />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='login';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='login.jsp';" />
 						<br />
 					</div>  
 				</form>

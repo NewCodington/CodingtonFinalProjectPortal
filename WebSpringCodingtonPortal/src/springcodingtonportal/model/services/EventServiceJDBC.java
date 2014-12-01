@@ -115,7 +115,7 @@ public class EventServiceJDBC implements EventDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 
 		// Create the Statement
-		selection = jdbcTemplate.query(sql.getSearchEvent(), new EventMapper());
+		selection = jdbcTemplate.query(sql.getSearchEvent(), new Object[]{Name}, new EventMapper());
 		
 		// Return the ArrayList of Events or null
 		return selection;
@@ -146,7 +146,7 @@ public class EventServiceJDBC implements EventDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
-		result = jdbcTemplate.update(sql.getInsertEvent(), event.getName(), event.getDescription(), event.getPlace(), event.getDate_event(), event.getStartTime(), event.getDuration(), event.getEventType(), event.getSeatsAvailable());
+		result = jdbcTemplate.update(sql.getInsertEvent(), new Object[]{event.getName(), event.getDescription(), event.getPlace(), event.getDate_event(), event.getStartTime(), event.getDuration(), event.getEventType(), event.getSeatsAvailable()});
 		
 		// Return if Event was inserted or not 
 		return result;  
@@ -174,7 +174,7 @@ public class EventServiceJDBC implements EventDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
-		result = jdbcTemplate.update(sql.getUpdateEvent(), event.getName(), event.getDescription(), event.getPlace(), event.getDate_event(), event.getStartTime(), event.getDuration(), event.getEventType(), event.getSeatsAvailable(), event.getEventId());
+		result = jdbcTemplate.update(sql.getUpdateEvent(), new Object[]{event.getName(), event.getDescription(), event.getPlace(), event.getDate_event(), event.getStartTime(), event.getDuration(), event.getEventType(), event.getSeatsAvailable(), event.getEventId()});
 		
 		// Return if Event was inserted or not 
 		return result;  
@@ -203,7 +203,7 @@ public class EventServiceJDBC implements EventDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
-		result = jdbcTemplate.update(sql.getDeleteEvent(), idEvent);
+		result = jdbcTemplate.update(sql.getDeleteEvent(), new Object[]{idEvent});
 		
 		// Return if Event was inserted or not 
 		return result;

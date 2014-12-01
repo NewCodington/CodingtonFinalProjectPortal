@@ -2,7 +2,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page import="codingtonportal.model.domain.Visitor"%>
+<%@page import="springcodingtonportal.model.domain.Visitor"%>
 
 <html>
 	  
@@ -17,21 +17,21 @@
 	<body id="body">
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
+		request.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		request.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("login.htm");
 		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
+		request.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		request.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("admin");
 		return;
 	}else {
-		if (session.getAttribute("VISITOR") == null) {
-			response.sendRedirect("updateVisitor");
+		if (request.getAttribute("VISITOR") == null) {
+			response.sendRedirect("getVisitor.htm");
 			return;
 		}
 	}
@@ -65,10 +65,10 @@
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 				
 				<%
-					Visitor visitor=(Visitor)session.getAttribute("VISITOR");
+					Visitor visitor=(Visitor)request.getAttribute("VISITOR");
 				%>
 	
-				<form method="post" action="updateVisitor">
+				<form method="post" action="updateVisitor.htm">
 					<div class="title">Update User</div>
 			        <br />
 					
@@ -104,7 +104,7 @@
 				  
 				  	<div class="input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='visitor';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileVisitor.htm';" />
 						<br />
 					</div>  
 				</form>

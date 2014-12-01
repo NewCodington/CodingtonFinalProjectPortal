@@ -13,7 +13,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/codington.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Bienvenido <jstlcore:out value="${UserName}" /></title>
+		<title>Bienvenido <%=session.getAttribute("Visitor")%></title>
 	</head>
 
 	
@@ -21,26 +21,21 @@
 	
 
 	
-	<%if((request.getAttribute("Admin")== null) && (request.getAttribute("Visitor")==null)) {
+	<%if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login.htm");
+		response.sendRedirect("login.jsp");
 		return;
 	}
-	else if (request.getAttribute("Admin")!=null) {
+	else if (session.getAttribute("Admin")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("profileAdmin.htm");
 		return;
 	}
-	else
 		 %>
-	
-	
-	
-	
 	
 		<div id="header">
 			<table>
@@ -67,22 +62,22 @@
 		<div id="content">
 
 			<div class = "left_nav">
-				<div class = "title"><p><%=request.getAttribute("Visitor") %>'s Menu</p></div>
+				<div class = "title"><p><%=session.getAttribute("Visitor") %>'s Menu</p></div>
 				<hr size=10 />
 				<div class = content>
-					<p><a href="visitor" class="link">My Page </a></p>
+					<p><a href="profileVisitor.htm" class="link">My Page </a></p>
 					<hr />
-					<p><a href="updateVisitor" class="link">Update Information </a></p>
-					<p><a href="updatePasswordVisitor" class="link">Update Password </a></p>
+					<p><a href="getVisitor.htm" class="link">Update Information </a></p>
+					<p><a href="updatePasswordVisitor.jsp" class="link">Update Password </a></p>
 					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
+					<p><a href="logout.htm" class="link">Logout </a></p>
 				</div>
 			</div>
 
 			<div class="right_nav">
 				<div class="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-				<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+				<div class="error">${VisitorRegisterEventError}</div>
+				<div class="message">${VisitorRegisterEventMessage}</div>
 				
 				<div class = "section">
 				
@@ -132,7 +127,7 @@
 							<td><%=event.getEventType()%></td>
 							<td><%=event.getSeatsAvailable()%></td>
 							<td><%=event.getStartTime()%></td>
-							<td><a href = <%="visitor?register=" + event.getEventId() %>>Register</a></td>
+							<td><a href = <%="registerEventForVisitor.htm?register=" + event.getEventId() %>>Register</a></td>
 						</tr>
 						<%
 							}
@@ -182,7 +177,7 @@
 						<td><%=event.getEventType()%></td>
 						<td><%=event.getSeatsAvailable()%></td>
 						<td><%=event.getStartTime()%></td>
-						<td><a href = "<%="visitor?unregister=" + event.getEventId() %>">Unregister</a></td>
+						<td><a href = "<%="unregisterEventForVisitor.htm?unregister=" + event.getEventId() %>">Unregister</a></td>
 					</tr>
 						<%
 							}
