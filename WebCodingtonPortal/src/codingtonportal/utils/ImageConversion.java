@@ -76,49 +76,36 @@ public class ImageConversion {
             return place;     
 	}
 	
-/*	public  File blobToImage(InputStream in_image) throws SQLException, IOException{
-		    File image_deserialized = new File("images/" + "ESTER" + ".jpg");		    
-		    
-		    //InputStream is = image.getBinaryStream(); 
-		     FileOutputStream out = new FileOutputStream(image_deserialized); 
-
-		    int b = 0;
-		    while ((b = in_image.read()) != -1){
-		    	out.write(b);		      
-		    }
-		    return image_deserialized;
-		  }*/		  
 	
-
-	
-	public BufferedImage showImage() throws IOException, ClassNotFoundException, NamingException{
+	public String showImage() throws IOException, ClassNotFoundException, NamingException{
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		ArrayList <Place> selection = new ArrayList <Place>();
 		Blob imBlob = null;
 		InputStream in = null;
-		File outimage= new File ("imagenes/ESTER.jpg");
+		File outimag =new File("C:/Users/JAVA101_01/Desktop/NewCodingtonPortal.git/trunk/images");
+		String g = null;
 
 		BufferedImage bufferedImage = null;
 		
 		try{			
 			Statement sentencia = (conex.getConnection()).createStatement();
-			ResultSet outdata= sentencia.executeQuery("select image from codington.place where name= 'hola';");			
-			while (outdata.next()){
+			ResultSet outdata= sentencia.executeQuery("select image from codington.place where name= 'sip';");			
+			while (outdata.next()){				
 				Place  places = new Place();
-				imBlob=outdata.getBlob("image");				
-				//places.setImage(outdata.getBlob("image").getBinaryStream());	
-				//in = outdata.getBlob("image").getBinaryStream();				
+				imBlob=outdata.getBlob("image");								
 				 OutputStream out;
 			     byte[] bytes = imBlob.getBytes(1, (int) imBlob.length());
 			     bufferedImage = ImageIO.read(new ByteArrayInputStream(bytes));
-			     //ImageIO.write(bufferedImage, "JPEG", new File("imagenes/" + "ESTER" + ".jpg"));		     
-			     
-			     ImageIO.write(bufferedImage, "JPEG", new File("C:/Users/JAVA101_01/Desktop/ESTER1.jpg"));
-			     //String s=new String(bytes);			     
-		         System.out.println(bufferedImage);  //prints bytes for the string			     
-				selection.add(places);
-				return bufferedImage;
+			     String p = this.getClass().getName();
+
+			     ImageIO.write(bufferedImage, "JPEG", outimag);
+			     //ImageIO.write(bufferedImage, "JPEG", new File("images/ester.jpg")); 
+			     //outimag = new File ("C:/Users/JAVA101_01/Desktop/"+ImageIO.write(bufferedImage, "JPEG", new File("C:/Users/JAVA101_01/Desktop/ester.jpg")));
+		         String s = outimag.getAbsoluteFile().toString();
+		         g = outimag.getAbsolutePath().toString();
+			     return g;		     
+				
 			}
 			for (Place element : selection)
 				System.out.println("Soy Image fea: \n"+	bufferedImage);
@@ -127,8 +114,88 @@ public class ImageConversion {
 			System.out.println("Ai mai ay problemas\n" + e);
 			//return null;
 		}	
-		return bufferedImage;
+		return g;
 	}
 
+	public void insertImage_Page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NamingException, ClassNotFoundException {        
+        DiskFileItemFactory factory = new DiskFileItemFactory();            
+        ServletFileUpload sfu  = new ServletFileUpload(factory);
+        List<FileItem> items = null;	
+  		FileItem input= null ;
+  		FERSDataConnection con= new FERSDataConnection(); 
+  		
+        try {
+			items = sfu.parseRequest(request);
+		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        ArrayList<Object> extras = new ArrayList <Object>();
+        for (FileItem fileItem : items){
+        	if (fileItem.isFormField()) {
+        		String fieldValue = fileItem.getString();
+        		extras.add(fieldValue);
+        	}
+        	else {
+        		extras.add(fileItem.getInputStream());
+        		input = items.get(2);  
+        		
+        	}
+        }                                 
+
+		try { 
+			// Create the Statement
+			PreparedStatement statementSQL = con.getConnection().prepareStatement("insert into aux_image values (?,?)");
+			// Add conditions						
+			statementSQL.setBlob(1,input.getInputStream());
+			statementSQL.setString(2,(String) extras.get(0));
+			System.out.println("Hecho");
+			// Execute query
+			 statementSQL.executeUpdate();		     
+
+		// Close the Statement and Connection
+		} catch (SQLException e ){}    
+	}
+
+	public String showImage_Page() throws IOException, ClassNotFoundException, NamingException{
+		
+		FERSDataConnection conex= new FERSDataConnection(); 
+		ArrayList <Place> selection = new ArrayList <Place>();
+		Blob imBlob = null;
+		InputStream in = null;
+		File outimag =new File("C:/Users/JAVA101_01/Desktop/imagenes/ciudades2.jpg");
+		String g = null;
+
+		BufferedImage bufferedImage = null;
+		
+		try{			
+			Statement sentencia = (conex.getConnection()).createStatement();
+			ResultSet outdata= sentencia.executeQuery("select image from codington.aux_image where nas = 'headerphoto';");			
+			
+			while (outdata.next()){				
+				Place  places = new Place();
+				imBlob=outdata.getBlob("image");								
+				 OutputStream out;
+			     byte[] bytes = imBlob.getBytes(1, (int) imBlob.length());
+			     bufferedImage = ImageIO.read(new ByteArrayInputStream(bytes));
+			     String p = this.getClass().getName();
+
+			     ImageIO.write(bufferedImage, "JPEG", outimag);
+			     //ImageIO.write(bufferedImage, "JPEG", new File("images/ester.jpg")); 
+			     //outimag = new File ("C:/Users/JAVA101_01/Desktop/"+ImageIO.write(bufferedImage, "JPEG", new File("C:/Users/JAVA101_01/Desktop/ester.jpg")));
+		         String s = outimag.getAbsoluteFile().toString();
+		         g = outimag.getAbsolutePath().toString();
+			     return g;		     
+				
+			}
+			for (Place element : selection)
+				System.out.println("Soy Image fea: \n"+	bufferedImage);
+		
+		}catch(SQLException e){		
+			System.out.println("Ai mai ay problemas\n" + e);
+			//return null;
+		}	
+		return g;
+	}
 
 }

@@ -118,8 +118,7 @@ public class PlaceServiceImpl implements PlaceDAO {
 					// Complete the fields
 					data.setIdPlace(outdata.getInt("idPlace"));
 					data.setName(outdata.getString("Name"));
-					data.setTypePlace(outdata.getInt("TypePlace"));
-					//data.setImage((InputStream) outdata.getBlob("Image"));
+					data.setTypePlace(outdata.getInt("TypePlace"));					
 					data.setImage(outdata.getBinaryStream("Image"));
 					data.setAddress(outdata.getString("Address"));
 					data.setDescription(outdata.getString("Description"));

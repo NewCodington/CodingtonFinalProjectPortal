@@ -93,16 +93,19 @@ public class RegistPlaceServlet extends HttpServlet {
 		ImageConversion nev= new ImageConversion();
 	
 		try {
-			place = nev.insertImage(request, response);
-			if(placeService.insertPlace(place) > 0){
+			nev.insertImage_Page(request, response);
+			//place = nev.insertImage(request, response);
+			/*if(placeService.insertPlace(place) > 0){
 				session.setAttribute("Success", "Successfully Place created ");
 				session.setAttribute("ViewSuccess", "YES");
 			}else{
 				session.setAttribute("Error", "Incorrect Place values");
-			}
-			//System.out.println(nev.blobToImage(place.getImage()));
-			System.out.println(nev.showImage());
+			}*/
+			//System.out.println(nev.showImage());
+		
+			nev.showImage();
 			response.sendRedirect("registerPlace");
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -110,10 +113,10 @@ public class RegistPlaceServlet extends HttpServlet {
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
+		} /*catch (SQLException e) {
 			// TODO Auto-generated catch block			
 			e.printStackTrace();
-		}
+		}*/
 						 
 	}
 }
