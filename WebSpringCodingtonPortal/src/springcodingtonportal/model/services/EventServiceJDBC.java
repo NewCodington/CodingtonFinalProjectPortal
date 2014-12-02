@@ -90,7 +90,10 @@ public class EventServiceJDBC implements EventDAO {
 		selection = jdbcTemplate.query(sql.getViewEvent(), new EventMapper());
 		
 		// Return the ArrayList of Events or null
-		return selection;
+		if (selection.size() == 0)
+			return null;
+		else
+			return selection;
 	}
 	
 	
@@ -118,7 +121,10 @@ public class EventServiceJDBC implements EventDAO {
 		selection = jdbcTemplate.query(sql.getSearchEvent(), new Object[]{Name}, new EventMapper());
 		
 		// Return the ArrayList of Events or null
-		return selection;
+		if (selection.size() == 0)
+			return null;
+		else
+			return selection;
 	}
 
 	

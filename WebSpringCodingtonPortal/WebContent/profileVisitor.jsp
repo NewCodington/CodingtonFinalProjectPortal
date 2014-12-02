@@ -82,7 +82,7 @@
 				<div class = "section">
 				
 					<div class="search">		
-						<form method="post" action="visitor">	
+						<form method="post" action="searchEvents.htm">	
 							<input type = "text" name="search" id="search" placeholder="Search" />
 							<input type= "submit" value="Search" />
 						</form>

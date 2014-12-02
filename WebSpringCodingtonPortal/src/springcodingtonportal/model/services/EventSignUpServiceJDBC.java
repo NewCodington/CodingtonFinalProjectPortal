@@ -212,7 +212,10 @@ public class EventSignUpServiceJDBC implements EventSignUpDAO {
 		selection = jdbcTemplate.query(sql.getSelectEventForVisitor(),  new Object[]{idVisitor}, new EventSignUpMapper());
 		
 		// Return the Event's Ids registered for Visitor or not
-		return selection;
+		if (selection.size() == 0)
+			return null;
+		else
+			return selection;
 	}
 
 

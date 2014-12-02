@@ -192,6 +192,7 @@ public class EventController {
 	
 	
 	
+	
 	private ModelAndView load(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
