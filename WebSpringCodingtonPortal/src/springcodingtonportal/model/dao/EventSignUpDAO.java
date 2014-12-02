@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import springcodingtonportal.model.domain.Event;
 import springcodingtonportal.model.domain.EventSign;
 
 

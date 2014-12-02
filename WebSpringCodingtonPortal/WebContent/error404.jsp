@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
- 
+<%@ include file="/include.jsp"%>
+
 <% response.setStatus(404); %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page import="codingtonportal.model.domain.Event"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="codingtonportal.model.domain.Place"%>
 
 <html>
 	  
@@ -44,7 +42,7 @@
 		<div id="content">
 			<div class="right_nav">
 				<div class="error">Sorry, the page requested does not exists.</div>
-				
+				<%session.invalidate();%>
 				<%
 					if(session.getAttribute("Visitor") != null) {	
 				%>

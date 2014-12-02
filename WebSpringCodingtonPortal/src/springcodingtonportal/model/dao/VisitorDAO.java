@@ -1,11 +1,9 @@
 package springcodingtonportal.model.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import springcodingtonportal.model.domain.Visitor;
 
