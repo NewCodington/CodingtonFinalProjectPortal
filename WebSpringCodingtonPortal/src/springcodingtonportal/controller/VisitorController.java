@@ -73,6 +73,7 @@ public class VisitorController {
 		
 		if(v.getIdVisitor() != -1)
 		{
+			session.setAttribute("appContext", appContext);
 			if(visitorService.isAdmin(v)){
 				
 				session.setAttribute("idAdmin", v.getIdVisitor());
@@ -365,6 +366,7 @@ public class VisitorController {
 		}
 		HttpSession session=request.getSession();
 		
+		session.removeAttribute("appContext");
 		session.removeAttribute("idVisitor");
 		session.removeAttribute("Visitor"); 
 		session.removeAttribute("idAdmin"); 

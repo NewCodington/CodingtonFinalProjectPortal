@@ -57,7 +57,10 @@ public class TypePlaceServiceJDBC implements TypePlaceDAO {
 		selection = jdbcTemplate.query(sql.getViewTypePlace(), new TypePlaceMapper());
 		
 		// Return the ArrayList of Places or null
-		return selection;
+		if (selection.size() == 0)
+			return null;
+		else
+			return selection;
 	}
 
 	
@@ -79,9 +82,13 @@ public class TypePlaceServiceJDBC implements TypePlaceDAO {
 	public TypePlace selectTypePlace(TypePlace type) throws SQLException, ClassNotFoundException, NamingException {
 		// Initialize variables
 		TypePlace data = null;
-
 		
-		// Return the Place or null
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		data = jdbcTemplate.queryForObject(sql.getSelectTypePlace(), new Object[]{type.getIdTypePlace()}, new TypePlaceMapper());
+		
+		// Return the ArrayList of Places or null
 		return data;
 	}
 

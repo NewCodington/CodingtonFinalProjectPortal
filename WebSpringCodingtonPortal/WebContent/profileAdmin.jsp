@@ -7,6 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="springcodingtonportal.model.domain.Event"%>
 <%@page import="springcodingtonportal.model.domain.Place"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
 
 <html>
 	
@@ -105,12 +106,15 @@
 						</tr>
 						<%
 							eventList = (ArrayList<Event>) request.getAttribute("EVENTLIST");
+							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
 							for (Event event : eventList) {
 						%>				
 						<tr>
 							<td><%=event.getName()%></td>
 							<td><%=event.getDescription()%></td>
-							<td><%=event.getPlace()%></td>
+							<td>
+							<%=event.getPlaceString(appContext)%>
+							</td>
 							<td><%=event.getDate_eventString()%></td>
 							<td><%=event.getDuration()%></td>
 							<td><%=event.getEventType()%></td>
@@ -153,11 +157,13 @@
 						</tr>
 						<%
 							placeList = (ArrayList<Place>) request.getAttribute("PLACELIST");
+							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
 							for (Place place : placeList) {
 						%>				
 						<tr>
 							<td><%=place.getName()%></td>
-							<td><%=place.getTypePlace()%></td>
+							<td><%=place.getRegionString(appContext, place.getTypePlace())%></td>
+							<td><%=place.getTypePlaceString(appContext)%></td>
 							<td><%=place.getImage()%></td>
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>

@@ -2,13 +2,20 @@ package springcodingtonportal.model.services;
 
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.RegionPlaceDAO;
 import springcodingtonportal.model.domain.RegionPlace;
 import springcodingtonportal.model.domain.TypePlace;
+import springcodingtonportal.model.mapper.RegionPlaceMapper;
+import springcodingtonportal.utils.QueriesSQL;
 
 
 
@@ -19,6 +26,22 @@ import springcodingtonportal.model.domain.TypePlace;
  */
 public class RegionPlaceServiceJDBC implements RegionPlaceDAO {
 
+	@Autowired
+	private ApplicationContext appContext;
+	private JdbcTemplate jdbcTemplate;
+	
+	
+	public RegionPlaceServiceJDBC() {
+		this.jdbcTemplate = null;
+	}
+	
+	public void setDataSource(DataSource dataSource) {
+	    this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	
+	
+	
 	/**
 	 * Method to get all Region of Places from the database.
 	 * 
@@ -29,13 +52,20 @@ public class RegionPlaceServiceJDBC implements RegionPlaceDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<RegionPlace> viewRegionPlace() throws SQLException, ClassNotFoundException, NamingException {
+	public List<RegionPlace> viewRegionPlace() throws SQLException, ClassNotFoundException, NamingException {
 		// Initialize variables
-		ArrayList <RegionPlace> selection = null;
+		List <RegionPlace> selection = null;
 				
-				
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getViewTypePlace(), new RegionPlaceMapper());
+		
 		// Return the ArrayList of Places or null
-		return selection;
+		if (selection.size() == 0)
+			return null;
+		else
+			return selection;
 	}
 
 	
@@ -57,9 +87,13 @@ public class RegionPlaceServiceJDBC implements RegionPlaceDAO {
 	public RegionPlace selectRegionPlace(RegionPlace region) throws SQLException, ClassNotFoundException, NamingException {
 		// Initialize variables
 		RegionPlace data = null;
+				
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 
+		// Create the Statement
+		data = jdbcTemplate.queryForObject(sql.getSelectRegionPlace(), new Object[]{region.getIdRegionPlace()}, new RegionPlaceMapper());
 		
-		// Return the Place or null
+		// Return the ArrayList of Places or null
 		return data;
 	}
 
@@ -83,9 +117,13 @@ public class RegionPlaceServiceJDBC implements RegionPlaceDAO {
 	public RegionPlace getRegionPlace(TypePlace typePlace) throws SQLException,ClassNotFoundException, NamingException {
 		// Initialize variables
 		RegionPlace data = null;
+				
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 
+		// Create the Statement
+		data = jdbcTemplate.queryForObject(sql.getGetRegionPlace(), new Object[]{typePlace.getIdTypePlace()}, new RegionPlaceMapper());
 		
-		// Return the Place or null
+		// Return the ArrayList of Places or null
 		return data;
 	}
 	

@@ -1,7 +1,7 @@
 package springcodingtonportal.model.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
 
@@ -16,7 +16,7 @@ import springcodingtonportal.model.domain.TypePlace;
  *
  */
 public interface RegionPlaceDAO {
-	public ArrayList<RegionPlace> viewRegionPlace() throws SQLException, ClassNotFoundException, NamingException;
+	public List<RegionPlace> viewRegionPlace() throws SQLException, ClassNotFoundException, NamingException;
 	public RegionPlace selectRegionPlace(RegionPlace region) throws SQLException, ClassNotFoundException, NamingException;
 	public RegionPlace getRegionPlace(TypePlace typePlace) throws SQLException, ClassNotFoundException, NamingException;
 }

@@ -6,6 +6,9 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="springcodingtonportal.model.domain.Event"%>
+<%@page import="springcodingtonportal.model.domain.Place"%>
+<%@page import="springcodingtonportal.model.services.PlaceServiceJDBC"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
 
 
 <html>
@@ -121,7 +124,12 @@
 						<tr>
 							<td><%=event.getName()%></td>
 							<td><%=event.getDescription()%></td>
-							<td><%=event.getPlace()%></td>
+							<td>
+							<%
+								ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
+							%>
+							<%=event.getPlaceString(appContext)%>
+							</td>
 							<td><%=event.getDate_eventString()%></td>
 							<td><%=event.getDuration()%></td>
 							<td><%=event.getEventType()%></td>

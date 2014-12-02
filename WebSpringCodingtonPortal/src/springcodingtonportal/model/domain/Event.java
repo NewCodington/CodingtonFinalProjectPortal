@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 
 import javax.naming.NamingException;
 
+import org.springframework.context.ApplicationContext;
+
 import springcodingtonportal.model.services.PlaceServiceJDBC;
 
 
@@ -156,8 +158,8 @@ public class Event {
 		this.place = place;
 	}
 	
-	public String getPlaceString() throws ClassNotFoundException, SQLException, NamingException {
-		PlaceServiceJDBC placeService =  new PlaceServiceJDBC();
+	public String getPlaceString(ApplicationContext appContext) throws ClassNotFoundException, SQLException, NamingException {
+		PlaceServiceJDBC placeService = (PlaceServiceJDBC) appContext.getBean("PlaceServiceJDBC");
 		Place p = new Place();
 		Place pOut;
 		

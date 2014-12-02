@@ -40,6 +40,18 @@
       <property name="dataSource"  ref="dataSource" />    
    </bean>
    
+   <!-- Definition for PlaceServiceJDBC bean -->
+ 	<bean id="TypePlaceServiceJDBC" 
+      class="springcodingtonportal.model.services.TypePlaceServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for PlaceServiceJDBC bean -->
+ 	<bean id="RegionPlaceServiceJDBC" 
+      class="springcodingtonportal.model.services.RegionPlaceServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
    <!-- Definition for EventSignUpServiceJDBC bean -->
  	<bean id="EventSignUpServiceJDBC" 
       class="springcodingtonportal.model.services.EventSignUpServiceJDBC">

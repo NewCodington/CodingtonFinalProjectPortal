@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import org.springframework.context.ApplicationContext;
+
 import springcodingtonportal.model.services.RegionPlaceServiceJDBC;
 import springcodingtonportal.model.services.TypePlaceServiceJDBC;
 
@@ -35,6 +37,30 @@ public class Place {
 		this.typePlace = 0;
 	}
 
+	
+	
+	/**
+	 * Constructor with parameters.
+	 * This constructor is used in the following methods:
+	 * selectPlace, viewPlace, insertPlace, updatePlace and deletePlace.
+	 * @param idPlace
+	 * @param name
+	 * @param region
+	 * @param typePlace
+	 * @param image
+	 * @param address
+	 * @param description
+	 */
+	public Place(int idPlace){
+		this.idPlace = idPlace;
+		this.name = null;
+		this.description = null;
+		this.image = null;
+		this.address = null;
+		this.typePlace = 0;
+	}
+	
+	
 
 	/**
 	 * Constructor with parameters.
@@ -129,19 +155,19 @@ public class Place {
 		this.typePlace = typePlace;
 	}
 	
-	public String getTypePlaceString() throws ClassNotFoundException, SQLException, NamingException{
-		TypePlaceServiceJDBC regionPlaceService = new TypePlaceServiceJDBC();
+	public String getTypePlaceString(ApplicationContext appContext) throws ClassNotFoundException, SQLException, NamingException{
+		TypePlaceServiceJDBC typePlaceService = (TypePlaceServiceJDBC) appContext.getBean("TypePlaceServiceJDBC");
 		TypePlace p = new TypePlace();
 		TypePlace pOut;
 		
 		p.setIdTypePlace(this.typePlace);
-		pOut = regionPlaceService.selectTypePlace(p);
+		pOut = typePlaceService.selectTypePlace(p);
 		p=null;
 		return pOut.getName();			
 	}
 	
-	public String getRegionString(int typePlace) throws ClassNotFoundException, SQLException, NamingException{
-		RegionPlaceServiceJDBC regionPlaceService = new RegionPlaceServiceJDBC();
+	public String getRegionString(ApplicationContext appContext, int typePlace) throws ClassNotFoundException, SQLException, NamingException{
+		RegionPlaceServiceJDBC regionPlaceService = (RegionPlaceServiceJDBC) appContext.getBean("RegionPlaceServiceJDBC");
 		TypePlace p = new TypePlace();
 		RegionPlace pOut;
 		
