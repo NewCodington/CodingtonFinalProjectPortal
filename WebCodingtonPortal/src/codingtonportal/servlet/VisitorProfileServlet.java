@@ -111,6 +111,7 @@ public class VisitorProfileServlet extends HttpServlet {
 		
 			eventsList = eventService.viewEvent();
 			
+			
 			session.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
 			session.setAttribute("EVENTLIST", eventsList);
 			
