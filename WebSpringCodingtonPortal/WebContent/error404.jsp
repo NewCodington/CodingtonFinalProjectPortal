@@ -42,7 +42,7 @@
 		<div id="content">
 			<div class="right_nav">
 				<div class="error">Sorry, the page requested does not exists.</div>
-				<%session.invalidate();%>
+				
 				<%
 					if(session.getAttribute("Visitor") != null) {	
 				%>
