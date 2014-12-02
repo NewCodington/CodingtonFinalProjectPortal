@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%@page import="codingtonportal.model.domain.Visitor"%>
+<%@ page import = "codingtonportal.utils.ImageConversion" %>
 
 <html>
 	  
@@ -56,8 +57,10 @@
 		
 		<!-- content-wrap starts here -->
 		<div id="content-wrap">		
-											
-		<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+		
+		<%ImageConversion nev= new ImageConversion(); %>									
+		<!--<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />  -->
+		<img src="<%=nev.showImage_Page("headerphoto")%>" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
 			<div id="sidebar">							
 				

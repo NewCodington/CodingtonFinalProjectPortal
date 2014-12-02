@@ -157,7 +157,7 @@ public class ImageConversion {
 		} catch (SQLException e ){}    
 	}
 
-	public String showImage_Page() throws IOException, ClassNotFoundException, NamingException{
+	public String showImage_Page(String name) throws IOException, ClassNotFoundException, NamingException{
 		
 		FERSDataConnection conex= new FERSDataConnection(); 
 		ArrayList <Place> selection = new ArrayList <Place>();
@@ -165,12 +165,16 @@ public class ImageConversion {
 		InputStream in = null;
 		File outimag =new File("C:/Users/JAVA101_01/Desktop/imagenes/ciudades2.jpg");
 		String g = null;
+		PreparedStatement statementSQL = null;
 
 		BufferedImage bufferedImage = null;
 		
 		try{			
 			Statement sentencia = (conex.getConnection()).createStatement();
-			ResultSet outdata= sentencia.executeQuery("select image from codington.aux_image where nas = 'headerphoto';");			
+			//ResultSet outdata= sentencia.executeQuery("select image from codington.aux_image where nas = ?;");
+			statementSQL = conex.getConnection().prepareStatement("select image from codington.aux_image where nas = ?;");
+			statementSQL.setString(1, name);
+			ResultSet outdata= statementSQL.executeQuery();
 			
 			while (outdata.next()){				
 				Place  places = new Place();

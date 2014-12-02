@@ -7,6 +7,7 @@
 <%@page import="codingtonportal.model.domain.Event"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="codingtonportal.model.domain.Place"%>
+<%@ page import = "codingtonportal.utils.ImageConversion" %>
 
 <html>
 	  
@@ -40,9 +41,9 @@
 
 	<!-- content-wrap starts here -->
 	<div id="content-wrap">		
-											
+	<%ImageConversion nev= new ImageConversion(); %>											
 	<!--<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />  -->
-	<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+	<img src="<%=nev.showImage_Page("headerphoto")%>" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
 		<div id="sidebar" >							
 				

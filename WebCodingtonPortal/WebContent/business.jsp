@@ -57,7 +57,7 @@
 	<div id="content-wrap">		
 	<%ImageConversion nev= new ImageConversion(); %>							
 	<!--<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />  -->
-	<img src="<%=nev.showImage_Page()%>" width="100%" height="120" alt="headerphoto" class="header-photo" />
+	<img src="<%=nev.showImage_Page("headerphoto")%>" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
 		<div id="sidebar" >							
 				
