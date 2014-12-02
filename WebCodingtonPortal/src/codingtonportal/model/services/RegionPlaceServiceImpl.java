@@ -14,6 +14,7 @@ import codingtonportal.utils.FERSDataConnection;
 import codingtonportal.utils.PropertyAccess;
 
 
+
 /**
  * 
  * Services of the Region of Places used to select and view type of places available in the application.
