@@ -48,21 +48,21 @@
 				%>
 				
 				<br /><br />
-				<p class = "return"><a align="center" href="visitor" class="link">Return to Your Profile Page </a></p>
+				<p class = "return"><a align="center" href="profileVisitor.htm" class="link">Return to Your Profile Page </a></p>
 				
 				<%
 					}else if(session.getAttribute("Admin") != null) {
 				%>
 				
 				<br /><br />
-				<p class = "return"><a align="center" href="admin" class="link">Return to Your Profile Page </a></p>
+				<p class = "return"><a align="center" href="profileAdmin.htm" class="link">Return to Your Profile Page </a></p>
 				
 				<%
 					}else {
 				%>
 				
 				<br /><br />
-				<p class = "return"><a align="center" href="login" class="link">Return to Login </a></p>
+				<p class = "return"><a align="center" href="login.jsp" class="link">Return to Login </a></p>
 				
 				<%
 					}
