@@ -4,8 +4,8 @@
 
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="codingtonportal.model.domain.Event"%>
-<%@page import="codingtonportal.model.domain.Place"%>
+<%@page import="springcodingtonportal.model.domain.Event"%>
+<%@page import="springcodingtonportal.model.domain.Place"%>
 
 <html>
 	
@@ -22,14 +22,14 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("login.jsp");
 		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitor");
+		response.sendRedirect("visitorProfile.htm");
 		return;
 	}
 	%> 
@@ -76,7 +76,7 @@
 			
 				<div class="section">
 					<div class="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-					<div class="message"><%= session.getAttribute("Success")!=null?session.getAttribute("Success").toString():""%></div>
+					<div class="message">${DeleteMessage}</div>
 			
 					<div class="title">EVENTS <hr /></div>
 	
@@ -109,14 +109,14 @@
 						<tr>
 							<td><%=event.getName()%></td>
 							<td><%=event.getDescription()%></td>
-							<td><%=event.getPlaceString()%></td>
+							<td><%=event.getPlace()%></td>
 							<td><%=event.getDate_eventString()%></td>
 							<td><%=event.getDuration()%></td>
 							<td><%=event.getEventType()%></td>
 							<td><%=event.getSeatsAvailable()%></td>
 							<td><%=event.getStartTime()%></td>
-							<td><a href = <%="updateEvent?updateEvent=" + event.getEventId() %>>Update</a></td>
-							<td><a href = <%="admin?deleteEvent=" + event.getEventId() %>>Delete</a></td>
+							<td><a href = <%="getEvent.htm?update=" + event.getEventId() %>>Update</a></td>
+							<td><a href = <%="deleteEvent.htm?delete=" + event.getEventId() %>>Delete</a></td>
 						</tr>
 						<%
 							}
@@ -156,13 +156,12 @@
 						%>				
 						<tr>
 							<td><%=place.getName()%></td>
-							<td><%=place.getRegionString(place.getTypePlace())%></td>
-							<td><%=place.getTypePlaceString()%></td>
+							<td><%=place.getTypePlace()%></td>
 							<td><%=place.getImage()%></td>
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>
-							<td><a href = <%="updatePlace?updatePlace=" + place.getIdPlace() %>>Update</a></td>
-							<td><a href = <%="admin?deletePlace=" + place.getIdPlace() %>>Delete</a></td>
+							<td><a href = <%="getPlace.htm?update=" + place.getIdPlace() %>>Update</a></td>
+							<td><a href = <%="deletePlace.htm?delete=" + place.getIdPlace() %>>Delete</a></td>
 						</tr>
 						<%
 							}

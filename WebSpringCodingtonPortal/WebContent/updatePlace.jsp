@@ -2,9 +2,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page import="codingtonportal.model.domain.Place"%>
+<%@page import="springcodingtonportal.model.domain.Place"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="codingtonportal.model.domain.TypePlace"%>
+<%@page import="springcodingtonportal.model.domain.TypePlace"%>
 	 
 <html>
 	  
@@ -14,35 +14,31 @@
 		<script language="javascript" src="Register.js"></script>
 		<title>Place Update Page</title>
 	</head>
-
-
-	<body id="body">
-	<%
+<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
+		request.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		request.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("login.htm");
 		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
+		request.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+		request.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("visitor");
 		return;
 	}
-	else
-	{
-		if(session.getAttribute("idPlace") == null) {
-			session.setAttribute("ErrorPriv", "You have not got selected a Place to update.");
-			session.setAttribute("ViewErrorPriv", "YES");
-			
-			response.sendRedirect("admin");
-			return;	
-		}
+	else {
+			if (request.getAttribute("ADMIN") == null) {
+				response.sendRedirect("getPlace.htm");
+				return;
+			}
 	}
 	%> 
+
+	<body id="body">
+	
 		<div id="header">
 			<table>
 		    	<tr>
@@ -90,7 +86,7 @@
 						Place place = (Place)session.getAttribute("PLACE");
 						ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
 				%>
-				<form method="post" action="updatePlace">
+				<form method="post" action="updatePlace.htm">
 					<div class="title">Update Place</div>
 					<br />
 					

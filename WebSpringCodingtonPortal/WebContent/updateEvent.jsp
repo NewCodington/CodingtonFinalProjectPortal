@@ -2,9 +2,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page import="codingtonportal.model.domain.Event"%>
+<%@page import="springcodingtonportal.model.domain.Event"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="codingtonportal.model.domain.Place"%>
+<%@page import="springcodingtonportal.model.domain.Place"%>
 
 <html>
 	  
@@ -21,20 +21,20 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("/login.jsp");
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitor");
+		response.sendRedirect("profileVisitor.htm");
 	}
 	else {
-		if(session.getAttribute("idEvent") == null) {
+		if(request.getAttribute("update") == null) {
 			session.setAttribute("ErrorPriv", "You have not got selected an Event to update.");
 			session.setAttribute("ViewErrorPriv", "YES");
 			
-			response.sendRedirect("admin");
+			response.sendRedirect("profileAdmin.htm");
 			return;
 		}
 	}
@@ -69,8 +69,8 @@
 				<div class = content>	
 					<p><a href="admin" class="link">My Page </a></p>
 					<hr />
-					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<p ><a class="link"  href=<%="registerPlace.htm"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent.htm"%>>Register Event </a></p>
 					<hr />
 					<p><a href="logout" class="link">Logout </a></p>
 				</div>
@@ -82,11 +82,11 @@
 				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
 	
 				<% 
-					if (session.getAttribute("idEvent") != null) {
+					if (request.getAttribute("update") != null) {
 						Event event=(Event)session.getAttribute("EVENT");
 						ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
 				%>
-				<form method="post" action="updateEvent">
+				<form method="post" action="updateEvent.htm">
 					<div class="title">Update Event</div>
 					<br />
 					    
@@ -140,7 +140,7 @@
 			
 					<div class="input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileAdmin.htm';" />
 						<br />
 					</div> 
 				</form>
