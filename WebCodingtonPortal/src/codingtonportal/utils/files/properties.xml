@@ -9,6 +9,7 @@
 			<insertEvent>INSERT INTO codington.event(Name, Description, Place, Date_event, StartTime, Duration, Event_type, Seats_available) VALUES (?, ?, ?, ?, ?, ?, ?, ?);</insertEvent>
 			<deleteEvent>DELETE FROM codington.event WHERE (idEvent = ?);</deleteEvent>
 			<updateEvent>UPDATE codington.event SET Name = ?, Description = ?, Place = ?, Date_event = ?, StartTime = ?, Duration = ?, Event_type = ?, Seats_available = ? WHERE (idEvent = ?);</updateEvent>
+			<eventPlace>SELECT codington.event.* FROM codington.event, codington.place, codington.typeplace WHERE (event.Place = place.idPlace AND place.TypePlace = typeplace.idTypePlace AND typeplace.name = ?);</eventPlace>
 		</event>
 		
 

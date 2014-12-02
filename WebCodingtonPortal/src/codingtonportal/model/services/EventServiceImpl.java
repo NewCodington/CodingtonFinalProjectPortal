@@ -153,6 +153,64 @@ public class EventServiceImpl implements EventDAO {
 	}
 	
 	
+	@Override
+	public ArrayList<Event> viewEventForPlace() throws ClassNotFoundException, SQLException, ParseException, NamingException {
+		// Initialize variables
+		FERSDataConnection con= new FERSDataConnection(); 
+		PropertyAccess connection= new PropertyAccess();
+		ArrayList <Event> selection = null;
+		PreparedStatement statementSQL = null;
+
+		try {
+			// Create the Statement
+			statementSQL = con.getConnection().prepareStatement(connection.getProperty("eventPlace"));
+			
+			// Execute query
+			ResultSet outdata= statementSQL.executeQuery();                     
+			
+			// If the Resultset brigns the Event
+			if (outdata.next()) {
+				// Create an ArrayList of Events
+				selection = new ArrayList <Event>();
+				
+				do {
+					// Create a new Event
+					Event data = new Event();	   
+
+					// Complete the fields
+					data.setEventId(outdata.getInt("idEvent"));
+					data.setName(outdata.getString("Name"));
+					data.setDescription(outdata.getString("Description"));
+					data.setPlace(outdata.getInt("Place"));
+					data.setDate_event(outdata.getDate("Date_event"));
+					data.setStartTime(outdata.getString("StartTime"));
+					data.setDuration(outdata.getString("Duration"));
+					data.setEventType(outdata.getString("Event_type"));
+					data.setSeatsAvailable(outdata.getInt("Seats_available"));
+	
+					// Add to ArrayList
+					selection.add(data);
+					
+				// Continue add Events while the Resultset have
+				}while(outdata.next());
+			}
+			// Close the Resultset
+			outdata.close();
+			
+		// Close the Statement and Connection
+		}finally {
+			if (statementSQL != null) { 
+				statementSQL.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		// Return the ArrayList of Events or null
+		return selection;
+	}
+	
+	
 	
 	/**
 	 * Method to search Events for a Name from the database.
