@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/include.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -63,12 +64,12 @@
 				<hr size=10 />
 				
 				<div class = content>	
-					<p><a href="admin" class="link">My Page </a></p>
+					<p><a href="profileAdmin.htm" class="link">My Page </a></p>
 					<hr />
-					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<p ><a class="link"  href=<%="registerPlace.htm"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent.htm"%>>Register Event </a></p>
 					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
+					<p><a href="logout.htm" class="link">Logout </a></p>
 				</div>
 			</div>
 		
@@ -76,13 +77,13 @@
 			
 				<div class="section">
 					<div class="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-					<div class="message">${DeleteMessage}</div>
+					<div class="message">${RegisterMessage}</div><div class="message">${UpdateMessage}</div><div class="message">${DeleteMessage}</div>
 			
 					<div class="title">EVENTS <hr /></div>
 	
 					<%
 						ArrayList<Event> eventList = null;
-						if (session.getAttribute("EVENTLIST") == null){
+						if (request.getAttribute("EVENTLIST") == null){
 					%>
 						<div class="message"><p>Not Exit Events</p></div>
 					<%	
@@ -103,7 +104,7 @@
 							<th>Actions</th>
 						</tr>
 						<%
-							eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
+							eventList = (ArrayList<Event>) request.getAttribute("EVENTLIST");
 							for (Event event : eventList) {
 						%>				
 						<tr>
@@ -132,7 +133,7 @@
 			
 					<%
 						ArrayList<Place> placeList = null;
-						if (session.getAttribute("PLACELIST") == null){
+						if (request.getAttribute("PLACELIST") == null){
 					%>
 						<div class="message"><p>Not Exit Places</p></div>
 					<%	
@@ -151,7 +152,7 @@
 							<th>Actions</th>
 						</tr>
 						<%
-							placeList = (ArrayList<Place>) session.getAttribute("PLACELIST");
+							placeList = (ArrayList<Place>) request.getAttribute("PLACELIST");
 							for (Place place : placeList) {
 						%>				
 						<tr>

@@ -1,5 +1,6 @@
 package springcodingtonportal.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import springcodingtonportal.model.domain.Event;
 import springcodingtonportal.model.domain.Place;
-import springcodingtonportal.model.domain.Visitor;
+import springcodingtonportal.model.domain.TypePlace;
 import springcodingtonportal.model.services.EventServiceJDBC;
 import springcodingtonportal.model.services.PlaceServiceJDBC;
-import springcodingtonportal.model.services.VisitorServiceJDBC;
+import springcodingtonportal.model.services.TypePlaceServiceJDBC;
 import springcodingtonportal.utils.Exceptions;
 
 
@@ -32,6 +33,60 @@ public class PlaceController {
 
 
 
+	@RequestMapping("/registerPlace.htm")
+	private ModelAndView registerPlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTER METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		
+		List<TypePlace> typesPlaceList=null;
+		TypePlaceServiceJDBC placeService = (TypePlaceServiceJDBC) appContext.getBean("TypePlaceServiceJDBC");
+				
+		typesPlaceList = placeService.viewTypePlace();
+		request.setAttribute("LISTTYPEPLACE", typesPlaceList);
+
+		return new ModelAndView("/registerPlace.jsp");
+	}
+	
+	
+	@RequestMapping("/registPlace.htm")
+	public ModelAndView registPlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENT METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		
+		PlaceServiceJDBC placeService = (PlaceServiceJDBC) appContext.getBean("PlaceServiceJDBC");
+		Place place=new Place();
+
+		place.setName(request.getParameter("placeName"));
+		place.setDescription(request.getParameter("description"));		
+		//place.setImage(request.getParameter("image"));
+		place.setAddress(request.getParameter("address"));
+		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
+		
+
+		boolean success = false;
+		if(placeService.insertPlace(place) > 0){
+			success = true;
+		}
+		
+		ModelAndView mv = load(request, response);
+		if(success) {
+			 mv.addObject("UpdateMessage", "¡¡¡  Successfully PLACE created  !!!");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("/deletePlace.htm")
 	public ModelAndView deletePlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("delete") Integer idPlace) throws Exception {
 		if(request==null || response==null)
@@ -41,9 +96,7 @@ public class PlaceController {
 		}
 		
 		PlaceServiceJDBC place 	= (PlaceServiceJDBC) appContext.getBean("PlaceServiceJDBC");
-		
-		
-		
+
 		boolean success = false;
 		if(place.deletePlace(idPlace) != null) {
 			success = true;
@@ -60,17 +113,18 @@ public class PlaceController {
 	
 	
 	@RequestMapping("/updatePlace.htm")
-	public ModelAndView updatePlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("update") Integer idPlace) throws Exception {
+	public ModelAndView updatePlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
 		{
 			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
+		HttpSession session=request.getSession();
 		
-		PlaceServiceJDBC placeService	= (PlaceServiceJDBC) appContext.getBean("PlaceServiceJDBC");
+		PlaceServiceJDBC placeService = (PlaceServiceJDBC) appContext.getBean("PlaceServiceJDBC");
 		Place place=new Place();
 
-		place.setIdPlace(idPlace);
+		place.setIdPlace(Integer.parseInt(session.getAttribute("idPlace").toString()));
 		place.setName(request.getParameter("placeName"));
 		place.setDescription(request.getParameter("description"));		
 		//place.setImage(request.getParameter("image"));
@@ -88,7 +142,21 @@ public class PlaceController {
 			 mv.addObject("UpdateMessage", "¡¡¡  Successfully PLACE updated  !!!");
 		}
 		
+		session.removeAttribute("idPlace");
+		
 		return mv;
+	}
+	
+
+	@RequestMapping("/getPlace.htm")
+	public ModelAndView getPlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("update") Integer idPlace) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		
+		return loadPlace(request, response,idPlace);
 	}
 	
 	
@@ -101,43 +169,28 @@ public class PlaceController {
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
 		
-		
+		TypePlaceServiceJDBC typeplaceService =  (TypePlaceServiceJDBC) appContext.getBean("TypePlaceServiceJDBC");
 		PlaceServiceJDBC placeService =  (PlaceServiceJDBC) appContext.getBean("PlaceServiceJDBC");
 		Place place=new Place();
 
 		place.setIdPlace(idPlace);
 		Place placeUpdate=new Place(placeService.selectPlace(place));
+		List<TypePlace> listTypePlace = typeplaceService.viewTypePlace();
 		
+		request.setAttribute("LISTTYPEPLACE", listTypePlace);
+		request.setAttribute("idPlace", placeUpdate.getIdPlace());
 		request.setAttribute("PLACE", placeUpdate);
 		
 		return new ModelAndView("/updatePlace.jsp");	
 	}
-	
-	
-	
-	@RequestMapping("/getPlace.htm")
-	public ModelAndView getPlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("update") Integer idPlace) throws Exception {
-		if(request==null || response==null)
-		{
-			log.info("Request or Response failed for REGISTEREVENTVISITOR METHOD..");
-			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
-		}
-		
-		
-		
-		
-		return loadPlace(request, response,idPlace);
-	}
-	
 
-private ModelAndView load(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView load(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
 		{
 			log.info("Request or Response failed for PROFILEVISITOR METHOD..");
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
-		HttpSession session=request.getSession();
 		
 		List<Place> placesList=null;
 		List<Event> eventsList=null;
@@ -147,10 +200,10 @@ private ModelAndView load(HttpServletRequest request, HttpServletResponse respon
 		
 		
 		eventsList = eventService.viewEvent();
-		session.setAttribute("EVENTLIST", eventsList);
+		request.setAttribute("EVENTLIST", eventsList);
 		
 		placesList = placeService.viewPlace();
-		session.setAttribute("PLACELIST", placesList);
+		request.setAttribute("PLACELIST", placesList);
 
 		return new ModelAndView("/profileAdmin.jsp");
 	}

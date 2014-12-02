@@ -48,47 +48,7 @@ public class VisitorController {
 	 * 
 	 */
 	
-	@RequestMapping("/registerVisitor.htm")
-	public ModelAndView registerVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if(request==null || response==null)
-		{
-			log.info("Request or Response failed for LOGINVISITOR METHOD..");
-			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
-		}
-		
-		Visitor visitor=new Visitor();
-		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
-		
-		visitor.setUserName(request.getParameter("uname"));
-		visitor.setFirstName(request.getParameter("fname"));
-		visitor.setLastName(request.getParameter("lname"));
-		visitor.setPassword(request.getParameter("pass"));
-		visitor.setEmail(request.getParameter("email"));
-		visitor.setDni(request.getParameter("dni"));
-		visitor.setPhoneNumber(request.getParameter("phone"));
-		visitor.setAddress(request.getParameter("adress"));
-		visitor.setAdmin(false);
-		
-		ModelAndView mv=new ModelAndView();
-		
-		if((visitorService.exitsUsernameVisitor(visitor)) != -1) {
-			request.setAttribute("VisitorInfo", visitor);
-			
-			mv.addObject("RegisterVisitorError", "¡¡¡ USERNAME already exists !!!");
-			mv.setViewName("/registerVisitor.jsp");
-			return mv;
-		}
-		else {
-			if(visitorService.insertVisitor(visitor) > 0){
-				mv.addObject("RegisterVisitorMessage", "¡¡¡ Successfully VISITOR created !!!");
-				mv.setViewName("/login.jsp");
-			}
-			return mv;
-		}
-	}
-		
-		
-		
+	
 	@RequestMapping("/login.htm")
 	public ModelAndView loginVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -140,7 +100,52 @@ public class VisitorController {
 			return mv;
 		}		
 	}
-
+	
+	
+	
+	
+	@RequestMapping("/registerVisitor.htm")
+	public ModelAndView registerVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for LOGINVISITOR METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+		
+		Visitor visitor=new Visitor();
+		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
+		
+		visitor.setUserName(request.getParameter("uname"));
+		visitor.setFirstName(request.getParameter("fname"));
+		visitor.setLastName(request.getParameter("lname"));
+		visitor.setPassword(request.getParameter("pass"));
+		visitor.setEmail(request.getParameter("email"));
+		visitor.setDni(request.getParameter("dni"));
+		visitor.setPhoneNumber(request.getParameter("phone"));
+		visitor.setAddress(request.getParameter("adress"));
+		visitor.setAdmin(false);
+		
+		ModelAndView mv=new ModelAndView();
+		
+		if((visitorService.exitsUsernameVisitor(visitor)) != -1) {
+			request.setAttribute("VisitorInfo", visitor);
+			
+			mv.addObject("RegisterVisitorError", "¡¡¡ USERNAME already exists !!!");
+			mv.setViewName("/registerVisitor.jsp");
+			return mv;
+		}
+		else {
+			if(visitorService.insertVisitor(visitor) > 0){
+				mv.addObject("RegisterVisitorMessage", "¡¡¡ Successfully VISITOR created !!!");
+				mv.setViewName("/login.jsp");
+			}
+			return mv;
+		}
+	}
+	
+	
+	
+	
 	
 	
 	@RequestMapping("/profileVisitor.htm")
@@ -153,6 +158,10 @@ public class VisitorController {
 		
 		return loadEvents(request, response);
 	}
+		
+		
+		
+	
 	
 	
 	
@@ -186,6 +195,10 @@ public class VisitorController {
 	}
 	
 	
+	
+	
+	
+	
 	@RequestMapping("/unregisterEventForVisitor.htm")
 	public ModelAndView unregisterEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("unregister") Integer idEventR) throws Exception {
 		if(request==null || response==null)
@@ -211,6 +224,7 @@ public class VisitorController {
 		return mv;
 	
 	}
+	
 	
 	
 	@RequestMapping("/getVisitor.htm")
@@ -262,6 +276,7 @@ public class VisitorController {
 	
 	
 	
+	
 	@RequestMapping("/updatePasswordVisitor.htm")
 	public ModelAndView updatePasswordVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -292,6 +307,8 @@ public class VisitorController {
 	
 	
 	
+	
+	
 	@RequestMapping("/logout.htm")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -310,6 +327,12 @@ public class VisitorController {
 		
 		return new ModelAndView("/login.jsp");
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -26,12 +26,15 @@
 		request.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		request.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitor");
+		response.sendRedirect("profileVisitor.htm");
 		return;
 	}
 	else {
-			if (request.getAttribute("ADMIN") == null) {
-				response.sendRedirect("getPlace.htm");
+			if (request.getAttribute("idPlace") == null) {
+				request.setAttribute("ErrorPriv", "You have not got selected an PLACE to update.");
+				request.setAttribute("ViewErrorPriv", "YES");
+				
+				response.sendRedirect("profileAdmin.htm");
 				return;
 			}
 	}
@@ -69,22 +72,20 @@
 				<div class = content>	
 					<p><a href="admin" class="link">My Page </a></p>
 					<hr />
-					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<p ><a class="link"  href=<%="registerPlace.htm"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent.htm"%>>Register Event </a></p>
 					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
+					<p><a href="logout.htm" class="link">Logout </a></p>
 				</div>
 			</div>
 	
 	
 			<div class="center_nav">
-				
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-
 				<%
-					if (session.getAttribute("idPlace") != null) {
-						Place place = (Place)session.getAttribute("PLACE");
-						ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+					if (request.getAttribute("idPlace") != null) {
+						session.setAttribute("idPlace", request.getAttribute("idPlace"));
+						Place place = (Place)request.getAttribute("PLACE");
+						ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) request.getAttribute("LISTTYPEPLACE");
 				%>
 				<form method="post" action="updatePlace.htm">
 					<div class="title">Update Place</div>
@@ -125,7 +126,7 @@
 					
 					<div class="input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileAdmin.htm';" />
 						<br />
 					</div>  
 				</form>

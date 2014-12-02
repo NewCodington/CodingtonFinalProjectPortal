@@ -30,8 +30,8 @@
 		response.sendRedirect("profileVisitor.htm");
 	}
 	else {
-		if(request.getAttribute("update") == null) {
-			session.setAttribute("ErrorPriv", "You have not got selected an Event to update.");
+		if (request.getAttribute("idEvent") == null) {
+			session.setAttribute("ErrorPriv", "You have not got selected an EVENT to update.");
 			session.setAttribute("ViewErrorPriv", "YES");
 			
 			response.sendRedirect("profileAdmin.htm");
@@ -72,19 +72,17 @@
 					<p ><a class="link"  href=<%="registerPlace.htm"%>>Register Place </a></p>
 					<p ><a class="link" href=<%="registerEvent.htm"%>>Register Event </a></p>
 					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
+					<p><a href="logout.htm" class="link">Logout </a></p>
 				</div>
 			</div>
 	
 	
 			<div class="center_nav">
-				
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-	
 				<% 
-					if (request.getAttribute("update") != null) {
-						Event event=(Event)session.getAttribute("EVENT");
-						ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
+					if (request.getAttribute("idEvent") != null) {
+						session.setAttribute("idEvent", request.getAttribute("idEvent"));
+						Event event=(Event)request.getAttribute("EVENT");
+						ArrayList<Place> placeList = (ArrayList<Place>) request.getAttribute("LISTPLACE");
 				%>
 				<form method="post" action="updateEvent.htm">
 					<div class="title">Update Event</div>
@@ -101,7 +99,7 @@
 					</div>
 					
 					<div class="field"><p>Date:</p>
-					  	<input type="text" id="date" name="date" value="<%= event.getDate_eventString() %>" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid place (length between 1-45)" placeholder="Date" required />
+					  	<input type="text" id="date" name="date" value="<%= event.getDate_eventString() %>" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-yyyy)" placeholder="Date" required />
 						<br />
 					</div>
 					

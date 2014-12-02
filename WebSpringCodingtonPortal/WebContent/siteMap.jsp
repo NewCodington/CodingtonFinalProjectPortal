@@ -18,7 +18,7 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("/login.jsp");
+		response.sendRedirect("login.jsp");
 		return;
 	}
 	%> 
@@ -51,7 +51,7 @@
 				<hr size=10 />
 				
 				<div class = content>	
-					<p><a class="link" href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"visitorProfile.htm":"adminProfile.htm" %>>My Page </a></p>
+					<p><a class="link" href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"profileVisitor.htm":"profileAdmin.htm" %>>My Page </a></p>
 					<hr />
 					<%
 						if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
@@ -68,7 +68,7 @@
 						}
 					%>
 					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
+					<p><a href="logout.htm" class="link">Logout </a></p>
 				</div>
 			</div>
 

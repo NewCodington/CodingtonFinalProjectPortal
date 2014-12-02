@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/include.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="codingtonportal.model.domain.TypePlace"%>
+<%@page import="springcodingtonportal.model.domain.TypePlace"%>
 
 <html>
 	  
@@ -21,20 +22,20 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("login.jsp");
 		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitor");
+		response.sendRedirect("profileVisitor.htm");
 		return;
 	}
 	else
 	{
-		if(session.getAttribute("LISTTYPEPLACE") == null)
-			response.sendRedirect("registerPlace");
+		if(request.getAttribute("LISTTYPEPLACE") == null)
+			response.sendRedirect("registerPlace.htm");
 	}
 	%> 
 		<div id="header">
@@ -68,19 +69,17 @@
 				<div class = content>	
 					<p><a href="admin" class="link">My Page </a></p>
 					<hr />
-					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<p ><a class="link"  href=<%="registerPlace.htm"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent.htm"%>>Register Event </a></p>
 					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
+					<p><a href="logout.htm" class="link">Logout </a></p>
 				</div>
 			</div>
 	
 	
 			<div class="center_nav">		
-				
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error"):""%></div>
-					
-				<form method="post" action="registerPlace">
+									
+				<form method="post" action="registPlace.htm">
 					<div class="title">New Place</div>
 					<br />
 					
@@ -106,8 +105,8 @@
 					
 					<div class="field"><p>Type Place:</p>
 						<%
-							if (session.getAttribute("LISTTYPEPLACE") != null) {
-								ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) session.getAttribute("LISTTYPEPLACE");
+							if (request.getAttribute("LISTTYPEPLACE") != null) {
+								ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) request.getAttribute("LISTTYPEPLACE");
 						%>
 						<select id="typePlace" name="typePlace" required>
 							<%
@@ -126,7 +125,7 @@
 					
 					<div class="input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileAdmin.htm';" />
 						<br />
 					</div>  
 				</form>

@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="codingtonportal.model.domain.Place"%>
+<%@page import="springcodingtonportal.model.domain.Place"%>
 
 <html>
 	  
@@ -21,19 +21,19 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("login.jsp");
 		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitor");
+		response.sendRedirect("visitorProfile.htm");
 		return;
 	}
 	else {
-		if(session.getAttribute("LISTPLACE") == null)
-			response.sendRedirect("registerEvent");
+		if(request.getAttribute("LISTPLACE") == null)
+			response.sendRedirect("registerEvent.htm");
 	}
 	%> 
 		<div id="header">
@@ -67,19 +67,17 @@
 				<div class = content>	
 					<p><a href="admin" class="link">My Page </a></p>
 					<hr />
-					<p ><a class="link"  href=<%="registerPlace"%>>Register Place </a></p>
-					<p ><a class="link" href=<%="registerEvent"%>>Register Event </a></p>
+					<p ><a class="link"  href=<%="registerPlace.htm"%>>Register Place </a></p>
+					<p ><a class="link" href=<%="registerEvent.htm"%>>Register Event </a></p>
 					<hr />
-					<p><a href="logout" class="link">Logout </a></p>
+					<p><a href="logout.htm" class="link">Logout </a></p>
 				</div>
 			</div>
 	
 	
 			<div class="center_nav">
-	
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-		
-				<form method="post" action="registerEvent">
+			
+				<form method="post" action="registEvent.htm">
 					<div class="title">New Event</div>
 					<br />
 					    
@@ -94,14 +92,14 @@
 					</div>
 					
 					<div class="field"><p>Date:</p>
-					  	<input type="text" id="date" name="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-aaaa)" placeholder="Date" required />
+					  	<input type="text" id="date" name="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-yyyy)" placeholder="Date" required />
 						<br />
 					</div>
 					
 					<div class="field"><p>Place:</p>
 					  	<%
-					  		if (session.getAttribute("LISTPLACE") != null) {
-								ArrayList<Place> placeList = (ArrayList<Place>) session.getAttribute("LISTPLACE");
+					  		if (request.getAttribute("LISTPLACE") != null) {
+								ArrayList<Place> placeList = (ArrayList<Place>) request.getAttribute("LISTPLACE");
 						%>
 						<select id="place" name="place" required>
 							<%
@@ -140,7 +138,7 @@
 			
 					<div class="input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='admin';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileAdmin.htm';" />
 						<br />
 					</div> 
 				</form>

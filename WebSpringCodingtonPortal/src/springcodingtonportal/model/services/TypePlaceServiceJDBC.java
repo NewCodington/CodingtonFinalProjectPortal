@@ -1,14 +1,19 @@
 package springcodingtonportal.model.services;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.TypePlaceDAO;
 import springcodingtonportal.model.domain.TypePlace;
+import springcodingtonportal.model.mapper.TypePlaceMapper;
+import springcodingtonportal.utils.QueriesSQL;
 
 /**
  * 
@@ -17,6 +22,21 @@ import springcodingtonportal.model.domain.TypePlace;
  */
 public class TypePlaceServiceJDBC implements TypePlaceDAO {
 
+	@Autowired
+	private ApplicationContext appContext;
+	private JdbcTemplate jdbcTemplate;
+	
+	
+	public TypePlaceServiceJDBC() {
+		this.jdbcTemplate = null;
+	}
+	
+	public void setDataSource(DataSource dataSource) {
+	    this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	
+	
 	/**
 	 * Method to get all Types of Places from the database.
 	 * 
@@ -27,11 +47,14 @@ public class TypePlaceServiceJDBC implements TypePlaceDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public ArrayList<TypePlace> viewTypePlace() throws NamingException, SQLException, ClassNotFoundException {
+	public List<TypePlace> viewTypePlace() throws NamingException, SQLException, ClassNotFoundException {
 		// Initialize variables
-		ArrayList <TypePlace> selection = null;
+		List <TypePlace> selection = null;
 		
-		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getViewTypePlace(), new TypePlaceMapper());
 		
 		// Return the ArrayList of Places or null
 		return selection;

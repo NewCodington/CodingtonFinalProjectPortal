@@ -12,15 +12,15 @@ public class PlaceMapper implements RowMapper<Place> {
 
 		@Override
 		public Place mapRow(ResultSet rs, int numRows) throws SQLException {
-			Place event = new Place();
+			Place place = new Place();
 			
-			event.setIdPlace(rs.getInt("idPlace"));
-			event.setName(rs.getString("Name"));
-			event.setTypePlace(rs.getInt("TypePlace"));
-			//event.setImage(rs.getBlob("Image"));
-			event.setAddress(rs.getString("Address"));
-			event.setDescription(rs.getString("Description"));
+			place.setIdPlace(rs.getInt("idPlace"));
+			place.setName(rs.getString("Name"));
+			place.setTypePlace(rs.getInt("TypePlace"));
+			//place.setImage(rs.getBlob("Image"));
+			place.setAddress(rs.getString("Address"));
+			place.setDescription(rs.getString("Description"));
 			
-			return event;
+			return place;
 		}
 	}

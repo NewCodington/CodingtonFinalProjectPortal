@@ -2,6 +2,7 @@ package springcodingtonportal.model.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
 
@@ -15,6 +16,6 @@ import springcodingtonportal.model.domain.TypePlace;
  *
  */
 public interface TypePlaceDAO {
-	public ArrayList<TypePlace> viewTypePlace() throws NamingException, SQLException, ClassNotFoundException;
+	public List<TypePlace> viewTypePlace() throws NamingException, SQLException, ClassNotFoundException;
 	public TypePlace selectTypePlace(TypePlace type) throws SQLException, ClassNotFoundException, NamingException;
 }
