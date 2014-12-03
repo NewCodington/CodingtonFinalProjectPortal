@@ -33,7 +33,7 @@ public class PlaceController {
 
 
 	@RequestMapping("/registerPlace.htm")
-	private ModelAndView registerPlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView regisertPlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
 		{

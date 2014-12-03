@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -99,89 +99,59 @@
 					
 					<div class = "section">
 				
-						<h1>Events Registered</h1><hr />
+						<h1>Events Search</h1><hr />
 
 					<%
-						ArrayList<Event> eventRegisterList = null;
-						if (request.getAttribute("EVENTREGISTERLIST") == null){
+						ArrayList<Event> eventList = null;
+						if (request.getAttribute("EVENTLIST") == null){
 					%>
 						
-						<div class="message"><p>There are no Events Registered for you</p></div>	
-						
+					<div class="message"><p>Not found Events</p></div>
+					
 					<%	
 						}
-						else {	
-							eventRegisterList = (ArrayList<Event>) request.getAttribute("EVENTREGISTERLIST");
-							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
+						else {
+							eventList = (ArrayList<Event>) request.getAttribute("EVENTLIST");
 					%>
-						
-						<table>
-							<tr>
-								<th>Event Name</th>
-								<th>Description</th>
-								<th>Place</th>
-								<th>Date</th>
-								<th>Duration</th>
-								<th>Event Type</th>
-								<th>Seats Available</th>
-								<th>Start Time</th>
-								<th>Action</th>
-							</tr>
-
+					<table>
+						<tr>
+							<th>Event Name</th>
+							<th>Description</th>
+							<th>Place</th>
+							<th>Date</th>
+							<th>Duration</th>
+							<th>Event Type</th>
+							<th>Seats Available</th>
+							<th>Start Time</th>
+							<th>Action</th>
+						</tr>
+						<%
+							for (Event event : eventList) {
+						%>
+									
+						<tr>
+							<td><%=event.getName()%></td>
+							<td><%=event.getDescription()%></td>
+							<td>
 							<%
-								for (Event event : eventRegisterList) {
+								ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
 							%>
-							<tr>
-								<td><%=event.getName()%></td>
-								<td><%=event.getDescription()%></td>
-								<td><%=event.getPlaceString(appContext)%></td>
-								<td><%=event.getDate_eventString()%></td>
-								<td><%=event.getDuration()%></td>
-								<td><%=event.getEventType()%></td>
-								<td><%=event.getSeatsAvailable()%></td>
-								<td><%=event.getStartTime()%></td>
-								<td><a href = "<%="unregisterEventForVisitor.htm?unregister=" + event.getEventId() %>">Unregister</a></td>
-							</tr>
-								<%
-									}
-								%>
-						</table>						
+							<%=event.getPlaceString(appContext)%>
+							</td>
+							<td><%=event.getDate_eventString()%></td>
+							<td><%=event.getDuration()%></td>
+							<td><%=event.getEventType()%></td>
+							<td><%=event.getSeatsAvailable()%></td>
+							<td><%=event.getStartTime()%></td>
+							<td><a href = <%="registerEventForVisitor.htm?register=" + event.getEventId() %>>Register</a></td>
+						</tr>
 						<%
 							}
-						%>					
-					</div>
-					
-					<div class = "section">
-					
-						<h1>User Information </h1><hr></hr></div>
-						
-						<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-					
+						%>
+					</table>
 					<%
-						Visitor visitor=(Visitor)session.getAttribute("VISITOR");
-					%>
-		
-				<div class = "section">
-				
-						<br />
-						
-						<h2>First name:<%= visitor.getFirstName() %></h2>
-						<br />  
-						
-						<h2>Last name:<%= visitor.getLastName() %></h2>
-						<br/>
-
-						<h2>DNI:<%= visitor.getDni() %></h2>
-						<br />
-
-						<h2>Phone Number:<%= visitor.getPhoneNumber() %></h2>
-							<br />
-
-						<h2>Email:<%= visitor.getEmail() %></h2>
-							<br />
-		
-						<h2>Address:<%= visitor.getAddress() %></h2>
-						<br />							  
+						}
+					%>				
 				</div>
 			</div>		
 		</div>	

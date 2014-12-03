@@ -19,6 +19,7 @@ import springcodingtonportal.model.domain.Place;
 import springcodingtonportal.model.domain.Event;
 import springcodingtonportal.model.services.EventServiceJDBC;
 import springcodingtonportal.model.services.PlaceServiceJDBC;
+import springcodingtonportal.utils.Constants;
 import springcodingtonportal.utils.Exceptions;
 
 
@@ -46,8 +47,56 @@ public class EventController {
 	
 	
 	
+	
+	@RequestMapping("/eventsForPlace.htm")
+	public ModelAndView eventsForPlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("typePlace") Integer typePlace) throws Exception {
+		if(request==null || response==null)
+		{
+			log.info("Request or Response failed for LISTEVENT FOR PLACE METHOD..");
+			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
+		}
+	
+		List<Event> eventList=null;
+		EventServiceJDBC eventService =  (EventServiceJDBC) appContext.getBean("EventServiceJDBC");
+		Constants constants =  (Constants) appContext.getBean("beanCONSTANTS");
+		
+		eventList = eventService.eventForPlace(typePlace);
+		request.setAttribute("EVENTLIST", eventList);
+		
+		if (typePlace == constants.getBUSSINES()) {
+			return new ModelAndView("/business.jsp");
+		}
+		else if (typePlace == constants.getMARKET()) {
+			return new ModelAndView("/market.jsp");
+		}
+		else if (typePlace == constants.getMUSEUM()) {
+			return new ModelAndView("/museum.jsp");
+		}
+		else if (typePlace == constants.getPARK()) {
+			return new ModelAndView("/park.jsp");
+		}
+		else if (typePlace == constants.getSTADIUM()) {
+			return new ModelAndView("/stadium.jsp");
+		}
+		else if (typePlace == constants.getTHEATER()) {
+			return new ModelAndView("/theater.jsp");
+		}
+		else if (typePlace == constants.getTOURISM()) {
+			return new ModelAndView("/tourism.jsp");
+		}
+		else if (typePlace == constants.getZOO()) {
+			return new ModelAndView("/zoo.jsp");
+		}
+		
+		return new ModelAndView("/events.jsp");	
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("/registerEvent.htm")
-	private ModelAndView registerEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView registerEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
 		{

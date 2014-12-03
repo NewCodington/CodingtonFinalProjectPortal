@@ -19,6 +19,7 @@ import springcodingtonportal.model.domain.Event;
 public interface EventDAO {
 	public Event selectEvent (Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException;
 	public List<Event> viewEvent () throws ClassNotFoundException, SQLException, ParseException, NamingException;
+	public List<Event> eventForPlace (Integer typePlace) throws ClassNotFoundException, SQLException, ParseException, NamingException;
 	public List<Event> searchEvent(String Name) throws ClassNotFoundException, SQLException, ParseException, NamingException;
 	public Integer insertEvent(Event event) throws ClassNotFoundException, SQLException, ParseException, NamingException;
 	public Integer deleteEvent(Integer idEvent) throws ClassNotFoundException, SQLException, NamingException;

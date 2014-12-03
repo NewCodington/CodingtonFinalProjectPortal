@@ -80,10 +80,10 @@
 	
 					<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
 					<div id="error">${VisitorRegisterEventError}</div>
-					<div id="message">${VisitorRegisterEventMessage}></div>			
+					<div id="message">${VisitorRegisterEventMessage}</div>			
 					
 						<div class="search">		
-							<form class="searchform" method="post" action="visitor">	
+							<form class="searchform" method="post" action="searchEvents.htm">	
 								<input class = "textbox" type = "text" name="search" id="search" placeholder="Search" />
 								<input type= "submit" value="Search" />
 							</form>
@@ -91,17 +91,17 @@
 						
 					<div class = "section">
 				
-						<div class="title">EVENTS <hr></hr></div>
+						<h1>EVENTS BUSINESS</h1><hr />
 						<%
 							ArrayList<Event> eventList = null;
-							if (session.getAttribute("EVENTLIST") == null){
+							if (request.getAttribute("EVENTLIST") == null){
 						%>
 	
 						<div id="message"><p>Not found Events</p></div>
 						<%	
 							}
 							else {
-								eventList = (ArrayList<Event>) session.getAttribute("EVENTLIST");
+								eventList = (ArrayList<Event>) request.getAttribute("EVENTLIST");
 								ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
 						%>
 						<table>
@@ -130,7 +130,7 @@
 								<td><%=event.getEventType()%></td>
 								<td><%=event.getSeatsAvailable()%></td>
 								<td><%=event.getStartTime()%></td>
-								<td><a href = <%="visitor?register=" + event.getEventId() %>>Register</a></td>
+								<td><a href = <%="registerEventForVisitor.htm?register=" + event.getEventId() %>>Register</a></td>
 							</tr>
 							<%
 								}
@@ -139,67 +139,12 @@
 						<%
 							}
 						%>
-					</div>
-					
-					<div class = "section">
-				
-						<div class="title">EVENTS REGISTERED<hr /></div>
-	
-						<%
-						ArrayList<Event> eventRegisterList = null;
-						if (session.getAttribute("EVENTREGISTERLIST") == null){
-						%>
-						
-						<div class="message"><p>There are no Events Registered for you</p></div>	
-						
-						<%	
-						}
-						else {	
-							eventRegisterList = (ArrayList<Event>) session.getAttribute("EVENTREGISTERLIST");
-							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
-						%>
-						
-						<table>
-							<tr>
-								<th>Event Name</th>
-								<th>Description</th>
-								<th>Place</th>
-								<th>Date</th>
-								<th>Duration</th>
-								<th>Event Type</th>
-								<th>Seats Available</th>
-								<th>Start Time</th>
-								<th>Action</th>
-							</tr>
-	
-							<%
-								for (Event event : eventRegisterList) {
-							%>
-							<tr>
-								<td><%=event.getName()%></td>
-								<td><%=event.getDescription()%></td>
-								<td><%=event.getPlaceString(appContext)%></td>
-								<td><%=event.getDate_eventString()%></td>
-								<td><%=event.getDuration()%></td>
-								<td><%=event.getEventType()%></td>
-								<td><%=event.getSeatsAvailable()%></td>
-								<td><%=event.getStartTime()%></td>
-								<td><a href = "<%="visitor?unregister=" + event.getEventId() %>">Unregister</a></td>
-							</tr>
-								<%
-									}
-								%>
-						</table>						
-						<%
-							}
-						%>					
-					</div>
-				</div>					
+					</div>					
 			</div>	
 						
-		<!-- content-wrap ends here -->		
+			<!-- content-wrap ends here -->		
+			</div>
 		</div>
-
 	</div>
 
 

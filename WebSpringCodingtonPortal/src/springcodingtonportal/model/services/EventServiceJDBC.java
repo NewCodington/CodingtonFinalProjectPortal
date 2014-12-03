@@ -98,6 +98,39 @@ public class EventServiceJDBC implements EventDAO {
 	
 	
 	
+	
+	
+	/**
+	 * Method to get Events depends on type of Place from the database.
+	 * 
+	 * @return ArrayList<Event> with all Events or NULL if there is no Event.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 * @throws ParseException 
+	 * @throws NamingException 
+	 */
+	@Override
+	public List<Event> eventForPlace(Integer typePlace) throws ClassNotFoundException, SQLException, ParseException, NamingException {
+		// Initialize variables
+		List <Event> selection = null;
+				
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		selection = jdbcTemplate.query(sql.getEventForPlace(), new Object[]{typePlace}, new EventMapper());
+		
+		// Return the ArrayList of Events or null
+		if (selection.size() == 0)
+			return null;
+		else
+			return selection;
+	}
+	
+	
+	
+	
+	
 	/**
 	 * Method to search Events for a Name from the database.
 	 * 

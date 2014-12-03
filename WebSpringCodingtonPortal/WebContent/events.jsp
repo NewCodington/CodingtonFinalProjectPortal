@@ -6,6 +6,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="springcodingtonportal.model.domain.Event"%>
 <%@page import="springcodingtonportal.model.domain.Visitor"%>
+<%@page import="springcodingtonportal.utils.Constants"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
 
 <html>
 <head>
@@ -76,34 +78,39 @@
 				<div id="main">	
 					
 							<div class="search">		
-								<form class="searchform" method="post" action="visitor">	
+								<form class="searchform" method="post" action="searchEvents.htm">	
 									<input class = "textbox" type = "text" name="search" id="search" placeholder="Search" />
 									<input type= "submit" value="Search" />
 								</form>
 							</div>
 	
 						
+						<%
+							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
+							Constants constants =  (Constants) appContext.getBean("beanCONSTANTS");
+						%>
+						
 						<div class = "section2">
 							<h1>North Town</h1>
 							<div class = "subsection1">
-								<h1>Business</h1>
-								<a href ="business.jsp"><img src="images/business.jpg"  style = "width: 250px; height:180px"/></a>
+								<h2>Business</h2>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getBUSSINES()%>"><img src="images/business.jpg"  style = "width: 250px; height:180px"/></a>
 							</div>
 							<div class = "subsection1">
-								<h1>Museum</h1>
-								<a href = "museum.jsp"><img src="images/museum.jpg" style = "width: 250px; height:180px"/></a>
+								<h2>Museum</h2>
+								<a href = "eventsForPlace.htm?typePlace=<%=constants.getMUSEUM()%>"><img src="images/museum.jpg" style = "width: 250px; height:180px"/></a>
 							</div>
 						</div>
 						
 						<div class = "section2">
 							
 							<div class = "subsection1">
-								<h1>Theater</h1>
-								<a href = "theater.jsp"><img src="images/theater.jpg" style = "width: 250px; height:180px"/></a>
+								<h2>Theater</h2>
+								<a href = "eventsForPlace.htm?typePlace=<%=constants.getTHEATER()%>"><img src="images/theater.jpg" style = "width: 250px; height:180px"/></a>
 							</div>
 							<div class = "subsection1">
-								<h1>Stadium</h1>
-								<a href ="stadium.jsp"><img src="images/stadium.jpg" style = "width: 250px; height:180px"/></a>
+								<h2>Stadium</h2>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getSTADIUM()%>"><img src="images/stadium.jpg" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 						</div>
@@ -114,26 +121,26 @@
 						<h1>South Town</h1>				
 											
 							<div class = "subsection1">
-								<h1>Parks</h1>
-								<a href ="park.jsp"><img src="images/park.jpg" style = "width: 250px; height:180px"/></a>
+								<h2>Parks</h2>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getPARK()%>"><img src="images/park.jpg" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 							<div class = "subsection1">
-								<h1>Tourism</h1>
-								<a href ="tourism.jsp"><img src="images/tourism.jpg" style = "width: 250px; height:180px"/></a>
+								<h2>Tourism</h2>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getTOURISM()%>"><img src="images/tourism.jpg" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 						</div>
 						
 						<div class = "section2">
 							<div class = "subsection1">
-								<h1>Zoos</h1>
-								<a href ="zoo.jsp"><img src="images/zoo.jpg" style = "width: 250px; height:180px"/></a>
+								<h2>Zoos</h2>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getZOO()%>"><img src="images/zoo.jpg" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 							<div class = "subsection1">
-								<h1>Markets</h1>
-								<a href ="market.jsp"><img src="images/market.jpg" style = "width: 250px; height:180px"/></a>
+								<h2>Markets</h2>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getMARKET()%>"><img src="images/market.jpg" style = "width: 250px; height:180px"/></a>
 							</div>
 						
 						</div>

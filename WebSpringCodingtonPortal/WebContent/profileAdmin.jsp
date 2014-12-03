@@ -85,7 +85,7 @@
 				
 				<div class="section">
 			
-					<h1>EVENTS <hr /></h1>
+					<h1>EVENTS</h1><hr />
 	
 					<%
 						ArrayList<Event> eventList = null;
@@ -139,7 +139,7 @@
 				</div>
 		 	
 				<div class = "section">
-					<div class="title">PLACES<hr /></div>
+					<h1>PLACES</h1><hr />
 			
 					<%
 						ArrayList<Place> placeList = null;

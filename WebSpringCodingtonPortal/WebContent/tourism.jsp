@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -6,24 +6,19 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="springcodingtonportal.model.domain.Event"%>
-<%@page import="springcodingtonportal.model.domain.Place"%>
-<%@page import="springcodingtonportal.model.domain.Visitor"%>
-<%@page import="springcodingtonportal.model.services.PlaceServiceJDBC"%>
 <%@page import="org.springframework.context.ApplicationContext"%>
-
 
 <html>
 
 	<head>
 
-		<title>New Codington</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
-		<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
-		<title>Bienvenido <%=session.getAttribute("Visitor")%></title>
-		
+	<title>New Codington</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
+
 	</head>
 
-	<body>
+<body>
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
@@ -39,8 +34,8 @@
 		response.sendRedirect("profileAdmin.htm");
 		return;
 	}
-	 %>
-		
+	%> 
+	
 	<!-- wrap starts here -->
 	<div id="wrap">
 		
@@ -59,7 +54,7 @@
 			</ul>	
 														
 		</div>	
-
+	
 		<!-- content-wrap starts here -->
 		<div id="content-wrap">		
 												
@@ -82,11 +77,10 @@
 			<div id="main">	
 				
 				<div id="content">
-
+	
 					<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
 					<div id="error">${VisitorRegisterEventError}</div>
-					<div id="message">${VisitorRegisterEventMessage}</div>
-								
+					<div id="message">${VisitorRegisterEventMessage}</div>			
 					
 						<div class="search">		
 							<form class="searchform" method="post" action="searchEvents.htm">	
@@ -95,26 +89,21 @@
 							</form>
 						</div>
 						
-								
-					
 					<div class = "section">
 				
-						<h1>Events Registered</h1><hr />
-
-					<%
-						ArrayList<Event> eventRegisterList = null;
-						if (request.getAttribute("EVENTREGISTERLIST") == null){
-					%>
-						
-						<div class="message"><p>There are no Events Registered for you</p></div>	
-						
-					<%	
-						}
-						else {	
-							eventRegisterList = (ArrayList<Event>) request.getAttribute("EVENTREGISTERLIST");
-							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
-					%>
-						
+						<h1>EVENTS TOURISM</h1><hr />
+						<%
+							ArrayList<Event> eventList = null;
+							if (request.getAttribute("EVENTLIST") == null){
+						%>
+	
+						<div id="message"><p>Not found Events</p></div>
+						<%	
+							}
+							else {
+								eventList = (ArrayList<Event>) request.getAttribute("EVENTLIST");
+								ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
+						%>
 						<table>
 							<tr>
 								<th>Event Name</th>
@@ -127,10 +116,11 @@
 								<th>Start Time</th>
 								<th>Action</th>
 							</tr>
-
+			
 							<%
-								for (Event event : eventRegisterList) {
+								for (Event event : eventList) {
 							%>
+										
 							<tr>
 								<td><%=event.getName()%></td>
 								<td><%=event.getDescription()%></td>
@@ -140,68 +130,29 @@
 								<td><%=event.getEventType()%></td>
 								<td><%=event.getSeatsAvailable()%></td>
 								<td><%=event.getStartTime()%></td>
-								<td><a href = "<%="unregisterEventForVisitor.htm?unregister=" + event.getEventId() %>">Unregister</a></td>
+								<td><a href = <%="registerEventForVisitor.htm?register=" + event.getEventId() %>>Register</a></td>
 							</tr>
-								<%
-									}
-								%>
-						</table>						
+							<%
+								}
+							%>
+						</table>
 						<%
 							}
-						%>					
-					</div>
-					
-					<div class = "section">
-					
-						<h1>User Information </h1><hr></hr></div>
+						%>
+					</div>					
+			</div>	
 						
-						<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-					
-					<%
-						Visitor visitor=(Visitor)session.getAttribute("VISITOR");
-					%>
-		
-				<div class = "section">
-				
-						<br />
-						
-						<h2>First name:<%= visitor.getFirstName() %></h2>
-						<br />  
-						
-						<h2>Last name:<%= visitor.getLastName() %></h2>
-						<br/>
-
-						<h2>DNI:<%= visitor.getDni() %></h2>
-						<br />
-
-						<h2>Phone Number:<%= visitor.getPhoneNumber() %></h2>
-							<br />
-
-						<h2>Email:<%= visitor.getEmail() %></h2>
-							<br />
-		
-						<h2>Address:<%= visitor.getAddress() %></h2>
-						<br />							  
-				</div>
-			</div>		
-		</div>	
-				
-						
-		<!-- content-wrap ends here -->		
+			<!-- content-wrap ends here -->		
+			</div>
 		</div>
+	</div>
+
 
 	<!-- footer starts here -->	
 	<div id="footer">
-		
-		
 		<p>New Codignton Portal - December, 2014</p>
-		
-		
 	</div>
-	<!-- footer ends here -->
-		
-	<!-- wrap ends here -->
-	</div>
-
-	</body>
+	
+	
+</body>
 </html>
