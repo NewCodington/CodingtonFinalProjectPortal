@@ -1,46 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
-<%@ include file="/include.jsp"%>
-
+ 
 <% response.setStatus(404); %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html>
 	  
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+<head>
+		<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script language="javascript" src="Register.js"></script>
 		<title>Error Page</title>
-	</head>
+</head>
 
-	<body id="body">
+<body>
 	
-		<div id="header">
-			<table>
-		    	<tr>
-		      		<td class="colum1" rowspan="2">
-		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
-		        	</td>
-		        	<td class="colum2">
-		        		<div class="title">New Codington Portal</div>
-		        	</td>	
-		        	<td class="colum3">&nbsp;</td>
-		      		</tr>
-		      	<tr>
-		        	<td>
-		        		<div class="subtitle">One of the World's Best Cities 2014</div>
-		        	</td>
-		        	<td>&nbsp;</td>
-		      	</tr>
-		    </table>
-		</div>
+<!-- wrap starts here -->
+<div id="wrap">
+	
+	<div id="header">				
+			
+		<h1 id="logo">New<span class="green">Codington</span></h1>	
+		<h2 id="slogan">One of the World's Best Cities 2014</h2> 
+		
+					
+		<!-- Menu Tabs -->
+		<ul>
+			<li id="current"><a href="history.jsp"><span>History</span></a></li>
+			<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+			<li><a href="about.jsp"><span>About</span></a></li>
+	
+		</ul>	
+													
+	</div>	
 
+	<!-- content-wrap starts here -->
+	<div id="content-wrap">		
+											
+	<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+		
+					
+		<div id="main">	
 
 		<div id="content">
-			<div class="right_nav">
+			
 				<div class="error">Sorry, the page requested does not exists.</div>
 				
 				<%
@@ -48,32 +51,33 @@
 				%>
 				
 				<br /><br />
-				<p class = "return"><a align="center" href="profileVisitor.htm" class="link">Return to Your Profile Page </a></p>
+				<p class = "return"><a align="center" href="visitor" class="link">Return to Your Profile Page </a></p>
 				
 				<%
 					}else if(session.getAttribute("Admin") != null) {
 				%>
 				
 				<br /><br />
-				<p class = "return"><a align="center" href="profileAdmin.htm" class="link">Return to Your Profile Page </a></p>
+				<p class = "return"><a align="center" href="admin" class="link">Return to Your Profile Page </a></p>
 				
 				<%
 					}else {
 				%>
 				
 				<br /><br />
-				<p class = "return"><a align="center" href="login.jsp" class="link">Return to Login </a></p>
+				<p class = "return"><a align="center" href="login" class="link">Return to Login </a></p>
 				
 				<%
 					}
 				%>
-			</div>
+			
 		</div>
-		
+		</div>
 		
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-	
+	</div>
+	</div>
 	</body>
 </html>

@@ -8,13 +8,18 @@
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script language="javascript" src="Register.js"></script>
 		<title>Visitor Update Password Page</title>
 	</head>
 
-	<body id="body">
+	<%
+		Visitor visitor=new Visitor();
+		visitor=(Visitor)session.getAttribute("VISITOR");
+	%>
+
+<body>
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
@@ -31,43 +36,58 @@
 		return;
 	}
 	%>
-		<div id="header">
-			<table>
-		    	<tr>
-		      		<td class="colum1" rowspan="2">
-		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
-		        	</td>
-		        	<td class="colum2">
-		        		<div class="title">New Codington Portal</div>
-		        	</td>	
-		        	<td class="colum3">&nbsp;</td>
-		      		</tr>
-		      	<tr>
-		        	<td>
-		        		<div class="subtitle">One of the World's Best Cities 2014</div>
-		        	</td>
-		        	<td>&nbsp;</td>
-		      	</tr>
-		    </table>
+	
+	<div id="wrap">
+	 
+		<div id="header">				
+			
+			<h1 id="logo">New<span class="green">Codington</span></h1>	
+			<h2 id="slogan">One of the World's Best Cities 2014</h2> 
+		
+			
+			<!-- Menu Tabs -->
+			<ul>
+				<li id="current"><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+				<li><a href="about.jsp"><span>About</span></a></li>
+	
+			</ul>	
+													
 		</div>
 		
+		<!-- content-wrap starts here -->
+		<div id="content-wrap">		
+											
+		<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
-		<div id="content">
-
-			<div class = "center_nav">
-
-				<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
+			<div id="sidebar">							
 				
-				<form method="post" action="updatePasswordVisitor.htm">
-					<div class="title">Update Password</div>
+				<h1><%=session.getAttribute("Visitor") %></h1>
+				<ul class="sidemenu">
+					<li><a href="profileVisitor.htm">My Page</a></li>
+					<li><a href="events.jsp">Town Events</a></li>
+					<li><a href="getVisitor.htm">Update Information</a></li>
+					<li><a href="updatePasswordVisitor.jsp">Update Password</a></li>
+					<li><a href="logout.htm">Logout</a></li>
+
+				</ul>		
+						
+		
+			</div>
+			
+			<div class = "main2">
+
+
+				<form class = "Rform" method="post" action="updatePasswordVisitor.htm" onsubmit = "return validateConfirmPass();">
+					<h1>Update Password</h1>
 			        <br />
 					
-					<div class="field"><p>Password:</p> 
+					<div class="field"> <p>Password:</p>
 					    <input type="password" name="pass" id = "pass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Password" required />
 					    <br />
 				    </div>
 				    
-					<div class="field"><p>Confirm Password:</p> 
+					<div class="field">  <p>Confirm Password:</p>
 					    <input type="password" name="cpass" id = "cpass" pattern="\S{6,15}" title="Enter a valid password (length between 6-15)" placeholder="Confirm Password" required />
 					    <br />
 				    </div>
@@ -79,12 +99,12 @@
 					</div>  
 				</form>
 			</div>
+		
 		</div>
-
 
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-	
-	</body>
+	</div>
+</body>
 </html>

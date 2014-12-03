@@ -5,44 +5,48 @@
 
 <html>
 	  
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/codington.css" />
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script language="javascript" src="Register.js"></script>
-		<title>New Codington Portal</title>
-	</head>
+<head>
 
-	<body id="body">
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<script language="javascript" src="Register.js"></script>
+			<title>New Codington Portal</title>
+			<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
+
+</head>
+
+<body>
+	<div id="wrap">
 	 
-		<div id="header">
-			<table>
-		    	<tr>
-		      		<td class="colum1" rowspan="2">
-		        		<img src="logo.gif" width="130" height="130" vspace="30" hspace="75" align="middle" />
-		        	</td>
-		        	<td class="colum2">
-		        		<div class="title">New Codington Portal</div>
-		        	</td>	
-		        	<td class="colum3">&nbsp;</td>
-		      		</tr>
-		      	<tr>
-		        	<td>
-		        		<div class="subtitle">One of the World's Best Cities 2014</div>
-		        	</td>
-		        	<td>&nbsp;</td>
-		      	</tr>
-		    </table>
+		<div id="header">				
+			
+			<h1 id="logo">New<span class="green">Codington</span></h1>	
+			<h2 id="slogan">One of the World's Best Cities 2014</h2> 
+		
+			
+			<!-- Menu Tabs -->
+			<ul>
+				<li id="current"><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+				<li><a href="about.jsp"><span>About</span></a></li>
+	
+			</ul>	
+													
 		</div>
 
 		
-		<div id="content">
+	<!-- content-wrap starts here -->
+	<div id="content-wrap">		
+											
+	<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
-			<div class="center_nav">
+			<div class="main2">
 				<br />
-				<div class="error">${VisitorLoginMessage}</div>	<div class="message">${RegisterVisitorMessage}</div>
+				<div id="error">${VisitorLoginMessage}</div>
+				<div id="message">${RegisterVisitorMessage}</div>
+	
 				
-				<form method="post" action="login.htm">
-					<div class="title">Sign In</div>
+				<form class = "loginform" method="post" action="login">
+					<h1>Sign In</h1>
 					<br />
 					
 					<div class="field">
@@ -56,9 +60,12 @@
 				  	</div>
 				  <div class = "input">
 						<input type="submit" value="Submit" />
+						<input type="button" value="Cancel" />
+				  
 				  </div>
+				  <div class = "register"><a href="registerVisitor.jsp" > Register New Visitor </a></div>
 				</form>
-				<div><a href="registerVisitor.jsp" > Register New Visitor </a></div>
+				
 			</div>
 		</div>
 
