@@ -32,7 +32,7 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitorProfile.htm");
+		response.sendRedirect("profileVisitor.htm");
 		return;
 	}
 	%> 
@@ -65,7 +65,6 @@
 			<h1><%=session.getAttribute("Admin") %></h1>
 			<ul class="sidemenu">
 				<li><a href="profileAdmin.htm">My Page</a></li>
-				<li><a href="events.jsp">Town Events</a></li>
 				<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
 				<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
 				<li><a href="logout.htm">Logout</a></li>
@@ -170,8 +169,8 @@
 						%>				
 						<tr>
 							<td><%=place.getName()%></td>
-							<td><%=place.getRegionString(place.getTypePlace())%></td>
-							<td><%=place.getTypePlaceString()%></td>
+							<td><%=place.getRegionString(appContext, place.getTypePlace())%></td>
+							<td><%=place.getTypePlaceString(appContext)%></td>
 							<td><%=place.getImage()%></td>
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>

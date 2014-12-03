@@ -33,6 +33,7 @@
 													
 		</div>
 
+	</div>
 		
 	<!-- content-wrap starts here -->
 	<div id="content-wrap">		
@@ -45,7 +46,7 @@
 				<div id="message">${RegisterVisitorMessage}</div>
 	
 				
-				<form class = "loginform" method="post" action="login">
+				<form class = "loginform" method="post" action="login.htm">
 					<h1>Sign In</h1>
 					<br />
 					

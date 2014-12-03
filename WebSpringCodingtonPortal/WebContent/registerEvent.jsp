@@ -28,11 +28,11 @@
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("visitorProfile.htm");
+		response.sendRedirect("profileVisitor.htm");
 		return;
 	}
 	else {
-		if(session.getAttribute("LISTPLACE") == null)
+		if(request.getAttribute("LISTPLACE") == null)
 			response.sendRedirect("registerEvent.htm");
 	}
 	%> 
@@ -64,13 +64,12 @@
 			
 			<div id="sidebar">							
 				
-				<h1><%=session.getAttribute("Admin") %></h1>
+				<h1><%=session.getAttribute("Admin")%></h1>
 				<ul class="sidemenu">
-					<li><a href="admin">My Page</a></li>
-					<li><a href="events.jsp">Town Events</a></li>
+					<li><a href="profileAdmin.htm">My Page</a></li>
 					<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
 					<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
-					<li><a href="logout">Logout</a></li>
+					<li><a href="logout.htm">Logout</a></li>
 
 				</ul>		
 						

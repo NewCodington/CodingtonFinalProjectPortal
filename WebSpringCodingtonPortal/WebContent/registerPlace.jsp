@@ -66,8 +66,7 @@
 				
 				<h1><%=session.getAttribute("Admin") %></h1>
 				<ul class="sidemenu">
-					<li><a href="index.html">My Page</a></li>
-					<li><a href="events.jsp">Town Events</a></li>
+					<li><a href="profileAdmin.htm">My Page</a></li>
 					<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
 					<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
 					<li><a href="logout.htm">Logout</a></li>
@@ -80,7 +79,7 @@
 				
 					<div class = "section">
 		
-					<form class = "Rform" method="post" action="registerPlace.htm" enctype="multipart/form-data">
+					<form class = "Rform" method="post" action="registPlace.htm" enctype="multipart/form-data">
 							<h1>New Place</h1>
 							<br />
 					

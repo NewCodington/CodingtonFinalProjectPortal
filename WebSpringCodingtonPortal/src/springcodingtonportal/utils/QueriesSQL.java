@@ -7,6 +7,7 @@ public class QueriesSQL {
 	String insertEvent;
 	String deleteEvent;
 	String updateEvent;
+	String eventForPlace;
 	
 	String selectPlace;
 	String viewPlace;
@@ -73,6 +74,12 @@ public class QueriesSQL {
 	}
 	public void setUpdateEvent(String updateEvent) {
 		this.updateEvent = updateEvent;
+	}
+	public String getEventForPlace() {
+		return eventForPlace;
+	}
+	public void setEventForPlace(String eventForPlace) {
+		this.eventForPlace = eventForPlace;
 	}
 	public String getSelectPlace() {
 		return selectPlace;

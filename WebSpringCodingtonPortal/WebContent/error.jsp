@@ -51,21 +51,21 @@
 					if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
 					{
 				%>
-				<li><a href=<%="registerPlace"%>>Register Place</a></li>
-				<li><a href=<%="registerEvent"%>>Register Event</a></li>
+				<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
+				<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
 				
 				<%
 					}else {
 				%>
 				
-				<li><a href="updateVisitor">Update Information</a></li>
-				<li><a href="updatePasswordVisitor">Update Password</a></li>
+				<li><a href="getVisitor.htm">Update Information</a></li>
+				<li><a href="updatePasswordVisitor.htm">Update Password</a></li>
 				
 				<%
 					}
 				%>
 					
-				<li><a href="logout">Logout</a></li>
+				<li><a href="logout.htm">Logout</a></li>
 
 			</ul>		
 						
