@@ -23,15 +23,11 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
 		response.sendRedirect("login.jsp");
 		return;
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
 		response.sendRedirect("profileVisitor.htm");
 		return;
 	}
@@ -46,12 +42,11 @@
 		
 			
 		<!-- Menu Tabs -->
-		<ul>
-			<li><a href="history.jsp"><span>History</span></a></li>
-			<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
-			<li><a href="about.jsp"><span>About</span></a></li>
-	
-		</ul>	
+			<ul>
+				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+				<li><a href="about.jsp"><span>About</span></a></li>
+		
+			</ul>	
 													
 		</div>
 		
@@ -78,11 +73,13 @@
 			
 			<div id = "content">
 				
+				<div id="error">${ErrorPriv}</div>
+				<% session.removeAttribute("ErrorPriv"); %>
 				<div id="error">${RegisterVisitorError}</div>
-				<div class="message">${RegisterMessage}</div><div class="message">${UpdateMessage}</div><div class="message">${DeleteMessage}</div>
-										
-				
-				
+				<div class="message">${RegisterMessage}</div>
+				<div class="message">${UpdateMessage}</div>
+				<div class="message">${DeleteMessage}</div>
+
 				<div class="section">
 			
 					<h1>EVENTS</h1><hr />

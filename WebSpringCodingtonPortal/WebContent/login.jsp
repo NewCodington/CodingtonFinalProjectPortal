@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include.jsp"%>
 
+<%  
+
+
+if(!session.isNew())session.invalidate();%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html>
@@ -20,19 +25,8 @@
 		<div id="header">				
 			
 			<h1 id="logo">New<span class="green">Codington</span></h1>	
-			<h2 id="slogan">One of the World's Best Cities 2014</h2> 
-		
-			
-			<!-- Menu Tabs -->
-			<ul>
-				<li><a href="history.jsp"><span>History</span></a></li>
-				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
-				<li><a href="about.jsp"><span>About</span></a></li>
-	
-			</ul>	
-													
+			<h2 id="slogan">One of the World's Best Cities 2014</h2> 						
 		</div>
-
 	</div>
 		
 	<!-- content-wrap starts here -->
@@ -43,6 +37,8 @@
 			<div class="main2">
 				<br />
 				<div id="error">${VisitorLoginMessage}</div>
+				<div id="error">${ErrorPriv}</div>
+				<% if(!session.isNew())session.removeAttribute("ErrorPriv"); %>
 				<div id="message">${RegisterVisitorMessage}</div>
 	
 				

@@ -52,12 +52,12 @@
 		
 			
 			<!-- Menu Tabs -->
-				<ul>
-					<li id="current"><a href="history.jsp"><span>History</span></a></li>
-					<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
-					<li><a href="about.jsp"><span>About</span></a></li>
-	
-				</ul>	
+			<ul>
+				<li><a href="events.jsp"><span>Event Catalog</span></a></li>
+				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+				<li><a href="about.jsp"><span>About</span></a></li>
+		
+			</ul>	
 													
 		</div>
 
@@ -72,7 +72,6 @@
 				<h1><%=session.getAttribute("Admin") %></h1>
 				<ul class="sidemenu">
 					<li><a href="admin">My Page</a></li>
-					<li><a href="events.jsp">Town Events</a></li>
 					<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
 					<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
 					<li><a href="logout.htm">Logout</a></li>

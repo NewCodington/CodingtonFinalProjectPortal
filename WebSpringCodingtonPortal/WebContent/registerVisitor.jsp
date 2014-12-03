@@ -41,15 +41,6 @@
 			
 		<h1 id="logo">New<span class="green">Codington</span></h1>	
 		<h2 id="slogan">One of the World's Best Cities 2014</h2> 
-		
-					
-		<!-- Menu Tabs -->
-		<ul>
-			<li><a href="history.jsp"><span>History</span></a></li>
-			<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
-			<li><a href="about.jsp"><span>About</span></a></li>
-	
-		</ul>	
 													
 	</div>	
 

@@ -27,15 +27,11 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
 		response.sendRedirect("login.jsp");
 		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
 		response.sendRedirect("profileAdmin.htm");
 		return;
 	}
@@ -52,7 +48,7 @@
 						
 			<!-- Menu Tabs -->
 			<ul>
-				<li><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="events.jsp"><span>Event Catalog</span></a></li>
 				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
 				<li><a href="about.jsp"><span>About</span></a></li>
 		
@@ -70,7 +66,6 @@
 				<h1><%=session.getAttribute("Visitor") %></h1>
 				<ul class="sidemenu">
 					<li><a href="profileVisitor.htm">My Page</a></li>
-					<li><a href="events.jsp">Town Events</a></li>
 					<li><a href="getVisitor.htm">Update Information</a></li>
 					<li><a href="updatePasswordVisitor.jsp">Update Password</a></li>
 					<li><a href="logout.htm">Logout</a></li>
@@ -83,7 +78,8 @@
 				
 				<div id="content">
 
-					<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
+					<div id="error">${ErrorPriv}</div>
+					<% session.removeAttribute("ErrorPriv"); %>
 					<div id="error">${VisitorRegisterEventError}</div>
 					<div id="message">${VisitorRegisterEventMessage}</div>
 								
@@ -149,14 +145,10 @@
 						<%
 							}
 						%>					
-					</div>
-					
+					</div>		
 					<div class = "section">
 					
-						<h1>User Information </h1><hr></hr></div>
-						
-						<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-					
+						<h1>User Information </h1><hr></hr></div>			
 					<%
 						Visitor visitor=(Visitor)session.getAttribute("VISITOR");
 					%>
@@ -192,11 +184,8 @@
 
 	<!-- footer starts here -->	
 	<div id="footer">
-		
-		
 		<p>New Codignton Portal - December, 2014</p>
-		
-		
+
 	</div>
 	<!-- footer ends here -->
 		

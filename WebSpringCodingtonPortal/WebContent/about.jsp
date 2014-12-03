@@ -8,7 +8,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>About Page</title>
+		<title>History</title>
 	</head>
 
 	
@@ -33,10 +33,9 @@
 						
 			<!-- Menu Tabs -->
 			<ul>
-				<li><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="events.jsp"><span>Event Catalog</span></a></li>
 				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
 				<li id="current"><a href="about.jsp"><span>About</span></a></li>
-		
 			</ul>	
 													
 		</div>	
@@ -50,10 +49,9 @@
 	
 		<div id="sidebar" >							
 				
-			<h1><%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?session.getAttribute("Visitor").toString():session.getAttribute("Admin").toString() %></h1>
+			<h1><%= session.getAttribute("Visitor")!=null?session.getAttribute("Visitor").toString():session.getAttribute("Admin").toString() %></h1>
 			<ul class="sidemenu">
-				<li><a href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"profileVisitor.htm":"profileAdmin.htm"  %>>My Page</a></li>
-				<li><a href="events.jsp">Town Events</a></li>
+				<li><a href=<%= (session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals(""))?"profileVisitor.htm":"profileAdmin.htm" %>>My Page</a></li>
 				<%
 					if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
 					{
@@ -81,6 +79,12 @@
 
 			
 		<div class = "section">
+			<h1>History of New Codignton </h1><hr />
+			
+			<div class="content">
+					<p>New Codington a new city is formed by the union of two small towns separated by the New Codington River that formerly was called the River Coder. Each of the zones has a tower and various public spaces. In the north are the Museum, the Theater, the Large Business and Stadium. While in the south, are the open spaces as well as the Zoo, the typical Markets, Tourist Attractions and the Park. </p>
+	             	<p> It is an annual festival held during the summer to celebrate the founding of the city. During the festival, various events are held in different places. Each year these events will vary. </p>
+	        </div>
 		</div>
 		</div>
 		

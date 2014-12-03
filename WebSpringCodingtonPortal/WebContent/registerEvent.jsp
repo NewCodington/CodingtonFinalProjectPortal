@@ -46,12 +46,12 @@
 		
 			
 			<!-- Menu Tabs -->
-				<ul>
-					<li><a href="history.jsp"><span>History</span></a></li>
-					<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
-					<li><a href="about.jsp"><span>About</span></a></li>
-	
-				</ul>	
+			<ul>
+				<li><a href="events.jsp"><span>Event Catalog</span></a></li>
+				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+				<li><a href="about.jsp"><span>About</span></a></li>
+		
+			</ul>
 													
 		</div>
 

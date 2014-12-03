@@ -47,7 +47,7 @@
 						
 			<!-- Menu Tabs -->
 			<ul>
-				<li><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="events.jsp"><span>Event Catalog</span></a></li>
 				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
 				<li><a href="about.jsp"><span>About</span></a></li>
 		
@@ -65,7 +65,6 @@
 				<h1><%=session.getAttribute("Visitor") %></h1>
 				<ul class="sidemenu">
 					<li><a href="profileVisitor.htm">My Page</a></li>
-					<li><a href="events.jsp">Town Events</a></li>
 					<li><a href="getVisitor.htm">Update Information</a></li>
 					<li><a href="updatePasswordVisitor.jsp">Update Password</a></li>
 					<li><a href="logout.htm">Logout</a></li>
@@ -77,11 +76,6 @@
 			<div id="main">	
 				
 				<div id="content">
-	
-					<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
-					<div id="error">${VisitorRegisterEventError}</div>
-					<div id="message">${VisitorRegisterEventMessage}</div>			
-					
 						<div class="search">		
 							<form class="searchform" method="post" action="searchEvents.htm">	
 								<input class = "textbox" type = "text" name="search" id="search" placeholder="Search" />
@@ -145,14 +139,13 @@
 			<!-- content-wrap ends here -->		
 			</div>
 		</div>
-	</div>
 
 
 	<!-- footer starts here -->	
 	<div id="footer">
 		<p>New Codignton Portal - December, 2014</p>
 	</div>
-	
+</div>
 	
 </body>
 </html>
