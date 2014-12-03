@@ -394,14 +394,7 @@ public class VisitorController {
 		return new ModelAndView("/login.jsp");
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	private ModelAndView loadEvents(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
@@ -464,67 +457,5 @@ public class VisitorController {
 		
 		return new ModelAndView("/updateVisitor.jsp");	
 	}
-	
-	public byte[] read(File file) throws IOException{
-
-	    ByteArrayOutputStream ous = null;
-	    InputStream ios = null;
-	    try {
-	        byte[] buffer = new byte[4096];
-	        ous = new ByteArrayOutputStream();
-	        ios = new FileInputStream(file);
-	        int read = 0;
-	        while ( (read = ios.read(buffer)) != -1 ) {
-	            ous.write(buffer, 0, read);
-	        }
-	    } finally { 
-	        try {
-	             if ( ous != null ) 
-	                 ous.close();
-	        } catch ( IOException e) {
-	        }
-
-	        try {
-	             if ( ios != null ) 
-	                  ios.close();
-	        } catch ( IOException e) {
-	        }
-	    }
-	    return ous.toByteArray();
-	}
-	
-	@RequestMapping("/image.htm")
-	public @ResponseBody void showImage(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, ClassNotFoundException, NamingException{
-		response.setContentType("image/gif");
-		response.setHeader("cache-control", "no-cache");
-
-	    ImageServiceJDBC image 	= (ImageServiceJDBC) appContext.getBean("ImageServiceJDBC");
-		InputStream imInp = image.selectImage("headerphoto");
-		OutputStream out;
-		
-		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-
-		int nRead;
-		byte[] data = new byte[16384];
-
-		while ((nRead = imInp.read(data, 0, data.length)) != -1) {
-		  buffer.write(data, 0, nRead);
-		}
-	    
-		buffer.flush();
-		
-	    try
-	    {
-	        out = response.getOutputStream();
-	        ImageIO.write(ImageIO.read(new ByteArrayInputStream(buffer.toByteArray())), "png", out);
-	        out.close();
-	    }
-	    catch (IOException ex)
-	    {
-	       
-	    }
-	    
-
-    }
 	
 }

@@ -23,12 +23,12 @@
 			<h1 id="logo">New<span class="green">Codington</span></h1>	
 			<h2 id="slogan">One of the World's Best Cities 2014</h2> 						
 		</div>
-	</div>
+	
 		
 	<!-- content-wrap starts here -->
 	<div id="content-wrap">		
 											
-	<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
+	<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo"/>
 		
 			<div class="main">
 				<br />
@@ -65,7 +65,7 @@
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-
+	</div>
 	</body>
 
 </html>
