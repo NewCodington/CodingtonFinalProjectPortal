@@ -22,7 +22,10 @@ import springcodingtonportal.model.services.PlaceServiceJDBC;
 import springcodingtonportal.utils.Constants;
 import springcodingtonportal.utils.Exceptions;
 
-
+/**
+ * 	Event controller handles all the event related transactions
+ *  with the data classes and triggered by events.jsp  
+ */
 @Controller
 public class EventController {
 	@Autowired
@@ -32,7 +35,13 @@ public class EventController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "profileAdmin.htm". If the request or response is null, it sends an exception.
+	 * @param request
+	 * @param response
+	 * @return load(request, response)
+	 * @throws Exception
+	 */
 	@RequestMapping("/profileAdmin.htm")
 	public ModelAndView profileAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -47,7 +56,15 @@ public class EventController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "eventsForPlace.htm". If the request or response is null, it sends an exception.
+	 * Else, the list of events registered for each place is taken from the database and displayed in the corresponding jsp.
+	 * @param request
+	 * @param response
+	 * @param typePlace
+	 * @return ModelAndView
+	 * @throws Exception
+	 */
 	@RequestMapping("/eventsForPlace.htm")
 	public ModelAndView eventsForPlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("typePlace") Integer typePlace) throws Exception {
 		if(request==null || response==null)
@@ -94,7 +111,14 @@ public class EventController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "registerEvent.htm". If the request or response is null, it sends an exception.
+	 * If they are non null, the list of places available is picked to add to the form to create a new event.
+	 * @param request
+	 * @param response
+	 * @return ModelAndView("/registerEvent.jsp")
+	 * @throws Exception
+	 */
 	@RequestMapping("/registerEvent.htm")
 	public ModelAndView registerEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -113,7 +137,14 @@ public class EventController {
 		return new ModelAndView("/registerEvent.jsp");
 	}
 	
-	
+	/**
+	 * jsp call this function by the name "registEvent.htm". If the request or response is null, it sends an exception.
+	 * Else a new event is created and inserted into the event list existing.
+	 * @param request
+	 * @param response
+	 * @return load(request, response)
+	 * @throws Exception
+	 */
 	@RequestMapping("/registEvent.htm")
 	public ModelAndView registEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -156,7 +187,15 @@ public class EventController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "getEvent.htm". If the request or response is null, it sends an exception.
+	 * It is used to show the event list existing in the database.
+	 * @param request
+	 * @param response
+	 * @param idEventU
+	 * @return loadEvent(request, response, idEventU)
+	 * @throws Exception
+	 */
 	@RequestMapping("/getEvent.htm")
 	public ModelAndView updateEvent(HttpServletRequest request, HttpServletResponse response, @RequestParam("update") Integer idEventU) throws Exception {
 		if(request==null || response==null)
@@ -168,7 +207,14 @@ public class EventController {
 		return loadEvent(request, response, idEventU);		
 	}
 	
-	
+	/**
+	 * jsp call this function by the name "updateEvent.htm". If the request or response is null, it sends an exception.
+	 * It is used to update an existing event from the database.
+	 * @param request
+	 * @param response
+	 * @return load(request, response)
+	 * @throws Exception
+	 */
 	@RequestMapping("/updateEvent.htm")
 	public ModelAndView updateVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -213,7 +259,15 @@ public class EventController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "deleteEvent.htm". If the request or response is null, it sends an exception.
+	 * It is used to remove an existing event from the database.
+	 * @param request
+	 * @param response
+	 * @param idEvent
+	 * @return load(request, response)
+	 * @throws Exception
+	 */
 	@RequestMapping("/deleteEvent.htm")
 	public ModelAndView unregisterEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("delete") Integer idEvent) throws Exception {
 		if(request==null || response==null)
@@ -241,7 +295,13 @@ public class EventController {
 	
 	
 	
-	
+	/**
+	 * This function gets the data from the database related to events and place and reload the page "profileAdmin"
+	 * @param request
+	 * @param response
+	 * @return ModelAndView("/profileAdmin.jsp")
+	 * @throws Exception
+	 */
 	private ModelAndView load(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
@@ -268,7 +328,14 @@ public class EventController {
 	
 	
 
-	
+	/**
+	 * This function gets the data from the database related to events and places and reload the page "updateEvent"
+	 * @param request
+	 * @param response
+	 * @param idEvent
+	 * @return ModelAndView("/updateEvent.jsp");
+	 * @throws Exception
+	 */
 	private ModelAndView loadEvent(HttpServletRequest request, HttpServletResponse response, Integer idEvent) throws Exception {
 		if(request==null || response==null)
 		{

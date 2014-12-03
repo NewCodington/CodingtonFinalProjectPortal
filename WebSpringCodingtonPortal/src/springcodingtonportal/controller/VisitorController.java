@@ -36,19 +36,13 @@ public class VisitorController {
 	private static Logger log = Logger.getLogger(VisitorController.class);
 	
 	/**
-	 * method will register new Visitor into FERS system
-	 * by accepting registration details and load into database
-	 * 
+	 * Method will register new Visitor into FERS system by accepting registration details and load into database.
+	 * jsp call this function by the name "login.htm". If the request or response is null, it sends an exception.
 	 * @param request
 	 * @param response
-	 * 
 	 * @return ModelAndView
-	 * 
 	 * @throws Exception
-	 * 
-	 */
-	
-	
+	 */	
 	@RequestMapping("/login.htm")
 	public ModelAndView loginVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -107,7 +101,14 @@ public class VisitorController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "registerVisitor.htm". If the request or response is null, it sends an exception.
+	 * If they are non null, a new visitor is created and added to the database.
+	 * @param request
+	 * @param response
+	 * @return ModelAndView
+	 * @throws Exception
+	 */
 	@RequestMapping("/registerVisitor.htm")
 	public ModelAndView registerVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -148,10 +149,13 @@ public class VisitorController {
 	}
 	
 	
-	
-	
-	
-	
+	/**
+	 * jsp call this function by the name "profileVisitor.htm". If the request or response is null, it sends an exception.
+	 * @param request
+	 * @param response
+	 * @return loadEvents(request, response)
+	 * @throws Exception
+	 */
 	@RequestMapping("/profileVisitor.htm")
 	public ModelAndView profileVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -165,9 +169,15 @@ public class VisitorController {
 		
 		
 		
-	
-	
-	
+	/**
+	 * jsp call this function by the name "searchEvents.htm". If the request or response is null, it sends an exception.
+	 * If they are non null, the event list and the eventSignUp list are taken from the database and display on "profileVisitor.jsp"
+	 * @param request
+	 * @param response
+	 * @param nameEvent
+	 * @return return new ModelAndView("/profileVisitor.jsp");
+	 * @throws Exception
+	 */	
 	@RequestMapping("/searchEvents.htm")
 	public ModelAndView searchEvent(HttpServletRequest request, HttpServletResponse response, @RequestParam("search") String nameEvent) throws Exception {
 		if(request==null || response==null)
@@ -189,10 +199,15 @@ public class VisitorController {
 	}
 	
 	
-	
-	
-	
-	
+	/**
+	 * jsp call this function by the name "registerEventForVisitor.htm". If the request or response is null, it sends an exception.
+	 * If they are non null, the eventSignUp list is taken from the database to check if a visitor is registered in an event to make logging.
+	 * @param request
+	 * @param response
+	 * @param idEventR
+	 * @return ModelAndView
+	 * @throws Exception
+	 */	
 	@RequestMapping("/registerEventForVisitor.htm")
 	public ModelAndView registerEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("register") Integer idEventR) throws Exception {
 		if(request==null || response==null)
@@ -222,11 +237,17 @@ public class VisitorController {
 		return mv;
 	}
 	
+		
 	
-	
-	
-	
-	
+	/**
+	 * jsp call this function by the name "unregisterEventForVisitor.htm". If the request or response is null, it sends an exception.
+	 * If they are non null, the eventSignUp list is taken from the database to check if a visitor is registered in an event to unregister.
+	 * @param request
+	 * @param response
+	 * @param idEventR
+	 * @return ModelAndView
+	 * @throws Exception
+	 */
 	@RequestMapping("/unregisterEventForVisitor.htm")
 	public ModelAndView unregisterEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("unregister") Integer idEventR) throws Exception {
 		if(request==null || response==null)
@@ -254,7 +275,14 @@ public class VisitorController {
 	}
 	
 	
-	
+	/**
+	 * jsp call this function by the name "getVisitor.htm". If the request or response is null, it sends an exception.
+	 * It is used to show the visitor list existing in the database.
+	 * @param request
+	 * @param response
+	 * @return loadVisitor(request, response)
+	 * @throws Exception
+	 */
 	@RequestMapping("/getVisitor.htm")
 	public ModelAndView getVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -267,7 +295,14 @@ public class VisitorController {
 	}
 	
 	
-	
+	/**
+	 * jsp call this function by the name "updateVisitor.htm". If the request or response is null, it sends an exception.
+	 * It is used to update an existing visitor from the database.
+	 * @param request
+	 * @param response
+	 * @return ModelAndView
+	 * @throws Exception
+	 */
 	@RequestMapping("/updateVisitor.htm")
 	public ModelAndView updateVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -305,7 +340,14 @@ public class VisitorController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "updatePasswordVisitor.htm". If the request or response is null, it sends an exception.
+	 * It is used to update the password of an existing visitor from the database.
+	 * @param request
+	 * @param response
+	 * @return ModelAndView
+	 * @throws Exception
+	 */
 	@RequestMapping("/updatePasswordVisitor.htm")
 	public ModelAndView updatePasswordVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -337,7 +379,14 @@ public class VisitorController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "logout.htm". If the request or response is null, it sends an exception.
+	 * It is used to logout the FERS system.
+	 * @param request
+	 * @param response
+	 * @return ModelAndView("/login.jsp")
+	 * @throws Exception
+	 */
 	@RequestMapping("/logout.htm")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -361,11 +410,13 @@ public class VisitorController {
 	
 	
 	
-	
-	
-	
-	
-	
+	/**
+	 * This function gets the data from the database related to Event and EventSignUp and reload the page "profileAdmin.jsp"
+	 * @param request
+	 * @param response
+	 * @return ModelAndView("/profileVisitor.jsp");
+	 * @throws Exception
+	 */
 	private ModelAndView loadEvents(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
@@ -408,7 +459,13 @@ public class VisitorController {
 	}
 	
 	
-	
+	/**
+	 * This function gets the data from the database related to Visitor and reload the page "updateVisitor.jsp"
+	 * @param request
+	 * @param response
+	 * @return ModelAndView("/updateVisitor.jsp");
+	 * @throws Exception
+	 */
 	private ModelAndView loadVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)

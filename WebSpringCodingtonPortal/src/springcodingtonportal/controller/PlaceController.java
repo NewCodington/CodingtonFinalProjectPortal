@@ -22,7 +22,10 @@ import springcodingtonportal.model.services.PlaceServiceJDBC;
 import springcodingtonportal.model.services.TypePlaceServiceJDBC;
 import springcodingtonportal.utils.Exceptions;
 
-
+/**
+ * 	Place controller handles all the place related transactions
+ *  with the data classes. 
+ */
 @Controller
 public class PlaceController {
 	@Autowired
@@ -31,7 +34,14 @@ public class PlaceController {
 	private static Logger log = Logger.getLogger(PlaceController.class);
 
 
-
+	/**
+	 * jsp call this function by the name "registerPlace.htm". If the request or response is null, it sends an exception.
+	 * If they are non null, a list of existing type of place is taken from the database and adds to the form to create a new place.
+	 * @param request
+	 * @param response
+	 * @return ModelAndView("/registerPlace.jsp");
+	 * @throws Exception
+	 */
 	@RequestMapping("/registerPlace.htm")
 	public ModelAndView regisertPlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -50,7 +60,14 @@ public class PlaceController {
 		return new ModelAndView("/registerPlace.jsp");
 	}
 	
-	
+	/**
+	 * jsp call this function by the name "registPlace.htm". If the request or response is null, it sends an exception.
+	 * Else a new place is created and inserted into the place list existing.
+	 * @param request
+	 * @param response
+	 * @return load(request, response);
+	 * @throws Exception
+	 */
 	@RequestMapping("/registPlace.htm")
 	public ModelAndView registPlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -85,7 +102,15 @@ public class PlaceController {
 	
 	
 	
-	
+	/**
+	 * jsp call this function by the name "deletePlace.htm". If the request or response is null, it sends an exception.
+	 * It is used to remove an existing place from the database.
+	 * @param request
+	 * @param response
+	 * @param idPlace
+	 * @return load(request, response);
+	 * @throws Exception
+	 */
 	@RequestMapping("/deletePlace.htm")
 	public ModelAndView deletePlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("delete") Integer idPlace) throws Exception {
 		if(request==null || response==null)
@@ -110,7 +135,14 @@ public class PlaceController {
 	
 	}
 	
-	
+	/**
+	 * jsp call this function by the name "updatePlace.htm". If the request or response is null, it sends an exception.
+	 * It is used to update an existing event from the database.
+	 * @param request
+	 * @param response
+	 * @return load(request, response);
+	 * @throws Exception
+	 */
 	@RequestMapping("/updatePlace.htm")
 	public ModelAndView updatePlace(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -147,6 +179,15 @@ public class PlaceController {
 	}
 	
 
+	/**
+	 * jsp call this function by the name "getPlace.htm". If the request or response is null, it sends an exception.
+	 * It is used to show the place list existing in the database
+	 * @param request
+	 * @param response
+	 * @param idPlace
+	 * @return loadPlace(request, response,idPlace);
+	 * @throws Exception
+	 */
 	@RequestMapping("/getPlace.htm")
 	public ModelAndView getPlace(HttpServletRequest request, HttpServletResponse response, @RequestParam("update") Integer idPlace) throws Exception {
 		if(request==null || response==null)
@@ -159,7 +200,14 @@ public class PlaceController {
 	}
 	
 	
-	
+	/**
+	 * This function gets the data from the database related to place and TypePlace and reload the page "updatePlace"
+	 * @param request
+	 * @param response
+	 * @param idPlace
+	 * @return ModelAndView("/updatePlace.jsp");
+	 * @throws Exception
+	 */
 	private ModelAndView loadPlace(HttpServletRequest request, HttpServletResponse response,Integer idPlace) throws Exception {
 		
 		if(request==null || response==null)
@@ -183,6 +231,13 @@ public class PlaceController {
 		return new ModelAndView("/updatePlace.jsp");	
 	}
 
+	/**
+	 * This function gets the data from the database related to events and place and reload the page "profileAdmin"
+	 * @param request
+	 * @param response
+	 * @return ModelAndView("/profileAdmin.jsp");
+	 * @throws Exception
+	 */
 	private ModelAndView load(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
