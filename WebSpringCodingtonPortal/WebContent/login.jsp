@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include.jsp"%>
 
-<%  
-
-
-if(!session.isNew())session.invalidate();%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -32,13 +28,13 @@ if(!session.isNew())session.invalidate();%>
 	<!-- content-wrap starts here -->
 	<div id="content-wrap">		
 											
-	<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+	<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
-			<div class="main2">
+			<div class="main">
 				<br />
 				<div id="error">${VisitorLoginMessage}</div>
 				<div id="error">${ErrorPriv}</div>
-				<% if(!session.isNew())session.removeAttribute("ErrorPriv"); %>
+				<% session.removeAttribute("ErrorPriv"); %>
 				<div id="message">${RegisterVisitorMessage}</div>
 	
 				

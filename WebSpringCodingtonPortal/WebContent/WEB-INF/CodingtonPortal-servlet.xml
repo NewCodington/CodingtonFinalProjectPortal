@@ -58,6 +58,12 @@
       <property name="dataSource"  ref="dataSource" />    
    </bean>
    
+   <!-- Definition for EventSignUpServiceJDBC bean -->
+ 	<bean id="ImageServiceJDBC" 
+      class="springcodingtonportal.model.services.ImageServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
    
    
 	<!-- Queries for database -->
@@ -69,7 +75,7 @@
 		<property name="insertEvent" 	value="INSERT INTO codington.event(Name, Description, Place, Date_event, StartTime, Duration, Event_type, Seats_available) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"></property>
 		<property name="deleteEvent" 	value="DELETE FROM codington.event WHERE (idEvent = ?);"></property>
 		<property name="updateEvent" 	value="UPDATE codington.event SET Name = ?, Description = ?, Place = ?, Date_event = ?, StartTime = ?, Duration = ?, Event_type = ?, Seats_available = ? WHERE (idEvent = ?);"></property>
-		<property name="eventForPlace"  value="SELECT e.* FROM codington.event e INNER JOIN codington.place p ON e.Place = p.idPlace INNER JOIN codington.typeplace tp ON p.TypePlace = tp.idTypePlace WHERE (tp.idTypePlace = ?);"></property>
+		<property name="eventForPlace"  value="SELECT * FROM codington.event, codington.place, codington.typeplace WHERE (event.Place = place.idPlace AND place.TypePlace = typeplace.idTypePlace AND typeplace.name = ?)"></property>
 				
 		<property name="selectPlace" 	value="SELECT * FROM codington.place WHERE (idPlace = ?);"></property>
 		<property name="viewPlace" 		value="SELECT * FROM codington.place;"></property>
@@ -99,19 +105,9 @@
 		
 		<property name="viewTypePlace" 	value="SELECT * FROM codington.typeplace;"></property>
 		<property name="selectTypePlace" value="SELECT * FROM codington.typeplace WHERE (idTypePlace = ?);"></property>
+		
+		<property name="selectImage"  value="SELECT * FROM codington.aux_image WHERE (name= ?);"></property>
+		<property name="insertImage" 	value="INSERT INTO codington.aux_image VALUES (?, ?);"></property>
 	</bean>
-	
-	<!-- Queries for database -->
-	
-	<bean id="beanCONSTANTS" class="springcodingtonportal.utils.Constants">
-		<property name="MUSEUM" 	value="1"></property>
-		<property name="BUSSINES" 	value="2"></property>
-		<property name="STADIUM" 	value="3"></property>
-		<property name="THEATER" 	value="4"></property>
-		<property name="ZOO" 		value="5"></property>
-		<property name="PARK" 		value="6"></property>
-		<property name="TOURISM" 	value="7"></property>
-		<property name="MARKET" 	value="8"></property>
-   </bean>
    
 </beans>

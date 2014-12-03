@@ -38,7 +38,11 @@ public class QueriesSQL {
 	String viewTypePlace;
 	String selectTypePlace;
 	
+	String selectImage;
+
+	String insertImage;
 	
+
 	public String getSelectEvent() {
 		return selectEvent;
 	}
@@ -224,5 +228,18 @@ public class QueriesSQL {
 	}
 	public void setUpdateSeats(String updateSeats) {
 		this.updateSeats = updateSeats;
+	}
+	
+	public String getInsertImage() {
+		return insertImage;
+	}
+	public void setInsertImage(String insertImage) {
+		this.insertImage = insertImage;
+	}
+	public String getSelectImage() {
+		return selectImage;
+	}
+	public void setSelectImage(String selectImage) {
+		this.selectImage = selectImage;
 	}
 	}

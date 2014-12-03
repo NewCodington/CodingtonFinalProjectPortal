@@ -1,8 +1,18 @@
 package springcodingtonportal.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +23,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import springcodingtonportal.model.domain.Event;
@@ -20,6 +31,7 @@ import springcodingtonportal.model.domain.EventSign;
 import springcodingtonportal.model.domain.Visitor;
 import springcodingtonportal.model.services.EventServiceJDBC;
 import springcodingtonportal.model.services.EventSignUpServiceJDBC;
+import springcodingtonportal.model.services.ImageServiceJDBC;
 import springcodingtonportal.model.services.VisitorServiceJDBC;
 import springcodingtonportal.utils.Exceptions;
 
@@ -36,13 +48,19 @@ public class VisitorController {
 	private static Logger log = Logger.getLogger(VisitorController.class);
 	
 	/**
-	 * Method will register new Visitor into FERS system by accepting registration details and load into database.
-	 * jsp call this function by the name "login.htm". If the request or response is null, it sends an exception.
+	 * method will register new Visitor into FERS system
+	 * by accepting registration details and load into database
+	 * 
 	 * @param request
 	 * @param response
+	 * 
 	 * @return ModelAndView
+	 * 
 	 * @throws Exception
-	 */	
+	 * 
+	 */
+	
+	
 	@RequestMapping("/login.htm")
 	public ModelAndView loginVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -55,6 +73,7 @@ public class VisitorController {
 		Visitor v = new Visitor();
 		Visitor visitor = null;
 		
+		
 		v.setUserName(request.getParameter("username"));
 		v.setPassword(request.getParameter("password"));
 		
@@ -65,7 +84,7 @@ public class VisitorController {
 		visitor = visitorService.loginVisitor(v);
 		
 		ModelAndView mv=new ModelAndView();
-		
+				
 		if(visitor != null)
 		{
 			session.setAttribute("appContext", appContext);
@@ -88,6 +107,7 @@ public class VisitorController {
 				
 				return loadEvents(request, response);
 			}
+			
 		}
 		else
 		{
@@ -101,14 +121,7 @@ public class VisitorController {
 	
 	
 	
-	/**
-	 * jsp call this function by the name "registerVisitor.htm". If the request or response is null, it sends an exception.
-	 * If they are non null, a new visitor is created and added to the database.
-	 * @param request
-	 * @param response
-	 * @return ModelAndView
-	 * @throws Exception
-	 */
+	
 	@RequestMapping("/registerVisitor.htm")
 	public ModelAndView registerVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -149,13 +162,10 @@ public class VisitorController {
 	}
 	
 	
-	/**
-	 * jsp call this function by the name "profileVisitor.htm". If the request or response is null, it sends an exception.
-	 * @param request
-	 * @param response
-	 * @return loadEvents(request, response)
-	 * @throws Exception
-	 */
+	
+	
+	
+	
 	@RequestMapping("/profileVisitor.htm")
 	public ModelAndView profileVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -169,15 +179,9 @@ public class VisitorController {
 		
 		
 		
-	/**
-	 * jsp call this function by the name "searchEvents.htm". If the request or response is null, it sends an exception.
-	 * If they are non null, the event list and the eventSignUp list are taken from the database and display on "profileVisitor.jsp"
-	 * @param request
-	 * @param response
-	 * @param nameEvent
-	 * @return return new ModelAndView("/profileVisitor.jsp");
-	 * @throws Exception
-	 */	
+	
+	
+	
 	@RequestMapping("/searchEvents.htm")
 	public ModelAndView searchEvent(HttpServletRequest request, HttpServletResponse response, @RequestParam("search") String nameEvent) throws Exception {
 		if(request==null || response==null)
@@ -186,28 +190,46 @@ public class VisitorController {
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
 		
-		EventServiceJDBC eventService =  (EventServiceJDBC) appContext.getBean("EventServiceJDBC");
-		List<Event> eventsList = null;
+		HttpSession session=request.getSession();
 		
+		EventServiceJDBC eventService =  (EventServiceJDBC) appContext.getBean("EventServiceJDBC");
+		EventSignUpServiceJDBC eventSignUp 	= (EventSignUpServiceJDBC) appContext.getBean("EventSignUpServiceJDBC");
+		
+		List<EventSign> listIdEvent = null;
+		List<Event> eventsList = null;
+		List<Event> eventsRegisterList = null;
+				
+		String idVisitor=null;
+		idVisitor=session.getAttribute("idVisitor").toString();
+		
+		
+		listIdEvent = eventSignUp.selectEventForVisitor(Integer.parseInt(idVisitor));
+		if(listIdEvent != null){
+			eventsRegisterList = new ArrayList <Event>();
+			
+			for (EventSign element : listIdEvent){
+				Event data = new Event();
+				data.setEventId(element.getIdEvent());
+				
+				eventsRegisterList.add(eventService.selectEvent(data));
+			}
+			
+		}
 		
 		eventsList = eventService.searchEvent(nameEvent);
 		
 		request.setAttribute("EVENTLIST", eventsList);
+		request.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
 		
-		return new ModelAndView("/search.jsp");	
+		return new ModelAndView("/profileVisitor.jsp");	
 	
 	}
 	
 	
-	/**
-	 * jsp call this function by the name "registerEventForVisitor.htm". If the request or response is null, it sends an exception.
-	 * If they are non null, the eventSignUp list is taken from the database to check if a visitor is registered in an event to make logging.
-	 * @param request
-	 * @param response
-	 * @param idEventR
-	 * @return ModelAndView
-	 * @throws Exception
-	 */	
+	
+	
+	
+	
 	@RequestMapping("/registerEventForVisitor.htm")
 	public ModelAndView registerEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("register") Integer idEventR) throws Exception {
 		if(request==null || response==null)
@@ -237,17 +259,11 @@ public class VisitorController {
 		return mv;
 	}
 	
-		
 	
-	/**
-	 * jsp call this function by the name "unregisterEventForVisitor.htm". If the request or response is null, it sends an exception.
-	 * If they are non null, the eventSignUp list is taken from the database to check if a visitor is registered in an event to unregister.
-	 * @param request
-	 * @param response
-	 * @param idEventR
-	 * @return ModelAndView
-	 * @throws Exception
-	 */
+	
+	
+	
+	
 	@RequestMapping("/unregisterEventForVisitor.htm")
 	public ModelAndView unregisterEventVisitor(HttpServletRequest request, HttpServletResponse response, @RequestParam("unregister") Integer idEventR) throws Exception {
 		if(request==null || response==null)
@@ -275,14 +291,7 @@ public class VisitorController {
 	}
 	
 	
-	/**
-	 * jsp call this function by the name "getVisitor.htm". If the request or response is null, it sends an exception.
-	 * It is used to show the visitor list existing in the database.
-	 * @param request
-	 * @param response
-	 * @return loadVisitor(request, response)
-	 * @throws Exception
-	 */
+	
 	@RequestMapping("/getVisitor.htm")
 	public ModelAndView getVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -295,14 +304,7 @@ public class VisitorController {
 	}
 	
 	
-	/**
-	 * jsp call this function by the name "updateVisitor.htm". If the request or response is null, it sends an exception.
-	 * It is used to update an existing visitor from the database.
-	 * @param request
-	 * @param response
-	 * @return ModelAndView
-	 * @throws Exception
-	 */
+	
 	@RequestMapping("/updateVisitor.htm")
 	public ModelAndView updateVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -332,7 +334,6 @@ public class VisitorController {
 		ModelAndView mv = loadEvents(request, response);
 		if(success) {
 			 mv.addObject("VisitorRegisterEventMessage", "¡¡¡  Successfully VISITOR updated  !!!");
-			 session.setAttribute("VISITOR", visitor);
 		}
 		
 		return mv;
@@ -340,14 +341,7 @@ public class VisitorController {
 	
 	
 	
-	/**
-	 * jsp call this function by the name "updatePasswordVisitor.htm". If the request or response is null, it sends an exception.
-	 * It is used to update the password of an existing visitor from the database.
-	 * @param request
-	 * @param response
-	 * @return ModelAndView
-	 * @throws Exception
-	 */
+	
 	@RequestMapping("/updatePasswordVisitor.htm")
 	public ModelAndView updatePasswordVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -379,14 +373,7 @@ public class VisitorController {
 	
 	
 	
-	/**
-	 * jsp call this function by the name "logout.htm". If the request or response is null, it sends an exception.
-	 * It is used to logout the FERS system.
-	 * @param request
-	 * @param response
-	 * @return ModelAndView("/login.jsp")
-	 * @throws Exception
-	 */
+	
 	@RequestMapping("/logout.htm")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request==null || response==null)
@@ -410,13 +397,11 @@ public class VisitorController {
 	
 	
 	
-	/**
-	 * This function gets the data from the database related to Event and EventSignUp and reload the page "profileAdmin.jsp"
-	 * @param request
-	 * @param response
-	 * @return ModelAndView("/profileVisitor.jsp");
-	 * @throws Exception
-	 */
+	
+	
+	
+	
+	
 	private ModelAndView loadEvents(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
@@ -459,13 +444,7 @@ public class VisitorController {
 	}
 	
 	
-	/**
-	 * This function gets the data from the database related to Visitor and reload the page "updateVisitor.jsp"
-	 * @param request
-	 * @param response
-	 * @return ModelAndView("/updateVisitor.jsp");
-	 * @throws Exception
-	 */
+	
 	private ModelAndView loadVisitor(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(request==null || response==null)
@@ -485,5 +464,67 @@ public class VisitorController {
 		
 		return new ModelAndView("/updateVisitor.jsp");	
 	}
+	
+	public byte[] read(File file) throws IOException{
+
+	    ByteArrayOutputStream ous = null;
+	    InputStream ios = null;
+	    try {
+	        byte[] buffer = new byte[4096];
+	        ous = new ByteArrayOutputStream();
+	        ios = new FileInputStream(file);
+	        int read = 0;
+	        while ( (read = ios.read(buffer)) != -1 ) {
+	            ous.write(buffer, 0, read);
+	        }
+	    } finally { 
+	        try {
+	             if ( ous != null ) 
+	                 ous.close();
+	        } catch ( IOException e) {
+	        }
+
+	        try {
+	             if ( ios != null ) 
+	                  ios.close();
+	        } catch ( IOException e) {
+	        }
+	    }
+	    return ous.toByteArray();
+	}
+	
+	@RequestMapping("/image.htm")
+	public @ResponseBody void showImage(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, ClassNotFoundException, NamingException{
+		response.setContentType("image/gif");
+		response.setHeader("cache-control", "no-cache");
+
+	    ImageServiceJDBC image 	= (ImageServiceJDBC) appContext.getBean("ImageServiceJDBC");
+		InputStream imInp = image.selectImage("headerphoto");
+		OutputStream out;
+		
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+		int nRead;
+		byte[] data = new byte[16384];
+
+		while ((nRead = imInp.read(data, 0, data.length)) != -1) {
+		  buffer.write(data, 0, nRead);
+		}
+	    
+		buffer.flush();
+		
+	    try
+	    {
+	        out = response.getOutputStream();
+	        ImageIO.write(ImageIO.read(new ByteArrayInputStream(buffer.toByteArray())), "png", out);
+	        out.close();
+	    }
+	    catch (IOException ex)
+	    {
+	       
+	    }
+	    
+
+    }
 	
 }
