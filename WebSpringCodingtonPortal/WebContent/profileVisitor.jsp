@@ -74,7 +74,6 @@
 					<li><a href="getVisitor.htm">Update Information</a></li>
 					<li><a href="updatePasswordVisitor.jsp">Update Password</a></li>
 					<li><a href="logout.htm">Logout</a></li>
-
 				</ul>		
 							
 			
@@ -113,10 +112,7 @@
 						}
 						else {	
 							eventRegisterList = (ArrayList<Event>) request.getAttribute("EVENTREGISTERLIST");
-						
 							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
-						
-					
 					%>
 						
 						<table>

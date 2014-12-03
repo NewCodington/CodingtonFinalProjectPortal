@@ -33,9 +33,9 @@
 						
 			<!-- Menu Tabs -->
 			<ul>
-				<li id="current"><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="history.jsp"><span>History</span></a></li>
 				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
-				<li><a href="about.jsp"><span>About</span></a></li>
+				<li id="current"><a href="about.jsp"><span>About</span></a></li>
 		
 			</ul>	
 													
@@ -50,9 +50,9 @@
 	
 		<div id="sidebar" >							
 				
-			<h1><%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"visitorProfile.htm":"adminProfile.htm" %>></h1>
+			<h1><%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?session.getAttribute("Visitor").toString():session.getAttribute("Admin").toString() %></h1>
 			<ul class="sidemenu">
-				<li><a href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"visitorProfile.htm":"adminProfile.htm"  %>>My Page</a></li>
+				<li><a href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"profileVisitor.htm":"profileAdmin.htm"  %>>My Page</a></li>
 				<li><a href="events.jsp">Town Events</a></li>
 				<%
 					if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
@@ -72,7 +72,7 @@
 					}
 				%>
 					
-				<li><a href="logout">Logout</a></li>
+				<li><a href="logout.htm">Logout</a></li>
 
 			</ul>		
 						

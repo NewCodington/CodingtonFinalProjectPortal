@@ -95,7 +95,7 @@
 				%>
 				
 				<div class = "section">
-					<form class = "Rform" method="post" action="updatePlace">
+					<form class = "Rform" method="post" action="updatePlace.htm">
 						<h1>Update Place</h1>
 						<br />
 						
@@ -134,7 +134,7 @@
 						
 						<div class="input">
 							<input type="submit" value="Submit" />
-							<input type="button" value="Cancel"  onclick = "javascript:window.location='aprofileAdmin.htm';" />
+							<input type="button" value="Cancel"  onclick = "javascript:window.location='profileAdmin.htm';" />
 							<br />
 						</div>  
 					</form>

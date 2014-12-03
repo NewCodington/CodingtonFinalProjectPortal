@@ -47,13 +47,11 @@
 		
 			
 			<!-- Menu Tabs -->
-				<ul>
-					<li id="current"><a href="history.jsp"><span>History</span></a></li>
-					<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
-					<li><a href="about.jsp"><span>About</span></a></li>
-	
-				</ul>												
-			</div>
+			<ul>
+				<li><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
+				<li><a href="about.jsp"><span>About</span></a></li>
+			</ul>												
 		</div>
 		
 		
@@ -73,10 +71,11 @@
 			</div>
 	
 	
-			<div class="center_nav">		
+			<div id="main">
+				<div class = "section">
 									
-				<form method="post" action="registPlace.htm">
-					<div class="title">New Place</div>
+				<form class = "Rform" method="post" action="registPlace.htm">
+					<h1>New Place</h1>
 					<br />
 					
 					<div class="field"><p>Place name:</p> 
@@ -127,6 +126,7 @@
 				</form>
 			</div>
 		</div>
+	</div>
 		
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
