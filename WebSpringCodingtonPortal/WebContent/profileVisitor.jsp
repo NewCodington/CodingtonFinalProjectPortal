@@ -52,7 +52,7 @@
 						
 			<!-- Menu Tabs -->
 			<ul>
-				<li id="current"><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="history.jsp"><span>History</span></a></li>
 				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
 				<li><a href="about.jsp"><span>About</span></a></li>
 		
@@ -85,7 +85,7 @@
 
 					<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
 					<div id="error">${VisitorRegisterEventError}</div>
-					<div id="message">${VisitorRegisterEventMessage}></div>
+					<div id="message">${VisitorRegisterEventMessage}</div>
 								
 					
 						<div class="search">		
@@ -166,35 +166,25 @@
 						<br />
 						
 						<h2>First name:<%= visitor.getFirstName() %></h2>
-							<br />
-					   
-						  
+						<br />  
+						
 						<h2>Last name:<%= visitor.getLastName() %></h2>
 						<br/>
-						
-						
+
 						<h2>DNI:<%= visitor.getDni() %></h2>
 						<br />
-						
-						
+
 						<h2>Phone Number:<%= visitor.getPhoneNumber() %></h2>
 							<br />
-						
-						
+
 						<h2>Email:<%= visitor.getEmail() %></h2>
 							<br />
-						
-						
+		
 						<h2>Address:<%= visitor.getAddress() %></h2>
-						<br />
-						
-								  
+						<br />							  
 				</div>
-				</div>
-
-			
-								
-			</div>	
+			</div>		
+		</div>	
 				
 						
 		<!-- content-wrap ends here -->		

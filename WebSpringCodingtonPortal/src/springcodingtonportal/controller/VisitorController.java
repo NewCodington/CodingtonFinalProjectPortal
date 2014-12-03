@@ -59,6 +59,8 @@ public class VisitorController {
 		HttpSession session=request.getSession();
 		
 		Visitor v = new Visitor();
+		Visitor visitor = null;
+		
 		v.setUserName(request.getParameter("username"));
 		v.setPassword(request.getParameter("password"));
 		
@@ -66,28 +68,29 @@ public class VisitorController {
 		
 		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
 
-		v.setIdVisitor(visitorService.loginVisitor(v));
-		
+		visitor = visitorService.loginVisitor(v);
 		
 		ModelAndView mv=new ModelAndView();
 		
-		if(v.getIdVisitor() != -1)
+		if(visitor != null)
 		{
 			session.setAttribute("appContext", appContext);
-			if(visitorService.isAdmin(v)){
+			if(visitorService.isAdmin(visitor)){
 				
-				session.setAttribute("idAdmin", v.getIdVisitor());
-				session.setAttribute("Admin", v.getUserName());
+				session.setAttribute("idAdmin", visitor.getIdVisitor());
+				session.setAttribute("Admin", visitor.getUserName());
 				
-				log.info("Succesfully login Administrator "+ v.getUserName());
+				log.info("Succesfully login Administrator "+ visitor.getUserName());
 				mv.setViewName("/profileAdmin.htm");
 				return mv;
 			}
 			else {
-				session.setAttribute("idVisitor", v.getIdVisitor());
-				session.setAttribute("Visitor", v.getUserName());
+				session.setAttribute("idVisitor", visitor.getIdVisitor());
+				session.setAttribute("Visitor", visitor.getUserName());
 				
-				log.info("Succesfully login visitor "+ v.getUserName());
+				log.info("Succesfully login visitor "+ visitor.getUserName());
+				
+				session.setAttribute("VISITOR", visitor);
 				
 				return loadEvents(request, response);
 			}

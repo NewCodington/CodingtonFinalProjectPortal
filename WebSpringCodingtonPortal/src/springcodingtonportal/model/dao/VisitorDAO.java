@@ -18,7 +18,7 @@ import springcodingtonportal.model.domain.Visitor;
 public interface VisitorDAO {
 	public Visitor selectVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
 	public List<Visitor> viewVisitor() throws ClassNotFoundException, SQLException, NamingException;
-	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
+	public Visitor loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
 	public Integer exitsUsernameVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
 	public Integer insertVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;
 	public Integer updateVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException;

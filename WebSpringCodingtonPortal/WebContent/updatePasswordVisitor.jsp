@@ -47,7 +47,7 @@
 			
 			<!-- Menu Tabs -->
 			<ul>
-				<li id="current"><a href="history.jsp"><span>History</span></a></li>
+				<li><a href="history.jsp"><span>History</span></a></li>
 				<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
 				<li><a href="about.jsp"><span>About</span></a></li>
 	
@@ -75,7 +75,7 @@
 		
 			</div>
 			
-			<div class = "main2">
+			<div id = "main">
 
 
 				<form class = "Rform" method="post" action="updatePasswordVisitor.htm" onsubmit = "return validateConfirmPass();">
@@ -101,10 +101,10 @@
 			</div>
 		
 		</div>
+	</div>
 
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-	</div>
 </body>
 </html>

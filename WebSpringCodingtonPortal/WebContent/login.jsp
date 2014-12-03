@@ -61,7 +61,6 @@
 				  	</div>
 				  <div class = "input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel" />
 				  
 				  </div>
 				  <div class = "register"><a href="registerVisitor.jsp" > Register New Visitor </a></div>

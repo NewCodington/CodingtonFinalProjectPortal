@@ -123,7 +123,7 @@
 				  
 				  	<div class="input">
 						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='ProfileVisitor.htm';" />
+						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileVisitor.htm';" />
 						<br />
 					</div>  
 				</form>

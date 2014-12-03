@@ -83,7 +83,7 @@ public class VisitorServiceJDBC implements VisitorDAO {
 	 * @throws NamingException 
 	 */
 	@Override
-	public Integer loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
+	public Visitor loginVisitor(Visitor visitor) throws ClassNotFoundException, SQLException, NamingException {
 		// Initialize variables
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		Visitor data = null;
@@ -92,9 +92,9 @@ public class VisitorServiceJDBC implements VisitorDAO {
 			data = jdbcTemplate.queryForObject(sql.getLoginVisitor(), new Object[]{visitor.getUserName(), visitor.getPassword()}, new VisitorMapper());
 		
 		}catch(EmptyResultDataAccessException e) {
-			return -1;
+			return null;
 		}
-		return data.getIdVisitor();
+		return data;
 			
 	}
 	
