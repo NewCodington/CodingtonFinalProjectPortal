@@ -11,12 +11,11 @@
 	<head>
 		<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script language="javascript" src="Register.js"></script>
-		<title>Register's Place Page</title>
+		<title>Event Register Page</title>
 	</head>
 
-
-	<body>
+	
+<body>
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
@@ -40,6 +39,7 @@
 	%> 
 	
 	<div id="wrap">
+	 
 		<div id="header">				
 			
 			<h1 id="logo">New<span class="green">Codington</span></h1>	
@@ -52,14 +52,15 @@
 					<li><a href="siteMap.jsp"><span>Site Map</span></a></li>
 					<li><a href="about.jsp"><span>About</span></a></li>
 	
-				</ul>												
-			</div>
+				</ul>	
+													
 		</div>
-		
+	
 		
 		<div id="content-wrap">
 		
-			<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+
+		<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
 			
 			<div id="sidebar">							
 				
@@ -69,68 +70,72 @@
 					<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
 					<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
 					<li><a href="logout.htm">Logout</a></li>
-				</ul>			
+
+				</ul>		
+						
+		
 			</div>
-	
-	
-			<div class="center_nav">		
-									
-				<form method="post" action="registPlace.htm">
-					<div class="title">New Place</div>
-					<br />
+			<div id="main">
+				
+					<div class = "section">
+		
+					<form class = "Rform" method="post" action="registPlace.htm" enctype="multipart/form-data">
+							<h1>New Place</h1>
+							<br />
 					
-					<div class="field"><p>Place name:</p> 
-					  	<input type="text" id="placeName" name="placeName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="1 to 45 characters" required />
-					  	<br />
-					</div>
-					 
-					<div class="field"><p>Description:</p> 
-					  	<input type="text" name="description" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" required="required" />
-					  	<br />
-					</div>
-					    
-					<div class="field"><p>Image:</p> 
-						<input type="file" id="image" name="image" id="image" required />
-						<br /><br />
-				  	</div>
-				  		
-				  	<div class="field"><p>Address:</p> 
-					    <input type="text" id="address" name="address"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="1 to 30 characters" required/>
-					    <br /><br />
-				  	</div>
-					
-					<div class="field"><p>Type Place:</p>
-						<%
-							if (request.getAttribute("LISTTYPEPLACE") != null) {
-								ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) request.getAttribute("LISTTYPEPLACE");
-						%>
-						<select id="typePlace" name="typePlace" required>
+							<div class="field"><p>Place name:</p> 
+								<input type="text" id="placeName" name="placeName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="1 to 45 characters" required />
+								<br />
+							</div>
+							 
+							<div class="field"><p>Description:</p> 
+								<input type="text" name="description" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" required="required" />
+								<br />
+							</div>
+								
+							<div class="field"><p>Image:</p> 
+								<input type="file" id="image" name="image" id="image" required />
+								<br /><br />
+							</div>
+								
+							<div class="field"><p>Address:</p> 
+								<input type="text" id="address" name="address"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){30}" title="1 to 30 characters" required/>
+								<br /><br />
+							</div>
+							
+							<div class="field"><p>Type Place:</p>
 							<%
-								for (TypePlace typePlace : typePlaceList) {
+								if (request.getAttribute("LISTTYPEPLACE") != null) {
+									ArrayList<TypePlace> typePlaceList = (ArrayList<TypePlace>) request.getAttribute("LISTTYPEPLACE");
 							%>
-							<option value="<%= typePlace.getIdTypePlace()%>"><%=typePlace.getName() %></option>
-							<%
-								}
-							%>
-						</select>
-						<%
-							}
-						%>
-						<br />
-					</div>
-					
-					<div class="input">
-						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileAdmin.htm';" />
-						<br />
-					</div>  
-				</form>
+								<select id="typePlace" name="typePlace" required>
+									<%
+										for (TypePlace typePlace : typePlaceList) {
+									%>
+									<option value="<%= typePlace.getIdTypePlace()%>"><%=typePlace.getName() %></option>
+									<%
+										}
+									%>
+								</select>
+								<%
+									}
+								%>
+								<br />
+							</div>
+							
+							<div class="input">
+								<input type="submit" value="Submit" />
+								<input type="button" value="Cancel"  onclick = "javascript:window.location='profileAdmin.htm';" />
+								<br />
+							</div>  
+					</form>
 			</div>
 		</div>
-		
+	
+	
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>
-	
+	</div>
 	</body>
 </html>
