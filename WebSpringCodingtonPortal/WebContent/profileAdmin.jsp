@@ -21,7 +21,7 @@
 <body>
 
 	<%
-	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+	if((session.getAttribute("Admin") == null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
 		response.sendRedirect("login.jsp");
 		return;
@@ -32,6 +32,7 @@
 		return;
 	}
 	%> 
+	
 	
 	<div id="wrap">
 	 
