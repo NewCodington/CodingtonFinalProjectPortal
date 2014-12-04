@@ -19,7 +19,7 @@
 	</head>
 
 <body>
-	<%
+	
 
 	
 	<!-- wrap starts here -->
