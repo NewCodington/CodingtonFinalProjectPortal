@@ -41,37 +41,6 @@
 											
 
 	<img src="image.htm?name=headerphoto" width="100%" height="120" alt="headerphoto" class="header-photo" />
-		
-		<div id="sidebar" >							
-				
-			<h1><%= session.getAttribute("Visitor")!=null?session.getAttribute("Visitor").toString():session.getAttribute("Admin").toString() %></h1>
-			<ul class="sidemenu">
-				<li><a href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"profileVisitor.htm":"profileAdmin.htm" %>>My Page</a></li>
-				<li><a href="events.jsp">Town Events</a></li>
-				<%
-					if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
-					{
-				%>
-				<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
-				<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
-				
-				<%
-					}else {
-				%>
-				
-				<li><a href="getVisitor.htm">Update Information</a></li>
-				<li><a href="updatePasswordVisitor.htm">Update Password</a></li>
-				
-				<%
-					}
-				%>
-					
-				<li><a href="logout.htm">Logout</a></li>
-
-			</ul>		
-						
-		
-		</div>
 
 	<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
 
