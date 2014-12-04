@@ -70,6 +70,19 @@ public class ImageServiceJDBC implements ImageDAO {
 		return result; 
 		
 	}
+	
+	public InputStream selectNameImage(String name) throws SQLException, ClassNotFoundException, NamingException {
+		// Initialize variables
+		Images data = null;
+		
+		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
+
+		// Create the Statement
+		//data = jdbcTemplate.queryForObject(sql.getSelectTypePlace(), new Object[]{type.getIdTypePlace()}, new TypePlaceMapper());
+		data = jdbcTemplate.queryForObject(sql.getSelectImage(),new Object[]{name},new ImageMapper());
+		// Return the ArrayList of Places or null
+		return data.getImages();
+	}
 
 
 }

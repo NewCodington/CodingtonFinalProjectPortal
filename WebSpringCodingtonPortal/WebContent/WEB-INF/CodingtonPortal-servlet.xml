@@ -82,6 +82,8 @@
 		<property name="insertPlace" 	value="INSERT INTO codington.place(Name, TypePlace, Image, Address, Description) VALUES (?, ?, ?, ?, ?);"></property>
 		<property name="updatePlace" 	value="UPDATE codington.place SET Name=?, TypePlace=?, Image=?, Address=? , Description =? WHERE (idPlace=?);"></property>
 		<property name="deletePlace" 	value="DELETE FROM codington.place WHERE (idPlace= ?);"></property>
+		<property name="selectNameImage"  value="SELECT image FROM codington.place WHERE (name= ?);"></property>
+		
 		
 		<property name="selectVisitor" 	value="SELECT * FROM codington.visitor WHERE (idVisitor = ?);"></property>
 		<property name="viewVisitor" 	value="SELECT * FROM codington.visitor;"></property>
