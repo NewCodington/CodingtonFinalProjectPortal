@@ -39,6 +39,7 @@
 	<!-- content-wrap starts here -->
 	<div id="content-wrap">		
 											
+<<<<<<< HEAD
 	<img src="image.htm?name=headerphoto" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
 		<div id="sidebar" >							
@@ -71,10 +72,11 @@
 						
 		
 		</div>
+=======
+	<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
+>>>>>>> branch 'master' of ssh://git@github.com/NewCodington/CodingtonFinalProjectPortal.git
 			
 		<div id="main">	
-			
-
 
 		<div id="content">
 			

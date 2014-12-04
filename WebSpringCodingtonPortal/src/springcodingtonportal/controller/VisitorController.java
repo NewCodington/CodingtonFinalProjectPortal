@@ -178,39 +178,15 @@ public class VisitorController {
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
 		
-		HttpSession session=request.getSession();
-		
 		EventServiceJDBC eventService =  (EventServiceJDBC) appContext.getBean("EventServiceJDBC");
-		EventSignUpServiceJDBC eventSignUp 	= (EventSignUpServiceJDBC) appContext.getBean("EventSignUpServiceJDBC");
-		
-		List<EventSign> listIdEvent = null;
 		List<Event> eventsList = null;
-		List<Event> eventsRegisterList = null;
-				
-		String idVisitor=null;
-		idVisitor=session.getAttribute("idVisitor").toString();
 		
-		
-		listIdEvent = eventSignUp.selectEventForVisitor(Integer.parseInt(idVisitor));
-		if(listIdEvent != null){
-			eventsRegisterList = new ArrayList <Event>();
-			
-			for (EventSign element : listIdEvent){
-				Event data = new Event();
-				data.setEventId(element.getIdEvent());
-				
-				eventsRegisterList.add(eventService.selectEvent(data));
-			}
-			
-		}
 		
 		eventsList = eventService.searchEvent(nameEvent);
 		
 		request.setAttribute("EVENTLIST", eventsList);
-		request.setAttribute("EVENTREGISTERLIST", eventsRegisterList);
 		
-		return new ModelAndView("/profileVisitor.jsp");	
-	
+		return new ModelAndView("/search.jsp");	
 	}
 	
 	
