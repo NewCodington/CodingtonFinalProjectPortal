@@ -75,7 +75,7 @@
 		<property name="insertEvent" 	value="INSERT INTO codington.event(Name, Description, Place, Date_event, StartTime, Duration, Event_type, Seats_available) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"></property>
 		<property name="deleteEvent" 	value="DELETE FROM codington.event WHERE (idEvent = ?);"></property>
 		<property name="updateEvent" 	value="UPDATE codington.event SET Name = ?, Description = ?, Place = ?, Date_event = ?, StartTime = ?, Duration = ?, Event_type = ?, Seats_available = ? WHERE (idEvent = ?);"></property>
-		<property name="eventForPlace"  value="SELECT * FROM codington.event, codington.place, codington.typeplace WHERE (event.Place = place.idPlace AND place.TypePlace = typeplace.idTypePlace AND typeplace.name = ?)"></property>
+		<property name="eventForPlace"  value="SELECT e.* FROM codington.event e INNER JOIN codington.place p ON e.Place = p.idPlace INNER JOIN codington.typeplace tp ON p.TypePlace = tp.idTypePlace WHERE (tp.idTypePlace = ?);"></property>
 				
 		<property name="selectPlace" 	value="SELECT * FROM codington.place WHERE (idPlace = ?);"></property>
 		<property name="viewPlace" 		value="SELECT * FROM codington.place;"></property>
