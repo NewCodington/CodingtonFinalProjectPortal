@@ -16,9 +16,8 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("login");
+		response.sendRedirect("login.jsp");
 		return;
 	}
 	%> 
@@ -53,11 +52,18 @@
 			<ul class="sidemenu">
 				<li><a href=<%= session.getAttribute("Visitor")!=null && !session.getAttribute("Visitor").toString().equals("")?"profileVisitor.htm":"profileAdmin.htm" %>>My Page</a></li>
 				<%
-						if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
-						{
+					if (session.getAttribute("Admin")!=null && !session.getAttribute("Admin").toString().equals("")) 
+					{
 				%>
 				<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
 				<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
+				
+				<%
+					}else {
+				%>
+				
+				<li><a href="getVisitor.htm">Update Information</a></li>
+				<li><a href="updatePasswordVisitor.jsp">Update Password</a></li>
 				
 				<%
 					}

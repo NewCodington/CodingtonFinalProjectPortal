@@ -22,14 +22,12 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("login.jsp");
 		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("profileAdmin.htm");
 		return;
@@ -77,7 +75,6 @@
 				
 				<div id="content">
 	
-					<div id="error"><%= session.getAttribute("ErrorPriv")!=null?session.getAttribute("ErrorPriv").toString():""%></div>
 					<div id="error">${VisitorRegisterEventError}</div>
 					<div id="message">${VisitorRegisterEventMessage}</div>			
 					
@@ -107,12 +104,12 @@
 							<tr>
 								<th>Event Name</th>
 								<th>Description</th>
+								<th>Event Type</th>
 								<th>Place</th>
 								<th>Date</th>
-								<th>Duration</th>
-								<th>Event Type</th>
-								<th>Seats Available</th>
 								<th>Start Time</th>
+								<th>Duration</th>
+								<th>Seats Available</th>
 								<th>Action</th>
 							</tr>
 			
@@ -123,12 +120,12 @@
 							<tr>
 								<td><%=event.getName()%></td>
 								<td><%=event.getDescription()%></td>
+								<td><%=event.getEventType()%></td>
 								<td><%=event.getPlaceString(appContext)%></td>
 								<td><%=event.getDate_eventString()%></td>
-								<td><%=event.getDuration()%></td>
-								<td><%=event.getEventType()%></td>
-								<td><%=event.getSeatsAvailable()%></td>
 								<td><%=event.getStartTime()%></td>
+								<td><%=event.getDuration()%></td>
+								<td><%=event.getSeatsAvailable()%></td>
 								<td><a href = <%="registerEventForVisitor.htm?register=" + event.getEventId() %>>Register</a></td>
 							</tr>
 							<%

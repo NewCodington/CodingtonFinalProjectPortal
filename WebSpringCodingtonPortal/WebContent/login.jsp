@@ -32,11 +32,9 @@
 		
 			<div class="main">
 				<br />
-				<div id="error">${VisitorLoginMessage}</div>
-				<div id="error">${ErrorPriv}</div>
-				<% session.removeAttribute("ErrorPriv"); %>
+				<div id="error">${VisitorLoginMessage}</div><div id="error">${ErrorPriv}</div>
 				<div id="message">${RegisterVisitorMessage}</div>
-	
+				<% session.removeAttribute("ErrorPriv"); %>
 				
 				<form class = "loginform" method="post" action="login.htm">
 					<h1>Sign In</h1>

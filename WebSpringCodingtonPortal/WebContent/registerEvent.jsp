@@ -28,10 +28,26 @@
 	
 <body>
 
-
-
-	
-	
+	<%
+		if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
+			session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+			
+			response.sendRedirect("login.jsp");
+			return;
+		}
+		else if (session.getAttribute("Visitor")!=null) {
+			session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
+			
+			response.sendRedirect("profileVisitor.htm");
+			return;
+		}
+		else {
+			if(request.getAttribute("LISTPLACE") == null) {
+				response.sendRedirect("registerEvent.htm");
+				return;
+			}
+		}
+	%> 
 	
 	
 	<div id="wrap">

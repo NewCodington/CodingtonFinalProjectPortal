@@ -19,14 +19,12 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("login.jsp");
 		return;
 	}
 	else if (session.getAttribute("Admin")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("profileAdmin.htm");
 		return;
@@ -38,7 +36,7 @@
 	}
 
 	%> 
-		<div id="wrap">
+	<div id="wrap">
 	 
 		<div id="header">				
 			
@@ -78,7 +76,7 @@
 	
 		<div id="main">				
 				<%
-					Visitor visitor=(Visitor)request.getAttribute("VISITOR");
+					Visitor visitor=(Visitor)session.getAttribute("VISITOR");
 				%>
 	
 			<div class = "section">
@@ -125,7 +123,7 @@
 				</form>
 			</div>
 		</div>
-
+	</div>
 
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>

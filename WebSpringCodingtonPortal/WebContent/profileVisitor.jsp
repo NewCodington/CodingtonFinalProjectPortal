@@ -78,10 +78,9 @@
 				
 				<div id="content">
 
-					<div id="error">${ErrorPriv}</div>
-					<% session.removeAttribute("ErrorPriv"); %>
-					<div id="error">${VisitorRegisterEventError}</div>
+					<div id="error">${ErrorPriv}</div><div id="error">${VisitorRegisterEventError}</div>
 					<div id="message">${VisitorRegisterEventMessage}</div>
+					<% session.removeAttribute("ErrorPriv"); %>
 								
 					
 						<div class="search">		
@@ -115,12 +114,12 @@
 							<tr>
 								<th>Event Name</th>
 								<th>Description</th>
+								<th>Event Type</th>
 								<th>Place</th>
 								<th>Date</th>
-								<th>Duration</th>
-								<th>Event Type</th>
-								<th>Seats Available</th>
 								<th>Start Time</th>
+								<th>Duration</th>
+								<th>Seats Available</th>
 								<th>Action</th>
 							</tr>
 
@@ -130,12 +129,12 @@
 							<tr>
 								<td><%=event.getName()%></td>
 								<td><%=event.getDescription()%></td>
+								<td><%=event.getEventType()%></td>
 								<td><%=event.getPlaceString(appContext)%></td>
 								<td><%=event.getDate_eventString()%></td>
-								<td><%=event.getDuration()%></td>
-								<td><%=event.getEventType()%></td>
-								<td><%=event.getSeatsAvailable()%></td>
 								<td><%=event.getStartTime()%></td>
+								<td><%=event.getDuration()%></td>
+								<td><%=event.getSeatsAvailable()%></td>
 								<td><a href = "<%="unregisterEventForVisitor.htm?unregister=" + event.getEventId() %>">Unregister</a></td>
 							</tr>
 								<%

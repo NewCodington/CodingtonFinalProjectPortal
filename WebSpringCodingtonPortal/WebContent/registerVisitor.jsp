@@ -21,16 +21,14 @@
 	<%
 	if (session.getAttribute("Visitor")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("profileVisitor.htm");
 		return;
 	}
 	else if(session.getAttribute("Admin")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("admin");
+		response.sendRedirect("profileAdmin.htm");
 		return;
 	}
 	%> 
@@ -124,13 +122,8 @@
 			
 			</div>
 		</div>
-	
-</div>
-	 
-		
-		
-
-
+	</div>
+	</div>
 		<div id ="footer">
 			<p>New Codignton Portal - December, 2014</p>
 		</div>

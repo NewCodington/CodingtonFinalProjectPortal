@@ -74,13 +74,10 @@
 			
 			<div id = "content">
 				
-				<div id="error">${ErrorPriv}</div>
+				<div id="error">${ErrorPriv}</div><div id="error">${RegisterVisitorError}</div>
+				<div id="message">${RegisterMessage}</div><div id="message">${UpdateMessage}</div><div id="message">${DeleteMessage}</div>
 				<% session.removeAttribute("ErrorPriv"); %>
-				<div id="error">${RegisterVisitorError}</div>
-				<div id="message">${RegisterMessage}</div>
-				<div id="message">${UpdateMessage}</div>
-				<div id="message">${DeleteMessage}</div>
-
+				
 				<div class="section">
 			
 					<h1>EVENTS</h1><hr />
@@ -101,12 +98,12 @@
 						<tr>
 							<th>Event Name</th>
 							<th>Description</th>
+							<th>Event Type</th>
 							<th>Place</th>
 							<th>Date</th>
-							<th>Duration</th>
-							<th>Event Type</th>
-							<th>Seats Available</th>
 							<th>Start Time</th>
+							<th>Duration</th>
+							<th>Seats Available</th>
 							<th>Actions</th>
 						</tr>
 			
@@ -118,12 +115,12 @@
 						<tr>
 							<td><%=event.getName()%></td>
 							<td><%=event.getDescription()%></td>
+							<td><%=event.getEventType()%></td>
 							<td><%=event.getPlaceString(appContext)%></td>
 							<td><%=event.getDate_eventString()%></td>
-							<td><%=event.getDuration()%></td>
-							<td><%=event.getEventType()%></td>
-							<td><%=event.getSeatsAvailable()%></td>
 							<td><%=event.getStartTime()%></td>
+							<td><%=event.getDuration()%></td>
+							<td><%=event.getSeatsAvailable()%></td>
 							<td><a href = <%="getEvent.htm?update=" + event.getEventId() %>>Update</a></td>
 							<td><a href = <%="deleteEvent.htm?delete=" + event.getEventId() %>>Delete</a></td>
 						</tr>
@@ -151,10 +148,10 @@
 									
 			  		<table>
 						<tr>
+							<th>Image</th>
 							<th>Place Name</th>
 							<th>Region</th>
 							<th>Type Place</th>
-							<th>Image</th>
 							<th>Address</th>
 							<th>Description</th>
 							<th>Actions</th>
@@ -167,10 +164,10 @@
 								session.setAttribute("inputImag", place.getImage());
 						%>				
 						<tr>
+							<td><a href =<%= "imagePlace.htm?id=" +  place.getIdPlace()%>><img src = <%="imagePlace.htm?id=" + place.getIdPlace() %> width = 20px height = 20px/></a></td>
 							<td><%=place.getName()%></td>
 							<td><%=place.getRegionString(appContext, place.getTypePlace())%></td>
-							<td><%=place.getTypePlaceString(appContext)%></td>	
-							<td><a href =<%= "imagePlace.htm?id=" +  place.getIdPlace()%>><img src = <%="imagePlace.htm?id=" + place.getIdPlace() %> width = 20px height = 20px/></a></td>							
+							<td><%=place.getTypePlaceString(appContext)%></td>								
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>
 							<td><a href = <%="getPlace.htm?update=" + place.getIdPlace() %>>Update</a></td>
@@ -204,7 +201,4 @@
 </div>
 
 </body>
-</html>
-		
-	</body>
 </html>

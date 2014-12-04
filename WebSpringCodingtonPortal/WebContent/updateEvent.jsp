@@ -20,20 +20,17 @@
 	<%
 	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
-		response.sendRedirect("/login.jsp");
+		response.sendRedirect("login.jsp");
 	}
 	else if (session.getAttribute("Visitor")!=null) {
 		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
 		
 		response.sendRedirect("profileVisitor.htm");
 	}
 	else {
 		if (request.getAttribute("idEvent") == null) {
 			session.setAttribute("ErrorPriv", "You have not got selected an EVENT to update.");
-			session.setAttribute("ViewErrorPriv", "YES");
 			
 			response.sendRedirect("profileAdmin.htm");
 			return;
@@ -69,7 +66,7 @@
 				
 				<h1><%=session.getAttribute("Admin") %></h1>
 				<ul class="sidemenu">
-					<li><a href="admin">My Page</a></li>
+					<li><a href="profileAdmin.htm">My Page</a></li>
 					<li><a href=<%="registerPlace.htm"%>>Register Place</a></li>
 					<li><a href=<%="registerEvent.htm"%>>Register Event</a></li>
 					<li><a href="logout.htm">Logout</a></li>
@@ -80,10 +77,7 @@
 			</div>
 	
 	
-		<div id="main">
-				
-			<div class="error"><%= session.getAttribute("Error")!=null?session.getAttribute("Error").toString():""%></div>
-	
+		<div id="main">	
 				<% 
 					if (request.getAttribute("idEvent") != null) {
 						session.setAttribute("idEvent", request.getAttribute("idEvent"));
