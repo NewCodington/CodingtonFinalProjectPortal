@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import springcodingtonportal.model.dao.ImageDAO;
@@ -51,7 +52,11 @@ public class ImageServiceJDBC implements ImageDAO {
 
 		// Create the Statement
 		//data = jdbcTemplate.queryForObject(sql.getSelectTypePlace(), new Object[]{type.getIdTypePlace()}, new TypePlaceMapper());
+		try {
 		data = jdbcTemplate.queryForObject(sql.getSelectImage(),new Object[]{name},new ImageMapper());
+		}catch(EmptyResultDataAccessException e) {
+			return null;
+		}
 		// Return the ArrayList of Places or null
 		return data.getImages();
 	}
@@ -80,8 +85,11 @@ public class ImageServiceJDBC implements ImageDAO {
 
 		// Create the Statement
 		//data = jdbcTemplate.queryForObject(sql.getSelectTypePlace(), new Object[]{type.getIdTypePlace()}, new TypePlaceMapper());
+		try {
 		data = jdbcTemplate.queryForObject(sql.getSelectImageId(),new Object[]{idPlace},new ImageBlobMapper());
-		
+		}catch(EmptyResultDataAccessException e) {
+			return null;
+		}
 
 		// Return the ArrayList of Places or null
 		return data.getImages();

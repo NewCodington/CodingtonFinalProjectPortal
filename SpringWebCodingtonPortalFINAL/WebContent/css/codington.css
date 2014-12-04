@@ -1,0 +1,321 @@
+/*
+	Body section
+	----------------------------------------------------------
+*/
+	#body 
+	{
+		margin: 0;
+	}
+
+
+	/*
+		Header section
+		------------------------------------ 
+	*/
+		#header 
+		{
+			background-color:#eeeeee;
+			text-align:center;
+			border-style: groove;
+			padding-top:8px;	
+			margin-bottom:2px;
+		}
+	
+		#header table {
+			width: 100%;
+		}
+		
+		#header table tr td.colum1{
+			width: 20%;
+		}
+		#header table tr td.colum2{
+			width: 60%;
+		}
+		#header table tr td.colum3{
+			width: 20%;
+		}
+	
+		#header table tr td .title
+		{
+			width: 100%;
+			text-align: center;
+		    font-size: 48px;
+			font-style:oblique;
+			font-weight:bold;
+		    margin-top:0; 
+		    margin-bottom:0;
+		}
+		
+		#header table tr td .subtitle
+		{
+			text-align: center;
+		    font-size: 28px;
+		    margin-top:0; 
+		    margin-bottom:0;	
+		}
+		
+		#header .menuHorizontal
+       	{			
+			background-color: #cccccc;
+			color: #333333;
+			font-size: 28px;
+		    text-align: right;
+		    width: 100%;		
+		}
+		#header .menuHorizontal a.link {
+			padding: 0 10px;
+		}
+		
+	/*
+		Content section
+		------------------------------------ 
+	*/
+		#content .left_nav
+	    {
+			background-color:#eeeeee;
+			width:13%;
+			margin-right: 2%;
+			float:left;
+			border-style: groove;
+		}
+		#content .left_nav .title
+    	{
+			font-size:24px;
+			margin: 10px 5px;
+			text-align:center;
+		}
+		#content .left_nav .content
+    	{
+	    	text-align: center;
+	    	font-size: 18px;
+	    	margin: 10px 5px;
+   		}
+	
+	
+		#content .right_nav
+	    {
+			width:83%;
+			float:left;
+			padding: 15px 5px 15px 5px;
+		}
+		#content .right_nav .title
+    	{
+			font-size:24px;
+			margin: 10px 5px 5px 0;
+		}
+		#content .right_nav .content
+    	{
+	    	font-size: 16px;
+	    	margin: 10px 5px;
+	    	padding-left: 10px;
+   		}
+   		
+		#content .right_nav p
+	    {
+			text-align: justify;
+		}
+		#content .right_nav p.return
+	    {
+			text-align: center;
+		}
+		
+		#content .right_nav .message,
+		#content .center_nav .message
+	    {
+		    font-size: 18px;
+		    color:blue;	
+		    margin-bottom: 15px;
+	   	}
+		#content .right_nav .error,
+		#content .center_nav .error
+	    {
+		    font-size: 18px;
+		    color:red;	
+		    margin-bottom: 15px;
+	   	}
+	   	
+	   	#content .right_nav .section
+	    {   
+			widht: 100%;
+			margin-bottom: 20px;
+		}
+		#content .right_nav .section .title
+	    {   
+	    	font-size: 22px;
+	    	font-weight: bold;
+		}
+		
+		#content .right_nav .section .search form input[type="text"] 
+		{
+			width: 75% !important;
+		  	font-size: 18px;
+		 	border-radius: 10px;
+		}
+		
+		#content .right_nav .section .search form input[type="submit"] 
+		{
+			width: 15% !important;
+		}
+		
+		#content .right_nav .section table 
+		{
+			width: 100%;
+		}
+		#content .right_nav .section table tr th
+		{
+			text-align: left;
+		}
+		
+		#content .center_nav
+		{
+			line-height:30px;
+			background-color:#eeeeee;
+			width:40%;
+			text-align:center;
+			padding:0px;	 
+			margin-left: auto;
+	        margin-right: auto;
+			margin-top: 2px;
+		}
+	   	
+   	
+		#content .center_nav input,
+		#content .center_nav select
+		{
+			width: 80%;
+		}
+		
+		form .title
+		{
+			font-size: 25px;
+			font-weight: bold;
+		}
+		
+		form p 
+		{
+			line-height: 0px;
+		}
+		
+		form .input 
+		{
+			margin: 4%;
+		}
+		
+		form select
+		{
+		  	padding: 5px;
+		}
+		
+		form input[type="text"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="text"]:focus,
+		form input[type="text"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="file"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="file"]:focus,
+		form input[type="file"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="tel"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="tel"]:focus,
+		form input[type="tel"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="password"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="password"]:focus,
+		form input[type="password"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}	
+		form input[type="email"] 
+		{
+		  	padding: 10px;
+		  	border: solid 3px #c9c9c9;
+		  	box-shadow: inset 0 0 0 1px #707070;
+		  	transition: box-shadow 0.3s, border 0.3s;
+		}
+		form input[type="email"]:focus,
+		form input[type="email"].focus 
+		{
+		  	border: solid 3px #6699CC;
+		}
+		form input[type="submit"], 
+		form input[type="button"] 
+		{
+			width: 40% !important;
+		  	text-align:center;
+		  	color:#0066FF;
+		  	font-size: 20px;
+		  	line-height: 2;
+		 	border-radius: 10px;
+		 	margin: 0% 2% 2% 2%;
+		}
+	
+	
+		buscar
+		{
+			
+			font-size: 80px;
+			
+		}	
+	
+		
+		/*
+			Links
+		*/
+			a.link
+			{
+				text-decoration:none;  
+				color:#993333;	
+			}
+			a:hover
+			{
+				text-decoration:none;  
+				color:#FF0000;
+			}
+	/*
+		Footer section
+		------------------------------------ 
+	*/
+   		#footer
+   		{
+		   	background-color:#eeeeee;;
+			color:#000000;
+			font-weight: bold;
+			clear:both;
+			text-align:center;
+			padding:5px;
+			margin-top:1%;
+   		}
+   	
+/*
+	End Body section
+	----------------------------------------------------------
+*/

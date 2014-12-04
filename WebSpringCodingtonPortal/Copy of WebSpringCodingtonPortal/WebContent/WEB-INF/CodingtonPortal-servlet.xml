@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ctx="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
+	
+	<ctx:annotation-config></ctx:annotation-config>
+	<ctx:component-scan base-package="springcodingtonportal.controller"></ctx:component-scan>
+	
+	
+	<!-- Initialization for data source -->
+	
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/codington" />
+		<property name="username" value="root" />
+		<property name="password" value="abcd1234" />
+	</bean>
+	
+	
+	<!-- Definition for VisitorServiceJDBC bean -->
+ 	<bean id="VisitorServiceJDBC" 
+      class="springcodingtonportal.model.services.VisitorServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for EventServiceJDBC bean -->
+ 	<bean id="EventServiceJDBC" 
+      class="springcodingtonportal.model.services.EventServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for PlaceServiceJDBC bean -->
+ 	<bean id="PlaceServiceJDBC" 
+      class="springcodingtonportal.model.services.PlaceServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for PlaceServiceJDBC bean -->
+ 	<bean id="TypePlaceServiceJDBC" 
+      class="springcodingtonportal.model.services.TypePlaceServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for PlaceServiceJDBC bean -->
+ 	<bean id="RegionPlaceServiceJDBC" 
+      class="springcodingtonportal.model.services.RegionPlaceServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <!-- Definition for EventSignUpServiceJDBC bean -->
+ 	<bean id="EventSignUpServiceJDBC" 
+      class="springcodingtonportal.model.services.EventSignUpServiceJDBC">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   
+   
+	<!-- Queries for database -->
+	
+	<bean id="beanSQL" class="springcodingtonportal.utils.QueriesSQL">
+		<property name="selectEvent" 	value="SELECT * FROM codington.event WHERE (idEvent = ?);"></property>
+		<property name="viewEvent" 		value="SELECT * FROM codington.event ORDER BY Date_event;"></property>
+		<property name="searchEvent" 	value="SELECT * FROM codington.event WHERE (Name LIKE CONCAT('%',?,'%'));"></property>
+		<property name="insertEvent" 	value="INSERT INTO codington.event(Name, Description, Place, Date_event, StartTime, Duration, Event_type, Seats_available) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"></property>
+		<property name="deleteEvent" 	value="DELETE FROM codington.event WHERE (idEvent = ?);"></property>
+		<property name="updateEvent" 	value="UPDATE codington.event SET Name = ?, Description = ?, Place = ?, Date_event = ?, StartTime = ?, Duration = ?, Event_type = ?, Seats_available = ? WHERE (idEvent = ?);"></property>
+		<property name="eventForPlace"  value="SELECT e.* FROM codington.event e INNER JOIN codington.place p ON e.Place = p.idPlace INNER JOIN codington.typeplace tp ON p.TypePlace = tp.idTypePlace WHERE (tp.idTypePlace = ?);"></property>
+				
+		<property name="selectPlace" 	value="SELECT * FROM codington.place WHERE (idPlace = ?);"></property>
+		<property name="viewPlace" 		value="SELECT * FROM codington.place;"></property>
+		<property name="insertPlace" 	value="INSERT INTO codington.place(Name, TypePlace, Image, Address, Description) VALUES (?, ?, ?, ?, ?);"></property>
+		<property name="updatePlace" 	value="UPDATE codington.place SET Name=?, TypePlace=?, Image=?, Address=? , Description =? WHERE (idPlace=?);"></property>
+		<property name="deletePlace" 	value="DELETE FROM codington.place WHERE (idPlace= ?);"></property>
+		
+		<property name="selectVisitor" 	value="SELECT * FROM codington.visitor WHERE (idVisitor = ?);"></property>
+		<property name="viewVisitor" 	value="SELECT * FROM codington.visitor;"></property>
+		<property name="loginVisitor" 	value="SELECT * FROM codington.visitor WHERE (Username=? AND Password=?);"></property>
+		<property name="insertVisitor" 	value="INSERT INTO codington.visitor(First_name, Last_name, DNI, Email, Phone_number, Address, Username, Password, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,? );"></property>
+		<property name="updateVisitor" 	value="UPDATE codington.visitor SET First_name=?, Last_name=?, DNI=?, Email=?, Phone_number=?, Address=? WHERE (idVisitor=?);"></property>
+		<property name="updatePassword" value="UPDATE codington.visitor SET Password=? WHERE (idVisitor=?);"></property>
+		<property name="deleteVisitor" 	value="DELETE FROM codington.visitor WHERE (idVisitor=?);"></property>
+		<property name="exitsUserVisitor" value="SELECT * FROM codington.visitor WHERE (Username = ?);"></property>
+		
+		<property name="registerForNewEvent" value="INSERT INTO codington.eventregistration (idVisitorR,idEventR) VALUES (?,?);"></property>
+		<property name="unregisterForEvent" value="DELETE FROM codington.eventregistration WHERE (idVisitorR= ? AND idEventR=?);"></property>
+		<property name="selectSeats" 	value="SELECT Seats_available FROM codington.event WHERE (idEvent = ?);"></property>
+		<property name="updateSeats" 	value="UPDATE codington.event SET Seats_available = ? WHERE (idEvent = ?);"></property>
+		<property name="selectEventForVisitor" value="SELECT * FROM codington.eventregistration WHERE (idVisitorR = ?);"></property>
+		<property name="selectVisitorForEvent" value="SELECT idVisitorR FROM codington.eventregistration WHERE (idEventR = ? AND idVisitorR = ?);"></property>
+		
+		<property name="viewRegionPlace" value="SELECT * FROM codington.regionplace;"></property>
+		<property name="selectRegionPlace" value="SELECT * FROM codington.regionplace WHERE (idRegionPlace = ?);"></property>
+		<property name="getRegionPlace" value="SELECT * FROM codington.regionplace INNER JOIN codington.typeplace ON codington.regionplace.idRegionPlace = codington.typeplace.RegionPlace WHERE (codington.typeplace.idTypePlace = ?);"></property>
+		
+		<property name="viewTypePlace" 	value="SELECT * FROM codington.typeplace;"></property>
+		<property name="selectTypePlace" value="SELECT * FROM codington.typeplace WHERE (idTypePlace = ?);"></property>
+	</bean>
+	
+	<!-- Queries for database -->
+	
+	<bean id="beanCONSTANTS" class="springcodingtonportal.utils.Constants">
+		<property name="MUSEUM" 	value="1"></property>
+		<property name="BUSSINES" 	value="2"></property>
+		<property name="STADIUM" 	value="3"></property>
+		<property name="THEATER" 	value="4"></property>
+		<property name="ZOO" 		value="5"></property>
+		<property name="PARK" 		value="6"></property>
+		<property name="TOURISM" 	value="7"></property>
+		<property name="MARKET" 	value="8"></property>
+   </bean>
+   
+</beans>

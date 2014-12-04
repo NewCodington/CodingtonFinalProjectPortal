@@ -39,29 +39,30 @@ public class ImageController {
 
 		    ImageServiceJDBC image 	= (ImageServiceJDBC) appContext.getBean("ImageServiceJDBC");
 			InputStream imInp = image.selectImage(name);
-			OutputStream out;
-			
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
-			int nRead;
-			byte[] data = new byte[99999];
-
-			while ((nRead = imInp.read(data, 0, data.length)) != -1) {
-			  buffer.write(data, 0, nRead);
+			if(imInp!=null){
+				OutputStream out;
+				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+				int nRead;
+				byte[] data = new byte[1024];
+				
+				while ((nRead = imInp.read(data, 0, data.length)) != -1) {
+				  buffer.write(data, 0, nRead);
+				}
+			    
+				buffer.flush();
+				
+			    try
+			    {
+			        out = response.getOutputStream();
+			        ImageIO.write(ImageIO.read(new ByteArrayInputStream(buffer.toByteArray())), "png", out);
+			        out.close();
+			    }
+			    catch (IOException ex)
+			    {
+			       ex.printStackTrace();
+			    }
 			}
-		    
-			buffer.flush();
-			
-		    try
-		    {
-		        out = response.getOutputStream();
-		        ImageIO.write(ImageIO.read(new ByteArrayInputStream(buffer.toByteArray())), "png", out);
-		        out.close();
-		    }
-		    catch (IOException ex)
-		    {
-		       ex.printStackTrace();
-		    }
 		}
 		    
 		    @RequestMapping("/imagePlace.htm")
@@ -69,7 +70,6 @@ public class ImageController {
 				
 				response.setContentType("image/gif");
 				response.setHeader("cache-control", "no-cache");
-				HttpSession session = request.getSession();
 			    
 				ImageServiceJDBC image 	= (ImageServiceJDBC) appContext.getBean("ImageServiceJDBC");
 				InputStream imInp = image.selectImageId(id);
