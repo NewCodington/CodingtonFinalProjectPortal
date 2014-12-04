@@ -1,15 +1,4 @@
 /* ---------------------------------------------------
-
-   AUTHOR           :  	Erwin Aligam
-   WEBSITE          :  	http://www.styleshout.com/
-   TEMPLATE NAME    : 	Bright Side of Life
-   TEMPLATE CODE    : 	S-0005
-   VERSION          :   1.1
-   LAST DATE MOD    :   January 20, 2010
-
- ----------------------------------------------------- */
-
-/* ---------------------------------------------------
    HTML ELEMENTS
 ------------------------------------------------------ */
 
@@ -270,7 +259,6 @@ form.loginform .register{
 
 #main .section{
 	margin-bottom:3%;
-	min-width: 750px;
 }
 
 #main .section table{
