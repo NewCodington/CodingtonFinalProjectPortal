@@ -9,33 +9,30 @@
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
+	
+	<script type="text/javascript" src="js/jscal2.js"></script>
+    <script type="text/javascript" src="js/lang/en.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/jscal2.css" />
+    <link rel="stylesheet" type="text/css" href="css/border-radius.css" />
+    <link rel="stylesheet" type="text/css" href="css/steel/steel.css" />
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="Register.js"></script>
+
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Event Register Page</title>
 	</head>
 
 	
 <body>
-	<%
-	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
-		response.sendRedirect("login.jsp");
-		return;
-	}
-	else if (session.getAttribute("Visitor")!=null) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
-		response.sendRedirect("profileVisitor.htm");
-		return;
-	}
-	else {
-		if(request.getAttribute("LISTPLACE") == null)
-			response.sendRedirect("registerEvent.htm");
-	}
-	%> 
+
+
+
+	
+	
+	
 	
 	<div id="wrap">
 	 
@@ -94,7 +91,26 @@
 						</div>
 						
 						<div class="field"><p>Date:</p>
-							<input type="text" id="date" name="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-aaaa)" placeholder="Date" required />
+						
+						
+						
+						 <input type="text" name="date"  id="date" /><button id="f_btn1">...</button><br />
+
+						    <script type="text/javascript">//<![CDATA[
+						      Calendar.setup({
+						        inputField : "date",
+						        trigger    : "f_btn1",
+						        onSelect   : function() { this.hide() },
+						        showTime   : 12,
+						        dateFormat : "%d-%m-%Y"
+						      });
+						   </script>
+						
+						
+					
+							<!--  <input type="text" id="date" name="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a valid date (dd-mm-aaaa)" placeholder="Date" required />
+							
+							 -->
 							<br />
 						</div>
 						
