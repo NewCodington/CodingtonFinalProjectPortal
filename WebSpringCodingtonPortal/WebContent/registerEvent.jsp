@@ -94,7 +94,7 @@
 						
 						
 						
-						 <input type="text" name="date"  id="date" /><button id="f_btn1">...</button><br />
+						 <input type="text" name="date"  id="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"/><button id="f_btn1">...</button><br />
 
 						    <script type="text/javascript">//<![CDATA[
 						      Calendar.setup({

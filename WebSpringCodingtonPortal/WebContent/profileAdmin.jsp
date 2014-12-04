@@ -77,9 +77,9 @@
 				<div id="error">${ErrorPriv}</div>
 				<% session.removeAttribute("ErrorPriv"); %>
 				<div id="error">${RegisterVisitorError}</div>
-				<div class="message">${RegisterMessage}</div>
-				<div class="message">${UpdateMessage}</div>
-				<div class="message">${DeleteMessage}</div>
+				<div id="message">${RegisterMessage}</div>
+				<div id="message">${UpdateMessage}</div>
+				<div id="message">${DeleteMessage}</div>
 
 				<div class="section">
 			
