@@ -18,6 +18,7 @@ import springcodingtonportal.model.dao.TypePlaceDAO;
 import springcodingtonportal.model.domain.Event;
 import springcodingtonportal.model.domain.Images;
 import springcodingtonportal.model.domain.TypePlace;
+import springcodingtonportal.model.mapper.ImageBlobMapper;
 import springcodingtonportal.model.mapper.ImageMapper;
 import springcodingtonportal.model.mapper.TypePlaceMapper;
 import springcodingtonportal.utils.QueriesSQL;
@@ -71,7 +72,7 @@ public class ImageServiceJDBC implements ImageDAO {
 		
 	}
 	
-	public InputStream selectNameImage(String name) throws SQLException, ClassNotFoundException, NamingException {
+	public InputStream selectImageId(int idPlace) throws SQLException, ClassNotFoundException, NamingException {
 		// Initialize variables
 		Images data = null;
 		
@@ -79,7 +80,9 @@ public class ImageServiceJDBC implements ImageDAO {
 
 		// Create the Statement
 		//data = jdbcTemplate.queryForObject(sql.getSelectTypePlace(), new Object[]{type.getIdTypePlace()}, new TypePlaceMapper());
-		data = jdbcTemplate.queryForObject(sql.getSelectImage(),new Object[]{name},new ImageMapper());
+		data = jdbcTemplate.queryForObject(sql.getSelectImageId(),new Object[]{idPlace},new ImageBlobMapper());
+		
+
 		// Return the ArrayList of Places or null
 		return data.getImages();
 	}

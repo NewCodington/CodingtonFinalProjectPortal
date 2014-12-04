@@ -30,6 +30,10 @@ public class Images {
 		this.Name = name;
 	}
 
+	public Images(InputStream Input) {
+		this.images = Input;
+	}
+
 
 	/**
 	 * GETTERS AND SETTERS.

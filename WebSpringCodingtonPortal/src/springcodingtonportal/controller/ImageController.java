@@ -65,15 +65,14 @@ public class ImageController {
 		}
 		    
 		    @RequestMapping("/imagePlace.htm")
-			public @ResponseBody void showImagePlace(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, ClassNotFoundException, NamingException{
+			public @ResponseBody void showImagePlace(HttpServletRequest request, HttpServletResponse response, @RequestParam ("id") int id) throws IOException, SQLException, ClassNotFoundException, NamingException{
 				
 				response.setContentType("image/gif");
 				response.setHeader("cache-control", "no-cache");
 				HttpSession session = request.getSession();
-				
-				InputStream imInp = (InputStream) session.getAttribute("inputImag");
-				
-				session.removeAttribute("inputImag");
+			    
+				ImageServiceJDBC image 	= (ImageServiceJDBC) appContext.getBean("ImageServiceJDBC");
+				InputStream imInp = image.selectImageId(id);
 				
 				if(imInp!=null){
 					OutputStream out;

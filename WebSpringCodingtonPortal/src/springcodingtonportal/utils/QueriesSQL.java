@@ -42,6 +42,8 @@ public class QueriesSQL {
 
 	String insertImage;
 	
+	String selectImageId;
+	
 
 	public String getSelectEvent() {
 		return selectEvent;
@@ -241,5 +243,12 @@ public class QueriesSQL {
 	}
 	public void setSelectImage(String selectImage) {
 		this.selectImage = selectImage;
+	}
+	
+	public String getSelectImageId() {
+		return selectImageId;
+	}
+	public void setSelectImageId(String selectImageId) {
+		this.selectImageId = selectImageId;
 	}
 	}

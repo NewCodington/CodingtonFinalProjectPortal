@@ -82,7 +82,7 @@
 		<property name="insertPlace" 	value="INSERT INTO codington.place(Name, TypePlace, Image, Address, Description) VALUES (?, ?, ?, ?, ?);"></property>
 		<property name="updatePlace" 	value="UPDATE codington.place SET Name=?, TypePlace=?, Image=?, Address=? , Description =? WHERE (idPlace=?);"></property>
 		<property name="deletePlace" 	value="DELETE FROM codington.place WHERE (idPlace= ?);"></property>
-		<property name="selectNameImage"  value="SELECT image FROM codington.place WHERE (name= ?);"></property>
+		<property name="selectImageId"  value="SELECT image FROM codington.place WHERE (idPlace= ?);"></property>
 		
 		
 		<property name="selectVisitor" 	value="SELECT * FROM codington.visitor WHERE (idVisitor = ?);"></property>
@@ -127,20 +127,5 @@
    </bean>
    
    
-   <!-- Class For send Email -->
-   
-   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="username" value="youremail@gmail.com" />
-		<property name="password" value="yourpassword" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.starttls.enable">true</prop>
-			</props>
-		</property>
-	</bean>
-	
+
 </beans>
