@@ -10,14 +10,8 @@
 	  
 	<head>
 	
-	<script type="text/javascript" src="js/jscal2.js"></script>
-    <script type="text/javascript" src="js/lang/en.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="css/jscal2.css" />
-    <link rel="stylesheet" type="text/css" href="css/border-radius.css" />
-    <link rel="stylesheet" type="text/css" href="css/steel/steel.css" />
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
+ 
+    	<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script type="text/javascript" src="Register.js"></script>
 
@@ -28,27 +22,7 @@
 	
 <body>
 
-	<%
-		if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-			session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-			
-			response.sendRedirect("login.jsp");
-			return;
-		}
-		else if (session.getAttribute("Visitor")!=null) {
-			session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-			
-			response.sendRedirect("profileVisitor.htm");
-			return;
-		}
-		else {
-			if(request.getAttribute("LISTPLACE") == null) {
-				response.sendRedirect("registerEvent.htm");
-				return;
-			}
-		}
-	%> 
-	
+
 	
 	<div id="wrap">
 	 

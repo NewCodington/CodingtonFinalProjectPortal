@@ -17,26 +17,7 @@
 	</head>
 
 <body>
-	<%
-	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		
-		response.sendRedirect("login.jsp");
-	}
-	else if (session.getAttribute("Visitor")!=null) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		
-		response.sendRedirect("profileVisitor.htm");
-	}
-	else {
-		if (request.getAttribute("idEvent") == null) {
-			session.setAttribute("ErrorPriv", "You have not got selected an EVENT to update.");
-			
-			response.sendRedirect("profileAdmin.htm");
-			return;
-		}
-	}
-	%> 
+ 
 	
 	<div id="wrap">
 	 

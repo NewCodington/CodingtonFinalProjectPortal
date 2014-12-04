@@ -32,19 +32,19 @@ public class ImageController {
 		private static Logger log = Logger.getLogger(VisitorController.class);
 		
 		@RequestMapping("/image.htm")
-		public @ResponseBody void showImage(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, ClassNotFoundException, NamingException{
+		public @ResponseBody void showImage(HttpServletRequest request, HttpServletResponse response, @RequestParam ("name") String name) throws IOException, SQLException, ClassNotFoundException, NamingException{
 			
 			response.setContentType("image/gif");
 			response.setHeader("cache-control", "no-cache");
 
 		    ImageServiceJDBC image 	= (ImageServiceJDBC) appContext.getBean("ImageServiceJDBC");
-			InputStream imInp = image.selectImage("headerphoto");
+			InputStream imInp = image.selectImage(name);
 			OutputStream out;
 			
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
 			int nRead;
-			byte[] data = new byte[16384];
+			byte[] data = new byte[99999];
 
 			while ((nRead = imInp.read(data, 0, data.length)) != -1) {
 			  buffer.write(data, 0, nRead);

@@ -18,28 +18,7 @@
 
 
 <body>
-	<%
-	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-		request.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		
-		response.sendRedirect("login.jsp");
-		return;
-	}
-	else if (session.getAttribute("Visitor")!=null) {
-		request.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		
-		response.sendRedirect("profileVisitor.htm");
-		return;
-	}
-	else {
-			if (request.getAttribute("idPlace") == null) {
-				request.setAttribute("ErrorPriv", "You have not got selected an PLACE to update.");
-				
-				response.sendRedirect("profileAdmin.htm");
-				return;
-			}
-	}
-	%> 
+
 	<div id="wrap">
 	 
 		<div id="header">				

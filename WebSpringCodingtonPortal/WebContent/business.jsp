@@ -19,20 +19,7 @@
 	</head>
 
 <body>
-	<%
-	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		
-		response.sendRedirect("login.jsp");
-		return;
-	}
-	else if (session.getAttribute("Admin")!=null) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		
-		response.sendRedirect("profileAdmin.htm");
-		return;
-	}
-	%> 
+ 
 	
 	<!-- wrap starts here -->
 	<div id="wrap">
