@@ -84,12 +84,12 @@
 							<br />
 							
 						<div class="field"><p>Event name:</p> 
-							<input type="text" id="eventName" name="eventName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
+							<input type="text" id="eventName" name="eventName" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
 							<br />
 						</div>
 						  
 						<div class="field"><p>Description:</p>
-						  <input type="text" id="description" name="description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
+						  <input type="text" id="description" name="description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="Enter a valid description" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
 						  <br />
 						</div>
 						
@@ -118,17 +118,17 @@
 						</div>
 						  
 						 <div class="field"><p>Start Time:</p>
-							<input type="text" id="startTime" name="startTime" pattern="()[a-zA-Z0-9]| |/|\|@|#|$|%|&){1,15}" title="Enter a valid start time (length between 1-15)" placeholder="Start Time" required />
+							<input type="text" id="startTime" name="startTime" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){1,15}" title="Enter a valid start time (length between 1-15)" placeholder="Start Time" required />
 							<br />
 						 </div>
 							
 						 <div class="field"><p>Duration:</p> 
-							<input type="text" id="duration" name="duration"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
+							<input type="text" id="duration" name="duration"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
 							<br />
 						 </div>
 						 
 						 <div class="field"><p>Type of Event:</p> 
-							<input type="text"  id="typeOfEvent"name="typeOfEvent"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
+							<input type="text"  id="typeOfEvent"name="typeOfEvent"  pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
 							<br />
 						 </div>
 						  

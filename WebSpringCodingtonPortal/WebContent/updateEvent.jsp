@@ -98,12 +98,12 @@
 					<br />
 					    
 					<div class="field"><p>Event name:</p> 
-					  	<input type="text" id="eventName" name="eventName" value="<%= event.getName() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
+					  	<input type="text" id="eventName" name="eventName" value="<%= event.getName() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" title="Enter a valid event name (length between 1-45)"  placeholder="Event name"required />
 					  	<br />
 					</div>
 					  
 					<div class="field"><p>Description:</p>
-					  <input type="text" id="description" name="description" value="<%= event.getDescription() %>" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){45}" placeholder="Description" required />
+					  <input type="text" id="description" name="description" value="<%= event.getDescription() %>" title="1 to 45 characters" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){45}" placeholder="Description" required />
 					  <br />
 					</div>
 					
@@ -125,17 +125,17 @@
 					</div>
 					  
 					 <div class="field"><p>Start Time:</p>
-					  	<input type="text" id="startTime" name="startTime" value="<%= event.getStartTime() %>" pattern="()[a-zA-Z0-9]| |/|\|@|#|$|%|&){1,15}" title="Enter a valid place (length between 1-45)" placeholder="Date" required />
+					  	<input type="text" id="startTime" name="startTime" value="<%= event.getStartTime() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){1,15}" title="Enter a valid place (length between 1-45)" placeholder="Date" required />
 					 	<br />
 					 </div>
 					    
 					 <div class="field"><p>Duration:</p> 
-					  	<input type="text" id="duration" name="duration" value="<%= event.getDuration() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
+					  	<input type="text" id="duration" name="duration" value="<%= event.getDuration() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){1,45}" title="Enter a valid Duration (length between 1-45)" placeholder="Duration" required />
 					  	<br />
 					 </div>
 					 
 					 <div class="field"><p>Type of Event:</p> 
-					  	<input type="text"  id="typeOfEvent"name="typeOfEvent" value="<%= event.getEventType() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&){1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
+					  	<input type="text"  id="typeOfEvent"name="typeOfEvent" value="<%= event.getEventType() %>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){1,45}" title="Enter a valid Type of event (length between 1-45)"  placeholder="Type of Event" required />
 					    <br />
 					 </div>
 					  

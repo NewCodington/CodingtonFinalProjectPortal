@@ -81,7 +81,15 @@
 				<div class="error"><p>There has been a problem on the server. Please try again later.</p>
 					<p>Sorry for the inconvenience.</p>
 				</div>
-				<%session.invalidate();%>
+				<%
+					session.removeAttribute("appContext");
+					session.removeAttribute("idVisitor");
+					session.removeAttribute("Visitor"); 
+					session.removeAttribute("idAdmin"); 
+					session.removeAttribute("Admin"); 
+					session.removeAttribute("VISITOR");
+					session.invalidate();
+				%>
 				<br /><br />
 				<p class = "return"><a align="center" href="login.htm" class="link">Return to Login </a></p>
 			

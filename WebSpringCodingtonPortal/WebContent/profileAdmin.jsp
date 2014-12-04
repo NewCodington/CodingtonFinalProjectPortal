@@ -169,7 +169,7 @@
 							<td><%=place.getName()%></td>
 							<td><%=place.getRegionString(appContext, place.getTypePlace())%></td>
 							<td><%=place.getTypePlaceString(appContext)%></td>	
-							<td><img src = <%="imagePlace.htm?id=" + place.getIdPlace() %> width = 20px height = 20px/></td>							
+							<td><a href =<%= "imagePlace.htm?id=" +  place.getIdPlace()%>><img src = <%="imagePlace.htm?id=" + place.getIdPlace() %> width = 20px height = 20px/></a></td>							
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>
 							<td><a href = <%="getPlace.htm?update=" + place.getIdPlace() %>>Update</a></td>
