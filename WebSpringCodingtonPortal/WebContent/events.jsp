@@ -43,7 +43,7 @@
 			<!-- content-wrap starts here -->
 			<div id="content-wrap">		
 													
-			<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
+			<img src="image.htm?name=headerphoto" width="100%" height="120" alt="headerphoto" class="header-photo" />
 				
 				<div id="sidebar" >							
 						
@@ -77,11 +77,11 @@
 							<h1>North Town</h1>
 							<div class = "subsection1">
 								<h2>Business</h2>
-								<a href ="eventsForPlace.htm?typePlace=<%=constants.getBUSSINES()%>"><img src="images/business.jpg"  style = "width: 250px; height:180px"/></a>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getBUSSINES()%>"><img src="image.htm?name=business"  style = "width: 250px; height:180px"/></a>
 							</div>
 							<div class = "subsection1">
 								<h2>Museum</h2>
-								<a href = "eventsForPlace.htm?typePlace=<%=constants.getMUSEUM()%>"><img src="images/museum.jpg" style = "width: 250px; height:180px"/></a>
+								<a href = "eventsForPlace.htm?typePlace=<%=constants.getMUSEUM()%>"><img src="image.htm?name=museum" style = "width: 250px; height:180px"/></a>
 							</div>
 						</div>
 						
@@ -89,11 +89,11 @@
 							
 							<div class = "subsection1">
 								<h2>Theater</h2>
-								<a href = "eventsForPlace.htm?typePlace=<%=constants.getTHEATER()%>"><img src="images/theater.jpg" style = "width: 250px; height:180px"/></a>
+								<a href = "eventsForPlace.htm?typePlace=<%=constants.getTHEATER()%>"><img src="image.htm?name=theater" style = "width: 250px; height:180px"/></a>
 							</div>
 							<div class = "subsection1">
 								<h2>Stadium</h2>
-								<a href ="eventsForPlace.htm?typePlace=<%=constants.getSTADIUM()%>"><img src="images/stadium.jpg" style = "width: 250px; height:180px"/></a>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getSTADIUM()%>"><img src="image.htm?name=stadium" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 						</div>
@@ -105,12 +105,12 @@
 											
 							<div class = "subsection1">
 								<h2>Parks</h2>
-								<a href ="eventsForPlace.htm?typePlace=<%=constants.getPARK()%>"><img src="images/park.jpg" style = "width: 250px; height:180px"/></a>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getPARK()%>"><img src="image.htm?name=park" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 							<div class = "subsection1">
 								<h2>Tourism</h2>
-								<a href ="eventsForPlace.htm?typePlace=<%=constants.getTOURISM()%>"><img src="images/tourism.jpg" style = "width: 250px; height:180px"/></a>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getTOURISM()%>"><img src="image.htm?name=tourism" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 						</div>
@@ -118,12 +118,12 @@
 						<div class = "section2">
 							<div class = "subsection1">
 								<h2>Zoos</h2>
-								<a href ="eventsForPlace.htm?typePlace=<%=constants.getZOO()%>"><img src="images/zoo.jpg" style = "width: 250px; height:180px"/></a>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getZOO()%>"><img src="image.htm?name=zoo" style = "width: 250px; height:180px"/></a>
 							</div>
 							
 							<div class = "subsection1">
 								<h2>Markets</h2>
-								<a href ="eventsForPlace.htm?typePlace=<%=constants.getMARKET()%>"><img src="images/market.jpg" style = "width: 250px; height:180px"/></a>
+								<a href ="eventsForPlace.htm?typePlace=<%=constants.getMARKET()%>"><img src="image.htm?name=market" style = "width: 250px; height:180px"/></a>
 							</div>
 						
 						</div>
