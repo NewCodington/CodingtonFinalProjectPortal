@@ -47,7 +47,7 @@ public class ImageConversion {
         Place place=new Place();
         List<FileItem> items = null;	
   		FileItem input= null ;
-  		FERSDataConnection con= new FERSDataConnection(); 
+
   		
         try {
 			items = sfu.parseRequest(request);

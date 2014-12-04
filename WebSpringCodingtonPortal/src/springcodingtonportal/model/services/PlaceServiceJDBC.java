@@ -114,7 +114,7 @@ public class PlaceServiceJDBC implements PlaceDAO {
 		QueriesSQL sql = (QueriesSQL) appContext.getBean("beanSQL");
 		
 		// Create the Statement
-		result = jdbcTemplate.update(sql.getInsertPlace(), place.getName(), place.getTypePlace(), place.getImage(), place.getAddress(), place.getDescription());
+		result = jdbcTemplate.update(sql.getInsertPlace(), new Object[]{place.getName(), place.getTypePlace(), place.getImage(), place.getAddress(), place.getDescription()});
 		
 		// Return if Event was inserted or not 
 		return result;

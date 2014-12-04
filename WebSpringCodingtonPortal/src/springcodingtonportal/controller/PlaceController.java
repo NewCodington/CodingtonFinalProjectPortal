@@ -1,5 +1,6 @@
 package springcodingtonportal.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -79,11 +84,36 @@ public class PlaceController {
 		PlaceServiceJDBC placeService = (PlaceServiceJDBC) appContext.getBean("PlaceServiceJDBC");
 		Place place=new Place();
 
-		place.setName(request.getParameter("placeName"));
-		place.setDescription(request.getParameter("description"));		
-		//place.setImage(request.getParameter("image"));
-		place.setAddress(request.getParameter("address"));
-		place.setTypePlace(Integer.parseInt(request.getParameter("typePlace")));
+        DiskFileItemFactory factory = new DiskFileItemFactory();            
+        ServletFileUpload sfu  = new ServletFileUpload(factory);        
+        List<FileItem> items = null;	
+  		FileItem input= null ;
+
+  		
+        try {
+			items = sfu.parseRequest(request);
+		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        ArrayList<Object> extra = new ArrayList <Object>();
+        for (FileItem fileItem : items){
+        	if (fileItem.isFormField()) {
+        		String fieldValue = fileItem.getString();
+        		extra.add(fieldValue);
+        	}
+        	else {
+        		extra.add(fileItem.getInputStream());
+        		input = items.get(2);  
+        		
+        	}
+        }                                 
+
+            place.setName((String) extra.get(0));
+            place.setDescription((String) extra.get(1));
+            place.setImage(input.getInputStream());
+            place.setAddress((String) extra.get(3));
+            place.setTypePlace(Integer.parseInt((String) extra.get(4)));
 		
 
 		boolean success = false;

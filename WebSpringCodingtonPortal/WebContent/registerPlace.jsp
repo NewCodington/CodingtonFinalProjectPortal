@@ -17,27 +17,7 @@
 
 
 	<body>
-	<%
-	if((session.getAttribute("Admin")== null) && (session.getAttribute("Visitor")==null)) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
-		response.sendRedirect("login.jsp");
-		return;
-	}
-	else if (session.getAttribute("Visitor")!=null) {
-		session.setAttribute("ErrorPriv", "You do not have privileges to access this page.");
-		session.setAttribute("ViewErrorPriv", "YES");
-		
-		response.sendRedirect("profileVisitor.htm");
-		return;
-	}
-	else
-	{
-		if(request.getAttribute("LISTTYPEPLACE") == null)
-			response.sendRedirect("registerPlace.htm");
-	}
-	%> 
+
 	
 	<div id="wrap">
 		<div id="header">				
@@ -58,7 +38,7 @@
 		
 		<div id="content-wrap">
 		
-			<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+			<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
 			
 			<div id="sidebar">							
 				
@@ -75,7 +55,7 @@
 			<div id="main">
 				<div class = "section">
 									
-				<form class = "Rform" method="post" action="registPlace.htm">
+				<form class = "Rform" method="post" action="registPlace.htm" enctype="multipart/form-data">
 					<h1>New Place</h1>
 					<br />
 					

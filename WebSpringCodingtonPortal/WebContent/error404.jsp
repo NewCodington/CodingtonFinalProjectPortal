@@ -37,7 +37,7 @@
 	<!-- content-wrap starts here -->
 	<div id="content-wrap">		
 											
-	<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+	<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
 					
 		<div id="main">	

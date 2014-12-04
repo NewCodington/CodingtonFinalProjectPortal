@@ -17,7 +17,7 @@ public class PlaceMapper implements RowMapper<Place> {
 			place.setIdPlace(rs.getInt("idPlace"));
 			place.setName(rs.getString("Name"));
 			place.setTypePlace(rs.getInt("TypePlace"));
-			//place.setImage(rs.getBlob("Image"));
+			place.setImage(rs.getBinaryStream("Image"));
 			place.setAddress(rs.getString("Address"));
 			place.setDescription(rs.getString("Description"));
 			

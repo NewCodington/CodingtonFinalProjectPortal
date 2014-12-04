@@ -53,7 +53,7 @@
 		
 	<div id="content-wrap">
 		
-	<img src="images/ciudad2.jpg" width="100%" height="120" alt="headerphoto" class="header-photo" />
+	<img src="image.htm" width="100%" height="120" alt="headerphoto" class="header-photo" />
 		
 		<div id="sidebar" >							
 				
@@ -163,12 +163,13 @@
 							placeList = (ArrayList<Place>) request.getAttribute("PLACELIST");
 							ApplicationContext appContext = (ApplicationContext) session.getAttribute("appContext");
 							for (Place place : placeList) {
+								session.setAttribute("inputImag", place.getImage());
 						%>				
 						<tr>
 							<td><%=place.getName()%></td>
 							<td><%=place.getRegionString(appContext, place.getTypePlace())%></td>
-							<td><%=place.getTypePlaceString(appContext)%></td>
-							<td><%=place.getImage()%></td>
+							<td><%=place.getTypePlaceString(appContext)%></td>	
+							<td><img src = "imagePlace.htm" width = 20px height = 20px/></td>							
 							<td><%=place.getAddress()%></td>
 							<td><%=place.getDescription()%></td>
 							<td><a href = <%="getPlace.htm?update=" + place.getIdPlace() %>>Update</a></td>
