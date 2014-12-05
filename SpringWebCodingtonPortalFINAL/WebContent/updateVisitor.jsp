@@ -98,7 +98,7 @@
 					  
 						<div class = "input">
 							<input type="submit" value="Submit"  />
-							<input type="button" value="Cancel"  onclick = "javascript:window.location='login.jsp';" />
+							<input type="button" value="Cancel"  onclick = "javascript:window.location='profileVisitor.htm';" />
 							<br />
 						 </div>
 					</form>
