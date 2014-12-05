@@ -12,7 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import springcodingtonportal.model.domain.Visitor;
-import codingtonportal.model.services.VisitorServiceImpl;
+import springcodingtonportal.model.services.VisitorServiceJDBC;
+
 
 public class VisitorDAOJUnit extends TestCase {
 	VisitorServiceJDBC visitor;

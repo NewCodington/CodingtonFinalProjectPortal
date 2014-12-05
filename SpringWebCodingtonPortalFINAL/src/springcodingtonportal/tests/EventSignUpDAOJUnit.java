@@ -13,9 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import springcodingtonportal.model.domain.*;
+import springcodingtonportal.model.services.EventSignUpServiceJDBC;
 
-
-import codingtonportal.model.services.EventSignUpImpl;
 
 
 public class EventSignUpDAOJUnit extends TestCase {

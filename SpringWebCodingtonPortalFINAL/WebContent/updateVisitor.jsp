@@ -10,7 +10,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/BrightSide.css"/>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script language="javascript" src="Register.js"></script>
+		<script type="text/javascript" src="Register.js"></script>
 		<title>Visitor Update Page</title>
 	</head>
 	
@@ -62,7 +62,7 @@
 	
 			<div class = "section">
 			
-				<form class = "Rform" method="post" action="updateVisitor.htm">
+				<form class = "Rform" method="post" name="f" action="updateVisitor.htm" onsubmit = "return validateForm();">
 					<h1>Update User</h1>
 			        <br />
 					

@@ -75,18 +75,18 @@
 
 					
 			<div class="right_nav">
-				<div class="title">SITE MAP <hr /></div>
+				<h1>SITE MAP </h1><hr />
 				
 				<div class="content">
-					<p>Login </a></p>
-				  	<blockquote>Register Visitor Page</a></blockquote>
-				  	<blockquote>Visitor's Page </a></blockquote>
-				  	<blockquote>Admin's Page </a></blockquote>
-				  	<blockquote><blockquote>Event's Registration Page </a></blockquote></blockquote>
-				  	<blockquote><blockquote>Place's Registration Page </a></blockquote></blockquote>
-				  	<blockquote>History Page</a></blockquote>
-				  	<blockquote>SiteMap Page</a></blockquote>
-				  	<blockquote>About Page</a></blockquote>
+					<blockquote>Login </blockquote>
+				  	<blockquote>Register Visitor Page</blockquote>
+				  	<blockquote>Visitor's Page</blockquote>
+				  	<blockquote>Admin's Page </blockquote>
+				  	<blockquote><blockquote>Event's Registration Page</blockquote></blockquote>
+				  	<blockquote><blockquote>Place's Registration Page</blockquote></blockquote>
+				  	<blockquote>History Page</blockquote>
+				  	<blockquote>SiteMap Page</blockquote>
+				  	<blockquote>About Page</blockquote>
 			  	</div>
 			</div>
 			

@@ -44,7 +44,7 @@
 
 		<div id="content">
 			
-				<div class="error">Sorry, the page requested does not exists.</div>
+				<div id="error">Sorry, the page requested does not exists.</div>
 				
 				<%
 					if(session.getAttribute("Visitor") != null) {	

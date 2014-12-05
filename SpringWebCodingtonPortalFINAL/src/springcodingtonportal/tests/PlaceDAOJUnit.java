@@ -3,7 +3,6 @@ package springcodingtonportal.tests;
 
 
 
-import java.sql.Blob;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -15,8 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import springcodingtonportal.model.domain.Place;
+import springcodingtonportal.model.services.PlaceServiceJDBC;
 
-import codingtonportal.model.services.PlaceServiceImpl;
 
 public class PlaceDAOJUnit extends TestCase {
 	
