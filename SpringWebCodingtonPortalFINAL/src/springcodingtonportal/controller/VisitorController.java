@@ -51,60 +51,52 @@ public class VisitorController {
 			throw new Exceptions("Error in Transaction, Please re-Try. for more information check Logfile in C:\\CodingtonLOG folder", new NullPointerException());
 		}
 		HttpSession session=request.getSession();
-		if(session.isNew()) {
-			ModelAndView mv=new ModelAndView();
-			mv.setViewName("/login.jsp");
-			
-			return mv;
-		}
-		else {
 		
-			Visitor v = new Visitor();
-			Visitor visitor = null;
-			
-			v.setUserName(request.getParameter("username"));
-			v.setPassword(request.getParameter("password"));
-			
-			log.info("Login visitor with UserName :"+v.getUserName());
-			
-			VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
-	
-			visitor = visitorService.loginVisitor(v);
-			
-			ModelAndView mv=new ModelAndView();
-			
-			if(visitor != null)
-			{
-				session.setAttribute("appContext", appContext);
-				if(visitorService.isAdmin(visitor)){
-					
-					session.setAttribute("idAdmin", visitor.getIdVisitor());
-					session.setAttribute("Admin", visitor.getUserName());
-					
-					log.info("Succesfully login Administrator "+ visitor.getUserName());
-					mv.setViewName("/profileAdmin.htm");
-					return mv;
-				}
-				else {
-					session.setAttribute("idVisitor", visitor.getIdVisitor());
-					session.setAttribute("Visitor", visitor.getUserName());
-					
-					log.info("Succesfully login visitor "+ visitor.getUserName());
-					
-					session.setAttribute("VISITOR", visitor);
-					
-					return loadEvents(request, response);
-				}
-			}
-			else
-			{
-				mv.addObject("VisitorLoginMessage", "¡¡¡  USERNAME and PASSWORD incorrect  !!!");
-				log.info("Username "+v.getUserName()+" or PASSWORD incorrect ...");
+		Visitor v = new Visitor();
+		Visitor visitor = null;
+		
+		v.setUserName(request.getParameter("username"));
+		v.setPassword(request.getParameter("password"));
+		
+		log.info("Login visitor with UserName :"+v.getUserName());
+		
+		VisitorServiceJDBC visitorService =  (VisitorServiceJDBC) appContext.getBean("VisitorServiceJDBC");
+
+		visitor = visitorService.loginVisitor(v);
+		
+		ModelAndView mv=new ModelAndView();
+		
+		if(visitor != null)
+		{
+			session.setAttribute("appContext", appContext);
+			if(visitorService.isAdmin(visitor)){
 				
-				mv.setViewName("/login.jsp");
+				session.setAttribute("idAdmin", visitor.getIdVisitor());
+				session.setAttribute("Admin", visitor.getUserName());
+				
+				log.info("Succesfully login Administrator "+ visitor.getUserName());
+				mv.setViewName("/profileAdmin.htm");
 				return mv;
-			}		
+			}
+			else {
+				session.setAttribute("idVisitor", visitor.getIdVisitor());
+				session.setAttribute("Visitor", visitor.getUserName());
+				
+				log.info("Succesfully login visitor "+ visitor.getUserName());
+				
+				session.setAttribute("VISITOR", visitor);
+				
+				return loadEvents(request, response);
+			}
 		}
+		else
+		{
+			mv.addObject("VisitorLoginMessage", "¡¡¡  USERNAME and PASSWORD incorrect  !!!");
+			log.info("Username "+v.getUserName()+" or PASSWORD incorrect ...");
+			
+			mv.setViewName("/login.jsp");
+			return mv;
+		}		
 	}
 	
 	

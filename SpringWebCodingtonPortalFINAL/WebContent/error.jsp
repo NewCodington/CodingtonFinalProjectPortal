@@ -59,7 +59,7 @@
 					session.invalidate();
 				%>
 				<br /><br />
-				<p class = "return"><a align="center" href="login.htm" class="link">Return to Login </a></p>
+				<p class = "return"><a align="center" href="login.jsp" class="link">Return to Login </a></p>
 			
 		</div>
 		</div>
