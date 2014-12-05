@@ -6,6 +6,8 @@
 <%@page import="springcodingtonportal.model.domain.Event"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="springcodingtonportal.model.domain.Place"%>
+<%@page import="java.text.SimpleDateFormat"%>
+
 
 <html>
 	  
@@ -79,7 +81,7 @@
 					</div>
 					
 					<div class="field"><p>Date:</p>
-						 <input type="text" name="date"  id="date" value="<%= event.getDate_event() %>" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"/><button id="f_btn1">...</button><br />
+						 <input type="text" name="date"  id="date" value="<%= event.getDate_eventString() %>" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"/><button id="f_btn1">...</button><br />
 
 						    <script type="text/javascript">//<![CDATA[
 						      Calendar.setup({
