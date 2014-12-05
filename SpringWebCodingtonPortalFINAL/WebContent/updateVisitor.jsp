@@ -8,9 +8,9 @@
 <html>
 	  
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/BrightSide.css"/>
+		<link rel="stylesheet" type="text/css" media="screen" href="css/BrightSide.css"/>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script type="text/javascript" src="Register.js"></script>
+		<script type="text/javascript" src="Update.js"></script>
 		<title>Visitor Update Page</title>
 	</head>
 	
@@ -62,46 +62,46 @@
 	
 			<div class = "section">
 			
-				<form class = "Rform" method="post" name="f" action="updateVisitor.htm" onsubmit = "return validateForm();">
-					<h1>Update User</h1>
-			        <br />
-					
-					<div class="field"><p>First name:</p>
-						<input type="text" value="<%= visitor.getFirstName() %>" name="fname" id = "fname" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required />
+						<form class = "Rform" method="post" name="f" action="updateVisitor.htm" onsubmit = "return validateForm();">
+						<h1>Update User</h1>
 						<br />
-				    </div>
+						
+						<div class="field"><p>First name:</p>
+							<input type="text" name="fname" id = "fname" value="<%= visitor!=null?visitor.getFirstName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" title="Enter a valid first name (length between 1-30)" placeholder="First name"  required />
+							<br />
+						</div>
+						  
+						<div class="field"><p>Last name:</p> 
+							<input type="text" name="lname" id = "lname" value="<%= visitor!=null?visitor.getLastName():""%>" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required />
+							<br />
+						</div>
+						
+						<div class="field"><p>DNI:</p>
+							<input type="text" name="dni" id = "dni" value="<%= visitor!=null?visitor.getDni():""%>" title="Enter a valid dni(XX.XXX.XXX-L)" placeholder="Dni (XX.XXX.XXX-L)" />
+							<br />
+						</div>
+						
+						<div class="field"><p>Phone Number:</p>
+							<input type="tel" name="phone" id = "phone" value="<%= visitor!=null?visitor.getPhoneNumber():""%>" placeholder="Phone Number" />
+							<br />
+						</div>
+						
+						<div class="field"><p>Email:</p> 
+							<input type="email" name="email" id = "email" value="<%= visitor!=null?visitor.getEmail():""%>" pattern="\S{3,200}" title="Enter a valid email (length between 3-200)" placeholder="Email" required />
+							<br />
+						</div>
+						
+						<div class="field"><p>Address:</p> 
+							<input type="text" name="adress" id = "adress" value="<%= visitor!=null?visitor.getAddress():""%>" placeholder="Address" />
+							<br />
+						</div>
 					  
-				    <div class="field"><p>Last name:</p> 
-					   	<input type="text" value="<%= visitor.getLastName() %>" name="lname" id = "lname" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" title="Enter a valid last name (length between 1-30)" placeholder="Last name"required />
-				    	<br />
-				    </div>
-				    
-					<div class="field"><p>DNI:</p>
-					    <input type="text" name="dni"  value="<%= visitor.getDni() %>"id = "dni" title="Enter a valid dni(XX.XXX.XXX-L)" placeholder="Dni (XX.XXX.XXX-L)" />
-					    <br />
-				   	</div>
-					
-					<div class="field"><p>Phone Number:</p>
-					    <input type="tel" name="phone" value="<%= visitor.getPhoneNumber() %>"id = "phone" placeholder="Phone Number" />
-					    <br />
-				    </div>
-					
-					<div class="field"><p>Email:</p> 
-					    <input type="email" name="email" value="<%= visitor.getEmail() %>"id = "email" pattern="\S{3,200}" title="Enter a valid email (length between 3-200)" placeholder="Email" required />
-				    	<br />
-				    </div>
-				    
-					<div class="field"><p>Address:</p> 
-					    <input type="text" name="adress" value="<%= visitor.getAddress() %>"id = "adress" pattern="([a-zA-Z0-9]| |/|\|@|#|$|%|&|.|,|;|:|'|´){30}" placeholder="Address" />
-					    <br />
-				  	</div>
-				  
-				  	<div class="input">
-						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel"  onclick = "javascript:window.location='profileVisitor.htm';" />
-						<br />
-					</div>  
-				</form>
+						<div class = "input">
+							<input type="submit" value="Submit"  />
+							<input type="button" value="Cancel"  onclick = "javascript:window.location='login.jsp';" />
+							<br />
+						 </div>
+					</form>
 			</div>
 		</div>
 	</div>
